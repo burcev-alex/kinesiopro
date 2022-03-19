@@ -122,7 +122,6 @@ class CategoryEditScreen extends Screen
         $service->saveTranslations($validate['translations']);
         $service->saveTemplates($validate['translations']);
 
-       // Cache::tags(['categories', 'menuCategories.ru', 'menuCategories.uk'])->flush();
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);
@@ -140,9 +139,7 @@ class CategoryEditScreen extends Screen
     {
         $category->delete()
             ? Alert::info('Вы успешно удалили запись.')
-            : Alert::warning('Произошла ошибка');
-
-       // Cache::tags(['categories', 'menuCategories.ru', 'menuCategories.uk'])->flush();
+            : Alert::warning('Произошла ошибка');;
 
         return redirect()->route('platform.category.list');
     }

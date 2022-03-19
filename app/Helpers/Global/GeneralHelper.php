@@ -97,7 +97,7 @@ if (! function_exists('isLocaleActive')) {
     {
         $locale = getLocalization();
 
-        return $locale == $lang || ($locale == '' && $lang == 'uk');
+        return $locale == $lang || ($locale == '' && $lang == 'ru');
     }
 }
 
@@ -109,7 +109,7 @@ if (! function_exists('getLocalization')) {
     {
         $localization = '';
         $explode = explode('/', request()->path());
-        if (isset($explode[0]) && in_array($explode[0], ['uk', 'ru', 'en'])) {
+        if (isset($explode[0]) && in_array($explode[0], ['ru', 'en'])) {
             $localization = $explode[0];
         }
 
@@ -126,11 +126,11 @@ if (! function_exists('getLocaleUrl')) {
         $explode = array_filter(explode('/', request()->path()), function ($data) {
             return ! empty($data);
         });
-        if (! empty($explode[0]) && in_array($explode[0], ['ru', 'uk', 'en'])) {
+        if (! empty($explode[0]) && in_array($explode[0], ['ru', 'en'])) {
             array_shift($explode);
         }
 
-        if ($lang == 'uk') {
+        if ($lang == 'ru') {
             array_unshift($explode, $lang);
         }
 

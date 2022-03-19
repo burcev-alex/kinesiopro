@@ -107,7 +107,7 @@ class CategoryCreateScreen extends Screen
         $service->saveTranslations($validate['translations']);
         $service->saveTemplates($validate['translations']);
 
-       // Cache::tags(['categories', 'menuCategories.ru', 'menuCategories.uk'])->flush();
+       // Cache::tags(['categories', 'menuCategories.ru'])->flush();
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);
