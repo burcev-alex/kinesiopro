@@ -51,8 +51,8 @@ class FeedBackObserver
         //         }
         //     }
         //     Mail::raw($text, function ($message) {
-        //         $message->to(config('services.support.email'), 'STEPGROUP');
-        //         $message->subject('Заявка с сайта STEPGROUP.COM.UA');
+        //         $message->to(config('services.support.email'), 'kinesiopro');
+        //         $message->subject('Заявка с сайта kinesiopro.ru');
         //     });
         // } catch (\Exception $e) {
         //     Log::info($e->getMessage());

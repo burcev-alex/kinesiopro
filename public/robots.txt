@@ -18,4 +18,4 @@ Disallow: /*tab=*
 Disallow: /*gclid=*
 Disallow: /*yclid=*
 
-Sitemap: https://stepgroup.com.ua/sitemap.xml
+Sitemap: https://skinesiopro.ru/sitemap.xml

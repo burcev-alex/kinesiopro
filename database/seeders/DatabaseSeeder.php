@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(AnnouncementSeeder::class);
         
         // Model::reguard();
-        Artisan::call('orchid:admin admin admin@stepgroup.com.ua step2021group');
+        Artisan::call('orchid:admin admin admin@kinesiopro.ru step2021group');
     }
 }
