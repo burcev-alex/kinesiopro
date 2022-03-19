@@ -1,0 +1,21 @@
+User-agent: *
+Disallow: */index.php/
+Disallow: */index.php
+Disallow: /cgi-bin
+Disallow: /search/
+Disallow: /personal/
+Disallow: /login
+Disallow: /*/filter/*
+Disallow: /*utm_
+Disallow: /personal/profile
+Disallow: /personal/order
+Disallow: /personal/favorive
+Disallow: /socialite
+Disallow: /auth/
+Disallow: /admin
+Disallow: /*sort=*
+Disallow: /*tab=*
+Disallow: /*gclid=*
+Disallow: /*yclid=*
+
+Sitemap: https://stepgroup.com.ua/sitemap.xml
