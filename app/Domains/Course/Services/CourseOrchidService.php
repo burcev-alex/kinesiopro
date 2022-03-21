@@ -23,6 +23,11 @@ class CourseOrchidService extends CourseService
      */
     public function save(array $fields): self
     {
+        if(array_key_exists('teachers_list', $fields)){
+            $fields['teacher_id'] = $fields['teachers_list'];
+            unset($fields['teachers_list']);
+        }
+        
         $this->model->fill($fields)->save();
         $this->saveMarkers($fields);
         return $this;

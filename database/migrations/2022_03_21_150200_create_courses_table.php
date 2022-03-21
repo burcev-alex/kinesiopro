@@ -28,6 +28,14 @@ class CreateCoursesTable extends Migration
             $table->dateTime('finish_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('price')->default(0);
             $table->jsonb('teacher_id')->default(null);
+            
+            $table->longText('description')->nullable();
+
+            $table->string('meta_h1')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('meta_description')->nullable();
+            
             $table->timestamps();
         });
     }

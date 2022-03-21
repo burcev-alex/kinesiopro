@@ -44,6 +44,11 @@ class CourseFactory extends Factory
             'marker_popular' => $this->faker->numberBetween(0, 1),
             'marker_archive' => $this->faker->numberBetween(0, 1),
             'teacher_id' => array_unique($teacherList),
+            'description' => $this->faker->sentence(),
+            'meta_h1' => $this->faker->sentence(2),
+            'meta_title' => $this->faker->sentence(2),
+            'meta_keywords' => implode(' ', $this->faker->words(6)),
+            'meta_description' => $this->faker->sentence(),
         ];
     }
 }

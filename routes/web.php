@@ -13,3 +13,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/feedback/', [FeedbackController::class, "save"])->name("feedback.save");
 Route::get('/feedback/', [FeedbackController::class, "index"])->name("feedback.form");
+
+
+Route::get('/catalog/', [FeedbackController::class, "index"])->name("catalog.card");

@@ -31,14 +31,14 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.category.list')
                 ->icon('list')->title('Каталог'),
 
-            // Menu::make('Курсы')
-            //     ->route('platform.course.list')
-            //     ->icon('list'),
+            Menu::make('Курсы')
+                ->route('platform.course.list')
+                ->icon('list'),
 
-            // Menu::make('Характеристики')
-            //     ->route('platform.property.list')
-            //     ->icon('list')
-            //     ->title('Справочники'),
+            Menu::make('Характеристики')
+                ->route('platform.property.list')
+                ->icon('list')
+                ->title('Справочники'),
 
             Menu::make('Баннеры')
                 ->route('platform.banners.list')

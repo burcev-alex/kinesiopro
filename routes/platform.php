@@ -23,6 +23,13 @@ use App\Orchid\Screens\Teacher\TeachersCreateScreen;
 use App\Orchid\Screens\Teacher\TeachersEditScreen;
 use App\Orchid\Screens\Teacher\TeachersListScreen;
 
+use App\Orchid\Screens\Property\CoursePropertyEditScreen;
+use App\Orchid\Screens\Property\CoursePropertyListScreen;
+
+use App\Orchid\Screens\Course\CourseEditScreen;
+use App\Orchid\Screens\Course\CourseListScreen;
+use App\Orchid\Screens\Course\CourseCreateScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -33,7 +40,11 @@ use App\Orchid\Screens\Teacher\TeachersListScreen;
 | contains the need "dashboard" middleware group. Now create something great!
 |
 */
+Route::screen('/courses', CourseListScreen::class)->name('platform.course.list');
+Route::screen('/courses/{course}/edit', CourseEditScreen::class)->name('platform.course.edit');
 
+Route::screen('/properties', CoursePropertyListScreen::class)->name('platform.property.list');
+Route::screen('/properties/{property}/edit', CoursePropertyEditScreen::class)->name('platform.property.edit');
 
 Route::screen('/teachers', TeachersListScreen::class)->name('platform.teachers.list');
 Route::screen('/teachers/{teachers}/edit', TeachersEditScreen::class)->name('platform.teachers.edit');

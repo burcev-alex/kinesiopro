@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
-use App\Domains\Order\Facades\Cart;
 use App;
 
 class Course extends Model
