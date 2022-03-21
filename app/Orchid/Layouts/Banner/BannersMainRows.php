@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Orchid\Layouts\Currency;
+namespace App\Orchid\Layouts\Banner;
 
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -11,7 +11,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
-class СurrenciesMainRows extends Rows
+class BannersMainRows extends Rows
 {
     /**
      * Used to create the title of a group of form elements.
@@ -32,10 +32,9 @@ class СurrenciesMainRows extends Rows
         $rows = [
             ...$rows,
             ...[
-                Input::make('currencies.name')->title('Название')->required(),
-                Input::make('currencies.code')->title('Код валюты')->required(),
-                Input::make('currencies.value')->title('Курс')->required(),
-                CheckBox::make('currencies.active')->title('Активность')
+                Input::make('banner.name')->title('Название')->required(),
+                Input::make('banner.sort')->title('Сортировка')->required(),
+                CheckBox::make('banner.active')->title('Активность')
             ]
         ];
 

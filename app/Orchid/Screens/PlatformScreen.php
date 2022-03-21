@@ -22,7 +22,7 @@ class PlatformScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Добро пожаловать в панель всевластия.';
+    public $description = 'Добро пожаловать в панель управления.';
 
     /**
      * Query data.
@@ -47,7 +47,7 @@ class PlatformScreen extends Screen
                 ->icon('globe-alt'),
 
             Link::make('GitHub')
-                ->href('https://gl.ac-step.com/ekoj/shop')
+                ->href('https://github.com/burcev-alex/kinesiopro')
                 ->icon('social-github'),
         ];
     }

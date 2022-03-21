@@ -3,7 +3,6 @@ namespace App\Orchid\Layouts\Category;
 
 use Log;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -29,9 +28,6 @@ class CategoryListLayout extends Table
         return [
             TD::make('id', 'ID'),
             TD::make('name', 'Название'),
-            TD::make('parent_name', 'Родительская')->render(function($category){
-                return $category->parent_name;
-            }),
             TD::make('active', 'Активность')->render(function($category){
                 return $category->active ? 'да' : '<b>нет</b>';
             }),

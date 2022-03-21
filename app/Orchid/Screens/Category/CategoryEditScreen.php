@@ -2,7 +2,7 @@
 namespace App\Orchid\Screens\Category;
 
 use App\Domains\Category\Models\Category;
-use App\Domains\Product\Services\CategoryService;
+use App\Domains\Category\Services\CategoryService;
 use App\Orchid\Layouts\Category\CategoryMainRows;
 use App\Orchid\Layouts\Category\CategorySeoRows;
 use App\Orchid\Layouts\Category\CategoryShortRows;
@@ -29,7 +29,7 @@ class CategoryEditScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Редактирование категории';
+    public $description = 'Редактирование специализации';
 
     public $exists = false;
 
@@ -43,20 +43,18 @@ class CategoryEditScreen extends Screen
         $this->exists = $category->exists;
 
         if ($this->exists) {
-            $this->description = 'Редактировать категорию';
+            $this->description = 'Редактировать специализацию';
             if ($category) {
                 $this->name = $category->name;
             }
 
             return [
-                'category' => $category,
-                'translations' => $category ? $category->translations : [],
+                'category' => $category
             ];
         }
         else{
             return [
-                'category' => collect([]),
-                'translations' => collect([]),
+                'category' => collect([])
             ];
         }
     }
@@ -86,7 +84,7 @@ class CategoryEditScreen extends Screen
 {
     return [
         Layout::tabs([
-            'Категория' => [
+            'Специализация' => [
                 CategoryMainRows::class
             ],
             'Описание' => [
@@ -94,9 +92,6 @@ class CategoryEditScreen extends Screen
             ],
             'SEO' => [
                 CategorySeoRows::class
-            ],
-            'Шаблоны' => [
-                SeoTemplateRows::class
             ]
         ])
     ];
@@ -111,17 +106,10 @@ class CategoryEditScreen extends Screen
         $service->setModel($category);
         $validate = $request->validate([
             'category.slug' => 'required',
-            'translations.*.name' =>'required',
-
-            'category.*' => '',
-            'translations.*.*' =>'',
-            'translations.*.*.*' =>'',
+            'category.*' => ''
         ]);
 
         $service->save($validate['category']);
-        $service->saveTranslations($validate['translations']);
-        $service->saveTemplates($validate['translations']);
-
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);
@@ -139,7 +127,7 @@ class CategoryEditScreen extends Screen
     {
         $category->delete()
             ? Alert::info('Вы успешно удалили запись.')
-            : Alert::warning('Произошла ошибка');;
+            : Alert::warning('Произошла ошибка');
 
         return redirect()->route('platform.category.list');
     }

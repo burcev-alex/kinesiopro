@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
     {
         
         
-        // $this->call(AuthSeeder::class);
-        // $this->call(AnnouncementSeeder::class);
+        $this->call(BannerSeeder::class);
+        $this->call(CategoriesSeeder::class);
         
         // Model::reguard();
-        Artisan::call('orchid:admin admin admin@kinesiopro.ru step2021group');
+        Artisan::call('orchid:admin admin admin@kinesiopro.ru 123456');
     }
 }

@@ -27,23 +27,22 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
 
-            Menu::make('Категории')
+            Menu::make('Специализации')
                 ->route('platform.category.list')
                 ->icon('list')->title('Каталог'),
 
-            Menu::make('Характеристики')
-            ->route('platform.property.list')
-            ->icon('list')
-            ->title('Справочники'),
+            // Menu::make('Курсы')
+            //     ->route('platform.course.list')
+            //     ->icon('list'),
 
-            Menu::make('Валюты')
-                ->route('platform.currencies.list')
+            // Menu::make('Характеристики')
+            //     ->route('platform.property.list')
+            //     ->icon('list')
+            //     ->title('Справочники'),
+
+            Menu::make('Баннера')
+                ->route('platform.banners.list')
                 ->icon('list'),
-
-            Menu::make('Применимость')
-                ->route('platform.applicabilities.list')
-                ->icon('list'),
-
         ];
     }
 

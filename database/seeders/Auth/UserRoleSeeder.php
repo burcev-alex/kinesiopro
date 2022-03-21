@@ -20,7 +20,7 @@ class UserRoleSeeder extends Seeder
     {
         $this->disableForeignKeys();
 
-        User::find(1)->assignRole(config('ekoj.access.role.admin'));
+        User::find(1)->assignRole(config('kinesio.access.role.admin'));
 
         $this->enableForeignKeys();
     }

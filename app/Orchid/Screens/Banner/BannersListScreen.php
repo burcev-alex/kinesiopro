@@ -1,30 +1,30 @@
 <?php
 
 
-namespace App\Orchid\Screens\Currency;
+namespace App\Orchid\Screens\Banner;
 
 
-use App\Domains\Currency\Models\Currency;
-use App\Orchid\Layouts\Currency\CurrenciesListLayout;
+use App\Domains\Banner\Models\Banner;
+use App\Orchid\Layouts\Banner\BannersListLayout;
 
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 
-class CurrenciesListScreen extends Screen
+class BannersListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Валюты';
+    public $name = 'Баннеры';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Список всех валют';
+    public $description = 'Список всех баннеров';
 
     /**
      * Query data.
@@ -34,7 +34,7 @@ class CurrenciesListScreen extends Screen
     public function query(): array
     {
         return [
-            'сurrencies' => Currency::orderBy('id', 'ASC')->paginate(12)
+            'banners' => Banner::orderBy('id', 'ASC')->paginate(12)
         ];
     }
 
@@ -48,7 +48,7 @@ class CurrenciesListScreen extends Screen
         return [
             Link::make('Добавить')
                 ->icon('pencil')
-                ->route('platform.currencies.create'),
+                ->route('platform.banners.create'),
         ];
     }
 
@@ -60,7 +60,7 @@ class CurrenciesListScreen extends Screen
     public function layout(): array
     {
         return [
-            CurrenciesListLayout::class
+            BannersListLayout::class
         ];
     }
 }

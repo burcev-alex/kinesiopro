@@ -1,35 +1,33 @@
 <?php
 
+namespace App\Orchid\Screens\Banner;
 
-namespace App\Orchid\Screens\Currency;
-
-
-use App\Domains\Currency\Models\Currency;
-use App\Domains\Currency\Services\CurrenciesService;
-use App\Orchid\Layouts\Currency\СurrenciesMainRows;
+use App\Domains\Banner\Models\Banner;
+use App\Domains\Banner\Services\BannersService;
+use App\Orchid\Layouts\Banner\BannersImagesRows;
+use App\Orchid\Layouts\Banner\BannersMainRows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
-class CurrenciesCreateScreen extends Screen
+class BannersCreateScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Валюты';
+    public $name = 'Баннер';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Создание валюты';
+    public $description = 'Добавить баннер';
 
     public $exists = false;
 
@@ -38,13 +36,12 @@ class CurrenciesCreateScreen extends Screen
      *
      * @return array
      */
-    public function query(Currency $currency): array
-    {
-        $this->exists = $currency->exists;
-
+    public function query(Banner $banner){
+        $this->exists = $banner->exists;
         return [
-            'currencies' => collect([])
+            'banner' => collect([])
         ];
+        
     }
 
     /**
@@ -70,30 +67,33 @@ class CurrenciesCreateScreen extends Screen
         return [
             Layout::tabs([
                 'Основное' => [
-                    СurrenciesMainRows::class
+                    BannersMainRows::class
+                ],
+                'Изображение' => [
+                    BannersImagesRows::class
                 ]
             ])
         ];
     }
 
     public function save(
-        Currency $currency,
+        Banner $banner,
         Request $request,
-        CurrenciesService $service
-    )
-    {
-        $service->setModel($currency);
+        BannersService $service
+    ){
+        $service->setModel($banner);
         $validate = $request->validate([
-            'currencies.code' => 'required',
-            
-            'currencies.*' => ''
+            'banner.name' =>'required',
+            'banner.images' =>'array|min:2|max:2|required',
+            'banner.images.attachment_id' => 'array|min:1|max:1|required',
+            'banner.images.attachment_mobile_id' => 'array|min:1|max:1|required',
+            'banner.*' => ''
         ]);
-
         $service->save($validate);
-
+        $service->saveImages(isset($validate['banner']['images']) ? $validate['banner']['images'] : []);
 
         Alert::success('Изменения успешно сохранены');
-        return redirect()->route('platform.currencies.edit', $currency);
-
+        return redirect()->route('platform.banners.edit', $banner->id);
     }
+
 }

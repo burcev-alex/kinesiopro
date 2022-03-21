@@ -22,26 +22,24 @@ class CategoryShortRows extends Rows
      */
     protected function fields(): array
     {
-        $translations = $this->query->get('translations');
+        $categories = $this->query->get('categories');
 
         $rows = [];
 
-        if (count($translations) > 0) {
-            return $translations->map(function($translation){
-                return Quill::make('translations.' . $translation->locale . '.description')
-                ->title('Описание ' . strtoupper($translation->locale))->value($translation->description);
-            })->toArray();
+        if ($categories) {
+            return [
+                Quill::make('category.description')
+                ->title('Описание')->value($categories->description)
+            ];
         }
         else{
-            foreach (LaravelLocalization::getSupportedLocales() as $locale => $value) {
-                $rows = [
-                    ...$rows,
-                    ...[
-                        Quill::make('translations.' . $locale . '.description')
-                        ->title('Описание ' . strtoupper($locale)),
-                    ]
-                ];
-            }
+            $rows = [
+                ...$rows,
+                ...[
+                    Quill::make('category.description')
+                    ->title('Описание'),
+                ]
+            ];
 
             return $rows;
         }

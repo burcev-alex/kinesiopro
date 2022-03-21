@@ -2,14 +2,12 @@
 namespace App\Orchid\Screens\Category;
 
 use App\Domains\Category\Models\Category;
-use App\Domains\Product\Services\CategoryService;
+use App\Domains\Category\Services\CategoryService;
 use App\Orchid\Layouts\Category\CategoryMainRows;
 use App\Orchid\Layouts\Category\CategorySeoRows;
 use App\Orchid\Layouts\Category\CategoryShortRows;
-use App\Orchid\Layouts\Category\SeoTemplateRows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
@@ -29,7 +27,7 @@ class CategoryCreateScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Создание категории';
+    public $description = 'Создание специализации';
 
     public $exists = false;
 
@@ -44,7 +42,6 @@ class CategoryCreateScreen extends Screen
 
         return [
             'category' => collect([]),
-            'translations' => collect([]),
         ];
     }
 
@@ -70,7 +67,7 @@ class CategoryCreateScreen extends Screen
     {
         return [
             Layout::tabs([
-                'Категория' => [
+                'Специализация' => [
                     CategoryMainRows::class
                 ],
                 'Описание' => [
@@ -78,9 +75,6 @@ class CategoryCreateScreen extends Screen
                 ],
                 'SEO' => [
                     CategorySeoRows::class
-                ],
-                'Шаблоны' => [
-                    SeoTemplateRows::class
                 ]
             ])
         ];
@@ -95,19 +89,12 @@ class CategoryCreateScreen extends Screen
         $service->setModel($category);
         $validate = $request->validate([
             'category.slug' => 'required',
-            'translations.*.name' =>'required',
-
-            'category.*' => '',
-            'translations.*.*' =>'',
-            'translations.*.*.*' =>'',
+            'category.*' => ''
         ]);
-        // Log::info($validate);
 
         $service->save($validate['category']);
-        $service->saveTranslations($validate['translations']);
-        $service->saveTemplates($validate['translations']);
 
-       // Cache::tags(['categories', 'menuCategories.ru'])->flush();
+       Cache::tags(['categories'])->flush();
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);

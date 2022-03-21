@@ -24,36 +24,30 @@ class CategorySeoRows extends Rows
      */
     public function fields(): array
     {
-        $translations = $this->query->get('translations');
+        $categories = $this->query->get('categories');
         $rows = [];
 
-        if (count($translations) > 0) {
-            $translations->each(function ($translation) use (&$rows) {
-                $rows = [
+        if (isset($categories)) {
+            $rows = [
                 ...$rows,
                 ...[
-                    Label::make('')->value('Версия ' . strtoupper($translation->locale)),
-                    Input::make('translations.' . $translation->locale . '.meta_h1')->value($translation->meta_h1)->title('Мета H1'),
-                    Input::make('translations.' . $translation->locale . '.meta_title')->value($translation->meta_title)->title('Мета заголовок'),
-                    Input::make('translations.' . $translation->locale . '.meta_keywords')->value($translation->meta_keywords)->title('Мета ключевые слова'),
-                    TextArea::make('translations.' . $translation->locale . '.meta_description')->value($translation->meta_description)->title('Мета описание'),
+                    Input::make('category.meta_h1')->value($categories->meta_h1)->title('Мета H1'),
+                    Input::make('category.meta_title')->value($categories->meta_title)->title('Мета заголовок'),
+                    Input::make('category.meta_keywords')->value($categories->meta_keywords)->title('Мета ключевые слова'),
+                    TextArea::make('category.meta_description')->value($categories->meta_description)->title('Мета описание'),
                 ],
             ];
-            });
         }
         else{
-            foreach (LaravelLocalization::getSupportedLocales() as $locale => $value) {
-                $rows = [
-                    ...$rows,
-                    ...[
-                        Label::make('')->value('Версия ' . strtoupper($locale)),
-                        Input::make('translations.' . $locale . '.meta_h1')->title('Мета H1'),
-                        Input::make('translations.' . $locale . '.meta_title')->title('Мета заголовок'),
-                        Input::make('translations.' . $locale . '.meta_keywords')->title('Мета ключевые слова'),
-                        TextArea::make('translations.' . $locale . '.meta_description')->title('Мета описание'),
-                    ]
-                ];
-            }
+            $rows = [
+                ...$rows,
+                ...[
+                    Input::make('category.meta_h1')->title('Мета H1'),
+                    Input::make('category.meta_title')->title('Мета заголовок'),
+                    Input::make('category.meta_keywords')->title('Мета ключевые слова'),
+                    TextArea::make('category.meta_description')->title('Мета описание'),
+                ]
+            ];
         }
 
         return $rows;

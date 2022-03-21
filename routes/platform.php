@@ -11,6 +11,14 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
+use App\Orchid\Screens\Category\CategoryListScreen;
+use App\Orchid\Screens\Category\CategoryEditScreen;
+use App\Orchid\Screens\Category\CategoryCreateScreen;
+
+use App\Orchid\Screens\Banner\BannersCreateScreen;
+use App\Orchid\Screens\Banner\BannersEditScreen;
+use App\Orchid\Screens\Banner\BannersListScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -21,6 +29,17 @@ use Tabuna\Breadcrumbs\Trail;
 | contains the need "dashboard" middleware group. Now create something great!
 |
 */
+
+
+Route::screen('/banners', BannersListScreen::class)->name('platform.banners.list');
+Route::screen('/banners/{banners}/edit', BannersEditScreen::class)->name('platform.banners.edit');
+Route::screen('/banners-create', BannersCreateScreen::class)->name('platform.banners.create');
+
+Route::screen('/categories', CategoryListScreen::class)->name('platform.category.list');
+Route::screen('/categories/{category}/edit', CategoryEditScreen::class)->name('platform.category.edit');
+Route::screen('/categories-create', CategoryCreateScreen::class)->name('platform.category.create');
+
+
 
 // Main
 Route::screen('/main', PlatformScreen::class)

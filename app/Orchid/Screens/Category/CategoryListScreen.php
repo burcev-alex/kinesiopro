@@ -13,14 +13,14 @@ class CategoryListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Категории';
+    public $name = 'Специализации';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Список всех категорий';
+    public $description = 'Список всех специализаций';
 
     /**
      * Query data.
@@ -30,8 +30,7 @@ class CategoryListScreen extends Screen
     public function query(): array
     {
         return [
-            'categories' => Category::rightJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->where('categories_translations.locale', app()->getLocale())->select('categories.*')->orderBy('categories_translations.name', 'ASC')->paginate(12)
+            'categories' => Category::paginate(12)
         ];
     }
 

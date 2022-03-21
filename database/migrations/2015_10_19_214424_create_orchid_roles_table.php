@@ -13,7 +13,7 @@ class CreateOrchidRolesTable extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('slug')->unique();
             $table->enum('type', ['admin', 'customer']);
             $table->string('guard_name');
