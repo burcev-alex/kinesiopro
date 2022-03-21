@@ -2,7 +2,6 @@
 namespace App\Orchid\Layouts\Category;
 
 use App\Domains\Category\Models\Category;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;

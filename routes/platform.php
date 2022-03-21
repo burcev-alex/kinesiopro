@@ -19,6 +19,10 @@ use App\Orchid\Screens\Banner\BannersCreateScreen;
 use App\Orchid\Screens\Banner\BannersEditScreen;
 use App\Orchid\Screens\Banner\BannersListScreen;
 
+use App\Orchid\Screens\Teacher\TeachersCreateScreen;
+use App\Orchid\Screens\Teacher\TeachersEditScreen;
+use App\Orchid\Screens\Teacher\TeachersListScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -30,6 +34,10 @@ use App\Orchid\Screens\Banner\BannersListScreen;
 |
 */
 
+
+Route::screen('/teachers', TeachersListScreen::class)->name('platform.teachers.list');
+Route::screen('/teachers/{teachers}/edit', TeachersEditScreen::class)->name('platform.teachers.edit');
+Route::screen('/teachers-create', TeachersCreateScreen::class)->name('platform.teachers.create');
 
 Route::screen('/banners', BannersListScreen::class)->name('platform.banners.list');
 Route::screen('/banners/{banners}/edit', BannersEditScreen::class)->name('platform.banners.edit');

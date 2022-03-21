@@ -40,8 +40,12 @@ class PlatformProvider extends OrchidServiceProvider
             //     ->icon('list')
             //     ->title('Справочники'),
 
-            Menu::make('Баннера')
+            Menu::make('Баннеры')
                 ->route('platform.banners.list')
+                ->icon('list'),
+
+            Menu::make('Преподаватели')
+                ->route('platform.teachers.list')
                 ->icon('list'),
         ];
     }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Orchid\Layouts\Banner;
+namespace App\Orchid\Layouts\Teacher;
 
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
@@ -9,7 +9,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
-class BannersMainRows extends Rows
+class TeacherMainRows extends Rows
 {
     /**
      * Used to create the title of a group of form elements.
@@ -30,9 +30,9 @@ class BannersMainRows extends Rows
         $rows = [
             ...$rows,
             ...[
-                Input::make('banner.name')->title('Название')->required(),
-                Input::make('banner.sort')->title('Сортировка')->required(),
-                CheckBox::make('banner.active')->title('Активность')
+                Input::make('teacher.full_name')->title('ФИО')->required(),
+                Input::make('teacher.sort')->title('Сортировка')->required(),
+                CheckBox::make('teacher.active')->title('Активность')
             ]
         ];
 

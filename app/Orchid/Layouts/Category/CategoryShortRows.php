@@ -1,7 +1,6 @@
 <?php
 namespace App\Orchid\Layouts\Category;
 
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Layouts\Rows;
