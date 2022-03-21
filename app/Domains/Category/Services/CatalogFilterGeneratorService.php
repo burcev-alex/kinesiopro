@@ -71,7 +71,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         $this->selectedFilters = $this->parseFilters(
             $routerService->detectFiltersFromPath()
         );
-        $this->filters = RefChar::where('active_filter', 1)->select('slug')->get()->toArray();
+        $this->filters = RefChar::select('slug')->get()->toArray();
         parent::__construct();
     }
 

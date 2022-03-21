@@ -59,7 +59,7 @@ class ProductCreateTest extends TestCase
         $products = Product::factory()->count(3)->create();
         $products->each(function ($product) use (&$options_values) {
             $opts = ProductsOption::factory()->count(3)->state([
-                'product_id' => $product->id
+                'course_id' => $product->id
             ])->create();
 
             $opts->each(function ($opt) use (&$options_values) {
@@ -85,7 +85,7 @@ class ProductCreateTest extends TestCase
 
         $products->each(function ($product) use (&$properies_values) {
             $properies_values[] = ProductsProperty::factory()->state([
-                'product_id' => $product->id
+                'course_id' => $product->id
             ])->count(3)->create();
         });
 
@@ -110,11 +110,11 @@ class ProductCreateTest extends TestCase
 
         $products->each(function ($product) use (&$images_translates) {
             $images = ProductsImage::factory()->state([
-                'product_id' => $product->id
+                'course_id' => $product->id
             ])->count(4)->create();
             $images_translates[] = [
                 'translates' => ProductsTranslation::factory()->state([
-                    'product_id' => $product->id
+                    'course_id' => $product->id
                 ])->create()->toArray(),
                 'images' => $images
             ];
@@ -145,7 +145,7 @@ class ProductCreateTest extends TestCase
         // Log::info($products);
         $products->each(function ($product) use (&$variants) {
             $variants[] = ProductsVariant::factory()->state([
-                'product_id' => $product->id
+                'course_id' => $product->id
             ])->count(5)->create();
         });
 

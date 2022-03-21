@@ -26,7 +26,7 @@ class RelationshipTest extends TestCase
     {
         $product = Product::factory()->hasOptions(3)->create();
         $product->options->each(function($option) use($product) {
-            $this->assertTrue($option->product_id == $product->id);
+            $this->assertTrue($option->course_id == $product->id);
         });
     }
     

@@ -41,11 +41,11 @@ class CatalogFilterService extends AbstractCatalogFilterService
             'direction' => 'asc'
         ],
         'max_price' => [
-            'column' => 'max_price',
+            'column' => 'price',
             'direction' => 'desc'
         ],
         'min_price' => [
-            'column' => 'max_price',
+            'column' => 'price',
             'direction' => 'asc'
         ],
         'date' => [
