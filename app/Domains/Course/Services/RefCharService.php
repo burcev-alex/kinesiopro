@@ -1,9 +1,8 @@
 <?php
-namespace App\Domains\Product\Services;
+namespace App\Domains\Course\Services;
 
-use App\Domains\Product\Models\RefChar;
-use App\Domains\Product\Models\RefCharsTranslation;
-use App\Domains\Product\Models\RefCharsValue;
+use App\Domains\Course\Models\RefChar;
+use App\Domains\Course\Models\RefCharsValue;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Cache;
 
@@ -28,21 +27,6 @@ class RefCharService extends BaseService
         return $this;
     }
 
-
-    public function saveTranslations(array $translations): self
-    {
-        foreach ($translations as $locale => $fields) {
-            RefCharsTranslation::updateOrCreate([
-                'char_id' => $this->model->id,
-                'locale' => $locale
-            ], [
-                'name' => $fields['name']
-            ]);
-        }
-        return $this;
-    }
-
-
     public function saveValues(array $values): self
     {
         // найти все значения характеристик
@@ -63,19 +47,15 @@ class RefCharService extends BaseService
             }
         }
 
-        foreach ($values as $slug => $fields) {
-            foreach (['ru', 'uk'] as $locale) {
-                if ($fields['slug'] != "") {
-                    RefCharsValue::updateOrCreate([
-                        'char_id' => $this->model->id,
-                        'slug' => $slug,
-                        'locale' => $locale
-                    ], [
-                        'value' => $fields[$locale],
-                        'slug' => $fields['slug'],
-                        'rgb' => $fields['rgb'],
-                    ]);
-                }
+        foreach ($values as $slug => $value) {
+            if ($value != "") {
+                RefCharsValue::updateOrCreate([
+                    'char_id' => $this->model->id,
+                    'slug' => $slug
+                ], [
+                    'value' => $value,
+                    'slug' => $slug
+                ]);
             }
         }
         return $this;
@@ -86,15 +66,11 @@ class RefCharService extends BaseService
      */
     public function getCharsGroupedBySlug()
     {
-        return Cache::tags('chars_with_values')->rememberForever('chars' . app()->getLocale(), function() {
+        return Cache::tags('chars_with_values')->rememberForever('chars', function() {
             $chars = RefChar::query()
                 ->with([
-                    'values' => function ($query) {
-                        return $query->where('locale', app()->getLocale());
-                    },
-                    'translation'
+                    'values'
                 ])
-                ->where('type', 'property')
                 ->where('active', 1)
                 ->orderBy('sort', 'ASC')
                 ->get()
@@ -109,10 +85,7 @@ class RefCharService extends BaseService
                     'id' => $char->id,
                     'slug' => $char->slug,
                     'values' => $char->values->toArray(),
-                    'translation' => [
-                        'locale' => $char->translation->locale,
-                        'name' => $char->translation->name
-                    ]
+                    'name' => $char->name
                 ];
             }
             return $return;
