@@ -30,6 +30,12 @@ use App\Orchid\Screens\Course\CourseEditScreen;
 use App\Orchid\Screens\Course\CourseListScreen;
 use App\Orchid\Screens\Course\CourseCreateScreen;
 
+use App\Orchid\Screens\News\NewsListScreen;
+use App\Orchid\Screens\News\NewsCreateScreen;
+use App\Orchid\Screens\News\NewsEditScreen;
+
+use App\Orchid\Screens\Utils\ClearCacheScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -58,6 +64,12 @@ Route::screen('/categories', CategoryListScreen::class)->name('platform.category
 Route::screen('/categories/{category}/edit', CategoryEditScreen::class)->name('platform.category.edit');
 Route::screen('/categories-create', CategoryCreateScreen::class)->name('platform.category.create');
 
+
+Route::screen('/cache-reset', ClearCacheScreen::class)->name('platform.cache.reset');
+
+Route::screen('news/list', NewsListScreen::class)->name('platform.news.list');
+Route::screen('news/create', NewsCreateScreen::class)->name('platform.news.create');
+Route::screen('news/edit/{news}', NewsEditScreen::class)->name('platform.news.edit');
 
 
 // Main

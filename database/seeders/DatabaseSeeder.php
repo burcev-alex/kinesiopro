@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RefCharSeeder::class);
         $this->call(CoursesSeeder::class);
         $this->call(CoursesPropsSeeder::class);
+        $this->call(NewsPaperComponentsSeeder::class);
+        $this->call(NewsPaperSeeder::class);
         
         // Model::reguard();
         Artisan::call('orchid:admin admin admin@kinesiopro.ru 123456');
