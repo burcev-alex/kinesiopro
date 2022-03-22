@@ -47,6 +47,11 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Блог')
                 ->icon('list')
                 ->route('platform.news.list')->title('Контент'),
+
+            Menu::make('Тесты')
+                ->route('platform.quiz.list')
+                ->icon('list'),
+                
             Menu::make('Баннеры')
                 ->route('platform.banners.list')
                 ->icon('list'),

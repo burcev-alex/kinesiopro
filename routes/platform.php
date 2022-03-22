@@ -34,6 +34,10 @@ use App\Orchid\Screens\News\NewsListScreen;
 use App\Orchid\Screens\News\NewsCreateScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
 
+use App\Orchid\Screens\Quiz\QuizItemListScreen;
+use App\Orchid\Screens\Quiz\QuizItemCreateScreen;
+use App\Orchid\Screens\Quiz\QuizItemEditScreen;
+
 use App\Orchid\Screens\Utils\ClearCacheScreen;
 
 /*
@@ -70,6 +74,10 @@ Route::screen('/cache-reset', ClearCacheScreen::class)->name('platform.cache.res
 Route::screen('news/list', NewsListScreen::class)->name('platform.news.list');
 Route::screen('news/create', NewsCreateScreen::class)->name('platform.news.create');
 Route::screen('news/edit/{news}', NewsEditScreen::class)->name('platform.news.edit');
+
+Route::screen('quiz/list', QuizItemListScreen::class)->name('platform.quiz.list');
+Route::screen('quiz/create', QuizItemCreateScreen::class)->name('platform.quiz.create');
+Route::screen('quiz/edit/{news}', QuizItemEditScreen::class)->name('platform.quiz.edit');
 
 
 // Main

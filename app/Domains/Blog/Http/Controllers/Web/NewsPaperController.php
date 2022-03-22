@@ -25,10 +25,10 @@ class NewsPaperController
      */
     public function index(Request $request, $param1 = null, $param2 = null, $param3 = null)
     {
-        list($category1, $category2, $category3, $filters, $page) = $this->routerService->detectParameters([$param1, $param2, $param3]);
+        list($filters, $page) = $this->routerService->detectParameters([$param1, $param2, $param3]);
 
         // всего кол-во статей
-        $countArticles = $this->newsService->where('active', true)->where('locale', app()->getLocale())->get()->count();
+        $countArticles = $this->newsService->where('active', true)->get()->count();
         
         if(!$page){
             $page = 1;
@@ -79,7 +79,7 @@ class NewsPaperController
      */
     public function show($slug, Request $request)
     {
-        list($news_paper, $components, $tags) = $this->newsService->showArticleDetails($slug);
+        list($news_paper, $components) = $this->newsService->showArticleDetails($slug);
 
         if (!$news_paper)
             return abort(404);

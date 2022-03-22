@@ -113,7 +113,7 @@ class NewsEditScreen extends Screen
                     DateTimer::make('item.me.publication_date')->title('Дата публикации')->value($this->news_paper->publication_date),
                     Input::make('item.me.title')->title('Заголовок')->value($this->news_paper->title),
                     CheckBox::make('item.me.active')
-                    ->value($this->news_paper->active)->title('Активна ли'),
+                    ->value($this->news_paper->active)->title('Активность'),
                     Upload::make('item.me.attachment_id')->title('Обложка')->value($this->news_paper->attachment_id)->maxFiles(1),
                     Upload::make('item.me.detail_attachment_id')->title('Обложка заголовка')->value($this->news_paper->detail_attachment_id)->maxFiles(1)
                 ]),

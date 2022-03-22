@@ -82,7 +82,7 @@ class NewsPaperService extends BaseService
         if (!$news_paper)
             return null;
 
-        return [$news_paper, $news_paper->components, $news_paper->tags];
+        return [$news_paper, $news_paper->components];
     }
 
     /**

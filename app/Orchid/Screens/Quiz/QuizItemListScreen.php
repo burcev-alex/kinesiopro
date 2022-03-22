@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Orchid\Screens\News;
+namespace App\Orchid\Screens\Quiz;
 
-use App\Domains\Blog\Models\NewsPaper;
-use App\Orchid\Layouts\News\NewsListLayout;
+use App\Domains\Quiz\Models\Item;
+use App\Orchid\Layouts\Quiz\QuizesListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class NewsListScreen extends Screen
+class QuizItemListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Новости';
+    public $name = 'Тесты';
 
     /**
      * Display header description.
      *
      * @var string
      */
-    public $description = 'Список всех новостей';
+    public $description = 'Список всех тестов';
 
     /**
      * Query data.
@@ -32,7 +32,7 @@ class NewsListScreen extends Screen
     public function query(): array
     {
         return [
-            'news' => NewsPaper::orderBy('created_at')->paginate(10)
+            'quizes' => Item::orderBy('created_at')->paginate(10)
         ];
     }
 
@@ -44,7 +44,7 @@ class NewsListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Создать новость')->icon('pencil')->route('platform.news.create')
+            Link::make('Создать тест')->icon('pencil')->route('platform.quiz.create')
         ];
     }
 
@@ -56,7 +56,7 @@ class NewsListScreen extends Screen
     public function layout(): array
     {
         return [
-            NewsListLayout::class
+            QuizesListLayout::class
         ];
     }
 }

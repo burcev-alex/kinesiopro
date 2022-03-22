@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Orchid\Screens\News;
+namespace App\Orchid\Screens\Quiz;
 
-use App\Domains\Blog\Models\Component;
-use App\Domains\Blog\Models\NewsPaper;
-use App\Domains\Blog\Models\NewsPaperComponent;
+use App\Domains\Quiz\Models\Question;
+use App\Domains\Quiz\Models\Item;
+use App\Domains\Quiz\Models\ItemQuestion;
 use Illuminate\Http\Request;
 use Log;
 use Orchid\Screen\Actions\Button;
@@ -17,21 +17,21 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class NewsCreateScreen extends Screen
+class QuizItemCreateScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Новая новость';
+    public $name = 'Новый тест';
 
     /**
      * Display header description.
      *
      * @var string
      */
-    public $description = 'Создание новой новости';
+    public $description = 'Создание новой тест';
 
     /**
      * Query data.
@@ -69,7 +69,7 @@ class NewsCreateScreen extends Screen
             Layout::tabs([
                 "Основное" => Layout::rows([
                     Input::make('item.me.slug')->title('URL')->value(''),
-                    Input::make('item.me.title')->title('Заголовок')->value(''),
+                    Input::make('item.me.title')->title('Название')->value(''),
                     CheckBox::make('item.me.active')
                     ->value(false)->title('Активность'),
                     Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1)
@@ -81,32 +81,32 @@ class NewsCreateScreen extends Screen
 
     public function save(Request $request)
     {
-        $news_paper = $request->get('item')['me'];
+        $quiz_item = $request->get('item')['me'];
 
-        if(!isset($news_paper['slug']) || !isset($news_paper['title']) || !isset($news_paper['attachment_id'])){
+        if(!isset($quiz_item['slug']) || !isset($quiz_item['title']) || !isset($quiz_item['attachment_id'])){
             Toast::error("Не все поля заполнены!");
             return redirect()->back();
         }
         
-        // $check_slug = NewsPaper::where('slug', $news_paper['slug'])->get()->first();
+        $check_slug = Item::where('slug', $quiz_item['slug'])->get()->first();
         
-        // if($check_slug){
-        //     Toast::error("URL новости совпадает с уже существующим!");
-        //     return redirect()->back();
-        // }
+        if($check_slug){
+            Toast::error("URL новости совпадает с уже существующим!");
+            return redirect()->back();
+        }
         
-        $news_paper_model = new NewsPaper($news_paper);
+        $quiz_item_model = new Item($quiz_item);
         
-        if(!isset($news_paper['active']))
-            $news_paper_model->active = 0;
-        else if(isset($news_paper['active']))
-            $news_paper_model->active = 1;
+        if(!isset($quiz_item['active']))
+            $quiz_item_model->active = 0;
+        else if(isset($quiz_item['active']))
+            $quiz_item_model->active = 1;
         
-        $news_paper_model->save();
+        $quiz_item_model->save();
 
-        Toast::success("Новость успешно создана!");
-        Toast::success("Добавьте в нее компонентов!");
-        return redirect()->route('platform.news.edit', $news_paper_model->id);
+        Toast::success("Тест успешно создана!");
+        Toast::success("Добавьте в нее вопросы!");
+        return redirect()->route('platform.quiz.edit', $quiz_item_model->id);
     }
 
 

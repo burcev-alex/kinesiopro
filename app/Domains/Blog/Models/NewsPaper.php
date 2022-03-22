@@ -18,7 +18,6 @@ class NewsPaper extends Model
     protected $fillable = [
         "title",
         "slug",
-        "category_id",
         "publication_date",
         "attachment_id",
         "meta_title",
