@@ -84,7 +84,7 @@ class NewsPaperSeeder extends Seeder
                     "component_name" => "title-text",
                     "fields" => [
                         "title" => $faker->sentence(),
-                        "text" => $faker->paragraph()
+                        "text" => $faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()
                     ]
                 ],
                 [
@@ -107,7 +107,7 @@ class NewsPaperSeeder extends Seeder
                 [
                     "component_name" => "text",
                     "fields" => [
-                        "text" => $faker->paragraph()
+                        "text" => $faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()
                     ]
                 ],
                 [
@@ -132,7 +132,7 @@ class NewsPaperSeeder extends Seeder
                 [
                     "component_name" => "text",
                     "fields" => [
-                        "text" => $faker->paragraph()
+                        "text" => $faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()." ".$faker->paragraph()
                     ]
                 ],
                 [
