@@ -35,26 +35,18 @@ class PodcastService extends BaseService
 
     public function save(array $fields): self
     {
-        $this->model->fill($fields['podcast']);
-        if (isset($fields['podcast']['active'])) $this->model->active = true;
+        if(array_key_exists('attachment_id', $fields)){
+            $fields['attachment_id'] = current($fields['attachment_id']);
+        }
+
+        $this->model->fill($fields);
+        if (isset($fields['active'])) $this->model->active = true;
         else $this->model->active = false;
 
 
         $this->model->save();
 
         return $this;
-    }
-
-    public function saveImages(array $images)
-    {
-        
-        if(!isset($images['attachment_id'])) $images['attachment_id'] = [];        
-        
-        foreach($images as $key => $items){
-            foreach($items as $item){
-                Podcast::where('id', $this->model->id)->update([$key => $item]);
-            }
-        }
     }
 
     /**

@@ -35,6 +35,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.course.list')
                 ->icon('list'),
 
+            Menu::make('Подкасты')
+                ->route('platform.podcast.list')
+                ->icon('list'),
+
             Menu::make('Характеристики')
                 ->route('platform.property.list')
                 ->icon('list')

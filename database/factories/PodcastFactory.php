@@ -28,7 +28,7 @@ class PodcastFactory extends Factory
     {
         try {
             return [
-                "title" => $this->faker->title(),
+                "title" => implode(' ', $this->faker->words(10)),
                 "slug" => Str::slug($this->faker->slug(3)),
                 "attachment_id" => $this->storageAttachment(265,300),
                 "sort" => 100,
