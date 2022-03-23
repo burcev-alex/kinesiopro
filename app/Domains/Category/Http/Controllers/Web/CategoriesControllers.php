@@ -3,7 +3,6 @@ namespace App\Domains\Category\Http\Controllers\Web;
 
 use App\Domains\Category\Models\Category;
 use App\Domains\Category\Services\BreadcrumbsService;
-use App\Domains\MetaSeo\Services\MetaSeoFactory;
 use App\Domains\Category\Services\CatalogFilterGeneratorService;
 use Tabuna\Breadcrumbs\Breadcrumbs;
 use Tabuna\Breadcrumbs\Trail;
