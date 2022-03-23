@@ -19,6 +19,10 @@ use App\Orchid\Screens\Banner\BannersCreateScreen;
 use App\Orchid\Screens\Banner\BannersEditScreen;
 use App\Orchid\Screens\Banner\BannersListScreen;
 
+use App\Orchid\Screens\Contact\ContactCreateScreen;
+use App\Orchid\Screens\Contact\ContactEditScreen;
+use App\Orchid\Screens\Contact\ContactListScreen;
+
 use App\Orchid\Screens\Teacher\TeachersCreateScreen;
 use App\Orchid\Screens\Teacher\TeachersEditScreen;
 use App\Orchid\Screens\Teacher\TeachersListScreen;
@@ -78,6 +82,10 @@ Route::screen('news/edit/{news}', NewsEditScreen::class)->name('platform.news.ed
 Route::screen('quiz/list', QuizItemListScreen::class)->name('platform.quiz.list');
 Route::screen('quiz/create', QuizItemCreateScreen::class)->name('platform.quiz.create');
 Route::screen('quiz/edit/{news}', QuizItemEditScreen::class)->name('platform.quiz.edit');
+
+Route::screen('contacts/list', ContactListScreen::class)->name('platform.contact.list');
+Route::screen('contact/create', ContactCreateScreen::class)->name('platform.contact.create');
+Route::screen('contact/edit/{news}', ContactEditScreen::class)->name('platform.contact.edit');
 
 
 // Main

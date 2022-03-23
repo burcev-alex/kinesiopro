@@ -55,6 +55,10 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Баннеры')
                 ->route('platform.banners.list')
                 ->icon('list'),
+                
+            Menu::make('Контакты')
+                ->route('platform.contact.list')
+                ->icon('list'),
     
             Menu::make('Сброс кеша')
                 ->route('platform.cache.reset')
