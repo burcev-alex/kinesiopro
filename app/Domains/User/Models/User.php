@@ -38,6 +38,15 @@ class User extends Authenticatable
         'email',
         'password',
         'permissions',
+        'firstname',
+        'surname',
+        'phone',
+        'birthday',
+        'country',
+        'work',
+        'position',
+        'avatar_id',
+        'scan_id',
     ];
 
     /**

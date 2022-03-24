@@ -68,6 +68,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.cache.reset')
                 ->icon('list')
                 ->title('Утилиты'),
+    
+            Menu::make('Пользователи')
+                ->route('platform.systems.users')
+                ->icon('list')
+                ->title('Система'),
+    
+            Menu::make('Роли')
+                ->route('platform.systems.roles')
+                ->icon('list'),
         ];
     }
 

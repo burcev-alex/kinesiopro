@@ -16,7 +16,7 @@ class CreateOrchidRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('slug')->unique();
             $table->enum('type', ['admin', 'customer']);
-            $table->string('guard_name');
+            $table->string('guard_name')->nullable();
             $table->string('name');
             $table->jsonb('permissions')->nullable();
             $table->timestamps();
