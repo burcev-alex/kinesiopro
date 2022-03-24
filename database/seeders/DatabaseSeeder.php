@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RefCharSeeder::class);
         $this->call(CoursesSeeder::class);
         $this->call(CoursesPropsSeeder::class);
+        $this->call(CoursesBlocksSeeder::class);
         $this->call(NewsPaperComponentsSeeder::class);
         $this->call(NewsPaperSeeder::class);
         $this->call(QuizQuestionsSeeder::class);

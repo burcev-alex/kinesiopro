@@ -239,7 +239,8 @@ class CatalogFilterService extends AbstractCatalogFilterService
                 return $query->with('chars', function ($query) {
                     return $query->where('active', 1)->get()->toArray();
                 });
-            }
+            },
+            'blocks'
         ]);
 
         // $query = str_replace(array('?'), array('\'%s\''), $builder->toSql());

@@ -3,6 +3,8 @@ namespace App\Orchid\Screens\Course;
 
 use App\Domains\Course\Http\Requests\OrchidCourseRequest;
 use App\Domains\Course\Models\Course;
+use App\Domains\Course\Models\CourseBlock as AppCourseBlock;
+use App\Orchid\Layouts\Course\CourseBlock;
 use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Services\CourseOrchidService;
 use App\Orchid\Layouts\Course\CourseDescriptionRows;
@@ -15,6 +17,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
+use Orchid\Screen\Actions\ModalToggle;
 
 class CourseEditScreen extends Screen
 {
@@ -25,6 +28,8 @@ class CourseEditScreen extends Screen
      */
     public $name = 'CourseEditScreen';
     public $service;
+    
+    public $blocks;
 
     /**
      * Display header description.
@@ -43,6 +48,7 @@ class CourseEditScreen extends Screen
     public function query(Course $course): array
     {
         $this->data = $course;
+        $this->blocks = $course->blocks;
 
         $this->name = $course != null ? $course->name : "";
         
@@ -50,6 +56,7 @@ class CourseEditScreen extends Screen
             'course' => $course,
             'category_main' => $course->category_id ? $course->category_id : null,
             'properties' => $course->properties,
+            'blocks' => $course->blocks,
             'property_values' => $course->property_values
         ];
     }
@@ -75,6 +82,12 @@ class CourseEditScreen extends Screen
                 ->method('save')
                 ->icon('save'),
 
+            ModalToggle::make('Добавить блок')
+                ->modal('addblock')
+                ->method('addblock')
+                ->icon('plus-alt'),
+            ModalToggle::make('Удалить блок')->method('deleteblock')->modal('deleteblock')->icon('trash')->canSee($this->blocks->count() > 0),
+
             Button::make('Удалить')
                 ->method('remove')
                 ->icon('close')
@@ -88,6 +101,13 @@ class CourseEditScreen extends Screen
      */
     public function layout(): array
     {
+        $options = [];
+        $blocks = $this->blocks->map(function ($item) use (&$options) {
+            $options[$item->id] = "Блок " . $item->sort . " - " . $item->title;
+            $block = new CourseBlock($item);
+            return $block->accordionField();
+        })->toArray();
+
         return [
             Layout::tabs([
                 'Курс' => [
@@ -97,6 +117,7 @@ class CourseEditScreen extends Screen
                 'Характеристики' => [
                     CoursePropsRows::class
                 ],
+                'Блоки курса' => $blocks,
                 'Детальное описание' => [
                     CourseDescriptionRows::class
                 ],
@@ -121,6 +142,10 @@ class CourseEditScreen extends Screen
         if (array_key_exists('property_values', $validated)) {
             $service->saveProperties($validated['property_values']);
         }
+
+        if (array_key_exists('blocks', $validated)) {
+            $service->saveBlocks($validated['blocks']);
+        }
        
         Alert::success('Курс успешно изменен');
         return redirect()->route('platform.course.edit', $course);
@@ -142,6 +167,14 @@ class CourseEditScreen extends Screen
             $propIds[] = $variant->id;
         }
         $course->properties()->delete();
+
+        // удаляем блоки
+        $blocks = CourseBlock::where('course_id', $course->id)->get();
+        $propIds = [];
+        foreach($blocks as $variant){
+            $propIds[] = $variant->id;
+        }
+        $course->blocks()->delete();
         
         $service->deleteById($course->id);
 

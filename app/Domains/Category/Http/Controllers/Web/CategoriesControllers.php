@@ -41,7 +41,6 @@ class CategoriesControllers extends Controller {
         BreadcrumbsService::category($category1, $filters); 
 
         // данные для мета тегов, и seo текст
-        $typePage = strlen($filters) > 0 ? 'filter' : 'categories';
         $arParseFilters = $this->catalogFilterService->parseFilters($filters);
         
         if(array_key_exists('text', $arParseFilters)){

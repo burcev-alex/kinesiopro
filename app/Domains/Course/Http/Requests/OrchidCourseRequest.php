@@ -30,6 +30,7 @@ class OrchidCourseRequest extends FormRequest
             'course.category_id' => 'required|integer',
             'course.*' => '', 
             'property_values.*' => '',
+            'blocks.*' => '',
         ];
     }
 }

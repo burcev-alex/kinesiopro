@@ -14,78 +14,78 @@ use function Symfony\Component\String\b;
 
 class CardControllers extends Controller {
 
-    protected CourseService $productService;
-    protected CoursePropertiesService $productPropertiesService;
+    protected CourseService $courseService;
+    protected CoursePropertiesService $coursePropertiesService;
 
     /**
-     * @param CourseService $productService
-     * @param CoursePropertiesService $productPropertiesService
+     * @param CourseService $courseService
+     * @param CoursePropertiesService $coursePropertiesService
      */
-    public function __construct(CourseService $productService, CoursePropertiesService $productPropertiesService)
-   //public function __construct(CourseService $productService)
+    public function __construct(CourseService $courseService, CoursePropertiesService $coursePropertiesService)
+   //public function __construct(CourseService $courseService)
     {
-        $this->productService = $productService;
-        $this->productPropertiesService = $productPropertiesService;
+        $this->courseService = $courseService;
+        $this->coursePropertiesService = $coursePropertiesService;
     }
 
     /**
-     * Get product by id
+     * Get course by id
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($slug) {
               
-        /** @var Course $product */
-        $product = $this->productService->show($slug);
+        /** @var Course $course */
+        $course = $this->courseService->show($slug);
         
-        if (!$product) {
+        if (!$course) {
             abort(404);
         }
 
         // Хлебные крошки
-        BreadcrumbsService::card($product);
+        BreadcrumbsService::card($course);
 
         $seo = [
-            'product' => [
-                'availability' => $product->marker_archive ? 'discontinued' : 'in stock',
-                'title' => $product->name,
-                'link' => route('products.card', ['slug' => $product->slug]),
-                'price' => $product->marker_archive ? "0 RUB" : round($product->variant->price * $product->variant->currency->value, 2)." RUB",
-                'condition' => $product->marker_archive ? '' : 'new',
+            'course' => [
+                'availability' => $course->marker_archive ? 'discontinued' : 'in stock',
+                'title' => $course->name,
+                'link' => route('courses.card', ['slug' => $course->slug]),
+                'price' => $course->marker_archive ? "0 RUB" : round($course->variant->price * $course->variant->currency->value, 2)." RUB",
+                'condition' => $course->marker_archive ? '' : 'new',
                 'currency' => 'RUB',
                 'brand' => 'Kinesiopro',
             ]
         ];
 
-        if(!empty($product) && $product->meta_h1){
-            $seo['h1'] = $product->meta_h1;
+        if(!empty($course) && $course->meta_h1){
+            $seo['h1'] = $course->meta_h1;
         } else {
-            $seo['h1'] = $product->name;
+            $seo['h1'] = $course->name;
         }
 
-        if(!empty($product) && $product->meta_title){
-            $seo['title'] = $product->meta_title;
+        if(!empty($course) && $course->meta_title){
+            $seo['title'] = $course->meta_title;
         } else {
-            $seo['title'] = $product->name;
+            $seo['title'] = $course->name;
         }
 
-        if(!empty($product) && $product->meta_description){
-            $seo['description'] = $product->meta_description;
+        if(!empty($course) && $course->meta_description){
+            $seo['description'] = $course->meta_description;
         } else {
-            $seo['description'] = $product->name;
+            $seo['description'] = $course->name;
         }
 
-        if(!empty($product) && $product->meta_keywords){
-            $seo['keywords'] = $product->meta_keywords;
+        if(!empty($course) && $course->meta_keywords){
+            $seo['keywords'] = $course->meta_keywords;
         } else {
             $seo['keywords'] = '';
         }
         
-        return view('pages.product.card', [
+        return view('pages.course.card', [
             'seo' => $seo,
-            'product' => $product,
-            'generalProperties' => $this->productPropertiesService->getGeneralProperties($product),
-            'fullProperties' => $this->productPropertiesService->getFullListDescription($product),
+            'course' => $course,
+            'generalProperties' => $this->coursePropertiesService->getGeneralProperties($course),
+            'fullProperties' => $this->coursePropertiesService->getFullListDescription($course)
         ]);
     }
 }

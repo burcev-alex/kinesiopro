@@ -2,6 +2,7 @@
 namespace App\Domains\Course\Services;
 
 use App\Domains\Category\Models\Category;
+use App\Domains\Course\Models\CourseBlock;
 use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Course\Services\CourseService;
@@ -70,6 +71,29 @@ class CourseOrchidService extends CourseService
                 'ref_char_value_id' => $char_value
             ], [
                 'ref_char_id' => $ref_char_value->char_id
+            ]);
+        }
+        return $this;
+    }
+
+    public function saveBlocks(array $blocks, $overwrite = true)
+    {
+        if ($overwrite) {
+            // удалить все старые блоки
+            $rsDeleteBlock = CourseBlock::where('course_id', $this->model->id)->get();
+            foreach ($rsDeleteBlock as $block) {
+                $block->delete();
+            }
+        }
+
+        foreach ($blocks as $block) {
+            CourseBlock::create([
+                'course_id' => $this->model->id,
+                'title' => $block['title'],
+                'sort' => $block['sort'],
+                'start_date' => $block['start_date'],
+                'finish_date' => $block['finish_date'],
+                'teacher_id' => $block['teacher_id']
             ]);
         }
         return $this;
