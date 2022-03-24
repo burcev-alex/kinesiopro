@@ -23,11 +23,17 @@ class CourseMarketRows extends Rows
      */
     protected function fields(): array
     {
+        $course = $this->query->get('course');
+
+        $marker_new = isset($course) && $course->marker_new ? 1 : 0;
+        $marker_popular = isset($course) && $course->marker_popular ? 1 : 0;
+        $marker_archive = isset($course) && $course->marker_archive ? 1 : 0;
+
         return [
             Group::make([
-                CheckBox::make('course.marker_new')->title('New'),
-                CheckBox::make('course.marker_popular')->title('Главная'),
-                CheckBox::make('course.marker_archive')->title('Архив'),
+                CheckBox::make('markers.marker_new')->value($marker_new)->title('New'),
+                CheckBox::make('markers.marker_popular')->value($marker_popular)->title('Главная'),
+                CheckBox::make('markers.marker_archive')->value($marker_archive)->title('Архив'),
             ]),
             Input::make('course.sort')->title('Сортировка')->required()
 

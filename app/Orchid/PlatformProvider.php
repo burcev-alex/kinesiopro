@@ -31,7 +31,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.category.list')
                 ->icon('list')->title('Каталог'),
 
-            Menu::make('Курсы')
+            Menu::make('Очные курсы')
                 ->route('platform.course.list')
                 ->icon('list'),
 

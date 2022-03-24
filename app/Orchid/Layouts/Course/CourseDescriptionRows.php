@@ -26,7 +26,7 @@ class CourseDescriptionRows extends Rows
 
         $rows = [
             Quill::make('course.description')->title('Описание')
-            ->value($course->description)
+            ->value(isset($course) ? $course->description : '')
         ];
 
         return $rows;

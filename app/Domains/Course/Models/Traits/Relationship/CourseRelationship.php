@@ -22,7 +22,7 @@ trait CourseRelationship {
 
     public function blocks()
     {
-        return $this->hasMany(CourseBlock::class, 'course_id', 'id');
+        return $this->hasMany(CourseBlock::class, 'course_id', 'id')->orderBy('sort');
     }
 
     public function property_values()

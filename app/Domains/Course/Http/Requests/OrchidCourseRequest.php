@@ -27,10 +27,11 @@ class OrchidCourseRequest extends FormRequest
             'course.name' => 'required|max:255',
             'course.active' => '',
             'course.sort' => 'required|integer',
-            'course.category_id' => 'required|integer',
+            'course.category_id' => 'required',
             'course.*' => '', 
             'property_values.*' => '',
             'blocks.*' => '',
+            'markers.*' => '',
         ];
     }
 }

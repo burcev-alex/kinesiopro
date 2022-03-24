@@ -14,10 +14,14 @@ use App\Orchid\Layouts\Course\CoursePropsRows;
 use App\Orchid\Layouts\Course\CourseSeoRows;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\ModalToggle;
+use Illuminate\Http\Request;
+use Orchid\Support\Facades\Toast;
 
 class CourseEditScreen extends Screen
 {
@@ -71,7 +75,7 @@ class CourseEditScreen extends Screen
         return [
             Link::make('Назад')
                  ->href(route('platform.course.list'))
-                 ->icon('action-undo'),
+                 ->icon('undo'),
                  
              Link::make('Просмотр')
                  ->href(route('catalog.card', ['slug' => $this->data->slug]))
@@ -82,10 +86,10 @@ class CourseEditScreen extends Screen
                 ->method('save')
                 ->icon('save'),
 
-            ModalToggle::make('Добавить блок')
-                ->modal('addblock')
+            Button::make('Добавить блок')
                 ->method('addblock')
                 ->icon('plus-alt'),
+
             ModalToggle::make('Удалить блок')->method('deleteblock')->modal('deleteblock')->icon('trash')->canSee($this->blocks->count() > 0),
 
             Button::make('Удалить')
@@ -109,6 +113,12 @@ class CourseEditScreen extends Screen
         })->toArray();
 
         return [
+            Layout::modal('deleteblock', [
+                Layout::rows([
+                    Select::make('block')->options($options)
+                ])
+            ])->title('Подтвердите удаление'),
+            Layout::modal('remove', [])->title('Подтвердите удаление'),
             Layout::tabs([
                 'Курс' => [
                     CourseMainRows::class,
@@ -128,6 +138,28 @@ class CourseEditScreen extends Screen
         ];
     }
 
+    public function addblock(Course $course, Request $request)
+    {
+        $item = $course->id;
+
+        AppCourseBlock::create([
+            "course_id" => $item,
+            "sort" => 0,
+            "teacher_id" => 1,
+            "title" => 'Example'
+        ]);
+
+        Toast::success('Вы успешно создали новый блок');
+        return redirect()->back();
+    }
+
+    public function deleteblock(Request $request)
+    {
+        $block = AppCourseBlock::find($request->block);
+        $block->delete();
+        return redirect()->back();
+    }
+
     public function save(
         Course $course,
         OrchidCourseRequest $request,
@@ -145,6 +177,10 @@ class CourseEditScreen extends Screen
 
         if (array_key_exists('blocks', $validated)) {
             $service->saveBlocks($validated['blocks']);
+        }
+
+        if (array_key_exists('markers', $validated)) {
+            $service->saveMarkers($validated['markers']);
         }
        
         Alert::success('Курс успешно изменен');
@@ -169,7 +205,7 @@ class CourseEditScreen extends Screen
         $course->properties()->delete();
 
         // удаляем блоки
-        $blocks = CourseBlock::where('course_id', $course->id)->get();
+        $blocks = AppCourseBlock::where('course_id', $course->id)->get();
         $propIds = [];
         foreach($blocks as $variant){
             $propIds[] = $variant->id;

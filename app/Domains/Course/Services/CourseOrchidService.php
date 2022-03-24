@@ -28,9 +28,14 @@ class CourseOrchidService extends CourseService
             $fields['teacher_id'] = $fields['teachers_list'];
             unset($fields['teachers_list']);
         }
+
+        if(!isset($fields['active']))
+            $fields['active'] = 0;
+        else if(isset($fields['active']))
+            $fields['active'] = 1;
         
         $this->model->fill($fields)->save();
-        $this->saveMarkers($fields);
+        
         return $this;
     }
 
@@ -101,10 +106,21 @@ class CourseOrchidService extends CourseService
 
     public function saveMarkers(array $markers)
     {
-        $this->model->active = isset($markers['active']);
-        $this->model->marker_new = isset($markers['marker_new']);
-        $this->model->marker_popular = isset($markers['marker_popular']);
-        $this->model->marker_archive = isset($markers['marker_archive']);
+        
+        if(array_key_exists('marker_new', $markers))
+            $this->model->marker_new = 1;
+        else
+            $this->model->marker_new = 0;
+        
+        if(array_key_exists('marker_popular', $markers))
+            $this->model->marker_popular = 1;
+        else
+            $this->model->marker_popular = 0;
+        
+        if(array_key_exists('marker_archive', $markers))
+            $this->model->marker_archive = 1;
+        else
+            $this->model->marker_archive = 0;
 
         $this->model->save();
     }

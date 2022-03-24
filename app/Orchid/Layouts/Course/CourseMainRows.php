@@ -47,7 +47,7 @@ class CourseMainRows extends Rows
         }
 
         $teacherIds = [];
-        if(count($course->teacher_id) > 0){
+        if(isset($course) && count($course->teacher_id) > 0){
             foreach($course->teacher_id as $id){
                 $teacherIds[] = intval($id);
             }
@@ -63,7 +63,7 @@ class CourseMainRows extends Rows
             Group::make([
                 Select::make('course.category_id')
                     ->options($arCategoryList)
-                    ->value($course->category_id)
+                    ->value(isset($course) ? $course->category_id: '')
                     ->title('Категория')
                     ->required(),
             ]),

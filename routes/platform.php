@@ -59,6 +59,7 @@ use App\Orchid\Screens\Utils\ClearCacheScreen;
 |
 */
 Route::screen('/courses', CourseListScreen::class)->name('platform.course.list');
+Route::screen('/course-create', CourseCreateScreen::class)->name('platform.course.create');
 Route::screen('/courses/{course}/edit', CourseEditScreen::class)->name('platform.course.edit');
 
 Route::screen('/properties', CoursePropertyListScreen::class)->name('platform.property.list');
@@ -80,19 +81,19 @@ Route::screen('/categories-create', CategoryCreateScreen::class)->name('platform
 Route::screen('/cache-reset', ClearCacheScreen::class)->name('platform.cache.reset');
 
 Route::screen('news/list', NewsListScreen::class)->name('platform.news.list');
-Route::screen('news/create', NewsCreateScreen::class)->name('platform.news.create');
+Route::screen('news-create', NewsCreateScreen::class)->name('platform.news.create');
 Route::screen('news/edit/{news}', NewsEditScreen::class)->name('platform.news.edit');
 
 Route::screen('quiz/list', QuizItemListScreen::class)->name('platform.quiz.list');
-Route::screen('quiz/create', QuizItemCreateScreen::class)->name('platform.quiz.create');
+Route::screen('quiz-create', QuizItemCreateScreen::class)->name('platform.quiz.create');
 Route::screen('quiz/edit/{news}', QuizItemEditScreen::class)->name('platform.quiz.edit');
 
 Route::screen('contacts/list', ContactListScreen::class)->name('platform.contact.list');
-Route::screen('contact/create', ContactCreateScreen::class)->name('platform.contact.create');
+Route::screen('contact-create', ContactCreateScreen::class)->name('platform.contact.create');
 Route::screen('contact/edit/{news}', ContactEditScreen::class)->name('platform.contact.edit');
 
 Route::screen('podcasts/list', PodcastListScreen::class)->name('platform.podcast.list');
-Route::screen('podcasts/create', PodcastCreateScreen::class)->name('platform.podcast.create');
+Route::screen('podcasts-create', PodcastCreateScreen::class)->name('platform.podcast.create');
 Route::screen('podcasts/edit/{news}', PodcastEditScreen::class)->name('platform.podcast.edit');
 
 

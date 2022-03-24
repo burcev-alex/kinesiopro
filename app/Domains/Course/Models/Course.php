@@ -31,6 +31,7 @@ class Course extends Model
         "marker_new",
         "marker_popular",
         "marker_archive",
+        "category_id",
         "sort",
         "price",
         "name",

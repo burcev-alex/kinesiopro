@@ -22,21 +22,16 @@ class CourseSeoRows extends Rows
      */
     protected function fields(): array
     {
-        $item = $this->query->get('course');
-        $rows = [];
-
+        $course = $this->query->get('course');
         $rows = [
-            ...$rows,
-            ...[
-                Input::make('course.meta_h1')
-                ->title('Meta H1')->value($item->meta_h1), 
-                Input::make('course.meta_title')
-                ->title('Meta Title')->value($item->meta_title), 
-                Input::make('course.meta_keywords')
-                ->title('Meta Keywords')->value($item->meta_keywords), 
-                Input::make('course.meta_description')
-                ->title('Meta Description')->value($item->meta_description), 
-            ]
+            Input::make('course.meta_h1')
+                ->title('Meta H1')->value(isset($course) ? $course->meta_h1 : ''), 
+            Input::make('course.meta_title')
+                ->title('Meta Title')->value(isset($course) ? $course->meta_title : ''), 
+            Input::make('course.meta_keywords')
+                ->title('Meta Keywords')->value(isset($course) ? $course->meta_keywords : ''), 
+            Input::make('course.meta_description')
+                ->title('Meta Description')->value(isset($course) ? $course->meta_description : ''),
         ];
 
         return $rows;

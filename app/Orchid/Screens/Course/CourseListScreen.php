@@ -45,7 +45,9 @@ class CourseListScreen extends Screen
      */
     public function commandBar(): array
     {
-         return [];
+        return [
+            Link::make('Создать курс')->icon('pencil')->route('platform.course.create')
+        ];
     }
 
     /**
