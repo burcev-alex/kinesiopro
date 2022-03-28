@@ -32,6 +32,7 @@ class OrchidCourseRequest extends FormRequest
             'property_values.*' => '',
             'blocks.*' => '',
             'markers.*' => '',
+            'teachers.*' => '',
         ];
     }
 }

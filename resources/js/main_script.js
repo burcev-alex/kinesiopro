@@ -1,14 +1,10 @@
-window.$ = window.jQuery = require('jquery');
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['x-apikey'] = '123456';
 
 
-
-
 let langPrefix = $('html').attr('lang') === 'ru' ? '/ru' : '';
 let token = $('meta[name="csrf-token"]').attr('content');
-require('jquery-validation');
 import language from "./modules/lang";
 
 
@@ -19,8 +15,20 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
 
 
 
-$(function () {
+$(document).ready(function () {
+    $('.navMenu__active > a').on('click', function (event) {
+        event.preventDefault();
+    });
 
-    console.log('Init!');
+    $('.navMenuMobil .navMenu__active > a').on('click', function () {
+        $(this).toggleClass('active');
+        $('.navMenuMobilIn').slideToggle();
+    });
 
-})
+    $('.headerBtn').on('click', function () {
+        $(this).toggleClass('active');
+        $('.mobilBlock').slideToggle();
+    });
+
+    $('.select').multipleSelect({});
+});

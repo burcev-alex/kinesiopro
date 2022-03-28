@@ -11,10 +11,10 @@ final class BreadcrumbsService
     public static function categories()
     {
         Breadcrumbs::for(
-            'catalog.categories', 
+            'courses.index', 
             function (Trail $trail)
             {
-                $trail->push(__('breadcrumbs.catalog'), route('catalog.categories')); 
+                $trail->push(__('breadcrumbs.catalog'), route('courses.index')); 
             }
         );
     }
@@ -37,10 +37,10 @@ final class BreadcrumbsService
         }
         
         Breadcrumbs::for(
-            'catalog.category',
+            'courses.index',
             function (Trail $trail) use($category1, $filters, $arrCategories) {
 
-                $trail->push(__('breadcrumbs.catalog'), route('catalog.categories')."/");
+                $trail->push(__('breadcrumbs.catalog'), route('courses.index')."/");
                 
                 if (strlen($category1) > 0) {
                     
@@ -51,7 +51,7 @@ final class BreadcrumbsService
                         $categoryTitle1 = $category1;
                     }
 
-                    $trail->push($categoryTitle1, route('catalog.category', [$category1])."/");
+                    $trail->push($categoryTitle1, route('courses.index', [$category1])."/");
                 }
             }
         );

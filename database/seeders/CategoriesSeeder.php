@@ -24,24 +24,24 @@ class CategoriesSeeder extends Seeder
                 'name' => 'REHABTeam',
             ],
             [
-                'slug' => 'Тематические курсы',
-                'name' => 'tematic-course',
+                'slug' => 'tematic-course',
+                'name' => 'Тематические курсы',
             ],
             [
-                'slug' => 'Maitland',
-                'name' => 'maitland',
+                'slug' => 'maitland',
+                'name' => 'Maitland',
             ],
             [
-                'slug' => 'Bohath',
-                'name' => 'bohath',
+                'slug' => 'bohath',
+                'name' => 'Bohath',
             ],
             [
-                'slug' => 'PNF',
-                'name' => 'pnf',
+                'slug' => 'pnf',
+                'name' => 'PNF',
             ],
             [
-                'slug' => 'Нейродинамика',
-                'name' => 'neyrodinamika',
+                'slug' => 'neyrodinamika',
+                'name' => 'Нейродинамика',
             ],
         ];
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domains\Category\Services\CatalogFilterGeneratorService;
 use App\Domains\Feedback\Models\FeedBack;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -44,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             }
 
             return $translations;
+        });
+
+        view()->composer(['includes.home.schedule'], function ($view) {
+            $view->with('filterSchema', app(CatalogFilterGeneratorService::class)->getFilterSchema());
         });
     }
 

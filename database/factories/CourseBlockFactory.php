@@ -24,6 +24,9 @@ class CourseBlockFactory extends Factory
      */
     public function definition()
     {
+        $startDate = $this->faker->date();
+        $rand = rand(2, 4);
+
         return [
             'course_id' => function ()
             {
@@ -36,8 +39,8 @@ class CourseBlockFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->sentence(),
             'sort' => rand(100, 500),
-            "start_date" => $this->faker->date(),
-            "finish_date" => $this->faker->date(),
+            "start_date" => $startDate,
+            "finish_date" => date('Y-m-d', strtotime($startDate) + (60*60*24*$rand)),
         ];
     }
 }

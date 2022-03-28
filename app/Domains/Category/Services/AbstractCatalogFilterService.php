@@ -1,7 +1,6 @@
 <?php
 namespace App\Domains\Category\Services;
 
-use App\Domains\Course\Services\CategoryService;
 use App\Domains\Course\Services\RefCharService;
 
 abstract class AbstractCatalogFilterService
@@ -37,7 +36,7 @@ abstract class AbstractCatalogFilterService
     /**
      * @return int
      */
-    public function gettotalCourses(): int
+    public function getTotalCourses(): int
     {
         return $this->totalCourses ?? 0;
     }
@@ -45,7 +44,7 @@ abstract class AbstractCatalogFilterService
     /**
      * @return int
      */
-    public function getSelectedCountProducts(): int
+    public function getSelectedCountCourses(): int
     {
         return $this->selectedCourses ?? 0;
     }
@@ -62,19 +61,11 @@ abstract class AbstractCatalogFilterService
         if (empty($categories)) {
             return $ids;
         }
-
-        // удалить корневой раздел
-        foreach($categories as $key=>$slug){
-            if($slug == 'categories'){
-                unset($categories[$key]);
-            }
-        }
         
         $groupedCategories = $this->categoryService->getGroupedCategories();
-        $current = $groupedCategories;
         
         foreach ($categories as $category) {
-            $current = $current[$category] ?? $current['children'][$category] ?? [];
+            $current = array_key_exists($category, $groupedCategories) ? $groupedCategories[$category] : [];
             if ($current) {
                 $ids = empty($ids) ? $current['ids'] : array_intersect($ids, $current['ids']);
             }

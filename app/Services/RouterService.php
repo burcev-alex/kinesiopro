@@ -1,8 +1,5 @@
 <?php
 namespace App\Services;
-
-use RuthgerIdema\UrlRewrite\Facades\UrlRewrite;
-
 class RouterService
 {
     /**
@@ -15,15 +12,15 @@ class RouterService
         $filterSelected = false;
         foreach ($params as $key => $param) {
             if (strpos($param, '=') !== false) {
-                $return[3] = $param;
+                $return[1] = $param;
                 $filterSelected = true; // после того как фильтр найден то категории не трогать
             } elseif (strpos($param, 'page-') !== false) {
-                $return[4] = (int) (explode('-', $param)[1] ?? 1);
-            } elseif (!$filterSelected && !in_array($key, [3, 4])) {
+                $return[2] = (int) (explode('-', $param)[1] ?? 1);
+            } elseif (!$filterSelected && !in_array($key, [1, 2])) {
                 $return[$key] = $param;
             }
         }
-
+        
         return $return;
     }
 
@@ -92,16 +89,6 @@ class RouterService
     public function getPagination(int $currentPage, int $lastPage): array
     {
         $url = url()->current();
-
-        // определить оригинальный URL
-       
-        $rsTargetUrl = UrlRewrite::getByRequestPath(request()->path());
-        
-        if($rsTargetUrl){
-            $arUrl = $rsTargetUrl->toArray();
-            $url = substr($arUrl['target_path'], 0, strlen($arUrl['target_path'])-1);
-        }
-
 
         $pagination = [
             'prev_url' => null,

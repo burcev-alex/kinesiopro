@@ -30,7 +30,7 @@ class TeacherFactory extends Factory
             return [
                 "full_name" => $this->faker->name(),
                 "slug" => Str::slug($this->faker->slug(2)),
-                "attachment_id" => $this->storageAttachment(265,300),
+                "attachment_id" => $this->storageAttachment(300,300),
                 "sort" => 100,
                 "active" => 1,
                 'description' => $this->faker->sentence(),

@@ -23,8 +23,8 @@ class AddColumnsUsersTable extends Migration
 			$table->string('work')->nullable();
 			$table->string('position')->nullable();
 
-            $table->integer('avatar_id');
-            $table->integer('scan_id');
+            $table->integer('avatar_id')->nullable();
+            $table->integer('scan_id')->nullable();
         });
     }
 

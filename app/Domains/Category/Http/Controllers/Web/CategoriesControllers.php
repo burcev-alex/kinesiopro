@@ -26,10 +26,10 @@ class CategoriesControllers extends Controller {
         $this->catalogFilterService = $catalogFilterService;
     }
 
-    public function index(string $param1 = '', string $param4 = '', string $param5 = '')
+    public function index(string $param1 = '', string $param2 = '', string $param3 = '')
     {
        
-        list($category1, $filters, $page) = $this->routerService->detectParameters([$param1, $param4, $param5]);
+        list($category1, $filters, $page) = $this->routerService->detectParameters([$param1, $param2, $param3]);
         
         $catalog = $this->catalogFilterService->setCategories($category1)
             ->getCatalog($filters, $page);
@@ -59,8 +59,11 @@ class CategoriesControllers extends Controller {
 
         if(!empty($category_info) && $category_info->meta_title){
             $seo['title'] = $category_info->meta_title;
-        } else {
+        } else if(!empty($category_info)) {
             $seo['title'] = $category_info->name;
+        }
+        else{
+            $seo['title'] = '';
         }
 
         if(!empty($category_info) && $category_info->meta_description){
@@ -85,7 +88,7 @@ class CategoriesControllers extends Controller {
         if (request()->wantsJson()) {
             $filterSchema = $this->filterGeneratorService->getFilterSchema();
 
-            $templateCatalogList = 'includes.catalog.catalog-list';
+            $templateCatalogList = 'includes.course.list';
             $paginationBlock = 'catalog-page-block';
 
             return response()->json([
@@ -94,7 +97,7 @@ class CategoriesControllers extends Controller {
                     'data' => $filterSchema
                 ],
                 'resource' => [
-                    'html' => view($templateCatalogList, ['products' => $catalog])->render(),
+                    'html' => view($templateCatalogList, ['courses' => $catalog])->render(),
                     'data' => $catalog
                 ],
                 'pagination' => [
@@ -102,11 +105,11 @@ class CategoriesControllers extends Controller {
                     'data' => $pagination
                 ],
                 'selectedCourses' => $catalog->total(),
-                'totalCourses' => $this->catalogFilterService->gettotalCourses(),
+                'totalCourses' => $this->catalogFilterService->getTotalCourses(),
                 'isFavorite' => $this->catalogFilterService->isFavorite()
             ]);
         } else {
-            return view('pages.categories.catalog', [
+            return view('pages.course.list', [
                 'targetUrl' => $targetUrl,
                 'seo' => $seo,
                 //'canonical' => $this->canonicalService->render(),
@@ -114,7 +117,7 @@ class CategoriesControllers extends Controller {
                 'categoryInfo' => $seo,
                 'pagination' => $pagination,
                 'selectedCourses' => $catalog->total(),
-                'totalCourses' => $this->catalogFilterService->gettotalCourses(),
+                'totalCourses' => $this->catalogFilterService->getTotalCourses(),
                 'isFavorite' => $this->catalogFilterService->isFavorite()
             ]);
         }
@@ -129,8 +132,8 @@ class CategoriesControllers extends Controller {
         return response()->json([
             'filters' => $this->filterGeneratorService->getFilterSchema(),
             'total' => [
-                'general' => $general = $this->filterGeneratorService->gettotalCourses(),
-                'selected' => $selected = $this->filterGeneratorService->getSelectedCountProducts(),
+                'general' => $general = $this->filterGeneratorService->getTotalCourses(),
+                'selected' => $selected = $this->filterGeneratorService->getSelectedCountCourses(),
                 'text' => trans_choice('filter.diapazon', $selected, ['value' => $selected, 'count' => $general])
             ]
         ]);

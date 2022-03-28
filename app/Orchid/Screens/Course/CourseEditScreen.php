@@ -78,7 +78,7 @@ class CourseEditScreen extends Screen
                  ->icon('undo'),
                  
              Link::make('Просмотр')
-                 ->href(route('catalog.card', ['slug' => $this->data->slug]))
+                 ->href(route('courses.card', ['slug' => $this->data->slug]))
                  ->target('_blank')
                  ->icon('browser'),
             
@@ -177,6 +177,10 @@ class CourseEditScreen extends Screen
 
         if (array_key_exists('blocks', $validated)) {
             $service->saveBlocks($validated['blocks']);
+        }
+
+        if (array_key_exists('teachers', $validated)) {
+            $service->saveTeachers($validated['teachers']);
         }
 
         if (array_key_exists('markers', $validated)) {

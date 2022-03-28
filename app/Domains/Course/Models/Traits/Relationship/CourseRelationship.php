@@ -5,6 +5,7 @@ use App\Domains\Category\Models\Category;
 use App\Domains\Course\Models\Course;
 use App\Domains\Course\Models\CourseBlock;
 use App\Domains\Course\Models\CourseProperty;
+use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Teacher\Models\Teacher;
 
@@ -12,7 +13,7 @@ trait CourseRelationship {
 
     public function teachers()
     {
-        return $this->hasMany(Teacher::class, 'id', 'teacher_id');
+        return $this->hasManyThrough(Teacher::class, CourseTeacher::class, 'course_id', 'id', 'id', 'teacher_id');
     }
 
     public function properties()
@@ -31,6 +32,6 @@ trait CourseRelationship {
     }
 
     public function category(){
-        return $this->hasOne(Category::class, 'category_id', 'id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

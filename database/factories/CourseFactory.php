@@ -22,14 +22,8 @@ class CourseFactory extends Factory
      */ 
     public function definition()
     {
-        $date = date('Y-m-d H:i').':00';
+        $date = date('Y-m-d').'10:00:00';
         $rand = $this->faker->numberBetween(2, 20);
-
-        $teacherList = [];
-        for($i=1; $i<=rand(1, 4); $i++){
-            $teacherList[] = rand(1, 10);
-        }
-
 
         return [
             'slug' => $this->faker->slug(2),
@@ -37,14 +31,13 @@ class CourseFactory extends Factory
             'active' => true,
             'name' => implode(' ', $this->faker->words(10)),
             'start_date' => $date,
-            'finish_date' => date('Y-m-d H:i', strtotime($date) + (60*60*24*$rand)),
+            'finish_date' => date('Y-m-d', strtotime($date) + (60*60*24*$rand)).' 17:00:00',
             'category_id' => $this->faker->numberBetween(1, 5),
             'price' => $this->faker->numberBetween(5000, 150000),
             'marker_new' => $this->faker->numberBetween(0, 1),
             'marker_popular' => $this->faker->numberBetween(0, 1),
             'marker_archive' => $this->faker->numberBetween(0, 1),
-            'teacher_id' => array_unique($teacherList),
-            'description' => $this->faker->sentence(),
+            'description' => $this->faker->text()." ".$this->faker->text()." ".$this->faker->text(),
             'meta_h1' => $this->faker->sentence(2),
             'meta_title' => $this->faker->sentence(2),
             'meta_keywords' => implode(' ', $this->faker->words(6)),

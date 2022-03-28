@@ -4,6 +4,7 @@ namespace App\Domains\Course\Services;
 use App\Domains\Category\Models\Category;
 use App\Domains\Course\Models\CourseBlock;
 use App\Domains\Course\Models\CourseProperty;
+use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Course\Services\CourseService;
 use Illuminate\Support\Facades\Storage;
@@ -24,11 +25,6 @@ class CourseOrchidService extends CourseService
      */
     public function save(array $fields): self
     {
-        if(array_key_exists('teachers_list', $fields)){
-            $fields['teacher_id'] = $fields['teachers_list'];
-            unset($fields['teachers_list']);
-        }
-
         if(!isset($fields['active']))
             $fields['active'] = 0;
         else if(isset($fields['active']))
@@ -99,6 +95,25 @@ class CourseOrchidService extends CourseService
                 'start_date' => $block['start_date'],
                 'finish_date' => $block['finish_date'],
                 'teacher_id' => $block['teacher_id']
+            ]);
+        }
+        return $this;
+    }
+
+    public function saveTeachers(array $teachers, $overwrite = true)
+    {
+        if ($overwrite) {
+            // удалить все старые записи
+            $rsDeleteTeachers = CourseTeacher::where('course_id', $this->model->id)->get();
+            foreach ($rsDeleteTeachers as $teacher) {
+                $teacher->delete();
+            }
+        }
+
+        foreach ($teachers['id'] as $teacher) {
+            CourseTeacher::create([
+                'course_id' => $this->model->id,
+                'teacher_id' => intval($teacher)
             ]);
         }
         return $this;

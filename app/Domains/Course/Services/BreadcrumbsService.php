@@ -11,22 +11,21 @@ final class BreadcrumbsService
      *
      * @return void
      */
-    public static function card($product)
+    public static function card($course)
     {
         Breadcrumbs::for(
-            'catalog.card',
-            function (Trail $trail) use($product) {
-                $trail->push(__('breadcrumbs.catalog'), route('catalog.categories'));
-               
-
-                if ($product->category) {
+            'courses.card',
+            function (Trail $trail) use($course) {
+                $trail->push(__('breadcrumbs.catalog'), route('courses.index'));
+                
+                if ($course->category) {
                     $params = [];
-                    $params[] = $product->category->slug;
+                    $params[] = $course->category->slug;
 
-                    $trail->push($product->category->name, route('catalog.category', $params)."/");
+                    $trail->push($course->category->name, route('courses.index', $params)."/");
                 }
 
-                $trail->push($product->name, route('catalog.card', ['slug' => $product->slug]));
+                $trail->push($course->name, route('courses.card', ['slug' => $course->slug]));
             }
         );
     }

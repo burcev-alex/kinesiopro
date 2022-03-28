@@ -22,7 +22,6 @@ class CardControllers extends Controller {
      * @param CoursePropertiesService $coursePropertiesService
      */
     public function __construct(CourseService $courseService, CoursePropertiesService $coursePropertiesService)
-   //public function __construct(CourseService $courseService)
     {
         $this->courseService = $courseService;
         $this->coursePropertiesService = $coursePropertiesService;

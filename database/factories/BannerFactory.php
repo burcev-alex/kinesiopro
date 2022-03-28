@@ -28,8 +28,8 @@ class BannerFactory extends Factory
         try {
             return [
                 "name" => $this->faker->slug(3),
-                "attachment_id" => $this->storageAttachment(1920,730),
-                "attachment_mobile_id" => $this->storageAttachment(600,600),
+                "attachment_id" => $this->storageAttachment(1280,440),
+                "attachment_mobile_id" => $this->storageAttachment(292,350),
                 "sort" => 100,
                 "active" => 1,
             ];

@@ -73,7 +73,7 @@ class CategoryService extends BaseService
         return Cache::tags('categories')->rememberForever('menuCategories.' . app()->getLocale(), function () {
             $categories = $this->model->newQuery()
                 ->where('active', 1)
-                ->select(['id', 'slug'])
+                ->select(['id', 'slug', 'name'])
                 ->get();
             return $this->generateCategoriesFormat($categories);
         });
@@ -90,7 +90,7 @@ class CategoryService extends BaseService
             $return[] = [
                 'id' => $category->id,
                 'slug' => $category->slug,
-                'name' => $category->translation->name ?? ''
+                'name' => $category->name ?? ''
             ];
         }
  

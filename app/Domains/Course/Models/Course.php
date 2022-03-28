@@ -39,8 +39,9 @@ class Course extends Model
         "meta_title",
         "meta_keywords",
         "meta_description",
-        "description",
-        "teacher_id",
+        "start_date",
+        "finish_date",
+        "description"
     ];
 
     /**
@@ -54,9 +55,7 @@ class Course extends Model
     /**
      * @var string[]
      */
-    protected $casts = [
-        'teacher_id' => 'array',
-    ];
+    protected $casts = [];
 
     /**
      * @return CourseFactory

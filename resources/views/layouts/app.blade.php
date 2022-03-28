@@ -13,6 +13,7 @@
         <meta http-equiv="Expires" content="0" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <link rel="canonical" href="https://kinesiopro.ru/">
 
         @if (config('app.env') == 'local')
@@ -31,9 +32,9 @@
         @php
         echo \Spatie\SchemaOrg\Schema::localBusiness()
             ->name(config('app.name'))
-            ->image(config('app.url').'/images/tild6230-3961-4661-b731-626539626362__-2-01.png')
+            ->image(config('app.url').'/images/headerLogo.svg')
             ->url(config('app.url'))
-            ->telephone("0800-755-667")
+            ->telephone("+7 (925) 038-61-32")
             ->address(\Spatie\SchemaOrg\Schema::postalAddress()
                 ->streetAddress("Самарская,2/3")
                 ->addressLocality("Одесса")
@@ -64,9 +65,7 @@
     @stack('before-styles')
     
     <!-- Assets -->
-
-    {{-- <link rel="shortcut icon" href="{{ mix('images/tild3530-3830-4238-a131-633239336535__favicon.ico') }}" type="image/x-icon" /> --}}
-
+    <link href="{{ mix('css/selects.css') }}" media="all" type="text/css" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" media="all" type="text/css" rel="stylesheet">
 
     <script type="text/javascript">
@@ -76,14 +75,23 @@
     @stack('after-styles')
 </head>
 <body>
-    @yield('content')
+    <div class="wrapper" id="app">
+        @include('includes.header')
+    
+        @yield('content')
+
+        @include('includes.footer')
+    </div>
 
     <script>
         window._defaultLocale = '{{ config('app.locale') }}';
         window._locale = '{{ app()->getLocale() }}';
         window._translations = {!! cache('translations') !!};
     </script>
+    
+    <script src="{{ mix('js/plugins/jquery.min.js') }}"></script>
     @stack('before-scripts')
+        <script src="{{ mix('js/plugins/selects.js') }}"></script>
         <script src="{{ mix('js/main_script.js') }}"></script>
     @stack('after-scripts')
 </body>

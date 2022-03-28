@@ -2,10 +2,7 @@
 namespace App\Domains\Course\Services;
 
 use App\Domains\Course\Models\Course;
-use App\Domains\Course\Models\CoursesOptionsValue;
-use App\Domains\Course\Models\CoursesVariant;
 use App\Domains\Course\Models\RefChar;
-use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Course\Services\CourseService;
 use Illuminate\Support\Facades\App;
 

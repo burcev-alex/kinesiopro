@@ -61,7 +61,9 @@ class CourseService extends BaseService
                     return $query->with('chars', function ($query) {
                         return $query->where('active', 1);
                     });
-                }
+                },
+                'teachers',
+                'blocks'
             ])->get();
             
         if($builder->count() > 0){

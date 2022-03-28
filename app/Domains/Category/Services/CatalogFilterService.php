@@ -3,10 +3,6 @@
 namespace App\Domains\Category\Services;
 
 use App\Domains\Course\Models\Course;
-use App\Domains\Course\Models\CoursesProperty;
-use App\Domains\Course\Models\RefChar;
-use App\Domains\Course\Models\RefCharsValue;
-use App\Domains\Course\Services\CategoryService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -54,7 +50,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
         ]
     ];
 
-    protected array $numbers = [15, 30, 60, 120];
+    protected array $numbers = [3, 15, 30, 60, 120];
 
     protected array $categoryIds = [];
     protected array $categoriesSlug = [];
@@ -163,8 +159,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
     {
         $this->query->with([
             'properties' => function ($query) {
-                return $query->select(['course_id', 'ref_char_id', 'ref_char_value_id'])
-                    ->where('locale', app()->getLocale());
+                return $query->select(['course_id', 'ref_char_id', 'ref_char_value_id']);
             }
         ]);
 
@@ -174,8 +169,8 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
         $categoryCourses = $this->query->get('id');
         $availableCharsForCategory = [];
-        foreach ($categoryCourses as $Course) {
-            foreach ($Course->properties ?? [] as $property) {
+        foreach ($categoryCourses as $course) {
+            foreach ($course->properties ?? [] as $property) {
                 if (isset($availableCharsForCategory[$property->ref_char_id])) {
                     $availableCharsForCategory[$property->ref_char_id][] = $property->ref_char_value_id;
                 } else {
@@ -232,14 +227,12 @@ class CatalogFilterService extends AbstractCatalogFilterService
         }
           
         $builder = $this->query->with([
-            'image' => function ($query) {
-                return $query->with('attachment');
-            },
             'property_values' => function ($query) {
                 return $query->with('chars', function ($query) {
                     return $query->where('active', 1)->get()->toArray();
                 });
             },
+            'teachers',
             'blocks'
         ]);
 
@@ -283,7 +276,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
                 $properties[$key] = $values;
             }
         }
-        
+
         if (!empty($properties)) {
             $this->attachProperties($properties);
         }
@@ -332,7 +325,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
                 }
             }
         }
-
+        
         if (!empty($filtered)) {
             foreach ($filtered as $refCharId => $refCharValueIds) {
                 // Взять пересечение всех фильтров
@@ -385,12 +378,21 @@ class CatalogFilterService extends AbstractCatalogFilterService
     }
 
     /**
+     * Search by period
+     * @param string $month
+     */
+    protected function filterPeriod(string $month)
+    {
+        $this->query->whereBetween('start_date', [$month, date('Y-m', strtotime($month).'-31')]);
+    }
+
+    /**
      * Add filter by categories ids
      * @param array $ids
      */
     protected function attachCategoriesIds(array $ids)
     {
-        $this->query->leftJoin('courses_category','Courses_category.course_id', '=', 'courses.id')->whereIn('courses_category.category_id', $ids)->leftJoin('categories','courses_category.category_id', '=', 'categories.id')->where('categories.active', 1);
+        $this->query->whereIn('category_id', $ids);
     }
 
     /**

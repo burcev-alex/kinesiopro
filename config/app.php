@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\BreadcrumbsServiceProvider::class,
 
         /*
          * Application Service Providers...
