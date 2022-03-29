@@ -1,3 +1,4 @@
+import { initSlider } from './slider';
 export class Pagination {
     constructor() {
         this._token = $('meta[name="csrf-token"]').attr("content");
@@ -38,6 +39,9 @@ export class Pagination {
                         if (Object.keys($(content)).length == 0) {
                             itemsBlock.addClass('empty-block');
                         }
+                        
+
+                        initSlider(itemsBlock.find('.itemBottom .itemSlider'));
 
 
                         paginationBlock.html(data.pagination.html);

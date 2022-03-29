@@ -1,5 +1,6 @@
 
 import { addPreloader, removePreloader } from './preloader';
+import { initSlider } from './slider';
 
 export class Filter {
     constructor(containerIdentif){
@@ -303,30 +304,7 @@ export class Filter {
             $('.select').multipleSelect('destroy');
             $('.select').multipleSelect({});
 
-            context.itemsWrapper.find('.itemBlock .itemBottom .itemSlider').each(function(){
-                $(this).slick({
-                    slidesToShow: 3,
-                    dots: false,
-                    prevArrow: "<img src='/images/icon24.svg' class='prev' alt='1'>",
-                    nextArrow: "<img src='/images/icon25.svg' class='next' alt='2'>",
-                    responsive: [{
-                            breakpoint: 781,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 1,
-                            }
-                        },
-            
-                        {
-                            breakpoint: 581,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                            }
-                        },
-                    ]
-                })
-            });
+            initSlider(context.itemsWrapper.find('.itemBlock .itemBottom .itemSlider'));
 
             // пагинация
             context.paginationBlock.html(data.pagination.html);
