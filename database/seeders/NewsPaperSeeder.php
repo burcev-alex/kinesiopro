@@ -63,7 +63,7 @@ class NewsPaperSeeder extends Seeder
 
         // Schema::disableForeignKeyConstraints();
 
-        for($iteration=1; $iteration<=10; $iteration++){
+        for($iteration=1; $iteration<=50; $iteration++){
             $attach = $this->getImage(800, 500);
             $attachDetail = $this->getImage(200, 200);
             $news = [

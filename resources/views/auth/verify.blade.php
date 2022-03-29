@@ -6,7 +6,6 @@
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <x-frontend.card>
                     <x-slot name="header">
                         @lang('Verify Your E-mail Address')
                     </x-slot>
@@ -19,7 +18,6 @@
                             <button class="btn btn-link p-0 m-0 align-baseline" type="submit">@lang('click here to request another').</button>
                         </x-forms.post>
                     </x-slot>
-                </x-frontend.card>
             </div><!--col-md-8-->
         </div><!--row-->
     </div><!--container-->

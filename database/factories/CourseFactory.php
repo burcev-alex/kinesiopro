@@ -22,7 +22,7 @@ class CourseFactory extends Factory
      */ 
     public function definition()
     {
-        $date = date('Y-m-d').'10:00:00';
+        $date = $this->faker->date().'10:00:00';
         $rand = $this->faker->numberBetween(2, 20);
 
         $descr = '';

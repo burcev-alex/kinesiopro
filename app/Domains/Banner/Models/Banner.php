@@ -18,6 +18,9 @@ class Banner extends Model
 
     protected $fillable = [
         "name",
+        "time_organization",
+        "place",
+        "description",
         "attachment_id",
         "attachment_mobile_id",
         "sort",

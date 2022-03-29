@@ -4,12 +4,7 @@ namespace App\Domains\Banner\Services;
 
 use App\Services\BaseService;
 use App\Domains\Banner\Models\Banner;
-use App\Exceptions\NoPageException;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Orchid\Attachment\Models\Attachment;
 
 class BannersService extends BaseService
 {
@@ -25,22 +20,28 @@ class BannersService extends BaseService
     }
 
     public function getHomeBanners(){
-        $result = Banner::Where('active', 1)->orderBy('sort', 'asc')->orderBy('created_at', 'desc')->get();
-        $banners = [];
-        
-        foreach($result as $item){
-            if ($item->attachment) {
-                $banners[] = [
-                    'name' => $item->name,
-                    'image' => $item->attachment->url(),
-                    'image_webp' => $item->attachment_webp,
-                    'image_mobile' => $item->attachment_mobile->url(),
-                ];
+        return Cache::tags('banners')->rememberForever('banners.' . app()->getLocale(), function () {
+            $result = Banner::Where('active', 1)->orderBy('sort', 'asc')->orderBy('created_at', 'desc')->get();
+            $banners = [];
+            
+            foreach($result as $item){
+                if ($item->attachment) {
+                    $banners[] = [
+                        'name' => $item->name,
+                        'time_organization' => $item->time_organization,
+                        'place' => $item->place,
+                        'description' => $item->description,
+                        'image' => $item->attachment->url(),
+                        'image_webp' => $item->attachment_webp,
+                        'image_mobile' => $item->attachment_mobile->url(),
+                    ];
+                }
             }
-        }
 
+            return $banners;
+        });
 
-        return $banners;
+        
     }
 
     public function save(array $fields): self
@@ -49,8 +50,9 @@ class BannersService extends BaseService
         if (isset($fields['banner']['active'])) $this->model->active = true;
         else $this->model->active = false;
 
-
         $this->model->save();
+
+        Cache::tags(['banners'])->flush();
 
         return $this;
     }

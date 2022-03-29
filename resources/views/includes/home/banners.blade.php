@@ -14,10 +14,19 @@
                 @endmobile
 
                 <div class="sliderTopText">
-                    <div class="sliderTopText__date">24-26 ноября</div>
+                    @if(strlen($banner['time_organization']) > 0)
+                        <div class="sliderTopText__date">{{ $banner['time_organization'] }}</div>
+                    @endif
+
                     <h2 class="sliderTopText__title">{{ $banner['name'] }}</h2>
-                    <span class="sliderTopText__bg">Scolio Russia</span>
-                    <p class="sliderTopText__paragraf">Лучшие спикеры России и Европы</p>
+
+                    @if(strlen($banner['place']) > 0)
+                        <span class="sliderTopText__bg">{{ $banner['place'] }}</span>
+                    @endif
+
+                    @if(strlen($banner['description']) > 0)
+                        <p class="sliderTopText__paragraf">{{ $banner['description'] }}</p>
+                    @endif
                 </div>
             </div>
         </div>

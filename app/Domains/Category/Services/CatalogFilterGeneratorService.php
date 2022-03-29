@@ -8,6 +8,7 @@ use App\Domains\Course\Models\RefChar;
 use App\Domains\Course\Services\CourseService;
 use App\Domains\Teacher\Models\Teacher;
 use App\Domains\Teacher\Services\TeachersService;
+use Illuminate\Support\Facades\Cache;
 use App\Services\RouterService;
 use Illuminate\Support\Carbon;
 
@@ -81,7 +82,9 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             $routerService->detectFiltersFromPath()
         );
 
-        $this->filters = RefChar::select('slug')->get()->toArray();
+        $this->filters = Cache::tags('ref_chars')->rememberForever('ref_chars.' . app()->getLocale(), function () {
+            return RefChar::select('slug')->get()->toArray();
+        });
 
         parent::__construct();
     }
@@ -190,6 +193,12 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
                 return 0;
             }
         })->toArray();
+        
+        // вычищаем лишние элементы
+        $teacherIds = collect($teacherIds)->filter(function($item){
+            return is_array($item);
+        })->toArray();
+        
         $arr = array_unique(array_merge(...$teacherIds));
         foreach($arr as &$val){
             $val = intval($val);
@@ -328,8 +337,11 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
         list($category1, $filters) = $this->routerService->detectParameters($array);
         
-        $rs = $filterService->setCategories($category1);
-        list($properties, $propertiesByCategories, $aggregationValues) = $filterService->getAvailableProperties($filters);
+        $filterService->setCategories($category1);
+
+        list($properties, $propertiesByCategories, $aggregationValues) = Cache::tags('courses')->rememberForever('getAvailableProperties.' . md5(serialize($filters)), function () use ($filterService, $filters) {
+            return $filterService->getAvailableProperties($filters);
+        });
 
         $this->totalCourses = $filterService->getTotalCourses();
         $this->selectedProducts = $filterService->getSelectedCountCourses();

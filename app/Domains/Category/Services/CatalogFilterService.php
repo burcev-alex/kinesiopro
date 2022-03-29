@@ -121,7 +121,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
             $this->attachCategoriesIds($ids);
             
-            $this->totalCourses = $this->query->count();
+            // $this->totalCourses = $this->query->count();
         }
 
         return $this;
@@ -192,7 +192,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
         $aggregationCollection = [];
         $availableChars = $this->facetFilter($filters, $courses, $aggregationCollection);
 
-        $this->totalCourses = $categoryCourses->count();
+        // $this->totalCourses = $categoryCourses->count();
         $this->selectedCourses = $courses->count();
 
         return [$availableChars, $availableCharsForCategory, $aggregationCollection];
@@ -243,18 +243,18 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
         $result = $builder->paginate($this->currentLimitPage, ['*'], 'page', $page);
             
-        foreach($result as $key_prod => $item){
-            $charts = [];
+        // foreach($result as $key_prod => $item){
+        //     $charts = [];
 
-            foreach($item->property_values as $charValue){ 
-                if(empty($charts[$charValue->char_id]['value'])){$charts[$charValue->char_id]['value'] = [];}
-                $charts[$charValue->char_id]['name'] = $charValue->char->name;
-                $charts[$charValue->char_id]['value'] = array_merge($charts[$charValue->char_id]['value'], [$charValue->id => $charValue->value]);
-                $charts[$charValue->char_id]['valueText'] = implode (', ', $charts[$charValue->char_id]['value']);
-            }
+        //     foreach($item->property_values as $charValue){ 
+        //         if(empty($charts[$charValue->char_id]['value'])){$charts[$charValue->char_id]['value'] = [];}
+        //         $charts[$charValue->char_id]['name'] = $charValue->char->name;
+        //         $charts[$charValue->char_id]['value'] = array_merge($charts[$charValue->char_id]['value'], [$charValue->id => $charValue->value]);
+        //         $charts[$charValue->char_id]['valueText'] = implode (', ', $charts[$charValue->char_id]['value']);
+        //     }
             
-            $result[$key_prod]->charValue = $charts;
-        }
+        //     $result[$key_prod]->charValue = $charts;
+        // }
         
         return $result;
     }

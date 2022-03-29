@@ -25,9 +25,13 @@ class BannerFactory extends Factory
      */
     public function definition()
     {
+        $rand = rand(10, 25);
         try {
             return [
-                "name" => $this->faker->slug(3),
+                "name" => implode(' ', $this->faker->words(6)),
+                "time_organization" => $rand."-".($rand+3)." ".date("F", strtotime($this->faker->date())),
+                "place" => implode(' ', $this->faker->words(2)),
+                "description" => implode(' ', $this->faker->words(4)),
                 "attachment_id" => $this->storageAttachment(1280,440),
                 "attachment_mobile_id" => $this->storageAttachment(292,350),
                 "sort" => 100,

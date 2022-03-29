@@ -6,7 +6,6 @@
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <x-frontend.card>
                     <x-slot name="header">
                         @lang('Register')
                     </x-slot>
@@ -72,7 +71,6 @@
                             </div><!--form-group-->
                         </x-forms.post>
                     </x-slot>
-                </x-frontend.card>
             </div><!--col-md-8-->
         </div><!--row-->
     </div><!--container-->

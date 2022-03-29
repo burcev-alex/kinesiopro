@@ -6,7 +6,8 @@ namespace App\Orchid\Layouts\Banner;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Label;
 use Orchid\Screen\Layouts\Rows;
 
 class BannersMainRows extends Rows
@@ -32,7 +33,13 @@ class BannersMainRows extends Rows
             ...[
                 Input::make('banner.name')->title('Название')->required(),
                 Input::make('banner.sort')->title('Сортировка')->required(),
-                CheckBox::make('banner.active')->title('Активность')
+                CheckBox::make('banner.active')->title('Активность'),
+                Group::make([
+                    Label::make('')->value('Огранизационная информация'),
+                    Input::make('banner.time_organization')->title('Время организации'),
+                    Input::make('banner.place')->title('Место'),
+                    Input::make('banner.description')->title('Комментарий'),
+                ])
             ]
         ];
 

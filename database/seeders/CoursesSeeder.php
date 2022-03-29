@@ -29,7 +29,7 @@ class CoursesSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0; $i<20; $i++){
+        for($i=0; $i<100; $i++){
             Course::factory()->create();
         }
     }

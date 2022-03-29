@@ -44,6 +44,8 @@ class PodcastService extends BaseService
 
         $this->model->save();
 
+        Cache::tags(['podcasts'])->flush();
+
         return $this;
     }
 

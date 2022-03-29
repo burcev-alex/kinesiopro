@@ -7,6 +7,7 @@ use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Course\Services\CourseService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Log;
@@ -31,6 +32,8 @@ class CourseOrchidService extends CourseService
             $fields['active'] = 1;
         
         $this->model->fill($fields)->save();
+
+        Cache::tags(['courses'])->flush();
         
         return $this;
     }

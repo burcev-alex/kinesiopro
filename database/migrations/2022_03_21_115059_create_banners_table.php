@@ -18,6 +18,9 @@ class CreateBannersTable extends Migration
             $table->unsignedBigInteger("attachment_id")->nullable();
             $table->unsignedBigInteger("attachment_mobile_id")->nullable();
             $table->string('name');
+            $table->string('time_organization')->nullable();
+            $table->string('place')->nullable();
+            $table->string('description')->nullable();
             $table->integer('sort')->default(100);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();

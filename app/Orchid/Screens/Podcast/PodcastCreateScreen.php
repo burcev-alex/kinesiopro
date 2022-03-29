@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Orchid\Screens\Podcast;
 
 use App\Domains\Podcast\Models\Podcast;
@@ -54,7 +55,7 @@ class PodcastCreateScreen extends Screen
     {
         return [
             Button::make('Сохранить')
-            ->method('save')->icon('save')
+                ->method('save')->icon('save')
         ];
     }
 
@@ -84,8 +85,7 @@ class PodcastCreateScreen extends Screen
         Podcast $podcast,
         Request $request,
         PodcastService $service
-        )
-    {
+    ) {
         $service->setModel($podcast);
         $validate = $request->validate([
             'podcast.title' => 'required',
@@ -97,10 +97,9 @@ class PodcastCreateScreen extends Screen
 
         $service->save($validate['podcast']);
 
-       Cache::tags(['categories'])->flush();
+        Cache::tags(['podcasts'])->flush();
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.podcast.edit', $podcast);
-
     }
 }

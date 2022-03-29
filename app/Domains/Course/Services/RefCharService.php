@@ -24,6 +24,9 @@ class RefCharService extends BaseService
         $fields['active'] = isset($fields['active']) ? true : false;
         $fields['sort'] = isset($fields['sort']) ? $fields['sort'] : 100;
         $this->model->fill($fields)->save();
+
+        Cache::tags(['ref_chars'])->flush();
+
         return $this;
     }
 
