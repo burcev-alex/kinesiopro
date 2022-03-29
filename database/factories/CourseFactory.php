@@ -25,6 +25,11 @@ class CourseFactory extends Factory
         $date = date('Y-m-d').'10:00:00';
         $rand = $this->faker->numberBetween(2, 20);
 
+        $descr = '';
+        for($i=1; $i<20; $i++){
+            $descr .= $this->faker->text()." ".$this->faker->text();
+        }
+
         return [
             'slug' => $this->faker->slug(2),
             'sort' => 500,
@@ -37,7 +42,7 @@ class CourseFactory extends Factory
             'marker_new' => $this->faker->numberBetween(0, 1),
             'marker_popular' => $this->faker->numberBetween(0, 1),
             'marker_archive' => $this->faker->numberBetween(0, 1),
-            'description' => $this->faker->text()." ".$this->faker->text()." ".$this->faker->text(),
+            'description' => $descr,
             'meta_h1' => $this->faker->sentence(2),
             'meta_title' => $this->faker->sentence(2),
             'meta_keywords' => implode(' ', $this->faker->words(6)),

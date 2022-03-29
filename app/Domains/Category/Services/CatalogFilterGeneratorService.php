@@ -43,6 +43,10 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
     protected array $numbers = [
         [
+            'title' => 'filter.numbers.option0',
+            'slug' => '3'
+        ],
+        [
             'title' => 'filter.numbers.option1',
             'slug' => '15'
         ],
@@ -91,22 +95,29 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
         $baseFilters['teachers'] = [
             'id' => 0,
+            'slug' => 'teacher',
             'title' => 'Преподаватели',
             'options' => $this->getTeachers()
         ];
+        $baseFilters['teachers'] = $this->markSelectedFilter($baseFilters['teachers']);
+
         $baseFilters['periods'] = [
             'id' => 0,
+            'slug' => 'period',
             'title' => 'Период',
             'options' => $this->getPeriods()
         ];
+        $baseFilters['periods'] = $this->markSelectedFilter($baseFilters['periods']);
         
-        return [
+        $returned = [
             'sub_category' => $this->getSubCategory(),
             'sort' => $this->getSort(),
             'numbers' => $this->getNumbers(),
             'filters' =>  $baseFilters,
             'selected_count' => $this->selectedCount
         ];
+        
+        return $returned;
     }
 
     /**
@@ -169,8 +180,6 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
      */
     public function getTeachers(): array
     {
-        $selected = '';
-
         $teacherIds = Course::where('marker_archive', 0)->where('active', 1)->with('teachers')->get()->map(function($item){
             if($item->teachers->count() > 0){
                 return $item->teachers->map(function($teacher){
@@ -187,9 +196,19 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         }
         unset($val);
 
-        $teachers = Teacher::whereIn('id', $arr)->get();
+        $teachers = Teacher::whereIn('id', $arr)->select(['id', 'slug', 'full_name'])->orderBy('full_name', 'asc')->get();
 
-        return $teachers->toArray();
+        $returned = [];
+        foreach($teachers as $teacher){
+            $returned[] = [
+                'value' => $teacher->id,
+                'title' => $teacher->full_name,
+                'selected' => false,
+                'available' => false,
+            ];
+        }
+
+        return $returned;
     }
 
     /**
@@ -199,18 +218,38 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     {
         $date_m = array('Null', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь');
 
-
         $selected = '';
 
         $courses = Course::where('marker_archive', 0)->where('active', 1)->select(['start_date'])->groupBy('start_date')->get();
         
         $list = [];
+        $tmp = [];
         foreach($courses as $course){
+            
+            $value = $course->start_date->format('Y-m').'-01';
+            if(in_array($value, $tmp)){
+                continue;
+            }
+
             $list[] = [
-                'value' => $course->start_date->format('Y-m').'-01',
-                'title' => $date_m[$course->start_date->format('n')].' '.$course->start_date->format('Y')
+                'value' => $value,
+                'title' => $date_m[$course->start_date->format('n')].' '.$course->start_date->format('Y'),
+                'selected' => false,
+                'available' => false
             ];
+
+            $tmp[] = $value;
         }
+
+        uasort($list, function($v1, $v2){
+            if ($v1['value'] < $v2['value']) {
+                return -1;
+            } elseif ($v1['value'] > $v2['value']) {
+                return 1;
+            } else {
+                return strcmp($v1['value'], $v2['value']);
+            }
+        });
 
         return $list;
     }
@@ -284,7 +323,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         $filterService = new CatalogFilterService();
 
         $array = array_values(array_filter(explode('/', request()->path()), function ($value) {
-            return $value && !in_array($value, ['catalog', 'filters']);
+            return $value && !in_array($value, ['courses', 'filters']);
         }));
 
         list($category1, $filters) = $this->routerService->detectParameters($array);
@@ -339,7 +378,13 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             }
         } else {
             foreach ($filter['options'] as &$option) {
-                $option['selected'] = in_array($option['value'], $selectedOptions);
+                if(is_array($selectedOptions)){
+                    $option['selected'] = in_array($option['value'], $selectedOptions);
+                }
+                else {
+                    $option['selected'] = ($option['value'] == $selectedOptions);
+                }
+
                 if ($option['selected']) {
                     $option['available'] = true;
 
@@ -357,8 +402,23 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
      * @return array
      */
     public function getSubCategory(){
+        $array = array_values(array_filter(explode('/', request()->path()), function ($value) {
+            return $value && !in_array($value, ['courses', 'filters']);
+        }));
+
+        list($category, $filters) = $this->routerService->detectParameters($array);
 
         $categories = Category::where('active', 1)->with('attachment')->get()->toArray();
+        
+        foreach($categories as &$cat){
+            if($cat['slug'] == $category){
+                $cat['selected'] = true;
+            }
+            else{
+                $cat['selected'] = false;
+            }
+        }
+        unset($cat);
         
         return $categories;
     }

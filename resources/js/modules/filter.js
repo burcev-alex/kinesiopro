@@ -1,17 +1,31 @@
-export class Schedule{
-    constructor(){
+
+import { addPreloader, removePreloader } from './preloader';
+
+export class Filter {
+    constructor(containerIdentif){
         this.filterFirstField = '';
         this.items = [];
         this._token = $('meta[name="csrf-token"]').attr("content");
         
-        this.itemsWrapper = $('#home-page-block-course');
+        this.itemsWrapper = $('#'+containerIdentif);
         this.paginationBlock = this.itemsWrapper.find('.pagination-block');
+
+        this.isCatalog = false;
+
+        this.limitPage = 3;
     }
 
     init(){
         this.events();
+    }
+    
+    // применяется для каталога
+    setIsCatalog(){
+        this.isCatalog = true;
+    }
 
-        this.getList();
+    setLimitPage(limit){
+        this.limitPage = limit;
     }
 
     events(){
@@ -21,6 +35,10 @@ export class Schedule{
             let path = context.getPathWithFilters(
                 context.generateFilters()
             );
+
+            if(context.isCatalog){
+                history.pushState({}, null, path);
+            }
 
             console.log(path);
             
@@ -38,8 +56,12 @@ export class Schedule{
         });
 
 
-        $('#filter-form .etabs .tab').click(function(){
+        $('#filter-form .etabs .tab[data-action="async"]').click(function(){
             let _this = $(this);
+
+            if(_this.hasClass('active')){
+                return false;
+            }
 
             $('#filter-form .etabs .tab').removeClass('active');
 
@@ -48,6 +70,10 @@ export class Schedule{
             let path = context.getPathWithFilters(
                 context.generateFilters()
             );
+
+            if(context.isCatalog){
+                history.pushState({}, null, path);
+            }
 
             console.log(path);
 
@@ -66,10 +92,15 @@ export class Schedule{
         });
     }
 
-    getList(){
+    firstLoad(){
         let context = this;
 
-        let path = '/courses/sort=date;numbers=3/';
+        let path = '/courses/sort=date;numbers='+context.limitPage+'/';
+
+        if(context.isCatalog){
+            history.pushState({}, null, path);
+        }
+        
         context.sendAjax(
             path,
             function(data){
@@ -89,7 +120,7 @@ export class Schedule{
             values = form.serializeArray(),
             filters = {},
             sort = 'date',
-            numbers = 3;
+            numbers = context.limitPage;
         // Parse filters
         $(values).each(function (index, obj) {
             if (obj.value !== '') {
@@ -205,7 +236,6 @@ export class Schedule{
         let category = '';
         
         let slugCat = $.trim($('#filter-form .etabs .tab.active a').attr('data-slug'));
-        console.log(slugCat);
         
         if(slugCat){
             category = slugCat + '/';
@@ -226,17 +256,22 @@ export class Schedule{
         if (!path) {
             return;
         }
+        
+        addPreloader('#filter-form');
+
         $.get({
             'url': path,
             dataType: "json",
             success: success,
             error: function (data) {
+                removePreloader('#filter-form');
                 console.log('Error');
             }
         });
     }
 
     successFilter(context, data){
+        removePreloader('#filter-form');
 
         let content = data.resource.html;
         if (content) {
@@ -247,6 +282,26 @@ export class Schedule{
                 context.itemsWrapper.find('.itemBlock').addClass('empty-block');
             }
 
+            // переопределить фильтр
+            let dataFilters = data.filters.data;
+            let form = $('#filter-form');
+            
+            // активность элементов при применении фильтра
+            $.each(dataFilters.filters, function (key, item) {
+                
+                let containerOptions = form.find('select[name="' + item.slug + '"]');
+                
+                containerOptions.find('option').attr('disabled', true);
+                containerOptions.find('option[value=""]').removeAttr('disabled');
+
+                $.each(item.options, function (k, option) {
+                    var option = containerOptions.find('option[value="'+option.value+'"]');
+                    option.removeAttr('disabled');
+                });
+            });
+
+            $('.select').multipleSelect('destroy');
+            $('.select').multipleSelect({});
 
             context.itemsWrapper.find('.itemBlock .itemBottom .itemSlider').each(function(){
                 $(this).slick({

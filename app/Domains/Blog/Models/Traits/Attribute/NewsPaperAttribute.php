@@ -6,7 +6,9 @@ trait NewsPaperAttribute {
 
     public function getPublishDateAttribute()
     {
-        return $this->publication_date ? $this->publication_date->format("d.m.y") : '';
+        $date_m = array('Null', 'янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек');
+
+        return $this->publication_date ? $this->publication_date->format("d")." ".$date_m[$this->publication_date->format("n")] : '';
     }
 
     public function setAttachmentIdAttribute($id)

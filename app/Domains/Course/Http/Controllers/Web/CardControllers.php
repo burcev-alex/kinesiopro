@@ -49,7 +49,7 @@ class CardControllers extends Controller {
                 'availability' => $course->marker_archive ? 'discontinued' : 'in stock',
                 'title' => $course->name,
                 'link' => route('courses.card', ['slug' => $course->slug]),
-                'price' => $course->marker_archive ? "0 RUB" : round($course->variant->price * $course->variant->currency->value, 2)." RUB",
+                'price' => $course->marker_archive ? "0 RUB" : round($course->price, 2)." RUB",
                 'condition' => $course->marker_archive ? '' : 'new',
                 'currency' => 'RUB',
                 'brand' => 'Kinesiopro',

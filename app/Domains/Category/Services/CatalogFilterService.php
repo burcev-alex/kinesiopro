@@ -162,12 +162,13 @@ class CatalogFilterService extends AbstractCatalogFilterService
                 return $query->select(['course_id', 'ref_char_id', 'ref_char_value_id']);
             }
         ]);
-
-        // $query = str_replace(array('?'), array('\'%s\''), $this->query->toSql());
-        // $query = vsprintf($query, $this->query->getBindings());
-        // dd($query);
+        
+        if(count($this->categoryIds) > 0){
+            $this->attachCategoriesIds($this->categoryIds);
+        }
 
         $categoryCourses = $this->query->get('id');
+        
         $availableCharsForCategory = [];
         foreach ($categoryCourses as $course) {
             foreach ($course->properties ?? [] as $property) {
@@ -383,7 +384,20 @@ class CatalogFilterService extends AbstractCatalogFilterService
      */
     protected function filterPeriod(string $month)
     {
-        $this->query->whereBetween('start_date', [$month, date('Y-m', strtotime($month).'-31')]);
+        $this->query->whereBetween('start_date', [$month, date('Y-m', strtotime($month)).'-31']);
+    }
+
+    /**
+     * Search by teacher
+     * @param int $teacherId
+     */
+    protected function filterTeacher(int $teacherId)
+    {
+        $this->query->whereHas('teachers', function (Builder $query) use ($teacherId) {
+            return $query->where(function ($query) use ($teacherId) {
+                return $query->where('teacher_id', $teacherId);
+            });
+        });
     }
 
     /**

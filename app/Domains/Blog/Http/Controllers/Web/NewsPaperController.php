@@ -23,12 +23,9 @@ class NewsPaperController
     /**
      * Show history of orders
      */
-    public function index(Request $request, $param1 = null, $param2 = null, $param3 = null)
+    public function index(Request $request, $param1 = null)
     {
-        list($filters, $page) = $this->routerService->detectParameters([$param1, $param2, $param3]);
-
-        // всего кол-во статей
-        $countArticles = $this->newsService->where('active', true)->get()->count();
+        list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
         
         if(!$page){
             $page = 1;
@@ -40,9 +37,6 @@ class NewsPaperController
         // доступные статьи
         $articles = $this->newsService->getArticles($filters, $page);
 
-        // выбранные значение фильтра
-        $selectedFilters = $this->newsService->getSelectedFilters();
-
         $pagination = $this->routerService->getPagination($articles->currentPage(), $articles->lastPage());
         if ($request->wantsJson()) {
             return [
@@ -52,7 +46,7 @@ class NewsPaperController
                 'pagination' => [
                     'html' => view('includes.pagination', [
                         'pagination' => $pagination,
-                        'block' => 'blog-page-block'
+                        'block' => 'blog-grid-block'
                     ])->render(),
                 ]
             ];
@@ -67,9 +61,7 @@ class NewsPaperController
         return view('pages.blog.blog-list', [
             'meta' => $meta,
             'articles' => $articles,
-            'selectedFilters' => $selectedFilters,
             'pagination' => $pagination,
-            'count' => $countArticles,
             'blockId' => 'blog-page-block'
         ]);
     }
@@ -89,8 +81,7 @@ class NewsPaperController
 
         return view('pages.blog.blog-single', [
             'news_paper' => $news_paper,
-            'components' => $components,
-            'tags' => $tags
+            'components' => $components
         ]);
     }
 

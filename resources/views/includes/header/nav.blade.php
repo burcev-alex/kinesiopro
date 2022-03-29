@@ -52,7 +52,7 @@
         </li>
 
         <li>
-            <a href="/"><span>Контакты</span></a>
+            <a href="{{ route('contacts') }}"><span>Контакты</span></a>
         </li>
     </ul>
 </nav>

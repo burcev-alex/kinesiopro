@@ -12,7 +12,7 @@ return [
     | want them to index and look at.
     |
     */
-	'robots' => 'all',
+	'robots' => 'noindex, nofollow',
 
 
 	/*

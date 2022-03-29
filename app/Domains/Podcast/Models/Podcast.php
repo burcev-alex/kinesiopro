@@ -2,6 +2,7 @@
 
 namespace App\Domains\Podcast\Models;
 
+use App\Domains\Podcast\Models\Traits\Scope\PodcastScope;
 use App\Domains\Podcast\Models\Traits\Attribute\PodcastAttribute;
 use App\Domains\Podcast\Models\Traits\Relationship\PodcastRelationship;
 use Database\Factories\PodcastFactory;
@@ -14,6 +15,7 @@ class Podcast extends Model
     use HasFactory,
     PodcastRelationship,
     PodcastAttribute,
+    PodcastScope, 
     AsSource;
 
     protected $fillable = [

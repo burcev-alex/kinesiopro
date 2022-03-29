@@ -16,6 +16,27 @@ class BreadcrumbsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Блог
+        Breadcrumbs::for(
+            'blog',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.blog'), route('index'))
+        );
+
+        // Контакты
+        Breadcrumbs::for(
+            'contacts',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.contacts'), route('index'))
+        );
+
+        // Подкасты
+        Breadcrumbs::for(
+            'podcast',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.podcast'), route('index'))
+        );
+
         // Мои данные
         Breadcrumbs::for(
             'profile.index',

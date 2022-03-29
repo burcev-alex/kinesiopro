@@ -62,17 +62,17 @@ trait CourseAttribute
             : 'error');
     }
     
-    function geCityDisplayAttribute()
+    function getCityDisplayAttribute()
     {
         return implode(', ', $this->property_values->filter(function($prop){
             return ($prop->char->slug == 'city');
         })->pluck('value')->toArray());
     }
     
-    function geFormatDisplayAttribute()
+    function getFormatDisplayAttribute()
     {
         return implode(', ', $this->property_values->filter(function($prop){
-            return ($prop->char->slug == 'format');
+            return $prop->char->slug == 'format';
         })->pluck('value')->toArray());
     }
 }

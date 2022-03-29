@@ -28,9 +28,8 @@ abstract class AbstractCatalogFilterService
         'text' => 'string',
         'sort' => 'string',
         'numbers' => 'float',
-
-        // Filters taken from multiple select
-        'categories' => 'array',
+        'period' => 'string',
+        'teacher' => 'int'
     ];
 
     /**

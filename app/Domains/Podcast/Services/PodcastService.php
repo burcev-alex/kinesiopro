@@ -13,9 +13,7 @@ use Orchid\Attachment\Models\Attachment;
 
 class PodcastService extends BaseService
 {
-
-
-    public const DEFAULT_LIMIT = 10;
+    public const DEFAULT_LIMIT = 8;
 
     // кол-во элементов на странице
     protected int $currentLimitPage;
@@ -64,7 +62,9 @@ class PodcastService extends BaseService
      */
     public function getCatalog(int $page = 1)
     {  
-        $builder = $this->query->with('attachment');
+        $builder = $this->model->active();
+
+        $this->attachLimitPagination();
 
         $result = $builder->paginate($this->currentLimitPage, ['*'], 'page', $page);
         

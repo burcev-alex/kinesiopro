@@ -1,0 +1,14 @@
+.preloader{
+    z-index: 99993 !important;
+    &:after{
+        content: '';
+        display: flex;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: fixed;
+        z-index: 9999;
+        background: url('../images/preloader.svg') no-repeat center rgba(255, 255, 255, 0.8);
+    }
+}

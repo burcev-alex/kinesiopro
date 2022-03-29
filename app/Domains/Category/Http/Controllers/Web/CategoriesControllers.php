@@ -63,19 +63,25 @@ class CategoriesControllers extends Controller {
             $seo['title'] = $category_info->name;
         }
         else{
-            $seo['title'] = '';
+            $seo['title'] = __('main.meta.course_tile');
         }
 
         if(!empty($category_info) && $category_info->meta_description){
             $seo['description'] = $category_info->meta_description;
         } else {
-            $seo['description'] = '';
+            $seo['description'] = __('main.meta.course_description');
         }
 
         if(!empty($category_info) && $category_info->meta_keywords){
             $seo['keywords'] = $category_info->meta_keywords;
         } else {
             $seo['keywords'] = '';
+        }
+
+        if(!empty($category_info) && $category_info->meta_h1){
+            $seo['h1'] = $category_info->meta_h1;
+        } else {
+            $seo['h1'] = __('main.meta.course_tile');
         }
 
         if(!empty($category_info) && $category_info->attachment){
@@ -89,7 +95,7 @@ class CategoriesControllers extends Controller {
             $filterSchema = $this->filterGeneratorService->getFilterSchema();
 
             $templateCatalogList = 'includes.course.list';
-            $paginationBlock = 'catalog-page-block';
+            $paginationBlock = 'course-grid-block-elements';
 
             return response()->json([
 

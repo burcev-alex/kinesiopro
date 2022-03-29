@@ -49,7 +49,7 @@
             <ul class="footerBlockListMenu">
                 @foreach ($categories as $category)
                     <li>
-                        <a href="{{ route('courses.index', [$category['name']]) }}">{{ $category['name'] }}</a>
+                        <a href="{{ route('courses.index', [$category['slug']]) }}">{{ $category['name'] }}</a>
                     </li>
                 @endforeach
 

@@ -16,15 +16,14 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <link rel="canonical" href="https://kinesiopro.ru/">
 
+        @yield('meta')
+
         @if (config('app.env') == 'local')
             <meta name="googlebot" content="noindex, nofollow"/>
             <meta name="yandex" content="none"/>
         @else
             <meta name="robots" content="all" />
         @endif
-
-        @yield('meta')
-
         
     @show
     

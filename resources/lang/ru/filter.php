@@ -29,6 +29,7 @@ return [
     ],
     'numbers' => [
         'title' => 'Показать по:',
+        'option0' => '3',
         'option1' => '15',
         'option2' => '30',
         'option3' => '60',

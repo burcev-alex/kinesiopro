@@ -2,7 +2,6 @@
 
 namespace App\Domains\Feedback\Http\Controllers\Web;
 
-use App\Domains\Feedback\Models\FeedBack;
 use App\Domains\Feedback\Services\ContactService;
 use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\Request;
@@ -25,6 +24,6 @@ class ContactController extends BaseController
         // доступные контакты
         $items = $this->contactService->getList();
 
-        return view('pages.contact', ['items' => $items]);
+        return view('pages.contacts', ['items' => $items]);
     }
 }

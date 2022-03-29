@@ -5,6 +5,8 @@ mix.copy('resources/js/plugins', 'public/js/plugins');
 mix.js('resources/js/main_script.js', 'public/js');
 mix.js('resources/js/main_page_script.js', 'public/js');
 mix.js('resources/js/course_page_script.js', 'public/js');
+mix.js('resources/js/blog_page_script.js', 'public/js');
+mix.js('resources/js/podcast_page_script.js', 'public/js');
 mix.js('resources/js/dashboard.js', 'public/js');
 
 mix.sass('resources/sass/slick.scss', 'public/css');

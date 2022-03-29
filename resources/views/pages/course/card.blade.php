@@ -32,6 +32,7 @@
         <aside class="aside flex aside2">
             <div class="signUpBlock">
                 <ul class="signUpBlockList">
+                    @if($course->start_date)
                     <li>
                         <div class="signUpBlockList__img">
                             <img src="/images/icon28.svg" alt="">
@@ -53,7 +54,9 @@
                             <div class="signUpBlockListRight__date">{{ $course->diff_day }} дня</div>
                         </div>
                     </li>
+                    @endif
 
+                    @if(strlen($course->format_display) > 0)
                     <li>
                         <div class="signUpBlockList__img">
                             <img src="/images/icon30.svg" alt="">
@@ -64,7 +67,9 @@
                             <div class="signUpBlockListRight__date">{{ $course->format_display }}</div>
                         </div>
                     </li>
+                    @endif
 
+                    @if(strlen($course->price) > 0)
                     <li>
                         <div class="signUpBlockList__img">
                             <img src="/images/icon31.svg" alt="">
@@ -75,6 +80,7 @@
                             <div class="signUpBlockListRight__date">{{ $course->price_format }} ₽</div>
                         </div>
                     </li>
+                    @endif
                 </ul>
 
                 <a href="#" class="signUp flex">

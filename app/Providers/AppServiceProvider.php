@@ -47,7 +47,11 @@ class AppServiceProvider extends ServiceProvider
             return $translations;
         });
 
-        view()->composer(['includes.home.schedule'], function ($view) {
+        view()->composer(['includes.course.filter'], function ($view) {
+            $view->with('filterSchema', app(CatalogFilterGeneratorService::class)->getFilterSchema());
+        });
+
+        view()->composer(['includes.course.categories'], function ($view) {
             $view->with('filterSchema', app(CatalogFilterGeneratorService::class)->getFilterSchema());
         });
     }

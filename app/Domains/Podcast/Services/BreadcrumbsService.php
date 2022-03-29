@@ -14,11 +14,11 @@ final class BreadcrumbsService
     public static function card($podcast)
     {
         Breadcrumbs::for(
-            'podcast.card',
+            'podcast.single',
             function (Trail $trail) use($podcast) {
-                $trail->push(__('breadcrumbs.podcast'), route('podcast.index'));
+                $trail->push(__('breadcrumbs.podcast'), route('podcast'));
 
-                $trail->push($podcast->name, route('podcast.card', ['slug' => $podcast->slug]));
+                $trail->push($podcast->title, route('podcast.single', ['slug' => $podcast->slug]));
             }
         );
     }

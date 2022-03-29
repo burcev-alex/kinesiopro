@@ -1,8 +1,9 @@
-import { Schedule } from './modules/schedule';
+import { Filter } from './modules/filter';
 
 $(document).ready(function () {
-    let schedule = new Schedule();
-    schedule.init();
+    let filter = new Filter('home-page-block-course');
+    filter.init();
+    filter.firstLoad();
 
     $('.itemSlider').slick({
         slidesToShow: 3,

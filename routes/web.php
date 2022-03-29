@@ -3,8 +3,8 @@
 use App\Domains\Category\Http\Controllers\Web\CategoriesControllers;
 use App\Domains\Course\Http\Controllers\Web\CardControllers;
 use App\Domains\Feedback\Http\Controllers\Api\FeedbackController;
+use App\Domains\Feedback\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/feedback/', [FeedbackController::class, "save"])->name("feedback.save");
 Route::get('/feedback/', [FeedbackController::class, "index"])->name("feedback.form");
-Route::get('/contacts/', [ContactsController::class, 'index'])->name('contacts');
+Route::get('/contacts/', [ContactController::class, 'index'])->name('contacts');
 
 
 
