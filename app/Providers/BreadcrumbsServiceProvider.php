@@ -16,32 +16,39 @@ class BreadcrumbsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Регистрация
+        Breadcrumbs::for(
+            'register.create',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.register'), route('register.create'))
+        );
+
         // Блог
         Breadcrumbs::for(
             'blog',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.blog'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.blog'), route('blog'))
         );
 
         // Контакты
         Breadcrumbs::for(
             'contacts',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.contacts'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.contacts'), route('contacts'))
         );
 
         // Подкасты
         Breadcrumbs::for(
             'podcast',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.podcast'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.podcast'), route('podcast'))
         );
 
         // Мои данные
         Breadcrumbs::for(
             'profile.index',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.personal.profile'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.personal.profile'), route('profile.index'))
         );
 
         // правила конфиденциальности
@@ -58,25 +65,11 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             $trail->push(Lang::get('breadcrumbs.public_offer'), route('index'))
         );
 
-        // контакты
+        // О компании
         Breadcrumbs::for(
             'contacts',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.contacts'), route('index'))
-        );
-
-        // О компании
-        Breadcrumbs::for(
-            'about',
-            fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.about'), route('index'))
-        );
-
-        // История заказов
-        Breadcrumbs::for(
-            'recovery',
-            fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.recovery'), route('recovery'))
+            $trail->push(Lang::get('breadcrumbs.about'), route('contacts'))
         );
     }
 }

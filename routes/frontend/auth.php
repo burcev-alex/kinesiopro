@@ -9,7 +9,7 @@ use App\Domains\User\Http\Controllers\Web\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function() {
-    Route::get('/registration/', [RegisteredUserController::class, 'create'])
+    Route::get('/register/', [RegisteredUserController::class, 'create'])
         ->name('register.create');
         
     Route::post('/register/', [RegisteredUserController::class, 'store'])

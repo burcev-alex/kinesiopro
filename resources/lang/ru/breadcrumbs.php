@@ -11,6 +11,7 @@ return [
     'catalog' => 'Курсы',
     'applicability' => 'Применимость',
     'recovery' => 'Восстановление пароля',
+    'register' => 'Регистрация',
     'personal' => [
         'profile' => 'Мои данные',
         'register' => 'Регистрация',

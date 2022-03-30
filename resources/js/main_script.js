@@ -5,8 +5,8 @@ window.axios.defaults.headers.common['x-apikey'] = '123456';
 
 let langPrefix = $('html').attr('lang') === 'ru' ? '/ru' : '';
 let token = $('meta[name="csrf-token"]').attr('content');
-import language from "./modules/lang";
 
+require('./modules/validator');
 
 let isMobile;
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) || $(window).width() <= 991) {

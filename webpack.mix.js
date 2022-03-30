@@ -19,6 +19,7 @@ mix.copy('resources/fonts', 'public/fonts');
 
 
 mix.copy('node_modules/jquery/dist/jquery.min.js', 'public/js/plugins');
+mix.copy('node_modules/jquery-validation/dist/jquery.validate.min.js', 'public/js/plugins');
 // mix.copy('node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js', 'public/js/plugins/fancybox');
 //  mix.copy('manifest.json', 'public/manifest.json');
 mix.copy('sw.js', 'public/sw.js');

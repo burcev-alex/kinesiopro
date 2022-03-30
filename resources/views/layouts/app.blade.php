@@ -64,8 +64,8 @@
     @stack('before-styles')
     
     <!-- Assets -->
-    <link href="{{ mix('css/selects.css') }}" media="all" type="text/css" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" media="all" type="text/css" rel="stylesheet">
+    <link href="{{ mix('css/selects.css') }}" media="all" type="text/css" rel="stylesheet">
 
     <script type="text/javascript">
         window.dataLayer = window.dataLayer || [];
@@ -89,6 +89,7 @@
     </script>
     
     <script src="{{ mix('js/plugins/jquery.min.js') }}"></script>
+    <script src="{{ mix('js/plugins/jquery.validate.min.js') }}"></script>
     @stack('before-scripts')
         <script src="{{ mix('js/plugins/selects.js') }}"></script>
         <script src="{{ mix('js/main_script.js') }}"></script>

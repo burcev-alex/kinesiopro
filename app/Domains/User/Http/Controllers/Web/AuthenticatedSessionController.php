@@ -2,7 +2,6 @@
 
 namespace App\Domains\User\Http\Controllers\Web;
 
-use App\Domains\Product\Services\FavoritesService;
 use App\Http\Controllers\Controller;
 use App\Domains\User\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -48,25 +47,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        FavoritesService::synchronize($user->id);
-
         $path = app('Illuminate\Routing\UrlGenerator')->previous();
-
-        if ($user->language) {
-
-            // убрать доменное имя
-            $exp = explode(config('app.url'), $path);
-            $path = $exp[1];
-
-            if ($user->language != 'uk') {
-                if (substr_count($path, "/" . $user->language . "/") == 0) {
-                    $path = '/' . $user->language . $path;
-                }
-            } else if ($user->language == 'uk' && substr_count($path, "/ru/") > 0) {
-                // если на странице RU тогда переход на UK версию
-                $path = str_replace("/ru/", "/", $path);
-            }
-        }
 
         return response()->json([
             'url' => $path

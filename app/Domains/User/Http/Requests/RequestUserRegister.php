@@ -14,13 +14,14 @@ class RequestUserRegister extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
+            'firstname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
             'surname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
             'phone' => ['required', 'string'],
+            'work' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'position' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', 'min:6']
-            // 'public_offer' => 'required',
-            // 'privacy_policy' => 'required'
         ];
     }
 
