@@ -79,7 +79,7 @@
 
                         <div class="signUpBlockListRight">
                             <div class="signUpBlockListRight__title">Продолжительность</div>
-                            <div class="signUpBlockListRight__date">{{ $course->diff_day }} дня</div>
+                            <div class="signUpBlockListRight__date">{{ $course->diff_day }} {{trans_choice('день|дня|дней', $course->diff_day)}}</div>
                         </div>
                     </li>
                     @endif
