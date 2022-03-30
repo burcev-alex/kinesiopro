@@ -27,6 +27,8 @@ class NewsPaperComponentsSeeder extends Seeder
             "lists" => [
                 "title" => "Список",
                 "fields" => [
+                    "type",
+                    "title",
                     "list"
                 ]
             ],

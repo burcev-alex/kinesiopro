@@ -3,9 +3,6 @@
 namespace App\View\Components\News;
 
 use Illuminate\View\Component;
-use Log;
-use Orchid\Attachment\Models\Attachment;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Родительский компонент. 
@@ -20,6 +17,7 @@ class MainComponent extends Component
     public ? string $text = null;
     public ? string $autor = null;
     public ? string $link = null;
+    public ? string $type = null;
     
     public ? array $texts = null;
     public ? array $media = null;
@@ -27,7 +25,6 @@ class MainComponent extends Component
     public ? array $next = null;
 
     public ? array $key = null;
-    public ? Collection $products = null;
 
 
     /**

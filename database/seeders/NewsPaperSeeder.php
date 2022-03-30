@@ -90,6 +90,8 @@ class NewsPaperSeeder extends Seeder
                 [
                     "component_name" => "lists",
                     "fields" => [
+                        "type" => "circle",
+                        "title" => $faker->sentence(),
                         "list" => [
                             "Дальнейшее развитие различных форм деятельности требует определения и уточнения кластеризации усилий. ",
                             "Дальнейшее развитие различных форм деятельности требует определения и уточнения кластеризации усилий. ",
@@ -124,9 +126,16 @@ class NewsPaperSeeder extends Seeder
                     ]
                 ],
                 [
-                    "component_name" => "gif",
+                    "component_name" => "lists",
                     "fields" => [
-                        "media" => [$attach->id]
+                        "type" => "cross",
+                        "title" => $faker->sentence(),
+                        "list" => [
+                            $faker->sentence(),
+                            $faker->sentence(),
+                            $faker->sentence(),
+                            $faker->sentence()
+                        ]
                     ]
                 ],
                 [

@@ -22,7 +22,35 @@
     <!--Start mainContent-->
     <main class="mainContent width flex mainContent2">
         <div class="mainRight marafonRight">
-            <p class="paragraf">{{ $course->description }}</p>
+            @foreach ($components as $key=>$component)
+                <div class="mainBlock" id="anchor{{ $key }}">
+                @switch($component->slug)
+                    @case('image')
+                        <x-news.image :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('title-text')
+                        <x-news.title-text :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('lists')
+                        <x-news.lists :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('video')
+                        <x-news.video :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('text-citation')
+                        <x-news.text-citation :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('gif')
+                        <x-news.gif :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @case('text')
+                        <x-news.text :number="$key" :fields="$component->mediaFields" />
+                    @break
+                    @default
+
+                @endswitch
+                </div>
+            @endforeach
 
             <a href="#" class="signUp flex">
                 <span>Записаться</span>

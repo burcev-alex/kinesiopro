@@ -33,7 +33,7 @@
                 @foreach ($course->blocks as $block)
                     <div>
                         <div class="blockCourse">
-                            <div class="blockCourse__time">{{ $block->start_date->format('d.m.Y') }} - {{ $block->finish_date->format('d.m.Y') }} ({{ $block->diff_day }} дней)</div>
+                            <div class="blockCourse__time">{{ $block->start_date->format('d.m.Y') }} - {{ $block->finish_date->format('d.m.Y') }} ({{ $block->diff_day }} {{trans_choice('день|дня|дней', $block->diff_day)}})</div>
                             <div class="blockCourse__text">{{ $block->title }}</div>
                             <div class="blockCourse__name">{{ $block->teacher->full_name }}</div>
                         </div>

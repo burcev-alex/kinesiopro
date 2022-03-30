@@ -26,6 +26,8 @@ class Lists extends MainComponent
         return view('components.news.lists', [
             "number" => $this->number,
             "list" => $this->list,
+            "title" => $this->title,
+            "type" => $this->type,
         ]);
     }
 }

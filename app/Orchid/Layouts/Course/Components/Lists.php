@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Orchid\Layouts\News\Components;
+namespace App\Orchid\Layouts\Course\Components;
 
-use App\Orchid\Layouts\News\NewsPaperComponent;
-use App\Orchid\Layouts\News\Interfaces\NewsPaperComponentInterface;
+use App\Orchid\Layouts\Course\Interfaces\CourseDesciptionComponentInterface;
+use App\Orchid\Layouts\Course\CourseDesciptionComponent;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 
-class Lists extends NewsPaperComponent implements NewsPaperComponentInterface
+class Lists extends CourseDesciptionComponent implements CourseDesciptionComponentInterface
 {
     public function render(): array
     {

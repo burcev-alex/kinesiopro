@@ -1,7 +1,5 @@
 @isset($text)
-    <div class="textBlock">
-        <p>
+    <div class="paragraf">
         {!! $text !!}
-        </p>
     </div>
 @endisset

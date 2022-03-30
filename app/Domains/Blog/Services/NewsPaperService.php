@@ -78,7 +78,7 @@ class NewsPaperService extends BaseService
      */
     public function showArticleDetails($slug)
     {
-        $news_paper = $this->model->where('slug', $slug)->where('active', true)->get()->first();
+        $news_paper = $this->model->where('slug', $slug)->where('active', true)->with('components')->get()->first();
         if (!$news_paper)
             return null;
 

@@ -15,4 +15,42 @@ return [
 
     'failed' => 'Имя пользователя и пароль не совпадают.',
     'throttle' => 'Слишком много попыток входа. Пожалуйста, попробуйте еще раз через :seconds секунд.',
+
+    
+    
+    'data' => [
+        'name' => 'Имя',
+        'name_placeholder' => 'Александр',
+        'surname' => 'Фамилия',
+        'surname_placeholder' => 'Иванов',
+        'middle_name' => 'По-батькові',
+        'email' => 'E-mail',
+        'password' => 'Пароль*',
+        'password_placeholder' => 'Введите пароль',
+        'new_password' => 'Подтвердить пароль*',
+        'new_password_placeholder' => 'Повторите пароль',
+        'phone' => 'Телефон',
+        'password_confirmation' => 'Подтверждение пароля',
+        'agree_with' => 'Принимаю условия',
+        'public_offert' => 'Публичной оферты',
+        'privacy_policy' => 'Политики конфиденциальности'
+    ],
+
+    'login' => [
+        'authorization' => 'ВХОД',
+        'forgot_password' => 'Забыли пароль?',
+        'signin' => 'ВОЙТИ',
+        'registration' => 'Зарегистрироваться',
+        'or_sign_in_with' => 'Войти с помощью учетной записи в социальной сети'
+    ],
+
+    'registration' => [
+        'title' => 'регистрация',
+        'social' => 'Зарегистрироваться с помощью учетной записи в социальной сети'
+    ],
+
+    'change_password' => [
+        'title' => 'Изменить пароль',
+        'btn' => 'Изменить',
+    ]
 ];

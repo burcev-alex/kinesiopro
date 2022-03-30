@@ -4,6 +4,7 @@ namespace App\Domains\Course\Models\Traits\Relationship;
 use App\Domains\Category\Models\Category;
 use App\Domains\Course\Models\Course;
 use App\Domains\Course\Models\CourseBlock;
+use App\Domains\Course\Models\CourseDesciptionComponent;
 use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
@@ -24,6 +25,11 @@ trait CourseRelationship {
     public function blocks()
     {
         return $this->hasMany(CourseBlock::class, 'course_id', 'id')->orderBy('sort');
+    }
+
+    public function components()
+    {
+        return $this->hasMany(CourseDesciptionComponent::class, 'course_id', 'id')->with('component')->orderBy('sort');
     }
 
     public function property_values()

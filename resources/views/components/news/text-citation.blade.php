@@ -1,14 +1,10 @@
 @if (isset($text) || isset($autor))
     @isset($text)
-        <div class="left-col">
-            <div class="text">
-                {!! $text !!}
-            </div>
+        <div class="paragraf">
+            {!! $text !!}
         </div>
     @endisset
     @isset($autor)
-        <div class="right-col">
-            <p class="text">{{ $autor }}</p>
-        </div>
+        <p class="text">{{ $autor }}</p>
     @endisset
 @endif

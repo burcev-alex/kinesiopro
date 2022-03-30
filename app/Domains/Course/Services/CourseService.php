@@ -63,6 +63,7 @@ class CourseService extends BaseService
                     });
                 },
                 'teachers',
+                'components',
                 'blocks'
             ])->get();
             

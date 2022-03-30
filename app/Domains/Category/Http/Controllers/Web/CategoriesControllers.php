@@ -81,7 +81,7 @@ class CategoriesControllers extends Controller {
         if(!empty($category_info) && $category_info->meta_h1){
             $seo['h1'] = $category_info->meta_h1;
         } else {
-            $seo['h1'] = __('main.meta.course_tile');
+            $seo['h1'] = __('main.meta.course_h1');
         }
 
         if(!empty($category_info) && $category_info->attachment){

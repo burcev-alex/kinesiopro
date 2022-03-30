@@ -132,8 +132,8 @@ return [
     */
 
     'template' => [
-        'header' => null,
-        'footer' => null,
+        'header' => 'dashboard.brand.header',
+        'footer' => 'dashboard.brand.footer',
     ],
 
     /*

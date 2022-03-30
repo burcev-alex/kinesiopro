@@ -83,6 +83,7 @@ class CardControllers extends Controller {
         return view('pages.course.card', [
             'seo' => $seo,
             'course' => $course,
+            'components' => $course->components,
             'generalProperties' => $this->coursePropertiesService->getGeneralProperties($course),
             'fullProperties' => $this->coursePropertiesService->getFullListDescription($course)
         ]);

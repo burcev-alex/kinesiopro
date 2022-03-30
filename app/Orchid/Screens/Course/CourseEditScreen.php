@@ -1,13 +1,15 @@
 <?php
 namespace App\Orchid\Screens\Course;
 
+use App\Domains\Blog\Models\Component;
 use App\Domains\Course\Http\Requests\OrchidCourseRequest;
 use App\Domains\Course\Models\Course;
 use App\Domains\Course\Models\CourseBlock as AppCourseBlock;
+use App\Domains\Course\Models\CourseDesciptionComponent as AppCourseDesciptionComponent;
 use App\Orchid\Layouts\Course\CourseBlock;
+use App\Orchid\Layouts\Course\CourseDesciptionComponent;
 use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Services\CourseOrchidService;
-use App\Orchid\Layouts\Course\CourseDescriptionRows;
 use App\Orchid\Layouts\Course\CourseMainRows;
 use App\Orchid\Layouts\Course\CourseMarketRows;
 use App\Orchid\Layouts\Course\CoursePropsRows;
@@ -21,6 +23,7 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\ModalToggle;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Support\Facades\Toast;
 
 class CourseEditScreen extends Screen
@@ -34,6 +37,7 @@ class CourseEditScreen extends Screen
     public $service;
     
     public $blocks;
+    public $components;
 
     /**
      * Display header description.
@@ -53,6 +57,7 @@ class CourseEditScreen extends Screen
     {
         $this->data = $course;
         $this->blocks = $course->blocks;
+        $this->components = $course->components;
 
         $this->name = $course != null ? $course->name : "";
         
@@ -61,6 +66,7 @@ class CourseEditScreen extends Screen
             'category_main' => $course->category_id ? $course->category_id : null,
             'properties' => $course->properties,
             'blocks' => $course->blocks,
+            'components' => $course->components,
             'property_values' => $course->property_values
         ];
     }
@@ -86,12 +92,27 @@ class CourseEditScreen extends Screen
                 ->method('save')
                 ->icon('save'),
 
-            Button::make('Добавить блок')
-                ->method('addblock')
-                ->icon('plus-alt'),
+            DropDown::make('Блоки курса')
+                ->slug('sub-menu-block')
+                ->icon('code')
+                ->list([
+                    Button::make('Добавить блок')
+                        ->method('addblock')
+                        ->icon('plus-alt'),
 
-            ModalToggle::make('Удалить блок')->method('deleteblock')->modal('deleteblock')->icon('trash')->canSee($this->blocks->count() > 0),
-
+                    ModalToggle::make('Удалить блок')->method('deleteblock')->modal('deleteblock')->icon('trash')->canSee($this->blocks->count() > 0),
+            ]),
+            
+            DropDown::make('Детальное описание')
+            ->slug('sub-menu-descriptionn')
+            ->icon('code')
+            ->list([
+                ModalToggle::make('Добавить описание')
+                    ->modal('addcomponent')
+                    ->method('addcomponent')
+                    ->icon('plus-alt'),
+                ModalToggle::make('Удалить описание')->method('deletecomponent')->modal('deletecomponent')->icon('trash')->canSee($this->components->count() > 0),
+            ]),
             Button::make('Удалить')
                 ->method('remove')
                 ->icon('close')
@@ -105,17 +126,36 @@ class CourseEditScreen extends Screen
      */
     public function layout(): array
     {
-        $options = [];
-        $blocks = $this->blocks->map(function ($item) use (&$options) {
-            $options[$item->id] = "Блок " . $item->sort . " - " . $item->title;
+        $optionsBlock = [];
+        $blocks = $this->blocks->map(function ($item) use (&$optionsBlock) {
+            $optionsBlock[$item->id] = "Блок " . $item->sort . " - " . $item->title;
             $block = new CourseBlock($item);
             return $block->accordionField();
         })->toArray();
 
+        $optionsComponent = [];
+        $components = $this->components->map(function ($item) use (&$optionsComponent) {
+            $optionsComponent[$item->id] = "Компонент " . $item->sort . " - " . $item->component->name;
+            $component = new CourseDesciptionComponent($item);
+            return $component->accordionField();
+        })->toArray();
+
         return [
+            Layout::modal('addcomponent', [
+                Layout::rows([
+                    Select::make('component')->fromModel(Component::class, 'name')->value([]),
+                    Input::make('item.id')->hidden()
+                ])
+
+            ])->title('Выберите компонент'),
+            Layout::modal('deletecomponent', [
+                Layout::rows([
+                    Select::make('component')->options($optionsComponent)
+                ])
+            ])->title('Подтвердите удаление'),
             Layout::modal('deleteblock', [
                 Layout::rows([
-                    Select::make('block')->options($options)
+                    Select::make('block')->options($optionsBlock)
                 ])
             ])->title('Подтвердите удаление'),
             Layout::modal('remove', [])->title('Подтвердите удаление'),
@@ -128,9 +168,7 @@ class CourseEditScreen extends Screen
                     CoursePropsRows::class
                 ],
                 'Блоки курса' => $blocks,
-                'Детальное описание' => [
-                    CourseDescriptionRows::class
-                ],
+                "Детальное описание" => $components,
                 'SEO' => [
                     CourseSeoRows::class
                 ]
@@ -157,6 +195,35 @@ class CourseEditScreen extends Screen
     {
         $block = AppCourseBlock::find($request->block);
         $block->delete();
+        return redirect()->back();
+    }
+
+    public function addcomponent(Request $request)
+    {
+        $component = Component::find($request->component);
+        $fields = [];
+        $item = $request->item['id'];
+
+        foreach ($component->fields as $key => $value) {
+            $fields[$value] = '';
+        }
+
+        AppCourseDesciptionComponent::create([
+            "course_id" => $item,
+            "component_id" => $component->id,
+            "sort" => 0,
+            "fields" => $fields
+        ]);
+
+        Toast::success('Вы успешно создали новый компонент описания - ' . $component->name);
+        return redirect()->back();
+    }
+
+
+    public function deletecomponent(Request $request)
+    {
+        $component = AppCourseDesciptionComponent::find($request->component);
+        $component->delete();
         return redirect()->back();
     }
 
