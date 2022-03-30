@@ -166,6 +166,8 @@ $(document).on('click', '.sendFormBtn', function (e) {
                 removePreloader();
                 console.log(response);
                 unblockButton(button);
+
+                document.location = '/';
                 
             },
             error: function (response) {

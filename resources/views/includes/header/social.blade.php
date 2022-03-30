@@ -30,11 +30,11 @@
     </form>
 
     @if (Auth::check())
-        <a href="/personal/" class="perAccount flex">
+        <a href="{{ route('logout') }}" class="perAccount flex">
             <span>Личный кабинет</span>
         </a>
     @else
-        <a href="javascript:;" class="show_autorization_popup perAccount flex">
+        <a href="{{ route('register.create') }}" class="show_autorization_popup perAccount flex">
             <span>Авторизация</span>
         </a>
     @endif
