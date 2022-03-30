@@ -11,7 +11,7 @@ trait TeacherAttribute
 
     private function _defaultImage()
     {
-        return '/img/png/photo_not_found.png';
+        return '/images/photo_not_found.png';
     }
     
     function getAttachmentWebpAttribute()

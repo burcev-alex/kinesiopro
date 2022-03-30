@@ -11,7 +11,7 @@ trait CourseAttribute
 
     private function _defaultImage()
     {
-        return '/img/png/photo_not_found.png';
+        return '/images/photo_not_found.png';
     }
 
     public function getDiffDayAttribute()

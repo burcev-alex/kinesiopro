@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Domains\Podcast\Models\Traits\Attribute;
+namespace App\Domains\Online\Models\Traits\Attribute;
 
-
-use Intervention\Image\ImageManagerStatic as Image;
-use File;
-
-trait PodcastAttribute
+trait OnlineAttribute
 {
 
     private function _defaultImage()
