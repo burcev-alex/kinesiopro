@@ -1,7 +1,7 @@
 <?php
 namespace App\Domains\Course\Models\Traits\Attribute;
 
-use App\Domains\Blog\Models\CourseDesciptionMedia;
+use App\Domains\Course\Models\CourseDesciptionMedia;
 
 trait CourseDesciptionComponentAttribute {
     public function getMediaFieldsAttribute()
