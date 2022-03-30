@@ -40,9 +40,7 @@ export class Pagination {
                             itemsBlock.addClass('empty-block');
                         }
                         
-
                         initSlider(itemsBlock.find('.itemBottom .itemSlider'));
-
 
                         paginationBlock.html(data.pagination.html);
                     } else {
