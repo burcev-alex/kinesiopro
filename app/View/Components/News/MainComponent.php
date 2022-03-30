@@ -40,12 +40,14 @@ class MainComponent extends Component
             foreach ($fields as $key => $value) {
                 if ($key == 'media') {
                     foreach ($value as $attachment) {
-                        $originPath = $attachment->relativeUrl;
-                        
-                        // подмена origin на webp , если поддерживается формат
-                        if (isSupportWebP() && !empty($originPath)) {
-                            // конвертировать исходник в webp
-                            convertImageToWebP($originPath);
+                        if($attachment){
+                            $originPath = $attachment->relativeUrl;
+                            
+                            // подмена origin на webp , если поддерживается формат
+                            if (isSupportWebP() && !empty($originPath)) {
+                                // конвертировать исходник в webp
+                                convertImageToWebP($originPath);
+                            }
                         }
                     }
 
