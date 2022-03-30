@@ -43,9 +43,12 @@ class RegisteredUserController extends Controller
         if ($user) {
             if (empty($user->password)) {
                 $user->update([
-                    'name' => $data['name'],
-                    'firstname' => $data['name'],
+                    'name' => $data['surname']." ".$data['firstname'],
+                    'firstname' => $data['firstname'],
                     'surname' => $data['surname'],
+                    'work' => $data['work'],
+                    'position' => $data['position'],
+                    'country' => $data['country'],
                     'phone' => $data['phone'],
                     'password' => $data['password']
                 ]);
@@ -58,11 +61,14 @@ class RegisteredUserController extends Controller
             try {
                 DB::beginTransaction();
                 $user = User::create([
-                    'name' => $data['name'],
-                    'firstname' => $data['name'],
+                    'name' => $data['surname']." ".$data['firstname'],
+                    'firstname' => $data['firstname'],
                     'surname' => $data['surname'],
                     'email' => $email,
                     'phone' => $data['phone'],
+                    'work' => $data['work'],
+                    'position' => $data['position'],
+                    'country' => $data['country'],
                     'password' => $data['password'],
                 ]);
                 event(new Registered($user));
