@@ -132,7 +132,7 @@
 
                     <div class="teachersListRight">
                         <span>{{ $teacher->full_name }}</span>
-                        <p>{{ $teacher->description }}</p>
+                        <p>{!! $teacher->description !!}</p>
                     </div>
                 </li>
                 @endforeach

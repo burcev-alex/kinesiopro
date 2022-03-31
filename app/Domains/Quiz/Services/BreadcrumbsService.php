@@ -15,11 +15,11 @@ final class BreadcrumbsService
     public static function card($item)
     {
         Breadcrumbs::for(
-            'quiz.single',
+            'tests.single',
             function (Trail $trail) use($item) {
-                $trail->push('Тесты', route('quiz'));
+                $trail->push('Тесты', route('tests'));
 
-                $trail->push($item->title, route('quiz.single', ['slug' => $item->slug]));
+                $trail->push($item->title, route('tests.single', ['slug' => $item->slug]));
             }
         );
     }

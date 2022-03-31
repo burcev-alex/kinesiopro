@@ -25,11 +25,8 @@ class QuizItemController
      */
     public function index(Request $request, $param1 = null)
     {
-        list($page) = $this->routerService->detectParameters([$param1]);
+        list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
 
-        // всего кол-во статей
-        $countArticles = $this->quizService->where('active', true)->get()->count();
-        
         if(!$page){
             $page = 1;
         }
@@ -62,7 +59,6 @@ class QuizItemController
             'meta' => $meta,
             'articles' => $articles,
             'pagination' => $pagination,
-            'count' => $countArticles,
             'blockId' => 'quiz-page-block'
         ]);
     }
@@ -83,17 +79,6 @@ class QuizItemController
         return view('pages.quiz.quiz-single', [
             'quiz_item' => $quiz_item,
             'components' => $components
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function count(Request $request)
-    {
-        return response()->json([
-            'count' => $this->quizService->where('active', true)->get()->count()
         ]);
     }
 }

@@ -30,6 +30,13 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             $trail->push(Lang::get('breadcrumbs.blog'), route('blog'))
         );
 
+        // Тесты
+        Breadcrumbs::for(
+            'tests',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.tests'), route('tests'))
+        );
+
         // Контакты
         Breadcrumbs::for(
             'contacts',

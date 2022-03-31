@@ -138,6 +138,14 @@ class QuizItemEditScreen extends Screen
             $quiz_item_model->active = 1;
         }
 
+        if(is_array($quiz_item['me']['attachment_id']) && count($quiz_item['me']['attachment_id']) > 0){
+            $quiz_item['me']['attachment_id'] = current($quiz_item['me']['attachment_id']);
+        }
+
+        if(is_array($quiz_item['me']['detail_attachment_id']) && count($quiz_item['me']['detail_attachment_id']) > 0){
+            $quiz_item['me']['detail_attachment_id'] = current($quiz_item['me']['detail_attachment_id']);
+        }
+
         $quiz_item_model->fill($quiz_item['me'])->save();
         
         

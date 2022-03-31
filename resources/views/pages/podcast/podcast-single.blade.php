@@ -17,7 +17,7 @@
     <main class="mainContent width flex">
         <div class="mainRight">
             <div class="mainBlock">
-                <p> {{ $podcast->description }} </p>
+                <div> {!! $podcast->description !!} </div>
             </div>
         </div>
     </main>
