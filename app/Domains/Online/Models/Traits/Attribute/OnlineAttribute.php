@@ -2,6 +2,8 @@
 
 namespace App\Domains\Online\Models\Traits\Attribute;
 
+use Illuminate\Support\Carbon;
+
 trait OnlineAttribute
 {
 
@@ -19,11 +21,9 @@ trait OnlineAttribute
         return '/images/photo_not_found.png';
     }
 
-    public function getPublishDateAttribute()
+    public function getStartDateFormatAttribute()
     {
-        $date_m = array('Null', 'янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек');
-
-        return $this->publication_date ? $this->publication_date->format("d")." ".$date_m[$this->publication_date->format("n")] : '';
+        return $this->start_date->translatedFormat('d F Y');
     }
     
     function getAttachmentWebpAttribute()

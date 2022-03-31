@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,9 @@ class LocaleServiceProvider extends ServiceProvider
     public function boot()
     {
         setAllLocale(config('app.locale'));
+        
+        Carbon::setLocale(config('app.locale'));
+        setlocale(LC_TIME, config('app.locale'));
 
         $this->registerBladeExtensions();
     }

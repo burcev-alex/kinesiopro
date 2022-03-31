@@ -242,7 +242,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
             $list[] = [
                 'value' => $value,
-                'title' => $date_m[$course->start_date->format('n')].' '.$course->start_date->format('Y'),
+                'title' => $course->start_date->translatedFormat('F Y'),
                 'selected' => false,
                 'available' => false
             ];

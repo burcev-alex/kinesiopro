@@ -15,10 +15,7 @@ trait PodcastAttribute
     }
 
     public function getPublishDateAttribute()
-    {
-        $date_m = array('Null', 'янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек');
-
-        return $this->publication_date ? $this->publication_date->format("d")." ".$date_m[$this->publication_date->format("n")] : '';
+    {return $this->publication_date ? $this->publication_date->translatedFormat("d M") : '';
     }
     
     function getAttachmentWebpAttribute()
