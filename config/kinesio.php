@@ -134,4 +134,8 @@ return [
     'internal_api_key' => env('INTERNAL_API_KEY', 'sS3DTvBKpFQ'),
 
     'testing' => env('APP_TESTING', false),
+
+    'sberbank' => [
+        'TOKEN' => env('SBERBANK_TOKEN', '')
+    ]
 ];

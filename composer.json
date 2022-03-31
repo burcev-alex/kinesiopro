@@ -11,12 +11,14 @@
     "require": {
         "php": "^7.4|^8.0",
         "arcanedev/log-viewer": "8.x",
+        "davidnadejdin/laravelrobokassa": "^1.0",
         "davmixcool/laravel-meta-manager": "^1.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "jamesmills/laravel-timezone": "^1.9",
+        "kenvel/laravel-sberbank": "dev-master",
         "langleyfoxall/laravel-nist-password-rules": "^4.1",
         "laravel/framework": "^8.40",
         "laravel/passport": "^10.1",
@@ -92,11 +94,13 @@
                 "Riverskies\\Laravel\\MobileDetect\\MobileDetectServiceProvider",
                 "Davmixcool\\MetaManager\\MetaServiceProvider",
                 "Intervention\\Image\\ImageServiceProvider",
+                "Davidnadejdin\\LaravelRobokassa\\RobokassaServiceProvider",
                 "Spatie\\Permission\\PermissionServiceProvider"
             ],
             "aliases": {
                 "MobileDetect": "Riverskies\\Laravel\\MobileDetect\\Facades\\MobileDetect",
                 "Image": "Intervention\\Image\\Facades\\Image",
+                "Robokassa": "Davidnadejdin\\LaravelRobokassa\\Robokassa",
                 "Debugbar": "Barryvdh\\Debugbar\\Facades\\Debugbar"
             },
             "dont-discover": []
