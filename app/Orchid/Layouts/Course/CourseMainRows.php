@@ -9,7 +9,7 @@ use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Repository;
@@ -59,6 +59,11 @@ class CourseMainRows extends Rows
             Input::make('course.slug')->title('URL')->required(),
             
             Input::make('course.price')->title('Цена')->required(),
+            
+            Group::make([
+                DateTimer::make('course.start_date')->title('Дата начала')->required(),
+                DateTimer::make('course.finish_date')->title('Дата окончания'),
+            ]),
 
             Group::make([
                 Select::make('course.category_id')

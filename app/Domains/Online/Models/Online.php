@@ -9,10 +9,12 @@ use Database\Factories\OnlineFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
+use Orchid\Filters\Filterable;
 
 class Online extends Model
 {
-    use HasFactory,
+    use HasFactory, 
+    Filterable, 
     OnlineRelationship,
     OnlineAttribute,
     OnlineScope, 

@@ -1,30 +1,30 @@
 <?php
 
 
-namespace App\Orchid\Screens\Course;
+namespace App\Orchid\Screens\Online;
 
 
-use App\Domains\Course\Models\Course;
-use App\Orchid\Layouts\Course\CourseListLayout;
-use App\Orchid\Screens\Filters\CourseFiltersLayout;
+use App\Domains\Online\Models\Online;
+use App\Orchid\Layouts\Online\OnlineListLayout;
+use App\Orchid\Screens\Filters\OnlineFiltersLayout;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 
-class CourseListScreen extends Screen
+class OnlineListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Очные курсы';
+    public $name = 'Онлайн-курсы';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Список всех очных курсов';
+    public $description = 'Список всех онлайн-курсов';
 
     /**
      * Query data.
@@ -34,7 +34,7 @@ class CourseListScreen extends Screen
     public function query(): array
     {
         return [
-            'courses' => Course::filters()->filtersApplySelection(CourseFiltersLayout::class)->orderBy('id', 'DESC')->paginate(10)
+            'onlines' => Online::filters()->filtersApplySelection(OnlineFiltersLayout::class)->orderBy('id', 'DESC')->paginate(10)
         ];
     }
 
@@ -46,7 +46,7 @@ class CourseListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Создать курс')->icon('pencil')->route('platform.course.create')
+            Link::make('Создать онлайн-курс')->icon('pencil')->route('platform.online.create')
         ];
     }
 
@@ -58,8 +58,8 @@ class CourseListScreen extends Screen
     public function layout(): array
     {
         return [
-            CourseFiltersLayout::class,
-            CourseListLayout::class
+            OnlineFiltersLayout::class,
+            OnlineListLayout::class
         ];
     }
 }

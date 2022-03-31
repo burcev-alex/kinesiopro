@@ -38,6 +38,10 @@ use App\Orchid\Screens\Course\CourseEditScreen;
 use App\Orchid\Screens\Course\CourseListScreen;
 use App\Orchid\Screens\Course\CourseCreateScreen;
 
+use App\Orchid\Screens\Online\OnlineEditScreen;
+use App\Orchid\Screens\Online\OnlineListScreen;
+use App\Orchid\Screens\Online\OnlineCreateScreen;
+
 use App\Orchid\Screens\News\NewsListScreen;
 use App\Orchid\Screens\News\NewsCreateScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
@@ -61,6 +65,10 @@ use App\Orchid\Screens\Utils\ClearCacheScreen;
 Route::screen('/courses', CourseListScreen::class)->name('platform.course.list');
 Route::screen('/course-create', CourseCreateScreen::class)->name('platform.course.create');
 Route::screen('/courses/{course}/edit', CourseEditScreen::class)->name('platform.course.edit');
+
+Route::screen('/onlines', OnlineListScreen::class)->name('platform.online.list');
+Route::screen('/online-create', OnlineCreateScreen::class)->name('platform.online.create');
+Route::screen('/onlines/{course}/edit', OnlineEditScreen::class)->name('platform.online.edit');
 
 Route::screen('/properties', CoursePropertyListScreen::class)->name('platform.property.list');
 Route::screen('/properties/{property}/edit', CoursePropertyEditScreen::class)->name('platform.property.edit');
