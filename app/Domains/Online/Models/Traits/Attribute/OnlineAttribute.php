@@ -5,6 +5,15 @@ namespace App\Domains\Online\Models\Traits\Attribute;
 trait OnlineAttribute
 {
 
+    /**
+     * Detect price format
+     * @return string
+     */
+    function getPriceFormatAttribute()
+    {
+        return number_format($this->price, 0, '.', ' ');
+    }
+
     private function _defaultImage()
     {
         return '/images/photo_not_found.png';
