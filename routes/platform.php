@@ -52,6 +52,9 @@ use App\Orchid\Screens\Quiz\QuizItemEditScreen;
 
 use App\Orchid\Screens\Utils\ClearCacheScreen;
 
+use App\Orchid\Screens\Orders\OrderShowScreen;
+use App\Orchid\Screens\Orders\OrderListScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -104,6 +107,10 @@ Route::screen('podcasts/list', PodcastListScreen::class)->name('platform.podcast
 Route::screen('podcasts-create', PodcastCreateScreen::class)->name('platform.podcast.create');
 Route::screen('podcasts/edit/{news}', PodcastEditScreen::class)->name('platform.podcast.edit');
 
+
+// Заказы
+Route::screen('order/show/{post?}', OrderShowScreen::class)->name('platform.order.show');
+Route::screen('orders', OrderListScreen::class)->name('platform.orders.list');
 
 // Main
 Route::screen('/main', PlatformScreen::class)

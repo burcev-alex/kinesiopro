@@ -136,6 +136,6 @@ return [
     'testing' => env('APP_TESTING', false),
 
     'sberbank' => [
-        'TOKEN' => env('SBERBANK_TOKEN', '')
+        'token' => env('SBERBANK_TOKEN', 'test')
     ]
 ];
