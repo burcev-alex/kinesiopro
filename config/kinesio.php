@@ -136,6 +136,8 @@ return [
     'testing' => env('APP_TESTING', false),
 
     'sberbank' => [
-        'token' => env('SBERBANK_TOKEN', 'test')
+        'login' => env('SBERBANK_LOGIN', 'admin'),
+        'password' => env('SBERBANK_PASSWORD', '123456'),
+        'token' => env('SBERBANK_TOKEN', 'test123456')
     ]
 ];

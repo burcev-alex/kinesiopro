@@ -53,7 +53,7 @@ class CheckoutService extends BaseService
 
         // определить способ оплаты
         try {
-            $servicePayment = $this->factoryPayment::getPaymentMethod($data['payment']['code']);
+            $servicePayment = $this->factoryPayment::getPaymentMethod($data['order']['payment']);
         }
         catch (\Exception $e) {
             DB::rollBack();
@@ -64,12 +64,8 @@ class CheckoutService extends BaseService
         try {
             $parameters = $data['order'];
             // посчитать общую стоимость заказа
-            $total = 0;
-            $totalVariant = 0;
-            foreach ($data['products'] as $product) {
-                $total = $total + ($product['price'] * $product['qty']);
-                $totalVariant++;
-            }
+            $total = $data['product']['price'];
+            $totalVariant = 1;
 
             if ($total == 0) {
                 throw new GeneralException('В корзине нет товаров!');
@@ -99,12 +95,10 @@ class CheckoutService extends BaseService
                 'phone' => (! empty($userEntity)) ? $userEntity->phone : $parameters['phone'],
                 'email' => (! empty($userEntity)) ? $userEntity->email : $parameters['user_email'],
                 'comment' => '',
-                'payment_method' => array_key_exists('payment', $parameters) ? $parameters['payment']['title'] : '',
+                'payment_method' => $parameters['payment'],
                 'payment_status' => 'waiting', // 'В ожидании оплаты',
                 'promocode' => $parameters['promocode'],
-                'payment' => [
-                    'payment_code' => array_key_exists('payment', $parameters) ? $parameters['payment']['code'] : '-',
-                ]
+                'payment' => []
             ]);
 
             if ($order) {
@@ -113,30 +107,31 @@ class CheckoutService extends BaseService
                 $orderId = 0;
             }
 
-            foreach ($data['products'] as $product) {
-                // свойства товара
-                $property = [];
+            // данные по товару
+            $product = $data['product'];
 
-                $productId = array_key_exists('product_id', $product) ? $product['product_id'] : 0;
-                $type = array_key_exists('type', $product) ? $product['type'] : 'online';
+            // свойства товара
+            $property = [];
 
-                $objProduct = new OrdersItem();
-                $objProduct->order_id = $orderId;
-                $objProduct->quantity = $product['qty'];
-                $objProduct->unit_price = $product['price'];
-                $objProduct->total = ($product['price'] * $product['qty']);
+            $productId = array_key_exists('id', $product) ? $product['id'] : 0;
+            $type = array_key_exists('type', $product) ? $product['type'] : 'online';
 
-                $objProduct->product_id = $productId;
-                $objProduct->product_type = $type;
-                $objProduct->name = $product['title'];
-                $objProduct->property = $property;
+            $objProduct = new OrdersItem();
+            $objProduct->order_id = $orderId;
+            $objProduct->quantity = $product['qty'];
+            $objProduct->unit_price = $product['price'];
+            $objProduct->total = ($product['price'] * $product['qty']);
 
-                $objProduct->save();
-            }
+            $objProduct->product_id = $productId;
+            $objProduct->product_type = $type;
+            $objProduct->name = $product['name'];
+            $objProduct->property = $property;
+
+            $objProduct->save();
 
             $parameters['order_number'] = $order->number;
             $parameters['order_id'] = $orderId;
-            $parameters['products'] = $data['products'];
+            $parameters['product'] = $data['product'];
 
             // генерация ссылки на оплату
             $parameters['external'] = $servicePayment->getPayment($order->toArray());

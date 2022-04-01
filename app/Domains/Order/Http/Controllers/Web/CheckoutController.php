@@ -29,12 +29,15 @@ class CheckoutController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'products' => 'required',
+            'product' => 'required',
+            'product.id' => 'required',
+            'product.price' => 'required',
             'order' => 'required',
-            'order.surname' => 'required|string|regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu',
-            'order.name' => 'required|string|regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu',
+            'order.surname' => 'required|string',
+            'order.name' => 'required|string',
             'order.phone' => 'required',
-            'order.user_email' => 'required'
+            'order.user_email' => 'required',
+            'order.payment' => 'required',
         ]);
 
         if ($validator->fails()) {

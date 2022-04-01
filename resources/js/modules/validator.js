@@ -1,7 +1,7 @@
 import { addPreloader, removePreloader } from './preloader';
 
 // Валидатор
-function formValidator(formName, handler) {
+export function formValidator(formName, handler) {
     $('#' + formName).validate({
         rules: {
             password: {
@@ -109,7 +109,7 @@ function formValidator(formName, handler) {
  * Block button
  * @param button
  */
-function blockButton(button) {
+export function blockButton(button) {
     $(button).prop('disabled', true);
 }
 
@@ -117,12 +117,12 @@ function blockButton(button) {
  * Unblock button
  * @param button
  */
-function unblockButton(button) {
+ export function unblockButton(button) {
     $(button).prop('disabled', false);
 }
 
 // Show error for form element
-function showValidationErrors(form, errors) {
+export function showValidationErrors(form, errors) {
     $(form).find('input, textarea').each(function (key, input) {
         let fieldName = $(input).attr('name'),
             errorBlock = $('#' + fieldName + '-error');

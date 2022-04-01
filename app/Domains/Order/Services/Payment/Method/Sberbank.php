@@ -11,7 +11,9 @@ class Sberbank implements PaymentInterface
     {
         $description = 'Заказ №' . $data['number'];
 
-        $acquiring_url = 'https://securepayments.sberbank.ru';
+        // $acquiring_url = 'https://securepayments.sberbank.ru'; // producton
+        $acquiring_url = 'https://3dsec.sberbank.ru'; // test
+        
         $access_token  = config('kinesio.sberbank.token');
 
         $sberbank = new SberbankInterface($acquiring_url, $access_token);

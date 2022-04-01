@@ -8,6 +8,20 @@ trait OnlineAttribute
 {
 
     /**
+     * @return string
+     */
+    function getTypeTitleAttribute()
+    {
+        $arr = [
+            'marafon' => 'марафон',
+            'course' => 'курс',
+            'conference' => 'конференцию',
+        ];
+
+        return $arr[$this->type];
+    }
+
+    /**
      * Detect price format
      * @return string
      */
