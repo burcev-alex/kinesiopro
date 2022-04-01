@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OnlineSeeder::class);
         $this->call(OnlinesDescriptionSeeder::class);
         $this->call(OrderSeeder::class);
+        $this->call(QuizItemSeeder::class);
+        $this->call(QuizItemQuestionsSeeder::class);
         
         // Model::reguard();
         Artisan::call('orchid:admin admin admin@kinesiopro.ru 123456');

@@ -13,12 +13,14 @@
     <h1 class="width titleH1">{{ __('main.meta.quiz_h1') }}</h1>
 
     <!-- Start quizContent-->
-    <ul class="blogItem flex quiz width" id="quiz-grid-block">
-        @include('includes.quiz.grid', ['articles' => $articles])
-    </ul>
-    
-    <div class="pagination-block">
-        @include('includes.pagination', ['block' => 'quiz-grid-block'])
+    <div class="width">
+        <ul class="blogItem flex testContent" id="quiz-grid-block">
+            @include('includes.quiz.grid', ['articles' => $articles])
+        </ul>
+        
+        <div class="pagination-block">
+            @include('includes.pagination', ['block' => 'quiz-grid-block'])
+        </div>
     </div>
     <!-- End quizContent-->
 @endsection

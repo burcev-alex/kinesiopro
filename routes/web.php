@@ -16,5 +16,4 @@ Route::post('/feedback/', [FeedbackController::class, "save"])->name("feedback.s
 Route::get('/feedback/', [FeedbackController::class, "index"])->name("feedback.form");
 Route::get('/contacts/', [ContactController::class, 'index'])->name('contacts');
 
-
 includeRouteFiles(__DIR__ . '/frontend/');

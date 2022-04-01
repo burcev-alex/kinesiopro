@@ -12,7 +12,7 @@ class SimpleElement extends ItemQuestion implements ItemQuestionInterface
 {
     public function render(): array
     {
-        $max = 5;
+        $max = 6;
 
         $fields = $this->question->fields;
         

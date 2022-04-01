@@ -23,13 +23,18 @@
         <div class="mobilBlockBtn">
             <div class="headerRight flex">
                 <div class="mobilBlockBtnBlock flex">
-                    <form action="" class="headerSearch">
-                        <a href="#" class="headerSearch__btn"></a>
-                    </form>
+                    @include('includes.header.search')
 
-                    <a href="#" class="perAccount flex">
-                        <span>Личный кабинет</span>
-                    </a>
+                    @if (Auth::check())
+                        <div class="enter">
+                            <div class="enter__desc">Вы вошли как: <span style="display: none;">3</span></div>
+                            <span class="enter__name">{{ $logged_in_user->name }}</span>
+                        </div>
+                    @else
+                        <a href="{{ route('register.create') }}" class="show_autorization_popup perAccount flex">
+                            <span>Авторизация</span>
+                        </a>
+                    @endif
                 </div>
 
                 <ul class="headerMenu flex">

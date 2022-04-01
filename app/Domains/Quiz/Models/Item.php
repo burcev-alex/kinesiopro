@@ -6,6 +6,8 @@ use App\Domains\Quiz\Models\Traits\Attribute\ItemAttribute;
 use App\Domains\Quiz\Models\Traits\Relationship\ItemRelationship;
 use App\Domains\Quiz\Models\Traits\Scope\ItemScope;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\ItemQuizFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Orchid\Screen\AsSource;
 use Illuminate\Support\Str;
 use Orchid\Attachment\Models\Attachment;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Item extends Model
 {
-    use AsSource, ItemRelationship, ItemAttribute, ItemScope;
+    use HasFactory, AsSource, ItemRelationship, ItemAttribute, ItemScope;
 
     protected $fillable = [
         "title",
@@ -56,4 +58,8 @@ class Item extends Model
         }
     }
 
+    protected static function newFactory()
+    {
+        return ItemQuizFactory::new();
+    }
 }

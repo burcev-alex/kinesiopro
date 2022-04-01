@@ -46,10 +46,6 @@
                 @endswitch
                 </div>
             @endforeach
-
-            <a href="#" class="signUp flex">
-                <span>Записаться</span>
-            </a>
         </div>
 
         <aside class="aside flex aside2">

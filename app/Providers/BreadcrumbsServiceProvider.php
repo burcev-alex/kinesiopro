@@ -62,14 +62,14 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         Breadcrumbs::for(
             'privacy_policy',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.policy'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.policy'), route('privacy_policy'))
         );
 
         // публичная оферта
         Breadcrumbs::for(
             'public_offer',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.public_offer'), route('index'))
+            $trail->push(Lang::get('breadcrumbs.public_offer'), route('public_offer'))
         );
 
         // О компании

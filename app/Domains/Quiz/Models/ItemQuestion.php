@@ -34,4 +34,10 @@ class ItemQuestion extends Model
         return  $this->question->slug;
     }
 
+    public function getMediaFieldsAttribute()
+    {
+        $fields = $this->fields;
+        
+        return $fields;
+    }
 }

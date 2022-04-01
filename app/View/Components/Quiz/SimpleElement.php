@@ -24,7 +24,7 @@ class SimpleElement extends MainQuestion
      */
     public function render()
     {
-        return view('components.news.simple-element', [
+        return view('components.quiz.simple-element', [
             "number" => $this->number,
             "title" => $this->title,
             "list" => $this->list

@@ -19,54 +19,33 @@
         <div>{!! $quiz_item->description !!}</div>
     </div>
 
-    <section class="teachers intensive">
-        <div class="teachersIn width">
-            <h2 class="teachersH2">Интенсивность болевых ощущений</h2>
+    <section class="teachers intensive" data-block="tests-intensive">
+        @foreach ($components as $key=>$component)
+            <div class="teachersIn width" id="anchor{{ $key }}" data-number="{{ $key + 1 }}" style="display:none;">
+            @switch($component->slug)
+                @case('element-comment')
+                    <x-quiz.element-comment :number="$key" :fields="$component->mediaFields" />
+                @break
+                @case('simple-element')
+                    <x-quiz.simple-element :number="$key" :fields="$component->mediaFields" />
+                @break
+                @default
 
-            <form action="" class="formIntensive flex">
-                <div class="formIntensiveRadio">
-                    <label class="blockCheckbox">
-                        <span>Я могу переносить боль без применения болеутоляющих средств</span>
-                        <input type="radio" checked="checked" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="formIntensiveRadio">
-                    <label class="blockCheckbox">
-                        <span>Я испытываю сильную боль, но могу переносить её без применения болеутоляющих средств</span>
-                        <input type="radio" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="formIntensiveRadio">
-                    <label class="blockCheckbox">
-                        <span>Болеутоляющие средства целиком избавляют меня от боли</span>
-                        <input type="radio" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="formIntensiveRadio mb">
-                    <label class="blockCheckbox">
-                        <span>Болеутоляющие средства частично избавляют меня от боли</span>
-                        <input type="radio" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="formIntensiveRadio mb">
-                    <label class="blockCheckbox">
-                        <span>Болеутоляющие средства незначительно облегчают мою боль</span>
-                        <input type="radio" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-
-                <div class="formIntensiveRadio mb">
-                    <label class="blockCheckbox">
-                        <span>Болеутоляющие средства не избавляют меня от боли</span>
-                        <input type="radio" name="radio"><span class="checkmark"></span>
-                    </label>
-                </div>
-            </form>
+            @endswitch
+            </div>
+        @endforeach
+        
+        <div id="total" class="width" style="display: none;">
+            <hr>
+            <h2>Итог: <span class="subtotal">0</span>%</h2>
         </div>
     </section>
-
 @stop
+
+@push('after-scripts')
+    @include('includes.scripts', [
+    'list' => [
+        mix('js/quiz_page_script.js')
+    ],
+    ])
+@endpush
