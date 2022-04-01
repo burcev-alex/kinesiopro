@@ -2410,6 +2410,88 @@
     padding-bottom: 70px;
   }
   
+  .formAutorizaishen {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .formAutorizaishen .formRegisterBlock {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .formAutorizaishen .formRegisterBlock .formRegisterBlockItem {
+    max-width: 49%;
+    width: 100%;
+  }
+  
+  .formAutorizaishen .formRegisterBlock .formRegisterBlockItem a {
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .formAutorizaishen .formRegisterBlock .formRegisterBlockItem a span {
+    color: #FA8151;
+    font: normal normal 14px 'Nunito', sans-serif;
+    border-bottom: 1px solid;
+  }
+  
+  .text-right {
+    float: right;
+  }
+  
+  .fix {
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .enterBtn {
+    border: 2px solid #EB6907;
+    border-radius: 5px;
+    margin-top: 60px;
+    justify-content: center;
+    background: none;
+    max-width: 127px;
+    width: 100%;
+    height: 41px;
+  }
+  
+  .enterBtn span {
+    color: #3A3A3A;
+    font: normal normal 17px 'Nunito', sans-serif;
+  }
+  
+  .center {
+    justify-content: center;
+  }
+  
+  .dontPage {
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .dontPage__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 240px;
+    line-height: 288px;
+    color: #FA8151;
+  }
+  
+  .dontPage__desc{
+    text-align: center;
+    color: #3A3A3A;
+    font: normal normal 18px/27px 'Nunito', sans-serif;
+    margin-bottom: 50px;
+  }
+  
+  .error {
+    color: #be5607 !important;
+    font: normal normal 16px 'Nunito', sans-serif !important;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -3247,7 +3329,7 @@
       margin-bottom: 70px;
     }
   
-    .schedule{
+    .schedule {
       margin-bottom: 70px;
     }
   
@@ -3359,6 +3441,14 @@
       margin-top: 420px;
     }
   
+    .formAutorizaishen .formRegisterBtn {
+      margin-top: 0;
+    }
+  
+    .formAutorizaishen {
+      max-width: 90%;
+    }
+  
     .formRegisterBlockItemPassword {
       position: absolute;
       top: 420px;
@@ -3412,7 +3502,7 @@
       -webkit-flex-wrap: wrap;
     }
   
-    .blogContent{
+    .blogContent {
       margin-bottom: 80px;
     }
   }
@@ -3761,6 +3851,10 @@
   
     .registerPayContent {
       padding: 30px 0;
+    }
+  
+    .formAutorizaishen .formRegisterBlock .formRegisterBlockItem {
+      max-width: 100%;
     }
   }
   
@@ -4178,7 +4272,7 @@
       margin: 0 auto;
     }
   
-    .podcast{
+    .podcast {
       margin: 30px auto 10px;
     }
   
@@ -4215,11 +4309,11 @@
       margin: 0 auto;
     }
   
-    .listPodcast{
+    .listPodcast {
       margin-bottom: 70px;
     }
   
-    .testContent{
+    .testContent {
       margin-bottom: 70px;
     }
   }

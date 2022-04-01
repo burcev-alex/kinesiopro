@@ -107,7 +107,7 @@
 
             <form action="{{ route('checkout.save') }}" data-action="async" id="createOrder" method="POST" class="registerPay">
                 @csrf
-                <input type="hidden" name="order[user_id]" value="{{ $logged_in_user->id }}">
+                <input type="hidden" name="order[user_id]" value="{{ $logged_in_user ? $logged_in_user->id : 0 }}">
 
                 <input type="hidden" name="product[id]" value="{{ $online->id }}">
                 <input type="hidden" name="product[type]" value="{{ $online->type }}">
@@ -197,6 +197,7 @@
 @push('after-scripts')
     @include('includes.scripts', [
     'list' => [
+        mix('js/plugins/mask.js'),
         mix('js/online_page_script.js')
     ],
     ])

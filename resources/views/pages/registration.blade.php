@@ -154,3 +154,13 @@
     </section>
     <!--End schedule-->
 @endsection
+
+
+@push('after-scripts')
+    @include('includes.scripts', [
+    'list' => [
+        mix('js/plugins/mask.js'),
+        mix('js/register_page_script.js')
+    ],
+    ])
+@endpush
