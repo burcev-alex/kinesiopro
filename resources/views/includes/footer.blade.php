@@ -1,5 +1,3 @@
-<div class="push"></div>
-
 <!--Start footer-->
 <footer class="footer">
     <div class="footerIn flex width">
