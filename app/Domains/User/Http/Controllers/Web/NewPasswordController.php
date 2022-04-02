@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Domains\User\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -20,9 +20,9 @@ class NewPasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function create(Request $request)
+    public function create(Request $request, $token)
     {
-        return view('auth.reset-password', ['request' => $request]);
+        return view('auth.passwords.reset', ['request' => $request, 'token' => $token]);
     }
 
     /**

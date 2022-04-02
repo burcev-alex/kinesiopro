@@ -85,5 +85,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push(Lang::get('breadcrumbs.login'), route('auth.login'))
         );
+
+        // Восстановление пароля
+        Breadcrumbs::for(
+            'password.create',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.fogot-password'), route('password.create'))
+        );
     }
 }

@@ -10,6 +10,17 @@ use Illuminate\Validation\ValidationException;
 
 class PasswordResetLinkController extends Controller
 {
+    
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('auth.passwords.email');
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
