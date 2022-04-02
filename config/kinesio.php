@@ -29,8 +29,8 @@ return [
         ],
 
         'middleware' => [
-            'confirm' => 'password.confirm:frontend.auth.password.confirm',
-            'verified' => 'verified:frontend.auth.verification.notice',
+            'confirm' => 'password.confirm:auth.password.confirm',
+            'verified' => 'verified:auth.verification.notice',
         ],
 
         'user' => [

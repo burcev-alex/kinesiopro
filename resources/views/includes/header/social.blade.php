@@ -33,7 +33,7 @@
             <span class="enter__name">{{ $logged_in_user->name }}</span>
         </div>
     @else
-        <a href="{{ route('register.create') }}" class="show_autorization_popup perAccount flex">
+        <a href="{{ route('auth.login') }}" class="show_autorization_popup perAccount flex">
             <span>Авторизация</span>
         </a>
     @endif

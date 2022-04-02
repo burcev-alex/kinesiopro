@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Please confirm your password before continuing.'))
 
@@ -11,7 +11,7 @@
                     </x-slot>
 
                     <x-slot name="body">
-                        <x-forms.post :action="route('frontend.auth.password.confirm')">
+                        <x-forms.post :action="route('auth.password.confirm')">
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">@lang('Password')</label>
 

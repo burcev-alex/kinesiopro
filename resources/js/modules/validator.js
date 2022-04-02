@@ -1,7 +1,7 @@
 import { addPreloader, removePreloader } from './preloader';
 
 // Валидатор
-export function formValidator(formName, handler) {
+function formValidator(formName, handler) {
     $('#' + formName).validate({
         rules: {
             password: {
@@ -122,7 +122,7 @@ export function blockButton(button) {
 }
 
 // Show error for form element
-export function showValidationErrors(form, errors) {
+function showValidationErrors(form, errors) {
     $(form).find('input, textarea').each(function (key, input) {
         let fieldName = $(input).attr('name'),
             errorBlock = $('#' + fieldName + '-error');
@@ -146,7 +146,7 @@ export function showValidationErrors(form, errors) {
 
 // Валидация форм
 $(document).on('click', '.sendFormBtn', function (e) {
-    // e.preventDefault();
+    e.preventDefault();
     let formID = $(this).closest('form').attr('id'),
         button = $(this);
     formValidator(formID, function (form) {
@@ -185,6 +185,65 @@ $(document).on('click', '.sendFormBtn', function (e) {
                 }
 
                 if (response.status === 422 && formID != 'passwordRecoveryForm') {
+                    let showErrors = function(form, errors){
+                        $(form).find('input, textarea').each(function (key, input) {
+                            let fieldName = $(input).attr('name'),
+                                errorBlock = $('#' + fieldName + '-error');
+                                
+                            if (errors[fieldName]) {
+                                if (errorBlock.length !== 0) {
+                                    errorBlock.css('display', 'block');
+                                    errorBlock.text(errors[fieldName][0]);
+                                } else {
+                                    $(input).append('<span id="' + fieldName + '-error" class="error">' + errors[fieldName][0] + '</span>')
+                                    $(input).click(function (e) {
+                                        // Add event to remove error
+                                        $(this).find('#' + fieldName + '-error').remove();
+                                        $(this).unbind('click');
+                                    })
+                                }
+                            } else if (errorBlock.length !== 0) {
+                                errorBlock.text('');
+                            }
+                        })
+                    }
+                    showErrors(form, response.responseJSON.errors);
+                } else {
+                    console.error(response.responseJSON.message);
+                }
+                unblockButton(button)
+            }
+        })
+    })
+})
+
+// авторизация
+$('#autorization[data-action="async"]').on('submit', function (e) {
+    e.preventDefault();
+    let formID = $(this).attr('id'),
+        button = $(this);
+    formValidator(formID, function (form) {
+        addPreloader();
+
+        // After form passed validation
+        blockButton(button);
+        $.post({
+            url: $(form).attr('action'),
+            data: $(form).serializeArray(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                removePreloader();
+
+                unblockButton(button);
+
+                document.location = "/";
+                
+            },
+            error: function (response) {
+                removePreloader();
+                if (response.status === 422) {
                     showValidationErrors(form, response.responseJSON.errors);
                 } else {
                     console.error(response.responseJSON.message);

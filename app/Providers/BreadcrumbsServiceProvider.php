@@ -78,5 +78,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push(Lang::get('breadcrumbs.about'), route('contacts'))
         );
+
+        // Авторизация
+        Breadcrumbs::for(
+            'auth.login',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.login'), route('auth.login'))
+        );
     }
 }

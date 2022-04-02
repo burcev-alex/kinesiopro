@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Reset Password'))
 
@@ -11,7 +11,7 @@
                     </x-slot>
 
                     <x-slot name="body">
-                        <x-forms.post :action="route('frontend.auth.password.email')">
+                        <x-forms.post :action="route('auth.password.email')">
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">@lang('E-mail Address')</label>
 

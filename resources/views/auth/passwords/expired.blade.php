@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Your password has expired.'))
 
@@ -11,7 +11,7 @@
                     </x-slot>
 
                     <x-slot name="body">
-                        <x-forms.patch :action="route('frontend.auth.password.expired.update')">
+                        <x-forms.patch :action="route('auth.password.expired.update')">
                             <div class="form-group row">
                                 <label for="current_password" class="col-md-4 col-form-label text-md-right">@lang('Current Password')</label>
 

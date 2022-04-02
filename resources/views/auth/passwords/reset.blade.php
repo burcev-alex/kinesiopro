@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Reset Password'))
 
@@ -11,7 +11,7 @@
                     </x-slot>
 
                     <x-slot name="body">
-                        <x-forms.post :action="route('frontend.auth.password.update')">
+                        <x-forms.post :action="route('auth.password.update')">
                             <input type="hidden" name="token" value="{{ $token }}" />
 
                             <div class="form-group row">

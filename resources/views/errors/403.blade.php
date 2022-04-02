@@ -1,4 +1,4 @@
-@extends('layouts.error')
+@extends('layouts.app')
 @section('metaLabels')
     @parent
     @include('meta::manager', [
