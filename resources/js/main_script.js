@@ -6,16 +6,18 @@ window.axios.defaults.headers.common['x-apikey'] = '123456';
 let langPrefix = $('html').attr('lang') === 'ru' ? '/ru' : '';
 let token = $('meta[name="csrf-token"]').attr('content');
 
-require('./modules/validator');
+import { Validator } from './modules/validator';
 
 let isMobile;
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) || $(window).width() <= 991) {
     isMobile = true;
 } else isMobile = false;
 
-
-
 $(document).ready(function () {
+    
+    // валидация форм
+    let validator = new Validator();
+
     $('.navMenu__active > a').on('click', function (event) {
         event.preventDefault();
     });

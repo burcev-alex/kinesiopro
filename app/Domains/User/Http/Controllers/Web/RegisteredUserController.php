@@ -16,6 +16,16 @@ use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('guest', [
+        //     'except' => [
+        //         'logout',
+        //         'switchLogout',
+        //     ],
+        // ]);
+    }
+
     /**
      * @param RequestUserRegister $request
      * @return \Illuminate\Http\JsonResponse

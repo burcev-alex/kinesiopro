@@ -15,13 +15,13 @@
             <div class="formRegisterBlock flex">
                 <div class="formRegisterBlockItem">
                     <label for="email">E-mail <span>*</span></label>
-                    <input type="text" id="email" name="email" value="{{ old('email') }}" required>
+                    <input type="text" id="email" name="email" value="{{ old('email') }}">
                     <a href="{{ route('password.create') }}"><span>Забыли пароль?</span></a>
                 </div>
 
                 <div class="formRegisterBlockItem">
                     <label for="password">Пароль <span>*</span></label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password">
                     <a href="{{ route('register.create') }}" class="text-right"><span>Регистрация</span></a>
                 </div>
             </div>

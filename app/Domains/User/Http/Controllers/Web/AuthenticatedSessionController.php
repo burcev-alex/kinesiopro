@@ -15,6 +15,19 @@ use Illuminate\Validation\ValidationException;
 class AuthenticatedSessionController extends Controller
 {
     /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        // $this->middleware('guest', [
+        //     'except' => [
+        //         'logout',
+        //         'switchLogout',
+        //     ],
+        // ]);
+    }
+
+    /**
      * Display the login view.
      *
      * @return \Illuminate\View\View

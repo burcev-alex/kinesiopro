@@ -10,6 +10,18 @@ use Illuminate\Validation\ValidationException;
 
 class PasswordResetLinkController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        // $this->middleware('guest', [
+        //     'except' => [
+        //         'logout',
+        //         'switchLogout',
+        //     ],
+        // ]);
+    }
     
     /**
      * Display the login view.
