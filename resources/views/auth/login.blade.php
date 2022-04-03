@@ -11,6 +11,7 @@
     <!--Start auth-->
     <section class="formRegisterMain">
         <form action="{{ route('login.store') }}" data-action="async" method="POST" class="flex formAutorizaishen" id="autorization">
+            @csrf
             <div class="formRegisterBlock flex">
                 <div class="formRegisterBlockItem">
                     <label for="email">E-mail <span>*</span></label>

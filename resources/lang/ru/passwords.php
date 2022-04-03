@@ -16,5 +16,6 @@ return [
     'sent' => 'На ваш E-mail отправлена инструкция на изменение пароля!',
     'throttled' => 'Please wait before retrying.',
     'token' => 'Ошибочный код изменения пароля.',
+    'password_equal_to_old' => 'Пароль равен старому',
     'user' => 'Не удалось найти пользователя с указанным E-mail.',
 ];

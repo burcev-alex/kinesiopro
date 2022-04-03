@@ -8,6 +8,7 @@
 
     <section class="formRegisterMain">
         <form action="{{ route('password.email') }}" data-action="async" method="POST" class="flex formAutorizaishen" id="passwordFogot">
+            @csrf
             <div class="formRegisterBlock flex">
                 <div class="formRegisterBlockItem">
                     <label for="email">E-mail <span>*</span></label>

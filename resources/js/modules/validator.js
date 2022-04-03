@@ -11,8 +11,11 @@ function formValidator(formName, handler) {
             password_again: {
                 equalTo: "#password"
             },
-            password_confirm: {
+            new_password: {
                 equalTo: "#new_password"
+            },
+            password_confirmation: {
+                equalTo: "#password_confirmation"
             },
             password_confirmation: {
                 equalTo: "#password"
@@ -251,6 +254,39 @@ $('#passwordFogot[data-action="async"]').on('submit', function (e) {
 
                 console.log(response);
                 alert(response.message);
+                
+            },
+            error: function (response) {
+                removePreloader();
+                if (response.status === 422) {
+                    showSimpleErrors(form, response.responseJSON.errors);
+                } else {
+                    console.error(response.responseJSON.message);
+                }
+            }
+        })
+    })
+});
+
+// сброс пароля
+$('#passwordReset[data-action="async"]').on('submit', function (e) {
+    e.preventDefault();
+    let formID = $(this).attr('id');
+    formValidator(formID, function (form) {
+        addPreloader();
+        
+        $.post({
+            url: $(form).attr('action'),
+            data: $(form).serializeArray(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                removePreloader();
+
+                console.log(response);
+                
+                document.location = '/';
                 
             },
             error: function (response) {

@@ -31,7 +31,7 @@ return [
         'new_password' => 'Подтвердить пароль',
         'new_password_placeholder' => 'Повторите пароль',
         'phone' => 'Телефон',
-        'password_confirmation' => 'Подтверждение пароля',
+        'new_password' => 'Подтверждение пароля',
         'agree_with' => 'Принимаю условия',
         'public_offert' => 'Публичной оферты',
         'privacy_policy' => 'Политики конфиденциальности'

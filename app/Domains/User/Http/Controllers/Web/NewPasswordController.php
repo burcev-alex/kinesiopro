@@ -42,9 +42,9 @@ class NewPasswordController extends Controller
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirm', 'token'),
+            $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
-                if (Hash::check($request->password, $user->password)) {
+                if (Hash::check($request->password, $request->password_confirmation)) {
                     throw ValidationException::withMessages([
                         'password' => __('passwords.password_equal_to_old')
                     ]);
