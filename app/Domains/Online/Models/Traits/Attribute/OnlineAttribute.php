@@ -16,6 +16,8 @@ trait OnlineAttribute
             'marafon' => 'марафон',
             'course' => 'курс',
             'conference' => 'конференцию',
+            'webinar' => 'вебинар',
+            'video' => 'видео курс',
         ];
 
         return $arr[$this->type];

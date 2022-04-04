@@ -43,8 +43,52 @@
             </ul>
         </li>
 
-        <li class="navMenu__program">
+        <li class="navMenu__active navMenu__program">
             <a href="{{ route('courses.index') }}"><span>Образовательные программы</span></a>
+
+            <ul class="navMenu{{ $sufix }}In">
+                <li>
+                    <a href="{{ route('courses.index') }}">
+                        <span>Расписание семинаров</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('courses.index') }}">
+                        <span>Базовый курс #RehabTeam</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('online', ['webinar']) }}">
+                        <span>Расписание вебинаров</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('online', ['marafon']) }}">
+                        <span>Расписание марафонов</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('online') }}">
+                        <span>Онлайн конференции</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('online', ['video']) }}">
+                        <span>Видео курсы</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('blog') }}">
+                        <span>Журнальный клуб</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li>

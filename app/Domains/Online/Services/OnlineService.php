@@ -62,9 +62,13 @@ class OnlineService extends BaseService
      * @param int $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCatalog(int $page = 1)
+    public function getCatalog(string $category='',  int $page = 1)
     {  
         $builder = $this->model->active();
+
+        if (!empty($category)) {
+            $builder->where('type', $category);
+        }
 
         $this->attachLimitPagination();
 

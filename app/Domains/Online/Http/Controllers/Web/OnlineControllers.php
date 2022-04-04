@@ -22,16 +22,16 @@ class OnlineControllers extends Controller {
         $this->onlineService = $onlineService;
     }
 
-    public function index(Request $request, string $param1 = '')
+    public function index(Request $request, string $param1 = '', string $param2 = '')
     {
        
-        list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
+        list($category, $filters, $page) = $this->routerService->detectParameters([$param1, '', $param2]);
         
         if(!$page){
             $page = 1;
         }
         
-        $catalog = $this->onlineService->getCatalog($page);
+        $catalog = $this->onlineService->getCatalog($category, $page);
          
         $pagination = $this->routerService->getPagination($catalog->currentPage(), $catalog->lastPage());
 

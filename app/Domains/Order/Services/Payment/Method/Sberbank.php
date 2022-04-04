@@ -3,7 +3,7 @@
 namespace App\Domains\Order\Services\Payment\Method;
 
 use App;
-use Kenvel\Sberbank as SberbankInterface;
+use App\Domains\Order\Services\SberbankInterface;
 
 class Sberbank implements PaymentInterface
 {

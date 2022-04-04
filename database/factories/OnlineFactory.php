@@ -37,6 +37,8 @@ class OnlineFactory extends Factory
         $type = [
             'marafon',
             'course',
+            'webinar',
+            'video',
             'conference'
         ];
 

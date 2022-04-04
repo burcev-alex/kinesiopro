@@ -37,12 +37,14 @@ class OnlineMainRows extends Rows
             Input::make('online.sort')->title('Сортировка')->required(),
 
             Upload::make('images.attachment_id')->title('Картинка анонса')->value($online->attachment_id)->maxFiles(1),
-
+            
             Select::make('online.type')
                     ->options([
                         'marafon' => 'Марафон',
                         'course' => 'Курс',
                         'conference' => 'Конференция',
+                        'webinar' => 'Вебинар',
+                        'video' => 'Видео курс',
                     ])
                     ->title('Тип')
                     ->required(),
