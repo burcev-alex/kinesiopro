@@ -9,7 +9,7 @@
         <li>
             <ul class="buyListIn">
                 <li>
-                    <a href="#">Вебинары </a>
+                    <a href="#">Вебинары</a>
                 </li>
 
                 <li>
@@ -32,16 +32,16 @@
     </ul>
 
     <ul class="profileList">
-        <li>
+        {{-- <li>
             <a href="">Сертификаты</a>
-        </li>
+        </li> --}}
 
         <li>
             <a href="">Уведомления <span>3</span></a>
         </li>
 
         <li>
-            <a href="#">Обратная связь</a>
+            <a href="mailto:kineziopro@gmail.com">Обратная связь</a>
         </li>
     </ul>
 </div>

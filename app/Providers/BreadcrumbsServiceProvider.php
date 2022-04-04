@@ -92,5 +92,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push(Lang::get('breadcrumbs.fogot-password'), route('password.create'))
         );
+
+        // Бонусная программа
+        Breadcrumbs::for(
+            'discount',
+            fn (Trail $trail) =>
+            $trail->push('Бонусная программа', route('discount'))
+        );
     }
 }

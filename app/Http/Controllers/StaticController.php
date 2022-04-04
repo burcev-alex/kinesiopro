@@ -7,10 +7,16 @@ namespace App\Http\Controllers;
  */
 class StaticController
 {
+    public function discount()
+    {
+        return view('pages.discount');
+    }
+
     public function privacyPolicy()
     {
         return view('pages.privacy_policy');
     }
+
     public function publicOffer()
     {
         return view('pages.public_offer');
