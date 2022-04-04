@@ -37,7 +37,7 @@ class CheckoutController extends BaseController
             'order.name' => 'required|string',
             'order.phone' => 'required',
             'order.user_email' => 'required',
-            'order.payment' => 'required',
+            'order.payment' => 'required'
         ]);
 
         if ($validator->fails()) {

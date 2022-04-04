@@ -74,17 +74,10 @@ class OrderShowScreen extends Screen
         $list = [];
 
         $list[] = DropDown::make('Смена статуса')->icon('icon-folder-alt')->list([
-            Button::make('Подтвержден')
-                ->method('set_'.OrderInterface::STATE_CONFIRMED)
-                ->icon('icon-check'),
             ModalToggle::make('Оплачен')
                 ->modal(OrderInterface::STATE_PAID.'Modal')
                 ->method('set_'.OrderInterface::STATE_PAID)
                 ->icon('icon-dollar'),
-            ModalToggle::make('Отправлен')
-                ->modal(OrderInterface::STATE_SHIPPED.'Modal')
-                ->method('set_'.OrderInterface::STATE_SHIPPED)
-                ->icon('icon-paper-plane'),
             Button::make('Выполнен')
                 ->method('set_'.OrderInterface::STATE_COMPLETED)
                 ->icon('icon-like'),
@@ -105,19 +98,6 @@ class OrderShowScreen extends Screen
      */
     public function layout() : array
     {
-        $address = [];
-        if (array_key_exists('city', $this->data['delivery']) && is_array($this->data['delivery']['city']) && array_key_exists('title', $this->data['delivery']['city'])) {
-            $address[] = $this->data['delivery']['city']['title'];
-        }
-        if (array_key_exists('department', $this->data['delivery']) && is_array($this->data['delivery']['city']) && is_array($this->data['delivery']['department']) && array_key_exists('title', $this->data['delivery']['department'])) {
-            $address[] = $this->data['delivery']['department']['title'];
-        }
-        if (array_key_exists('address', $this->data['delivery'])) {
-            $address[] = $this->data['delivery']['address'];
-        }
-        if (array_key_exists('custom_address', $this->data['delivery'])) {
-            $address[] = $this->data['delivery']['custom_address'];
-        }
 
         return [
             Layout::modal('payedModal', [
@@ -134,33 +114,27 @@ class OrderShowScreen extends Screen
                 Layout::rows([
                     Label::make('number')->title('Номер')->value($this->data['number']),
                     Label::make('state')->title('Статус')->value(Order::getStateTitle($this->data['state'])),
-                    Label::make('total')->title('Сумма')->value($this->data['total'].' грн'),
+                    Label::make('total')->title('Сумма')->value($this->data['total'].' руб'),
                     Label::make('created_at')->title('Дата создания')->value($this->data['created_at']),
                     Label::make('completed_at')->title('Дата выполнения')->value($this->data['completed_at']),
                 ])->title('Основная информация'),
                 Layout::rows([
                     Label::make('first_name')->value($this->data['first_name'])->title('Имя'),
                     Label::make('last_name')->value($this->data['last_name'])->title('Фамилия'),
-                    Label::make('second_name')->value($this->data['second_name'])->title('Отчество'),
                     Label::make('phone')->value($this->data['phone'])->title('Телефон'),
                     Label::make('email')->value($this->data['email'])->title('Email')
-                ])->title('Получатель'),
+                ])->title('Покупатель'),
             ]),
             Layout::columns([
                 Layout::rows([
                     Label::make('payment_method')->value($this->data['payment_method'])->title('Способ оплаты'),
-                    Label::make('payment_status')->value($this->data['payment_status'])->title('Статус оплаты'),
-                    Label::make('payment_status')->value($this->data['total'].' грн')->title('Сумма оплаты'),
-                    Label::make('payment_numer')->value(array_key_exists('transactionId', $this->data['payment']) ? $this->data['payment']['transactionId'] : '-')->title('Номер транзакции'),
+                    Label::make('payment_status')->value($this->data['payment_status'])->title('Статус оплаты')
                 ])->title('Оплата'),
                 Layout::rows([
-                    Label::make('delivery_method')->value($this->data['delivery_method'])->title('Способ доставки'),
-                    Label::make('delivery_status')->value($this->data['delivery_status'])->title('Статус доставки'),
-                    Label::make('delivery_address')->value(implode(', ', $address))->title('Адрес'),
-                    Label::make('delivery_ttn')->value(array_key_exists('transactionId', $this->data['delivery']) ? $this->data['delivery']['transactionId'] : '-')->title('ТТН')
-                ])->title('Доставка'),
+                    Input::make('payment_link')->value(array_key_exists('url', $this->data['payment']) ? $this->data['payment']['url'] : '')->title('Ссылка'),
+                ])->title('Метод оплаты'),
             ]),
-            Layout::view('admin.order.detail.products'),
+            Layout::view('platform.order.detail.products'),
             Layout::rows([
                 Label::make('comment')->title('Комментарий клиента')->value($this->data['comment']),
             ])->title('Доп. информация'),
@@ -202,8 +176,7 @@ class OrderShowScreen extends Screen
         $order = Order::find($orderId);
         $order->payment = json_encode(array_merge($data['payment'], ['transactionId' => $arrRequest['payment_numer']]));
         $order->state = OrderInterface::STATE_PAID;
-        $order->payment_status = 'Оплачен';
-        $order->sync_status = 0;
+        $order->payment_status = 'payed';
         $res = $order->save();
 
         if ($res) {
@@ -211,47 +184,6 @@ class OrderShowScreen extends Screen
         } else {
             Alert::warning('Произошла ошибка');
         }
-
-        return redirect()->route('platform.order.show', $item);
-    }
-
-    /**
-     * @param Order $item
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function set_shipped(Order $item, Request $request)
-    {
-        $data = $this->getOrder($item->id);
-        $arrRequest = $request->toArray();
-
-        $orderId = $item->id;
-
-        $order = Order::find($orderId);
-        $order->delivery = json_encode(array_merge($data['delivery'], ['transactionId' => $arrRequest['delivery_numer']]));
-        $order->state = OrderInterface::STATE_SHIPPED;
-        $order->delivery_status = 'Передан в службу доставки';
-        $order->sync_status = 0;
-        $res = $order->save();
-
-        if ($res) {
-            Alert::info('Статус успешно изменен!');
-        } else {
-            Alert::warning('Произошла ошибка');
-        }
-
-        return redirect()->route('platform.order.show', $item);
-    }
-
-    /**
-     * @param Order $item
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function set_confirmed(Order $item)
-    {
-        $this->setState($item->id, OrderInterface::STATE_CONFIRMED);
 
         return redirect()->route('platform.order.show', $item);
     }
@@ -313,7 +245,6 @@ class OrderShowScreen extends Screen
     {
         $order = Order::find($orderId);
         $order->state = $state;
-        $order->sync_status = 0;
         $res = $order->save();
 
         if ($res) {
@@ -325,17 +256,12 @@ class OrderShowScreen extends Screen
 
     protected function getOrder($id)
     {
-        $itemSource = Order::where('id', $id)->with('items', 'user')->get();
+        $itemSource = Order::where('id', $id)->with('items', 'user')->get()->first();
 
-        $data = $itemSource->toArray()[0];
+        $data = $itemSource->toArray();
 
         $data['created_at'] = date('d.m.Y H:i:s', strtotime($data['created_at']));
         $data['completed_at'] = date('d.m.Y H:i:s', strtotime($data['completed_at']));
-
-        foreach ($data['items'] as &$product) {
-            $product['article'] = $product['property']['article'];
-        }
-        unset($product);
 
         return $data;
     }

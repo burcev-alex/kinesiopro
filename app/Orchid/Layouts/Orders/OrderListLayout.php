@@ -33,7 +33,7 @@ class OrderListLayout extends Table
             }),
             
             TD::make('total', 'Сумма')->render(function (Order $item) {
-                return $item->total. " грн";
+                return $item->total. " руб";
             }),
             
             TD::make('state', 'Статус')->render(function (Order $item) {
