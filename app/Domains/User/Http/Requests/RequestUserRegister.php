@@ -21,7 +21,9 @@ class RequestUserRegister extends FormRequest
             'country' => ['required', 'string'],
             'position' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'confirmed', 'min:6']
+            'password' => ['required', 'confirmed', 'min:6'],
+            'scan_id' => '',
+            'avatar_id' => '',
         ];
     }
 

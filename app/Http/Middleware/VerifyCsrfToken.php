@@ -22,6 +22,10 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        '/sberbank/success',
+        '/sberbank/error',
+        '/robokassa/payment',
+        '/robokassa/success',
+        '/robokassa/error'
     ];
 }

@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Orchid\Attachment\File;
 
 class RegisteredUserController extends Controller
 {
@@ -70,7 +73,8 @@ class RegisteredUserController extends Controller
         } else {
             try {
                 DB::beginTransaction();
-                $user = User::create([
+
+                $fields = [
                     'name' => $data['surname']." ".$data['firstname'],
                     'firstname' => $data['firstname'],
                     'surname' => $data['surname'],
@@ -80,8 +84,30 @@ class RegisteredUserController extends Controller
                     'position' => $data['position'],
                     'country' => $data['country'],
                     'password' => $data['password'],
-                ]);
+                ];
+
+                // загрузка аватар
+                if($request->avatar_id){
+                    $uploaded = new UploadedFile($request->avatar_id->path(), md5($email)."_avatar.jpg");
+                    $file = new File($uploaded, 'public');
+                    $attach = $file->load();
+
+                    $fields['avatar_id'] = $attach->id;
+                }
+
+                // загрузка скан.копий документов
+                if($request->scan_id){
+                    $uploaded = new UploadedFile($request->scan_id->path(), md5($email)."_scan.jpg");
+                    $file = new File($uploaded, 'public');
+                    $attach = $file->load();
+
+                    $fields['scan_id'] = $attach->id;
+                }
+
+                $user = User::create($fields);
+                
                 event(new Registered($user));
+                
                 Auth::login($user);
                 DB::commit();
             } catch (\Exception $exception) {

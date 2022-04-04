@@ -19,6 +19,10 @@ class RobokassaControllers extends BaseController
         $this->data = $input = $request->all();
 
         $this->service = new FacadeRobokassa();
+
+        if(!array_key_exists('InvId', $input)){
+            return abort('419');
+        }
         
         $this->order = Order::where('id', $input['InvId'])->get()->first();
     }
@@ -28,6 +32,23 @@ class RobokassaControllers extends BaseController
         if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
         
             // изменение статуса заказа
+            
+            $fields = [
+                'payment_status' => 'payed'
+            ];
+
+            $this->order->update($fields);
+            
+            /**
+             * Array
+                (
+                    [OutSum] => 1541.00
+                    [InvId] => 16
+                    [SignatureValue] => a4487f74d53baf3e8dbbb5ad6bb740c5
+                    [IsTest] => 1
+                    [Culture] => ru
+                ) 
+             */
 
         }
 
@@ -39,6 +60,11 @@ class RobokassaControllers extends BaseController
         if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
         
             // изменение статуса заказа
+            $fields = [
+                'payment_status' => 'payed'
+            ];
+
+            $this->order->update($fields);
 
         }
 

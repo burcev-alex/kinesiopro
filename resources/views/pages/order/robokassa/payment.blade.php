@@ -9,12 +9,5 @@
 @stop
 
 @section('content')
-    <div class="container">
-        <div class="breadCrumbs">
-            @php
-                echo '<pre>'.print_r($data, true).'</pre>';
-            @endphp
-        </div>
-    </div>
     <p>Order payment</p>
 @endsection

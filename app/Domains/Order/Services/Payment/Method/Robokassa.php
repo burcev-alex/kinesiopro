@@ -15,6 +15,7 @@ class Robokassa implements PaymentInterface
         $payment = $service->createPayment($data['id'], $data['total'], $description);
 
         return [
+            'payment_id' => '',
             'url' => $payment->getPaymentUrl()
         ];
     }
