@@ -22,9 +22,9 @@ class SberbankInterface {
      * @param string $acquiring_url like https://securepayments.sberbank.ru
      * @param string $access_token  secure token for sberbank
      */
-     public function __construct(string $acquiring_url, string $access_token) {
-	$this->acquiring_url = $acquiring_url;
-	$this->access_token  = $access_token;
+     public function __construct() {
+	$this->acquiring_url = config('kinesio.sberbank.url');
+	$this->access_token  = config('kinesio.sberbank.token');
         $this->setupUrls();
      }
 

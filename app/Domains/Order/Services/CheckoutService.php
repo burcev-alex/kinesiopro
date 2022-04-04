@@ -136,6 +136,9 @@ class CheckoutService extends BaseService
             // генерация ссылки на оплату
             $parameters['external'] = $servicePayment->getPayment($order->toArray());
 
+            // сохранить идентификатор платежного запроса
+            Order::where('id', $orderId)->update(['payment' => $parameters['external']]);
+
             session()->forget('coupon');
         } catch (\Exception $e) {
             DB::rollBack();

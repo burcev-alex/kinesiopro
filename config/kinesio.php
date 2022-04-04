@@ -136,6 +136,7 @@ return [
     'testing' => env('APP_TESTING', false),
 
     'sberbank' => [
+        'url' => (bool)env('SBERBANK_TEST_MODE', true) ? 'https://3dsec.sberbank.ru' : 'https://securepayments.sberbank.ru',
         'login' => env('SBERBANK_LOGIN', 'admin'),
         'password' => env('SBERBANK_PASSWORD', '123456'),
         'token' => env('SBERBANK_TOKEN', 'test123456')
