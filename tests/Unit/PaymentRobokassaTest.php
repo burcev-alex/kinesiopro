@@ -15,7 +15,7 @@ class PaymentRobokassaTest extends TestCase
     {
         $service = PaymentFactory::getPaymentMethod('robokassa');
 
-        $order = Order::where('id', rand(1, 10))->get()->first();
+        $order = Order::where('id', rand(5, 20))->get()->first();
         
         $responce = $service->getPayment($order->toArray());
 
