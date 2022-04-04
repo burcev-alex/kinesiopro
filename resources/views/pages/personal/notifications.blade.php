@@ -49,7 +49,7 @@
 @push('after-scripts')
     @include('includes.scripts', [
     'list' => [
-        mix('js/profile_page_script.js')
+        '/js/profile_page_script.js'
     ],
     ])
 @endpush
