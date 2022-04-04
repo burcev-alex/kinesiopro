@@ -52,7 +52,7 @@
                 </div>
             @endforeach
 
-            <a href="#" class="signUp flex">
+            <a href="#checkout" class="signUp flex">
                 <span>Записаться</span>
             </a>
         </div>
@@ -111,13 +111,27 @@
                     @endif
                 </ul>
 
-                <a href="#" class="signUp flex">
+                <a href="#checkout" class="signUp flex">
                     <span>Записаться</span>
                 </a>
             </div>
         </aside>
     </main>
     <!--End mainContent-->
+
+    <!-- Start teachers -->
+    <section class="teachers registerPayContent" id="checkout">
+        <div class="teachersIn">
+            <h2 class="teachersH2">Записаться</h2>
+            <div class="payText">Стоимость: {{ $course->price }} рублей.</div>
+
+            @include('includes.personal.checkout', [
+                'type' => 'course',
+                'entity' => $course
+            ])
+        </div>
+    </section>
+    <!-- End teachers -->
 
     <!-- Start teachers -->
     @if($course->teachers->count() > 0)
@@ -155,6 +169,7 @@
 @push('after-scripts')
     @include('includes.scripts', [
     'list' => [
+        mix('js/plugins/mask.js'),
         mix('js/course_page_script.js')
     ],
     ])

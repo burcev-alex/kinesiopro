@@ -21,5 +21,6 @@ return [
     'personal' => [
         'profile' => 'Мои данные',
         'register' => 'Регистрация',
+        'notifications' => 'Уведомления',
     ]
 ];

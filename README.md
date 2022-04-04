@@ -3,6 +3,8 @@
 Список сторонних решений, которые применены в проекте, с ссылками на репозитории:
 
 - [Meta](https://github.com/davmixcool/laravel-meta-manager).
+- [Trailing SlashMeta 1](https://github.com/fsasvari/laravel-trailing-slash).
+- [Trailing SlashMeta 2](https://github.com/xinningsu/laravel-route-trailing-slash).
 
 
 ### Команды Docker.

@@ -45,9 +45,9 @@ class CheckoutController extends BaseController
         }
 
         try {
-            $order = $service->store($input);
-            if (IntVal($order->id) > 0) {
-                return $this->sendResponse($order, 'Item created successfully.');
+            $result = $service->store($input);
+            if (IntVal($result['order_id']) > 0) {
+                return $this->sendResponse($result, 'Item created successfully.');
             } else {
                 throw new GeneralException(__('There was a problem creating this order. Please try again.'));
             }

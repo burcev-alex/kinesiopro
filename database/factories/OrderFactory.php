@@ -37,6 +37,7 @@ class OrderFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'phone' => $this->faker->phoneNumber,
             'payment_method' => $payment[rand(0,1)],
+            'user_id' => 1,
             'payment_status' => 'waiting', // waiting OR payed
             'payment' => [
                 "transactionId" => $this->faker->swiftBicNumber

@@ -27,11 +27,13 @@ export class Checkout {
                 },
                 success: function (response) {
                     removePreloader();
-                    unblockButton(button);
 
                     container.find('.errors').hide().html('');
                     
                     console.log(response);
+
+                    window.open(response.data.external.url, '_blank');
+					window.focus();
 
                     alert('Заказ успешно создан!');
                     

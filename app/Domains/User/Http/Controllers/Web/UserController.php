@@ -29,6 +29,18 @@ class UserController
     {
         return view('pages.personal.user_info', ['user' => new ResourceUser($request->user())]);
     }
+    
+    public function notifications(Request $request)
+    {
+        $list = $request->user()->notifications;
+        
+        $request->user()->notifications->markAsRead();
+
+        return view('pages.personal.notifications', [
+            'user' => new ResourceUser($request->user()),
+            'notifications' => $list->toArray()
+        ]);
+    }
 
     /**
      * @param RequestUserUpdate $requestUserUpdate

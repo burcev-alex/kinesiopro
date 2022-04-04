@@ -37,7 +37,11 @@
         </li> --}}
 
         <li>
-            <a href="">Уведомления <span>3</span></a>
+            <a href="{{ route('profile.notifications') }}">Уведомления 
+                @if($logged_in_user->unreadNotifications->count() > 0) 
+                    <span>{{ $logged_in_user->unreadNotifications->count() }}</span>
+                @endif
+            </a>
         </li>
 
         <li>

@@ -12,4 +12,7 @@ Route::middleware('auth')->group(function () {
 
     // Order endpoints
     Route::get('/orders/', [OrderController::class, 'index'])->name('orders.index');
+
+    // уведомления
+    Route::get('/notifications/', [UserController::class, 'notifications'])->name('profile.notifications');
 });

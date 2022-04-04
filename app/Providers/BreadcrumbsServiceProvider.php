@@ -58,6 +58,13 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             $trail->push(Lang::get('breadcrumbs.personal.profile'), route('profile.index'))
         );
 
+        // Уведомления
+        Breadcrumbs::for(
+            'profile.notifications',
+            fn (Trail $trail) =>
+            $trail->push(Lang::get('breadcrumbs.personal.profile'), route('profile.index'))->push(Lang::get('breadcrumbs.personal.notifications'), route('profile.notifications'))
+        );
+
         // правила конфиденциальности
         Breadcrumbs::for(
             'privacy_policy',

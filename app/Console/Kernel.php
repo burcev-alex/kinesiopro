@@ -16,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\MySqlDump::class
+        Commands\MySqlDump::class,
+        Commands\SiteMap::class,
+        Commands\EnsureQueueListenerIsRunning::class,
     ];
 
     /**
@@ -27,7 +29,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('app:sitemap')->daily();
+        $schedule->command('app:sitemap')->daily();
+        $schedule->command('queue:checkup')->everyFiveMinutes();
     }
 
     /**

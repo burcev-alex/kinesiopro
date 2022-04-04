@@ -43,11 +43,11 @@ class CheckoutService extends BaseService
      *
      * @param  array  $data
      *
-     * @return Order
+     * @return array
      * @throws GeneralException
      * @throws \Throwable
      */
-    public function store(array $data = []): Order
+    public function store(array $data = []): array
     {
         DB::beginTransaction();
 
