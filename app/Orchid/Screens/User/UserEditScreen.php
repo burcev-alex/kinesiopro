@@ -180,6 +180,14 @@ class UserEditScreen extends Screen
         }
 
         $userData['permissions'] = $permissions;
+
+        if(is_array($userData['avatar_id'])){
+            $userData['avatar_id'] = current($userData['avatar_id']);
+        }
+
+        if(is_array($userData['scan_id'])){
+            $userData['scan_id'] = current($userData['scan_id']);
+        }
         
         $user->fill($userData)->save();
 
