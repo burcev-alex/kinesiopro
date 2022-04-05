@@ -30,7 +30,7 @@ class PodcastListScreen extends Screen
     public function query(): array
     {
         return [
-            'podcasts' => Podcast::paginate(15)
+            'podcasts' => Podcast::paginate(15),
         ];
     }
 

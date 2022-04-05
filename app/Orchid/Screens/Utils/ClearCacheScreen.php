@@ -75,6 +75,8 @@ class ClearCacheScreen extends Screen
     }
 
     /**
+     * Clear data
+     *
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -89,6 +91,8 @@ class ClearCacheScreen extends Screen
     }
 
     /**
+     * Clear view
+     *
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -103,6 +107,8 @@ class ClearCacheScreen extends Screen
     }
 
     /**
+     * Clear config
+     *
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse

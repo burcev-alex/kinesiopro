@@ -15,7 +15,7 @@ final class BreadcrumbsService
     {
         Breadcrumbs::for(
             'online.single',
-            function (Trail $trail) use($online) {
+            function (Trail $trail) use ($online) {
                 $trail->push(__('breadcrumbs.online'), route('online'));
 
                 $trail->push($online->title, route('online.single', ['slug' => $online->slug]));

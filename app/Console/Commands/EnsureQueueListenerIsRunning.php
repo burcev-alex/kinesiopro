@@ -35,7 +35,7 @@ class EnsureQueueListenerIsRunning extends Command
      */
     public function handle()
     {
-        if ( ! $this->isQueueListenerRunning()) {
+        if (! $this->isQueueListenerRunning()) {
             $this->comment('Queue listener is being started.');
             $pid = $this->startQueueListener();
             $this->saveQueueListenerPID($pid);
@@ -51,12 +51,11 @@ class EnsureQueueListenerIsRunning extends Command
      */
     private function isQueueListenerRunning()
     {
-        if ( ! $pid = $this->getLastQueueListenerPID()) {
+        if (! $pid = $this->getLastQueueListenerPID()) {
             return false;
         }
 
         $process = exec("ps -p $pid -opid=,cmd=");
-        //$processIsQueueListener = str_contains($process, 'queue:listen'); // 5.1
         $processIsQueueListener = ! empty($process);
 
         return $processIsQueueListener;
@@ -69,7 +68,7 @@ class EnsureQueueListenerIsRunning extends Command
      */
     private function getLastQueueListenerPID()
     {
-        if ( ! file_exists(base_path() . '/storage/queue.pid')) {
+        if (! file_exists(base_path() . '/storage/queue.pid')) {
             return false;
         }
 
@@ -95,7 +94,6 @@ class EnsureQueueListenerIsRunning extends Command
      */
     private function startQueueListener()
     {
-        //$command = 'php ' . base_path() . '/artisan queue:listen --timeout=60 --sleep=5 --tries=3 > /dev/null & echo $!';
         $command = 'php ' . base_path() . '/artisan queue:work --timeout=60 --sleep=5 --tries=3 > /dev/null & echo $!';
         $pid = exec($command);
 

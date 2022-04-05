@@ -7,9 +7,6 @@ use App\Domains\Quiz\Models\Item;
 use App\Domains\Quiz\Models\ItemQuestion as AppItemQuestion;
 use App\Orchid\Layouts\Quiz\ItemQuestion;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
-use Log;
-use Orchid\Alert\Toast as AlertToast;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
@@ -53,7 +50,7 @@ class QuizItemEditScreen extends Screen
         $this->questions = $quiz_item->questions;
         $this->name = $quiz_item->title;
         return [
-            'item' => $quiz_item
+            'item' => $quiz_item,
         ];
     }
 
@@ -69,13 +66,17 @@ class QuizItemEditScreen extends Screen
                 ->icon('save')
                 ->method('save')
                 ->icon('save'),
-            ModalToggle::make('Удалить тест')->method('delete')->modal('delete')->icon('trash'),
+            ModalToggle::make('Удалить тест')->method('delete')
+            ->modal('delete')->icon('trash'),
             ModalToggle::make('Добавить вопрос')
                 ->modal('addquestion')
                 ->method('addquestion')
                 ->icon('plus-alt'),
-            ModalToggle::make('Удалить вопрос')->method('deletequestion')->modal('deletequestion')->icon('trash')->canSee($this->questions->count() > 0),
-            Link::make("Посмотреть")->href(config('app.url') . "/tests/" . $this->quiz_item->slug)->icon('globe-alt')
+            ModalToggle::make('Удалить вопрос')
+            ->method('deletequestion')
+            ->modal('deletequestion')->icon('trash')
+            ->canSee($this->questions->count() > 0),
+            Link::make("Посмотреть")->href(config('app.url') . "/tests/" . $this->quiz_item->slug)->icon('globe-alt'),
         ];
     }
 
@@ -97,7 +98,7 @@ class QuizItemEditScreen extends Screen
             Layout::modal('addquestion', [
                 Layout::rows([
                     Select::make('question')->fromModel(Question::class, 'name')->value([]),
-                    Input::make('item.id')->hidden()
+                    Input::make('item.id')->hidden(),
                 ])
 
             ])->title('Выберите вопрос'),
@@ -114,16 +115,23 @@ class QuizItemEditScreen extends Screen
                     Input::make('item.me.title')->title('Название')->value($this->quiz_item->title),
                     CheckBox::make('item.me.active')
                     ->value($this->quiz_item->active)->title('Активность'),
-                    Upload::make('item.me.attachment_id')->title('Картинка анонса')->value($this->quiz_item->attachment_id)->maxFiles(1),
-                    Upload::make('item.me.detail_attachment_id')->title('Детальная картинка')->value($this->quiz_item->detail_attachment_id)->maxFiles(1),
-                    Quill::make('item.me.preview')->value($this->quiz_item->preview)->title('Анонс'),
-                    Quill::make('item.me.description')->value($this->quiz_item->preview)->title('Детальное описание')
+                    Upload::make('item.me.attachment_id')
+                    ->title('Картинка анонса')
+                    ->value($this->quiz_item->attachment_id)
+                    ->maxFiles(1),
+                    Upload::make('item.me.detail_attachment_id')
+                    ->title('Детальная картинка')
+                    ->value($this->quiz_item->detail_attachment_id)->maxFiles(1),
+                    Quill::make('item.me.preview')
+                    ->value($this->quiz_item->preview)
+                    ->title('Анонс'),
+                    Quill::make('item.me.description')->value($this->quiz_item->preview)->title('Детальное описание'),
                 ]),
                 "SEO" => Layout::rows([
                     TextArea::make('item.me.meta_title')->title('Мета название')->value($this->quiz_item->meta_title),
-                    TextArea::make('item.me.meta_description')->title('Мета описание')->value($this->quiz_item->meta_description)
+                    TextArea::make('item.me.meta_description')->title('Мета описание')->value($this->quiz_item->meta_description),
                 ])
-            ])
+            ]),
         ];
     }
 
@@ -133,23 +141,22 @@ class QuizItemEditScreen extends Screen
         
         if (! isset($quiz_item['me']['active'])) {
             $quiz_item_model->active = 0;
-        }
-        else if(isset($quiz_item['me']['active'])){
+        } elseif (isset($quiz_item['me']['active'])) {
             $quiz_item_model->active = 1;
         }
 
-        if(is_array($quiz_item['me']['attachment_id']) && count($quiz_item['me']['attachment_id']) > 0){
+        if (is_array($quiz_item['me']['attachment_id']) && count($quiz_item['me']['attachment_id']) > 0) {
             $quiz_item['me']['attachment_id'] = current($quiz_item['me']['attachment_id']);
         }
 
-        if(is_array($quiz_item['me']['detail_attachment_id']) && count($quiz_item['me']['detail_attachment_id']) > 0){
+        if (is_array($quiz_item['me']['detail_attachment_id']) && count($quiz_item['me']['detail_attachment_id']) > 0) {
             $quiz_item['me']['detail_attachment_id'] = current($quiz_item['me']['detail_attachment_id']);
         }
 
         $quiz_item_model->fill($quiz_item['me'])->save();
         
         
-        if(isset($quiz_item['questions'])){
+        if (isset($quiz_item['questions'])) {
             $quiz_item_model->saveQuestions($quiz_item['questions']);
         }
 

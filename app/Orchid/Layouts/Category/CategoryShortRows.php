@@ -30,18 +30,16 @@ class CategoryShortRows extends Rows
                 Quill::make('category.description')
                 ->title('Описание')->value($categories->description)
             ];
-        }
-        else{
+        } else {
             $rows = [
                 ...$rows,
                 ...[
                     Quill::make('category.description')
                     ->title('Описание'),
-                ]
+                ],
             ];
 
             return $rows;
         }
-        
     }
 }

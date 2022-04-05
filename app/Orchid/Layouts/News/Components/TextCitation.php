@@ -17,7 +17,7 @@ class TextCitation extends NewsPaperComponent implements NewsPaperComponentInter
 
         return [
             Input::make($this->prefix . '.autor')->value($autor)->title('Автор цитаты'),
-            Quill::make($this->prefix . '.text')->value($text)->title('Текст')
+            Quill::make($this->prefix . '.text')->value($text)->title('Текст'),
         ];
     }
 }

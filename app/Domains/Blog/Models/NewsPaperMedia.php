@@ -9,7 +9,7 @@ class NewsPaperMedia extends Model
 {
     protected $fillable = [
         "component_id",
-        "attachment_id"
+        "attachment_id",
     ];
 
     public $table = 'blog_news_paper_media';

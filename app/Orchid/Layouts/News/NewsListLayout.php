@@ -28,19 +28,17 @@ class NewsListLayout extends Table
     {
         return [
             TD::make('id', 'ID'),
-            TD::make('title', 'Заголовок')->render(function (NewsPaper $item)
-            {
+            TD::make('title', 'Заголовок')->render(function (NewsPaper $item) {
                 return Link::make($item->title)->route('platform.news.edit', $item->id);
             }),
-            TD::make('active', 'Активность')->render(function (NewsPaper $item)
-            {
+            TD::make('active', 'Активность')->render(function (NewsPaper $item) {
                 return CheckBox::make('active')
                 ->value($item->active)->disabled();
             }),
             TD::make('slug', 'URL'),
-            TD::make('publishDate', 'Дата публикации')->render(function(NewsPaper $item){
+            TD::make('publishDate', 'Дата публикации')->render(function (NewsPaper $item) {
                 return $item->publishDate;
-            })
+            }),
         ];
     }
 }

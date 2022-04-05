@@ -33,8 +33,7 @@ class PodcastSeoRows extends Rows
                 Input::make('podcast.meta_keywords')->value($podcast->meta_keywords)->title('Мета ключевые слова'),
                 TextArea::make('podcast.meta_description')->value($podcast->meta_description)->title('Мета описание'),
             ];
-        }
-        else{
+        } else {
             $rows = [
                 Input::make('podcast.meta_h1')->title('Мета H1'),
                 Input::make('podcast.meta_title')->title('Мета заголовок'),

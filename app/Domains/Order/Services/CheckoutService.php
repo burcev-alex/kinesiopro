@@ -54,8 +54,7 @@ class CheckoutService extends BaseService
         // определить способ оплаты
         try {
             $servicePayment = $this->factoryPayment::getPaymentMethod($data['order']['payment']);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             throw new GeneralException(__('There was a problem creating this element. Please try again. '. $e->getMessage()));

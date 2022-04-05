@@ -2,25 +2,22 @@
 
 namespace App\Domains\Podcast\Models\Traits\Attribute;
 
-
-use Intervention\Image\ImageManagerStatic as Image;
-use File;
-
 trait PodcastAttribute
 {
 
-    private function _defaultImage()
+    private function defaultImage()
     {
         return '/images/photo_not_found.png';
     }
 
     public function getPublishDateAttribute()
-    {return $this->publication_date ? $this->publication_date->translatedFormat("d M") : '';
+    {
+        return $this->publication_date ? $this->publication_date->translatedFormat("d M") : '';
     }
     
-    function getAttachmentWebpAttribute()
+    public function getAttachmentWebpAttribute()
     {
-        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->_defaultImage();
+        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->defaultImage();
         
         // подмена origin на webp , если поддерживается формат
         if (isSupportWebP()) {

@@ -15,7 +15,7 @@ final class BreadcrumbsService
     {
         Breadcrumbs::for(
             'podcast.single',
-            function (Trail $trail) use($podcast) {
+            function (Trail $trail) use ($podcast) {
                 $trail->push(__('breadcrumbs.podcast'), route('podcast'));
 
                 $trail->push($podcast->title, route('podcast.single', ['slug' => $podcast->slug]));

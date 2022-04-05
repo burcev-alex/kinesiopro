@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace App\Domains\Online\Models\Traits\Relationship;
 
 use App\Domains\Online\Models\OnlineDesciptionComponent;
 use Orchid\Attachment\Models\Attachment;
 
-trait OnlineRelationship {
+trait OnlineRelationship
+{
     public function attachment()
     {
         return $this->hasOne(Attachment::class, 'id', 'attachment_id');

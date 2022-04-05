@@ -29,14 +29,14 @@ class CoursePropertyValuesRows extends Rows
         $values = $this->query->get('values');
         $slug = $this->query->get('slug');
         
-        $rows = $values->mapToGroups(function($item){
+        $rows = $values->mapToGroups(function ($item) {
             return [$item['slug'] => $item];
-        })->map(function($item, $slug) {
-            // для каждого слага выводим обозначения           
+        })->map(function ($item, $slug) {
+            // для каждого слага выводим обозначения
             return [
                 'value' => $item->first() ? $item->first()->value : "",
                 'slug' => $slug
-            ];            
+            ];
         })->toArray();
 
         $fields = [
@@ -45,7 +45,7 @@ class CoursePropertyValuesRows extends Rows
         ];
         $columns = [
             'Название' => 'value',
-            'Символьный код' => 'slug'
+            'Символьный код' => 'slug',
         ];
 
         return [

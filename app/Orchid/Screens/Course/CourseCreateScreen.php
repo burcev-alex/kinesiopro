@@ -49,7 +49,7 @@ class CourseCreateScreen extends Screen
             
             Button::make('Сохранить')
                 ->method('save')
-                ->icon('save')
+                ->icon('save'),
         ];
     }
 
@@ -64,7 +64,7 @@ class CourseCreateScreen extends Screen
             Layout::tabs([
                 'Курс' => [
                     CourseMainRows::class,
-                    CourseMarketRows::class
+                    CourseMarketRows::class,
                 ],
                 'Характеристики' => [
                     CoursePropsRows::class
@@ -83,7 +83,8 @@ class CourseCreateScreen extends Screen
         Course $course,
         OrchidCourseRequest $request,
         CourseOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($course);
         $validated = $request->validated();

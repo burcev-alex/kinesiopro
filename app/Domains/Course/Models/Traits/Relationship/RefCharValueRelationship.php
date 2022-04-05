@@ -1,9 +1,10 @@
-<?php 
+<?php
 namespace App\Domains\Course\Models\Traits\Relationship;
 
 use App\Domains\Course\Models\RefChar;
 
-trait RefCharValueRelationship {
+trait RefCharValueRelationship
+{
     
     public function char()
     {
@@ -14,5 +15,4 @@ trait RefCharValueRelationship {
     {
         return $this->belongsTo(RefChar::class, 'char_id', 'id', 'values');
     }
-
 }

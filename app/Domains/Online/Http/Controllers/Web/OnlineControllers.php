@@ -10,13 +10,15 @@ use App\Services\RouterService;
 use App\Domains\Online\Services\OnlineService;
 use Illuminate\Http\Request;
 
-class OnlineControllers extends Controller {
+class OnlineControllers extends Controller
+{
     protected OnlineService $onlineService;
 
     
     public function __construct(
         OnlineService $onlineService,
-        RouterService $routerService)
+        RouterService $routerService
+    )
     {
         $this->routerService = $routerService;
         $this->onlineService = $onlineService;
@@ -27,7 +29,7 @@ class OnlineControllers extends Controller {
        
         list($category, $filters, $page) = $this->routerService->detectParameters([$param1, '', $param2]);
         
-        if(!$page){
+        if (!$page) {
             $page = 1;
         }
         
@@ -45,15 +47,14 @@ class OnlineControllers extends Controller {
                         'pagination' => $pagination,
                         'block' => 'online-grid-block'
                     ])->render(),
-                ]
+                ],
             ];
         }
         
         return view('pages.online.online-list', [
             'onlines' => $catalog,
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
-
     }
 
     /**
@@ -63,15 +64,16 @@ class OnlineControllers extends Controller {
     {
         $online = $this->onlineService->getBySlug($slug);
 
-        if (!$online)
+        if (!$online) {
             return abort(404);
+        }
 
         // Хлебные крошки
         BreadcrumbsService::card($online);
 
         return view('pages.online.online-single', [
             'online' => $online,
-            'components' => $online->components
+            'components' => $online->components,
         ]);
     }
 }

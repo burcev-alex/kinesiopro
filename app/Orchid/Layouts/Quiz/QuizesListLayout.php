@@ -28,12 +28,10 @@ class QuizesListLayout extends Table
     {
         return [
             TD::make('id', 'ID'),
-            TD::make('title', 'Заголовок')->render(function (Item $item)
-            {
+            TD::make('title', 'Заголовок')->render(function (Item $item) {
                 return Link::make($item->title)->route('platform.quiz.edit', $item->id);
             }),
-            TD::make('active', 'Активность')->render(function (Item $item)
-            {
+            TD::make('active', 'Активность')->render(function (Item $item) {
                 return CheckBox::make('active')
                 ->value($item->active)->disabled();
             }),

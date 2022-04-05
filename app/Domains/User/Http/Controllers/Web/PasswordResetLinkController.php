@@ -11,19 +11,6 @@ use Illuminate\Validation\ValidationException;
 class PasswordResetLinkController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        // $this->middleware('guest', [
-        //     'except' => [
-        //         'logout',
-        //         'switchLogout',
-        //     ],
-        // ]);
-    }
-    
-    /**
      * Display the login view.
      *
      * @return \Illuminate\View\View
@@ -34,6 +21,8 @@ class PasswordResetLinkController extends Controller
     }
 
     /**
+     * Отправить ссылку на изменение пароля
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws ValidationException
@@ -54,20 +43,20 @@ class PasswordResetLinkController extends Controller
         if ($status == Password::INVALID_USER) {
             return response()->json([
                 'errors' => [
-                    'email' => __($status)
+                    'email' => __($status),
                 ],
-                'message' => 'The given data was invalid.'
+                'message' => 'The given data was invalid.',
             ], 422);
         }
 
         if ($status == Password::RESET_LINK_SENT) {
             return response()->json([
-                'message' => __($status)
+                'message' => __($status),
             ]);
         }
 
         throw ValidationException::withMessages([
-            'email' => __($status)
+            'email' => __($status),
         ]);
     }
 }

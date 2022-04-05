@@ -13,6 +13,8 @@ use Orchid\Screen\Fields\Select;
 class RoleFilter extends Filter
 {
     /**
+     * Parameters
+     *
      * @var array
      */
     public $parameters = [
@@ -20,6 +22,8 @@ class RoleFilter extends Filter
     ];
 
     /**
+     * Name
+     *
      * @return string
      */
     public function name(): string
@@ -28,6 +32,8 @@ class RoleFilter extends Filter
     }
 
     /**
+     * Run
+     *
      * @param Builder $builder
      *
      * @return Builder
@@ -40,6 +46,8 @@ class RoleFilter extends Filter
     }
 
     /**
+     * Display
+     *
      * @return Field[]
      */
     public function display(): array
@@ -54,6 +62,8 @@ class RoleFilter extends Filter
     }
 
     /**
+     * Value
+     *
      * @return string
      */
     public function value(): string

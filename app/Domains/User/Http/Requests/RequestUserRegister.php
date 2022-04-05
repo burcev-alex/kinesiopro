@@ -31,6 +31,8 @@ class RequestUserRegister extends FormRequest
     }
 
     /**
+     * Сообщения
+     *
      * @return string[]
      */
     public function messages()

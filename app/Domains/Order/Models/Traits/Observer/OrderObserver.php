@@ -22,7 +22,8 @@ trait OrderObserver
      *
      * @return string
      */
-    private static function generateNumber(){
+    private static function generateNumber()
+    {
 
         // узнать последний сформированный заказа
         $lastOrderId = Order::whereDate('created_at', Carbon::today())->count();

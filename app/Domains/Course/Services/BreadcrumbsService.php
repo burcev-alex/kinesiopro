@@ -15,7 +15,7 @@ final class BreadcrumbsService
     {
         Breadcrumbs::for(
             'courses.card',
-            function (Trail $trail) use($course) {
+            function (Trail $trail) use ($course) {
                 $trail->push(__('breadcrumbs.catalog'), route('courses.index'));
                 
                 if ($course->category) {

@@ -11,13 +11,15 @@ use App\Domains\Podcast\Services\CatalogFilterService;
 use App\Domains\Podcast\Services\PodcastService;
 use Illuminate\Http\Request;
 
-class PodcastControllers extends Controller {
+class PodcastControllers extends Controller
+{
     protected PodcastService $podcastService;
 
     
     public function __construct(
         PodcastService $podcastService,
-        RouterService $routerService)
+        RouterService $routerService
+    )
     {
         $this->routerService = $routerService;
         $this->podcastService = $podcastService;
@@ -28,7 +30,7 @@ class PodcastControllers extends Controller {
        
         list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
         
-        if(!$page){
+        if (!$page) {
             $page = 1;
         }
         
@@ -46,15 +48,14 @@ class PodcastControllers extends Controller {
                         'pagination' => $pagination,
                         'block' => 'podcast-grid-block'
                     ])->render(),
-                ]
+                ],
             ];
         }
         
         return view('pages.podcast.podcast-list', [
             'podcasts' => $catalog,
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
-
     }
 
     /**
@@ -64,14 +65,15 @@ class PodcastControllers extends Controller {
     {
         $podcast = $this->podcastService->getBySlug($slug);
 
-        if (!$podcast)
+        if (!$podcast) {
             return abort(404);
+        }
 
         // Хлебные крошки
         BreadcrumbsService::card($podcast);
 
         return view('pages.podcast.podcast-single', [
-            'podcast' => $podcast
+            'podcast' => $podcast,
         ]);
     }
 }

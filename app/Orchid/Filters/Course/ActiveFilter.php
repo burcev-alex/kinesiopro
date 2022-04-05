@@ -12,6 +12,8 @@ use Orchid\Screen\Fields\Select;
 class ActiveFilter extends Filter
 {
     /**
+     * Parameters
+     *
      * @var array
      */
     public $parameters = [
@@ -19,6 +21,8 @@ class ActiveFilter extends Filter
     ];
 
     /**
+     * Name
+     *
      * @return string
      */
     public function name() : string
@@ -27,6 +31,8 @@ class ActiveFilter extends Filter
     }
 
     /**
+     * Run
+     *
      * @param Builder $builder
      *
      * @return Builder
@@ -37,6 +43,8 @@ class ActiveFilter extends Filter
     }
 
     /**
+     * Display
+     *
      * @return Field[]
      */
     public function display() : array
@@ -45,7 +53,7 @@ class ActiveFilter extends Filter
             Select::make('active')
                     ->options([
                         1 => 'Да',
-                        0 => 'Нет'
+                        0 => 'Нет',
                     ])
                     ->title('Значение')
                     ->empty()

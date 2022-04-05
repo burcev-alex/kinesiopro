@@ -15,6 +15,8 @@ use Throwable;
 class RolePermissionLayout extends Rows
 {
     /**
+     * User
+     *
      * @var User|null
      */
     private $user;
@@ -36,6 +38,8 @@ class RolePermissionLayout extends Rows
     }
 
     /**
+     * GeneratedPermissionFields
+     *
      * @param Collection $permissionsRaw
      *
      * @return array
@@ -51,6 +55,8 @@ class RolePermissionLayout extends Rows
     }
 
     /**
+     * MakeCheckBoxGroup
+     *
      * @param Collection $permissions
      * @param string     $title
      *
@@ -77,6 +83,8 @@ class RolePermissionLayout extends Rows
     }
 
     /**
+     * MakeCheckBox
+     *
      * @param Collection $chunks
      *
      * @return CheckBox
@@ -94,6 +102,8 @@ class RolePermissionLayout extends Rows
     }
 
     /**
+     * GetIndeterminateStatus
+     *
      * @param $slug
      * @param $value
      *

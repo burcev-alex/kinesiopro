@@ -8,7 +8,7 @@ class CourseDesciptionMedia extends Model
 {
     protected $fillable = [
         "component_id",
-        "attachment_id"
+        "attachment_id",
     ];
 
     public $table = 'courses_description_media';

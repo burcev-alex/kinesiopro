@@ -49,12 +49,11 @@ class CategoryEditScreen extends Screen
             }
 
             return [
-                'category' => $category
+                'category' => $category,
             ];
-        }
-        else{
+        } else {
             return [
-                'category' => collect([])
+                'category' => collect([]),
             ];
         }
     }
@@ -71,7 +70,7 @@ class CategoryEditScreen extends Screen
             ->method('save')->icon('save'),
 
             Button::make('Удалить')
-            ->method('remove')->icon('trash')
+            ->method('remove')->icon('trash'),
         ];
     }
 
@@ -81,8 +80,8 @@ class CategoryEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-{
-    return [
+    {
+        return [
         Layout::tabs([
             'Специализация' => [
                 CategoryMainRows::class
@@ -94,14 +93,14 @@ class CategoryEditScreen extends Screen
                 CategorySeoRows::class
             ]
         ])
-    ];
-}
+        ];
+    }
 
     public function save(
         Category $category,
         Request $request,
         CategoryService $service
-        )
+    )
     {
         $service->setModel($category);
         $validate = $request->validate([
@@ -113,10 +112,11 @@ class CategoryEditScreen extends Screen
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);
-
     }
 
     /**
+     * Remove
+     *
      * @param Category $item
      *
      * @return \Illuminate\Http\RedirectResponse

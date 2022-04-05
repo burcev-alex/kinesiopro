@@ -18,19 +18,6 @@ use Illuminate\Validation\ValidationException;
 class NewPasswordController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        // $this->middleware('guest', [
-        //     'except' => [
-        //         'logout',
-        //         'switchLogout',
-        //     ],
-        // ]);
-    }
-    
-    /**
      * Display the password reset view.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,6 +29,8 @@ class NewPasswordController extends Controller
     }
 
     /**
+     * Изменение пароля
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws ValidationException
@@ -51,7 +40,7 @@ class NewPasswordController extends Controller
         $request->validate([
             'token' => ['required'],
             'email' => 'required|email|exists:users,email',
-            'password' => ['required', 'min:6']
+            'password' => ['required', 'min:6'],
         ]);
 
         $status = Password::reset(
@@ -59,7 +48,7 @@ class NewPasswordController extends Controller
             function ($user) use ($request) {
                 if (Hash::check($request->password, $request->password_confirmation)) {
                     throw ValidationException::withMessages([
-                        'password' => __('passwords.password_equal_to_old')
+                        'password' => __('passwords.password_equal_to_old'),
                     ]);
                 }
                 $user->forceFill([
@@ -85,12 +74,12 @@ class NewPasswordController extends Controller
         if ($status == Password::PASSWORD_RESET) {
             return response()->json([
                 'url' => route('index'),
-                'message' => __('auth.reset_password.success')
+                'message' => __('auth.reset_password.success'),
             ]);
         }
 
         throw ValidationException::withMessages([
-            'email' => __($status)
+            'email' => __($status),
         ]);
     }
 }

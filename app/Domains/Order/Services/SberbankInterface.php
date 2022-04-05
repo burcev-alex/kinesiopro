@@ -1,7 +1,8 @@
 <?php
 namespace App\Domains\Order\Services;
 
-class SberbankInterface {
+class SberbankInterface
+{
     private $acquiring_url;
     private $access_token;
 
@@ -18,15 +19,16 @@ class SberbankInterface {
 
     /**
      * Inicialize Sberbank class
-     * 
+     *
      * @param string $acquiring_url like https://securepayments.sberbank.ru
      * @param string $access_token  secure token for sberbank
      */
-     public function __construct() {
-	$this->acquiring_url = config('kinesio.sberbank.url');
-	$this->access_token  = config('kinesio.sberbank.token');
+    public function __construct()
+    {
+        $this->acquiring_url = config('kinesio.sberbank.url');
+        $this->access_token  = config('kinesio.sberbank.token');
         $this->setupUrls();
-     }
+    }
 
     /**
      * Generate Sberbank payment URL
@@ -37,15 +39,16 @@ class SberbankInterface {
      *
      * Sberbank does't recieve description longer that $description_max_lenght
      * $amount_multiplicator - need for convert price to cents
-     * 
+     *
      * @param  array  $data array of payment data
      * @return array of data
      */
-    public function paymentURL(array $data):array {        
-        if ( !$this->paymentArrayChecked($data) ) {
+    public function paymentURL(array $data):array
+    {
+        if (!$this->paymentArrayChecked($data)) {
             $this->error = 'Incomplete payment data';
             return [
-                'success'        => FALSE,
+                'success'        => false,
                 'error'          => $this->error,
                 'response'       => $this->response,
                 'payment_id'     => $this->payment_id,
@@ -58,8 +61,8 @@ class SberbankInterface {
         $amount_multiplicator   = 100;
 
         $data['currency'] = $this->getCurrency();
-        $data['amount'] = $data['amount'] * $amount_multiplicator;        
-        $data['description'] = mb_strimwidth($data['description'], 0, $description_max_lenght - 1, '');        
+        $data['amount'] = $data['amount'] * $amount_multiplicator;
+        $data['description'] = mb_strimwidth($data['description'], 0, $description_max_lenght - 1, '');
 
         return [
             'success'        => $this->sendRequest($this->url_init, $data),
@@ -73,11 +76,12 @@ class SberbankInterface {
 
     /**
      * Check payment status
-     * 
+     *
      * @param  [string] Sberbank payment id
      * @return array of data
      */
-    public function getState(string $payment_id):array {
+    public function getState(string $payment_id):array
+    {
         $params = [ 'orderId' => $payment_id ];
 
         return [
@@ -92,22 +96,23 @@ class SberbankInterface {
 
     /**
      * TODO: Cancel payment
-     * For canceling payment need to use 
+     * For canceling payment need to use
      * username and password for inicialize Sberbank API
      */
 
     /**
      * Send reques to bank acquiring API
-     * 
+     *
      * @param  string $path API url
      * @param  array  $data params
      * @return bool success or not
      */
-    private function sendRequest(string $path,  array $data) {
+    private function sendRequest(string $path, array $data)
+    {
         $data['token']    = $this->access_token;
         $data = \http_build_query($data, '', '&');
 
-        if($curl = curl_init()) {
+        if ($curl = curl_init()) {
             curl_setopt($curl, CURLOPT_URL, $path);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -123,36 +128,36 @@ class SberbankInterface {
             curl_close($curl);
 
             $this->response = $response;
-            $json = json_decode($response);            
+            $json = json_decode($response);
 
-            if($json) {
-                if ( $this->errorsFound() ) {
-                    return FALSE;
+            if ($json) {
+                if ($this->errorsFound()) {
+                    return false;
+                } else {
+                    $this->payment_id = @$json->orderId;
+                    $this->payment_url = @$json->formUrl;
+                    $this->payment_status = @$json->orderStatus;
 
-                } else {                    
-                    $this->payment_id       = @$json->orderId;
-                    $this->payment_url      = @$json->formUrl;
-                    $this->payment_status   = @$json->orderStatus;                    
-
-                    return TRUE;
+                    return true;
                 }
             }
 
             $this->error .= "Can't create connection to: $path | with data: $data";
-            return FALSE;
-
+            return false;
         } else {
             $this->error .= "CURL init filed: $path | with data: $data";
-            return FALSE;
+            return false;
         }
     }
 
     /**
      * Finding all possible errors
+     *
      * @return bool
      */
-    private function errorsFound():bool {
-        $response = json_decode($this->response, TRUE);
+    private function errorsFound():bool
+    {
+        $response = json_decode($this->response, true);
 
         if (isset($response['errorCode'])) {
             $error_code = (int) $response['errorCode'];
@@ -176,85 +181,91 @@ class SberbankInterface {
             $error_message = 'Unknown error.';
         }
 
-        if($error_code !== 0){
+        if ($error_code !== 0) {
             $this->error = 'Error code: '. $error_code . ' | Message: ' . $error_message;
-            return TRUE;
+            return true;
         }
-        return FALSE;     
+        return false;
     }
 
      /**
      * Check payment array for all keys is isset
-     * 
+     *
      * @param  array for checking
      * @return [bool]
      */
-    private function paymentArrayChecked(array $array_for_check){
+    private function paymentArrayChecked(array $array_for_check)
+    {
         $keys = ['orderNumber', 'amount', 'returnUrl', 'failUrl', 'description', 'language'];
         return $this->allKeysIsExistInArray($keys, $array_for_check);
     }
 
     /**
      * Checking for existing all $keys in $arr
-     * 
+     *
      * @param  array $keys - array of keys
      * @param  array $arr - checked array
      * @return [bool]
      */
-    private function allKeysIsExistInArray(array $keys, array $arr){
+    private function allKeysIsExistInArray(array $keys, array $arr)
+    {
         return (bool) !array_diff_key(array_flip($keys), $arr);
     }
 
      /**
      * Setting up urls for API
-     * 
+     *
      * @return void
      */
-    private function setupUrls(){
+    private function setupUrls()
+    {
         $this->acquiring_url = $this->checkSlashOnUrlEnd($this->acquiring_url);
         $this->url_init      = $this->acquiring_url . 'payment/rest/register.do';
-        $this->url_cancel    = $this->acquiring_url . 'payment/rest/reverse.do';        
+        $this->url_cancel    = $this->acquiring_url . 'payment/rest/reverse.do';
         $this->url_get_state = $this->acquiring_url . 'payment/rest/getOrderStatusExtended.do';
     }
 
     /**
      * Adding slash on end of url string if not there
-     * 
+     *
      * @return url string
      */
-    private function checkSlashOnUrlEnd($url) {
-        if ( $url[strlen($url) - 1] !== '/'){
+    private function checkSlashOnUrlEnd($url)
+    {
+        if ($url[strlen($url) - 1] !== '/') {
             $url .= '/';
         }
         return $url;
     }
 
     /**
-     * return protected propertys
-     * 
+     * Return protected propertys
+     *
      * @param  [mixed] $property name
      * @return [mixed]           value
      */
-    public function __get($property){
-      if (property_exists($this, $property)) {
-        return $this->$property;
-      }
+    public function __get($property)
+    {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
     }
 
     /**
      * Set up currency code
-     * 
+     *
      * @param string $currency name
      */
-    private function getCurrency($currency = 'RUB'){
-        if($currency === 'EUR'){
+    private function getCurrency($currency = 'RUB')
+    {
+        if ($currency === 'EUR') {
             return '978';
         }
-        if($currency === 'USD'){
+        if ($currency === 'USD') {
             return '840';
         }
 
-        if($currency === 'RUB'){
+        if ($currency === 'RUB') {
             return '643';
         }
     }

@@ -32,7 +32,7 @@ class QuizItemListScreen extends Screen
     public function query(): array
     {
         return [
-            'quizes' => Item::orderBy('created_at')->paginate(10)
+            'quizes' => Item::orderBy('created_at')->paginate(10),
         ];
     }
 

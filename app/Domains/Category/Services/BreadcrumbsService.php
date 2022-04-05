@@ -11,10 +11,9 @@ final class BreadcrumbsService
     public static function categories()
     {
         Breadcrumbs::for(
-            'courses.index', 
-            function (Trail $trail)
-            {
-                $trail->push(__('breadcrumbs.catalog'), route('courses.index')); 
+            'courses.index',
+            function (Trail $trail) {
+                $trail->push(__('breadcrumbs.catalog'), route('courses.index'));
             }
         );
     }
@@ -32,22 +31,20 @@ final class BreadcrumbsService
         
         $arrCategories = [];
        
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $arrCategories[$category->slug] = $category;
         }
         
         Breadcrumbs::for(
             'courses.index',
-            function (Trail $trail) use($category1, $filters, $arrCategories) {
+            function (Trail $trail) use ($category1, $filters, $arrCategories) {
 
                 $trail->push(__('breadcrumbs.catalog'), route('courses.index')."/");
                 
                 if (strlen($category1) > 0) {
-                    
-                    if(array_key_exists($category1, $arrCategories)){
+                    if (array_key_exists($category1, $arrCategories)) {
                         $categoryTitle1 = $arrCategories[$category1]->name;
-                    }
-                    else{
+                    } else {
                         $categoryTitle1 = $category1;
                     }
 

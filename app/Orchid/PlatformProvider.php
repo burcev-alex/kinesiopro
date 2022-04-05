@@ -11,6 +11,8 @@ use Orchid\Support\Color;
 class PlatformProvider extends OrchidServiceProvider
 {
     /**
+     * Boot
+     *
      * @param Dashboard $dashboard
      */
     public function boot(Dashboard $dashboard): void
@@ -21,6 +23,8 @@ class PlatformProvider extends OrchidServiceProvider
     }
 
     /**
+     * RegisterMainMenu
+     *
      * @return Menu[]
      */
     public function registerMainMenu(): array
@@ -90,6 +94,8 @@ class PlatformProvider extends OrchidServiceProvider
     }
 
     /**
+     * RegisterProfileMenu
+     *
      * @return Menu[]
      */
     public function registerProfileMenu(): array
@@ -102,6 +108,8 @@ class PlatformProvider extends OrchidServiceProvider
     }
 
     /**
+     * RegisterPermissions
+     *
      * @return ItemPermission[]
      */
     public function registerPermissions(): array
@@ -114,13 +122,12 @@ class PlatformProvider extends OrchidServiceProvider
     }
 
     /**
+     * RegisterSearchModels
+     *
      * @return string[]
      */
     public function registerSearchModels(): array
     {
-        return [
-            // ...Models
-            // \App\Models\User::class
-        ];
+        return [];
     }
 }

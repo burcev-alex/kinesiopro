@@ -30,12 +30,12 @@ class CourseListLayout extends Table
             TD::make('id', 'ID'),
             TD::make('name', 'Название'),
             
-            TD::make('active', 'Активность')->render(function($product){
+            TD::make('active', 'Активность')->render(function ($product) {
                 return $product->active ? 'да' : '<b>нет</b>';
             }),
-            TD::make('code', 'Символьный код')->render(function($product){
+            TD::make('code', 'Символьный код')->render(function ($product) {
                 return Link::make($product->slug)->route('platform.course.edit', $product);
-            })
+            }),
 
         ];
     }

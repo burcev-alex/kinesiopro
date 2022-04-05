@@ -4,7 +4,8 @@ namespace App\Domains\Quiz\Models\Traits\Relationship;
 use App\Domains\Quiz\Models\ItemQuestion;
 use Orchid\Attachment\Models\Attachment;
 
-trait ItemRelationship {
+trait ItemRelationship
+{
 
     public function attachment()
     {

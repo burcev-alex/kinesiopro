@@ -17,12 +17,11 @@ class TelegramController extends Controller
 
         $data = $source['message'];
         
-        if(array_key_exists('entities', $data) && $data['text'] == '/start'){
+        if (array_key_exists('entities', $data) && $data['text'] == '/start') {
             // регистрация в телеграм-боте
             // отправить сообщение администратору
 
             try {
-        
                 $chatId = 240191897; // ADMIN
                 $message = "✅<b>Подключение к каналу</b> \r\n";
                 $message .= "chat_id: ".$data['from']['id']." \r\n";
@@ -30,7 +29,6 @@ class TelegramController extends Controller
                 $message .= "Options Chat: ".implode(" / ", $data['chat']);
             
                 Telegram::setAsyncRequest(false)->sendMessage(['chat_id' => $chatId, 'text' => $message, 'parse_mode' => 'HTML']);
-                
             } catch (TelegramResponseException $e) {
                 Log::info($e->getMessage());
                 echo '{"ok":false,"error_code":400,"description":"Bad Request: chat_id is empty"} ';
@@ -38,7 +36,7 @@ class TelegramController extends Controller
         }
 
         $result = [
-            'status' => 'OK'
+            'status' => 'OK',
         ];
 
         return response($result, 200);

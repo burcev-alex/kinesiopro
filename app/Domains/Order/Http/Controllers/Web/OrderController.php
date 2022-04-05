@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Lang;
 class OrderController
 {
     /**
+     * Список заказов
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index() {
+    public function index()
+    {
         $userEntity = Auth::user();
         if (! empty($userEntity)) {
             $userId = $userEntity->id;

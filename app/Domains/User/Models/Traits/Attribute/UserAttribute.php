@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 trait UserAttribute
 {
     /**
+     * Set Password Attribute
+     *
      * @param $password
      */
     public function setPasswordAttribute($password): void
@@ -24,6 +26,8 @@ trait UserAttribute
     }
 
     /**
+     * Аватар
+     *
      * @return mixed
      */
     public function getAvatarAttribute()
@@ -32,6 +36,8 @@ trait UserAttribute
     }
 
     /**
+     * Права доступа
+     *
      * @return string
      */
     public function getPermissionsLabelAttribute()
@@ -49,6 +55,8 @@ trait UserAttribute
     }
 
     /**
+     * Роль
+     *
      * @return string
      */
     public function getRolesLabelAttribute()

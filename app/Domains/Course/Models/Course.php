@@ -21,7 +21,7 @@ class Course extends Model
     Filterable;
 
     /**
-     * fillable
+     * Fillable
      *
      * @var array
      */
@@ -41,10 +41,12 @@ class Course extends Model
         "meta_description",
         "start_date",
         "finish_date",
-        "description"
+        "description",
     ];
 
     /**
+     * Даты
+     *
      * @var string[]
      */
     protected $dates = [
@@ -53,11 +55,15 @@ class Course extends Model
     ];
 
     /**
+     * Форматирование типов
+     *
      * @var string[]
      */
     protected $casts = [];
 
     /**
+     * Factory
+     *
      * @return CourseFactory
      */
     protected static function newFactory()
@@ -66,13 +72,15 @@ class Course extends Model
     }
 
     /**
+     * Значения свойств
+     *
      * @param string $slug
      * @param bool $first
      * @return array|mixed|null
      */
     public function getPropertyValues(string $slug, bool $first = true)
     {
-        return Cache::tags('course_'.$this->id)->rememberForever('course_' . $this->id .'_property', function() use($slug, $first) {
+        return Cache::tags('course_'.$this->id)->rememberForever('course_' . $this->id .'_property', function () use ($slug, $first) {
             $return = [];
             foreach ($this->property_values as $propertyValue) {
                 if ($propertyValue->chars->slug == $slug) {
@@ -87,6 +95,7 @@ class Course extends Model
 
     /**
      * From count
+     *
      * @return mixed
      */
     public function fromCount()
@@ -95,11 +104,13 @@ class Course extends Model
     }
 
     /**
+     * Значения свойств сгруппированные по слагу
+     *
      * @return mixed
      */
     public function getGroupedPropertiesBySlug()
     {
-        return Cache::tags('course_'.$this->id)->rememberForever('course_' . $this->id . '_group_properties', function() {
+        return Cache::tags('course_'.$this->id)->rememberForever('course_' . $this->id . '_group_properties', function () {
             return $this->property_values->groupBy(function ($data) {
                 return $data->chars->slug;
             });
@@ -108,6 +119,7 @@ class Course extends Model
 
     /**
      * Todo move such methods to chars values
+     *
      * @param string $slug
      * @param string $type
      * @param bool $all
@@ -133,6 +145,7 @@ class Course extends Model
 
     /**
      * Todo move such methods to chars values
+     *
      * @param string $slug
      * @return array
      */
@@ -154,23 +167,27 @@ class Course extends Model
     }
 
     /**
+     * Конвертация значения по типу
+     *
      * @param string $value
      * @param string $type
      * @return int|string
      */
     protected function convertValueType(string $value, string $type)
     {
-        // Convert type
+        $result = $value;
+
         switch ($type) {
             case 'float':
-                $value = is_numeric($value)
-                    ? (float) $value
-                    : 0;
+                $result = is_numeric($value) ? (float) $value : 0;
+                break;
             case 'int':
-                $value = is_numeric($value)
-                    ? (int) $value
-                    : 0;
+                $result = is_numeric($value) ? (int) $value : 0;
+                break;
+            default:
+                $result = (string) $value;
         }
-        return $value;
+
+        return $result;
     }
 }

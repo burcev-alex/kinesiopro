@@ -38,12 +38,12 @@ class TeachersCreateScreen extends Screen
      *
      * @return array
      */
-    public function query(Teacher $teacher){
+    public function query(Teacher $teacher)
+    {
         $this->exists = $teacher->exists;
         return [
-            'teacher' => collect([])
+            'teacher' => collect([]),
         ];
-        
     }
 
     /**
@@ -88,12 +88,13 @@ class TeachersCreateScreen extends Screen
         Teacher $teacher,
         Request $request,
         TeachersService $service
-    ){
+    )
+    {
         $service->setModel($teacher);
         $validate = $request->validate([
-            'teacher.full_name' =>'required',
-            'teacher.slug' =>'required',
-            'teacher.images' =>'array|min:1|max:1|required',
+            'teacher.full_name' => 'required',
+            'teacher.slug' => 'required',
+            'teacher.images' => 'array|min:1|max:1|required',
             'teacher.images.attachment_id' => 'array|min:1|max:1|required',
             'teacher.*' => ''
         ]);
@@ -103,5 +104,4 @@ class TeachersCreateScreen extends Screen
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.teachers.edit', $teacher->id);
     }
-
 }

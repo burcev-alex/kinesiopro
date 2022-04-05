@@ -85,7 +85,8 @@ class PodcastCreateScreen extends Screen
         Podcast $podcast,
         Request $request,
         PodcastService $service
-    ) {
+    )
+    {
         $service->setModel($podcast);
         $validate = $request->validate([
             'podcast.title' => 'required',

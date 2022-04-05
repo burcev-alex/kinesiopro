@@ -15,7 +15,7 @@ class Order extends Model implements OrderInterface
     use HasFactory,
     AsSource,
     OrderRelationship,
-    OrderAttribute, 
+    OrderAttribute,
     OrderObserver;
 
     protected $fillable = [
@@ -39,7 +39,7 @@ class Order extends Model implements OrderInterface
     ];
 
     protected $casts = [
-        'payment'=> "array"
+        'payment' => "array",
     ];
 
     public static array $availableStates = [
@@ -47,12 +47,9 @@ class Order extends Model implements OrderInterface
         OrderInterface::STATE_PAID,
         OrderInterface::STATE_CANCELLED,
         OrderInterface::STATE_COMPLETED,
-        OrderInterface::STATE_REFUSAL
+        OrderInterface::STATE_REFUSAL,
     ];
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public static function getStateTitle($state)
     {
         return in_array($state, self::$availableStates) ? __('history.filter.state.' . $state) : "-";
@@ -60,6 +57,7 @@ class Order extends Model implements OrderInterface
 
     /**
      * Get state css class to draw
+     *
      * @return string
      */
     public function getStateClassAttribute()
@@ -75,13 +73,18 @@ class Order extends Model implements OrderInterface
     }
 
     /**
+     * Проверка оплачен заказ , или нет
+     *
      * @return bool
      */
-    public function isPayed() {
+    public function isPayed()
+    {
         return $this->payment_status == 'payed';
     }
 
     /**
+     * Название статуса
+     *
      * @return string
      */
     public function getStateTitleAttribute()

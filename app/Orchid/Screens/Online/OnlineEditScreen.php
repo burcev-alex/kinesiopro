@@ -58,7 +58,7 @@ class OnlineEditScreen extends Screen
         
         return [
             'online' => $online,
-            'components' => $online->components
+            'components' => $online->components,
         ];
     }
 
@@ -69,6 +69,11 @@ class OnlineEditScreen extends Screen
      */
     public function commandBar(): array
     {
+        $modalDeleteDescr = ModalToggle::make('Удалить описание')
+        ->method('deletecomponent')
+        ->modal('deletecomponent')->icon('trash')
+        ->canSee($this->components->count() > 0);
+
         return [
             Link::make('Назад')
                  ->href(route('platform.online.list'))
@@ -91,11 +96,11 @@ class OnlineEditScreen extends Screen
                     ->modal('addcomponent')
                     ->method('addcomponent')
                     ->icon('plus-alt'),
-                ModalToggle::make('Удалить описание')->method('deletecomponent')->modal('deletecomponent')->icon('trash')->canSee($this->components->count() > 0),
+                $modalDeleteDescr,
             ]),
             Button::make('Удалить')
                 ->method('remove')
-                ->icon('close')
+                ->icon('close'),
         ];
     }
 
@@ -117,7 +122,7 @@ class OnlineEditScreen extends Screen
             Layout::modal('addcomponent', [
                 Layout::rows([
                     Select::make('component')->fromModel(Component::class, 'name')->value([]),
-                    Input::make('item.id')->hidden()
+                    Input::make('item.id')->hidden(),
                 ])
 
             ])->title('Выберите компонент'),
@@ -138,7 +143,7 @@ class OnlineEditScreen extends Screen
                 'SEO' => [
                     OnlineSeoRows::class
                 ]
-            ])
+            ]),
         ];
     }
 
@@ -175,7 +180,8 @@ class OnlineEditScreen extends Screen
         Online $online,
         OrchidOnlineRequest $request,
         OnlineOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($online);
         $validated = $request->validated();
@@ -198,7 +204,8 @@ class OnlineEditScreen extends Screen
         Online $online,
         OrchidOnlineRequest $request,
         OnlineOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($online);
         $validated = $request->validated();

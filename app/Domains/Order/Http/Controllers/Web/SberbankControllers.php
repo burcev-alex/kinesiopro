@@ -23,25 +23,21 @@ class SberbankControllers extends BaseController
         $this->order = Order::where('id', $input['InvId'])->get()->first();
     }
 
-    public function success(Request $request)
+    public function success()
     {
         $res = $this->service->getState($this->data['payment_id']);
         if ($this->order && $res['success']) {
-        
             // изменение статуса заказа
-
         }
 
         return view('pages.order.sberbank.success', ['data' => $this->data, 'order' => $this->order]);
     }
     
-    public function error(Request $request)
+    public function error()
     {
         $res = $this->service->getState($this->data['payment_id']);
         if ($this->order && $res['success']) {
-        
             // изменение статуса заказа
-
         }
 
         return view('pages.order.sberbank.error', ['data' => $this->data, 'order' => $this->order]);

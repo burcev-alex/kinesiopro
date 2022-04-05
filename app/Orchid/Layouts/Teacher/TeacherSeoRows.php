@@ -36,8 +36,7 @@ class TeacherSeoRows extends Rows
                     TextArea::make('teacher.meta_description')->value($teacher->meta_description)->title('Мета описание'),
                 ],
             ];
-        }
-        else{
+        } else {
             $rows = [
                 ...$rows,
                 ...[
@@ -45,7 +44,7 @@ class TeacherSeoRows extends Rows
                     Input::make('teacher.meta_title')->title('Мета заголовок'),
                     Input::make('teacher.meta_keywords')->title('Мета ключевые слова'),
                     TextArea::make('teacher.meta_description')->title('Мета описание'),
-                ]
+                ],
             ];
         }
 

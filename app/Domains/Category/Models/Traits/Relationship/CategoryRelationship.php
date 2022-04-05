@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace App\Domains\Category\Models\Traits\Relationship;
 
 use App\Domains\Course\Models\Course;
 use Orchid\Attachment\Models\Attachment;
 
-trait CategoryRelationship {
+trait CategoryRelationship
+{
 
     public function courses()
     {

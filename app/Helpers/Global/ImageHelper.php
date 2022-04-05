@@ -20,17 +20,15 @@ if (!function_exists('isSupportWebP')) {
 
                 if ($browserInfo['name'] != 'Safari') {
                     $result = true;
-                } elseif ($browserInfo['name'] == 'Safari' && IntVal($expVersion[0]) >= 14) {
+                } elseif ($browserInfo['name'] == 'Safari' && intval($expVersion[0]) >= 14) {
                     $result = true;
                 } else {
                     $result = false;
                 }
-            }
-            else{
+            } else {
                 $result = true;
             }
-        }
-        else{
+        } else {
             $result = true;
         }
 
@@ -39,9 +37,12 @@ if (!function_exists('isSupportWebP')) {
 }
 
 if (!function_exists('imageCreatePath')) {
-    function imageCreatePath($path) {
-        if (is_dir($path)) return true;
-        $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
+    function imageCreatePath($path)
+    {
+        if (is_dir($path)) {
+            return true;
+        }
+        $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1);
         $return = imageCreatePath($prev_path);
         return ($return && is_writable($prev_path)) ? mkdir($path, 0755, true) : false;
     }
@@ -54,56 +55,46 @@ if (!function_exists('convertImageToWebP')) {
             $source = public_path().$source;
         }
 
-		if(!file_exists($source)){
-			return $source;
-		}
+        if (!file_exists($source)) {
+            return $source;
+        }
 
-        // определить наличие пробелов или карилицы в урл, 
+        // определить наличие пробелов или карилицы в урл,
         // при наличии провести экранирование
         $exp = explode('/', $source);
-        $exp[count($exp)-1] = urlencode($exp[count($exp)-1]);
+        $exp[count($exp) - 1] = urlencode($exp[count($exp) - 1]);
         $source = implode('/', $exp);
 
-		try {
-			$extension = pathinfo($source, PATHINFO_EXTENSION);
-			$destination = str_replace(["/storage/", ".".$extension], ["/storage/webp/", ".webp"], $source);
+        try {
+            $extension = pathinfo($source, PATHINFO_EXTENSION);
+            $destination = str_replace(["/storage/", ".".$extension], ["/storage/webp/", ".webp"], $source);
 
-			if(!file_exists($destination)){
-				if ($extension == 'jpeg' || $extension == 'jpg') {
-					$image = imagecreatefromjpeg($source);
-				} elseif ($extension == 'gif') {
-					$image = imagecreatefromgif($source);
-				} elseif ($extension == 'png') {
-					$image = imagecreatefrompng($source);
-				}
-				else{
-					$image = imagecreatefromjpeg($source);
-				}
+            if (!file_exists($destination)) {
+                if ($extension == 'jpeg' || $extension == 'jpg') {
+                    $image = imagecreatefromjpeg($source);
+                } elseif ($extension == 'gif') {
+                    $image = imagecreatefromgif($source);
+                } elseif ($extension == 'png') {
+                    $image = imagecreatefrompng($source);
+                } else {
+                    $image = imagecreatefromjpeg($source);
+                }
 
-				$destination = str_replace(["/storage/", ".".$extension], ["/storage/webp/", ".webp"], $source);
-				$exp = explode("/", $destination);
-				unset($exp[count($exp)-1]);
-				$pathDir = implode("/", $exp);
-				imageCreatePath($pathDir);
+                $destination = str_replace(["/storage/", ".".$extension], ["/storage/webp/", ".webp"], $source);
+                $exp = explode("/", $destination);
+                unset($exp[count($exp) - 1]);
+                $pathDir = implode("/", $exp);
+                imageCreatePath($pathDir);
 
-				try {
-					imagewebp($image, $destination, $quality);
-				}
-				catch(\ErrorException $e){
-					//echo '<pre>'.print_r($extension, true).'</pre>';
-					//echo '<pre>'.print_r($destination, true).'</pre>';
-					
-					#dd($e->getMessage());
-				}
-			}
+                imagewebp($image, $destination, $quality);
+            }
 
-			$destination = str_replace(public_path(), "", $destination);
+            $destination = str_replace(public_path(), "", $destination);
 
-			return $destination;
-		}
-		catch(\Exception $e){
+            return $destination;
+        } catch (\Exception $e) {
             $source = str_replace(public_path(), "", $source);
-			return $source;
-		}
+            return $source;
+        }
     }
 }

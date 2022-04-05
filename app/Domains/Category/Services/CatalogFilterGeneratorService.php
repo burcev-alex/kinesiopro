@@ -70,9 +70,17 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     protected CourseService $courseService;
     protected RouterService $routerService;
     protected array $selectedFilters = [];
-    /** @var int Contain count of selected filters */
+    
+    /**
+     * Contain count of selected filters
+     *
+     * @var integer
+     */
     protected int $selectedCount = 0;
 
+    /**
+     * Constructor
+     */
     public function __construct(RouterService $routerService, CourseService $courseService)
     {
         $this->courseService = $courseService;
@@ -90,6 +98,8 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Схема фильтра
+     *
      * @return array
      */
     public function getFilterSchema(): array
@@ -100,7 +110,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             'id' => 0,
             'slug' => 'teacher',
             'title' => 'Преподаватели',
-            'options' => $this->getTeachers()
+            'options' => $this->getTeachers(),
         ];
         $baseFilters['teachers'] = $this->markSelectedFilter($baseFilters['teachers']);
 
@@ -108,7 +118,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             'id' => 0,
             'slug' => 'period',
             'title' => 'Период',
-            'options' => $this->getPeriods()
+            'options' => $this->getPeriods(),
         ];
         $baseFilters['periods'] = $this->markSelectedFilter($baseFilters['periods']);
         
@@ -116,14 +126,16 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             'sub_category' => $this->getSubCategory(),
             'sort' => $this->getSort(),
             'numbers' => $this->getNumbers(),
-            'filters' =>  $baseFilters,
-            'selected_count' => $this->selectedCount
+            'filters' => $baseFilters,
+            'selected_count' => $this->selectedCount,
         ];
         
         return $returned;
     }
 
     /**
+     * Get Sort
+     *
      * @return array
      */
     public function getSort(): array
@@ -152,6 +164,8 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Get Numbers
+     *
      * @return array
      */
     public function getNumbers(): array
@@ -179,28 +193,29 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Get Teachers
+     *
      * @return array
      */
     public function getTeachers(): array
     {
-        $teacherIds = Course::where('marker_archive', 0)->where('active', 1)->with('teachers')->get()->map(function($item){
-            if($item->teachers->count() > 0){
-                return $item->teachers->map(function($teacher){
+        $teacherIds = Course::where('marker_archive', 0)->where('active', 1)->with('teachers')->get()->map(function ($item) {
+            if ($item->teachers->count() > 0) {
+                return $item->teachers->map(function ($teacher) {
                     return $teacher->id;
                 });
-            }
-            else{
+            } else {
                 return 0;
             }
         })->toArray();
         
         // вычищаем лишние элементы
-        $teacherIds = collect($teacherIds)->filter(function($item){
+        $teacherIds = collect($teacherIds)->filter(function ($item) {
             return is_array($item);
         })->toArray();
         
         $arr = array_unique(array_merge(...$teacherIds));
-        foreach($arr as &$val){
+        foreach ($arr as &$val) {
             $val = intval($val);
         }
         unset($val);
@@ -208,7 +223,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         $teachers = Teacher::whereIn('id', $arr)->select(['id', 'slug', 'full_name'])->orderBy('full_name', 'asc')->get();
 
         $returned = [];
-        foreach($teachers as $teacher){
+        foreach ($teachers as $teacher) {
             $returned[] = [
                 'value' => $teacher->id,
                 'title' => $teacher->full_name,
@@ -221,22 +236,19 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Get Periods
+     *
      * @return array
      */
     public function getPeriods(): array
     {
-        $date_m = array('Null', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь');
-
-        $selected = '';
-
         $courses = Course::where('marker_archive', 0)->where('active', 1)->select(['start_date'])->groupBy('start_date')->get();
         
         $list = [];
         $tmp = [];
-        foreach($courses as $course){
-            
+        foreach ($courses as $course) {
             $value = $course->start_date->format('Y-m').'-01';
-            if(in_array($value, $tmp)){
+            if (in_array($value, $tmp)) {
                 continue;
             }
 
@@ -244,13 +256,13 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
                 'value' => $value,
                 'title' => $course->start_date->translatedFormat('F Y'),
                 'selected' => false,
-                'available' => false
+                'available' => false,
             ];
 
             $tmp[] = $value;
         }
 
-        uasort($list, function($v1, $v2){
+        uasort($list, function ($v1, $v2) {
             if ($v1['value'] < $v2['value']) {
                 return -1;
             } elseif ($v1['value'] > $v2['value']) {
@@ -264,16 +276,17 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Get General Filters
+     *
      * @return array
      * @throws \Exception
      */
     public function getGeneralFilters(): array
     {
-        list($chars, $aggregationValues) = $this->updateCharsDependsOnCourses($this->refCharService->getCharsGroupedBySlug());
+        list($chars, $aggValues) = $this->updateCharsDependsOnCourses($this->refCharService->getCharsGroupedBySlug());
         $return = [];
 
         foreach ($this->filters as $filter) {
-            
             $char = $chars[$filter['slug']] ?? null;
             if (!$char) {
                 continue;
@@ -286,12 +299,11 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             foreach ($char['values'] ?? [] as $item) {
                 if (isset($item['available'])) {
                     if (!isset($options[$item['slug']])) {
-
                         $options[$item['slug']] = [
                             'id' => $item['id'],
                             'title' => $item['value'],
                             'value' => $item['slug'],
-                            'available' => $item['available']
+                            'available' => $item['available'],
                         ];
                     } elseif (!$options[$item['slug']]['available'] && $item['available']) {
                         $options[$item['slug']]['available'] = $item['available'];
@@ -299,7 +311,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
                 }
             }
             
-            uasort($options, function($v1, $v2){
+            uasort($options, function ($v1, $v2) {
                 if ($v1['value'] < $v2['value']) {
                     return -1;
                 } elseif ($v1['value'] > $v2['value']) {
@@ -314,7 +326,6 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             
 
             $return[$filter['slug']] = $this->markSelectedFilter($filter);
-            
         }
 
         return $return;
@@ -322,6 +333,7 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
     /**
      * Filter chars by set category from the path
+     *
      * @param array $chars
      * @return array
      * @throws \Exception
@@ -339,7 +351,10 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         
         $filterService->setCategories($category1);
 
-        list($properties, $propertiesByCategories, $aggregationValues) = Cache::tags('courses')->rememberForever('getAvailableProperties.' . md5(serialize($filters)), function () use ($filterService, $filters) {
+        $cache = Cache::tags('courses');
+        $cacheKey = 'getAvailableProperties.' . md5(serialize($filters));
+        
+        list($properties, $propByCat, $aggValues) = $cache->rememberForever($cacheKey, function () use ($filterService, $filters) {
             return $filterService->getAvailableProperties($filters);
         });
 
@@ -349,9 +364,9 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
         $return = [];
         foreach ($chars as $slug => $char) {
             // Если доступно для категории то включить фильтр
-            if (!empty($propertiesByCategories[$char['id']])) {
+            if (!empty($propByCat[$char['id']])) {
                 $availableValueIds = $properties[$char['id']] ?? [];
-                $categoryValues = $propertiesByCategories[$char['id']];
+                $categoryValues = $propByCat[$char['id']];
                 foreach ($char['values'] as &$value) {
                     if (in_array($value['id'], $categoryValues)) {
                         // Доступен ли значение фильтра
@@ -362,11 +377,12 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             }
         }
 
-        return [$return, $aggregationValues];
+        return [$return, $aggValues];
     }
 
     /**
      * Mark filters as selected
+     *
      * @param array $filter
      * @param string $type
      * @return array
@@ -390,10 +406,9 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
             }
         } else {
             foreach ($filter['options'] as &$option) {
-                if(is_array($selectedOptions)){
+                if (is_array($selectedOptions)) {
                     $option['selected'] = in_array($option['value'], $selectedOptions);
-                }
-                else {
+                } else {
                     $option['selected'] = ($option['value'] == $selectedOptions);
                 }
 
@@ -411,9 +426,12 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
     }
 
     /**
+     * Get General Filters
+     *
      * @return array
      */
-    public function getSubCategory(){
+    public function getSubCategory()
+    {
         $array = array_values(array_filter(explode('/', request()->path()), function ($value) {
             return $value && !in_array($value, ['courses', 'filters']);
         }));
@@ -422,11 +440,10 @@ class CatalogFilterGeneratorService extends AbstractCatalogFilterService
 
         $categories = Category::where('active', 1)->with('attachment')->get()->toArray();
         
-        foreach($categories as &$cat){
-            if($cat['slug'] == $category){
+        foreach ($categories as &$cat) {
+            if ($cat['slug'] == $category) {
                 $cat['selected'] = true;
-            }
-            else{
+            } else {
                 $cat['selected'] = false;
             }
         }

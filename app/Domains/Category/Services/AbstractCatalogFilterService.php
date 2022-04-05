@@ -22,6 +22,8 @@ abstract class AbstractCatalogFilterService
     }
 
     /**
+     * Типы полей, которые учатсвуют в фильтрации
+     *
      * @var array|string[]
      */
     protected array $filtersMethods = [
@@ -29,10 +31,12 @@ abstract class AbstractCatalogFilterService
         'sort' => 'string',
         'numbers' => 'float',
         'period' => 'string',
-        'teacher' => 'int'
+        'teacher' => 'int',
     ];
 
     /**
+     * Кол-во курсов
+     *
      * @return int
      */
     public function getTotalCourses(): int
@@ -41,6 +45,8 @@ abstract class AbstractCatalogFilterService
     }
 
     /**
+     * Кол-во выбранных курсов
+     *
      * @return int
      */
     public function getSelectedCountCourses(): int
@@ -50,6 +56,7 @@ abstract class AbstractCatalogFilterService
 
     /**
      * Get list of categories ids start from first level
+     *
      * @param array $categories
      * @return array
      * @throws \Exception
@@ -75,10 +82,12 @@ abstract class AbstractCatalogFilterService
 
     /**
      * Parse filters
+     *
      * @param string $filters
      * @return array
      */
-    public function parseFilters(string $filters, bool $parseKey = true) {
+    public function parseFilters(string $filters, bool $parseKey = true)
+    {
         $return = [];
         foreach (explode(';', $filters) as $filter) {
             $filterArray = explode('=', $filter);
@@ -99,11 +108,13 @@ abstract class AbstractCatalogFilterService
 
     /**
      * Parse value
+     *
      * @param string $key
      * @param string $value
      * @return float|string|string[]
      */
-    protected function parseValue(string $key, string $value) {
+    protected function parseValue(string $key, string $value)
+    {
         $type = $this->filtersMethods[$key] ?? 'array';
         switch ($type) {
             case 'array':

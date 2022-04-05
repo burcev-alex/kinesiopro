@@ -84,7 +84,7 @@ class CategoryCreateScreen extends Screen
         Category $category,
         Request $request,
         CategoryService $service
-        )
+    )
     {
         $service->setModel($category);
         $validate = $request->validate([
@@ -94,10 +94,9 @@ class CategoryCreateScreen extends Screen
 
         $service->save($validate['category']);
 
-       Cache::tags(['categories'])->flush();
+        Cache::tags(['categories'])->flush();
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.category.edit', $category);
-
     }
 }

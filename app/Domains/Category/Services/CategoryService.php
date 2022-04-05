@@ -13,11 +13,15 @@ use Orchid\Attachment\Models\Attachment;
 class CategoryService extends BaseService
 {
     /**
+     * Группировка по родительскому признаку
+     *
      * @var array
      */
     protected array $groupedIdsBySlug;
 
     /**
+     * Разделы учатсвующие в фильтрации
+     *
      * @var array
      */
     protected array $categoriesFilterIds;
@@ -35,14 +39,17 @@ class CategoryService extends BaseService
 
     public function save(array $fields): self
     {
-        if(array_key_exists('attachment_id', $fields)){
+        if (array_key_exists('attachment_id', $fields)) {
             $fields['attachment_id'] = current($fields['attachment_id']);
         }
 
         $this->model->fill($fields);
 
-        if (isset($fields['active'])) $this->model->active = true;
-        else $this->model->active = false;
+        if (isset($fields['active'])) {
+            $this->model->active = true;
+        } else {
+            $this->model->active = false;
+        }
 
         $this->model->save();
 
@@ -50,6 +57,8 @@ class CategoryService extends BaseService
     }
 
     /**
+     * Get By Slug
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
@@ -60,12 +69,14 @@ class CategoryService extends BaseService
             ->first();
     }
 
-    public function getHomeCategoriesOneLevel(){
-       return Category::where('active', 1)->orderBy('sort', 'asc')->get();       
+    public function getHomeCategoriesOneLevel()
+    {
+        return Category::where('active', 1)->orderBy('sort', 'asc')->get();
     }
 
     /**
      * Get menu categories list
+     *
      * @return mixed
      */
     public function getCachedMenuCategoriesList()
@@ -80,17 +91,19 @@ class CategoryService extends BaseService
     }
 
     /**
-     * @param $categories
-     * @param int $level
+     * Генерация схемы разделов для корректного вывода в публичной части
+     *
+     * @param array $categories
      * @return array
      */
-    public function generateCategoriesFormat($categories, int $level = 1) {
+    public function generateCategoriesFormat($categories)
+    {
         $return = [];
         foreach ($categories as $category) {
             $return[] = [
                 'id' => $category->id,
                 'slug' => $category->slug,
-                'name' => $category->name ?? ''
+                'name' => $category->name ?? '',
             ];
         }
  
@@ -98,13 +111,14 @@ class CategoryService extends BaseService
     }
 
     /**
+     * Группировка разделов
+     *
      * @return array
      * @throws \Exception
      */
     public function getGroupedCategories()
     {
         if (!isset($this->groupedIdsBySlug)) {
-        
             $categories = $this->getCachedMenuCategoriesList();
             $return = [];
             foreach ($categories as $category) {
@@ -120,6 +134,8 @@ class CategoryService extends BaseService
     }
 
     /**
+     * Разделы группы
+     *
      * @return array
      */
     public function getGroupedCategoriesIds(): array

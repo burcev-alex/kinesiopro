@@ -26,6 +26,6 @@ class VerifyCsrfToken extends Middleware
         '/sberbank/error',
         '/robokassa/payment',
         '/robokassa/success',
-        '/robokassa/error'
+        '/robokassa/error',
     ];
 }

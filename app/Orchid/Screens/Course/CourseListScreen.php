@@ -3,7 +3,6 @@
 
 namespace App\Orchid\Screens\Course;
 
-
 use App\Domains\Course\Models\Course;
 use App\Orchid\Layouts\Course\CourseListLayout;
 use App\Orchid\Screens\Filters\CourseFiltersLayout;
@@ -33,8 +32,10 @@ class CourseListScreen extends Screen
      */
     public function query(): array
     {
+        $filter = CourseFiltersLayout::class;
+        
         return [
-            'courses' => Course::filters()->filtersApplySelection(CourseFiltersLayout::class)->orderBy('id', 'DESC')->paginate(10)
+            'courses' => Course::filters()->filtersApplySelection($filter)->orderBy('id', 'DESC')->paginate(10),
         ];
     }
 
@@ -59,7 +60,7 @@ class CourseListScreen extends Screen
     {
         return [
             CourseFiltersLayout::class,
-            CourseListLayout::class
+            CourseListLayout::class,
         ];
     }
 }

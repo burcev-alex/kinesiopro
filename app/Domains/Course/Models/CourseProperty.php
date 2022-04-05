@@ -16,7 +16,7 @@ class CourseProperty extends Model
     protected $fillable = [
         "course_id",
         "ref_char_value_id",
-        "ref_char_id"
+        "ref_char_id",
     ];
 
     protected $table = 'courses_properties';

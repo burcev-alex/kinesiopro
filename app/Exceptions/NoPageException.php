@@ -14,7 +14,6 @@ class NoPageException extends Exception
 
     public function report()
     {
-        
     }
 
 

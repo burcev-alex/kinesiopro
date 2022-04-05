@@ -12,6 +12,8 @@ class ContactController extends BaseController
     protected ContactService $contactService;
 
     /**
+     * Constructor
+     *
      * @param ContactService $productService
      */
     public function __construct(ContactService $contactService)
@@ -19,7 +21,12 @@ class ContactController extends BaseController
         $this->contactService = $contactService;
     }
 
-    public function index(Request $request)
+    /**
+     * Список контактов
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function index()
     {
         // доступные контакты
         $items = $this->contactService->getList();

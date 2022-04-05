@@ -10,7 +10,8 @@ use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
 use App\Domains\Teacher\Models\Teacher;
 
-trait CourseRelationship {
+trait CourseRelationship
+{
 
     public function teachers()
     {
@@ -37,7 +38,8 @@ trait CourseRelationship {
         return $this->hasManyThrough(RefCharsValue::class, CourseProperty::class, 'course_id', 'id', 'id', 'ref_char_value_id');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

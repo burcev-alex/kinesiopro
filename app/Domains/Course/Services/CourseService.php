@@ -4,8 +4,6 @@ namespace App\Domains\Course\Services;
 use App\Domains\Course\Models\Course;
 use App\Exceptions\NoPageException;
 use App\Services\BaseService;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class CourseService extends BaseService
 {
@@ -15,12 +13,13 @@ class CourseService extends BaseService
      * @param  Course $course
      * @return void
      */
-    public function __construct(Course $course) {
+    public function __construct(Course $course)
+    {
         $this->model = $course;
     }
 
     /**
-     * whereSlug
+     * WhereSlug
      *
      * @param  string $slug
      * @return Course
@@ -29,7 +28,7 @@ class CourseService extends BaseService
     public function whereSlug(string $slug) : Course
     {
         $model = $this->where('slug', $slug)->get()->first();
-        if($model === null){
+        if ($model === null) {
             throw new NoPageException('there is no course with slug like: ' . $slug);
         }
 
@@ -38,6 +37,7 @@ class CourseService extends BaseService
 
     /**
      * Todo move it to cache
+     *
      * @return int
      */
     public function getTotalActiveCourses(): int
@@ -48,6 +48,8 @@ class CourseService extends BaseService
     }
 
     /**
+     * Полная информация по курсу
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
@@ -67,15 +69,16 @@ class CourseService extends BaseService
                 'blocks'
             ])->get();
             
-        if($builder->count() > 0){
+        if ($builder->count() > 0) {
             return $builder->first();
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     /**
+     * Курсы с применением фильтра
+     *
      * @param array $options
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */

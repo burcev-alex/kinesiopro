@@ -72,7 +72,7 @@ class ContactCreateScreen extends Screen
                 ],
                 'Соц.сети' => [
                     ContactSocialRows::class
-                ]
+                ],
             ])
         ];
     }
@@ -81,7 +81,8 @@ class ContactCreateScreen extends Screen
         Contact $contact,
         Request $request,
         ContactService $service
-    ) {
+    )
+    {
         $service->setModel($contact);
         $validate = $request->validate([
             'contact.city' => 'required',

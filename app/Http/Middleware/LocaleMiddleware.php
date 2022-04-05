@@ -19,11 +19,6 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // Locale is enabled and allowed to be changed
-        // if (config('grandstep.locale.status') && session()->has('locale')) {
-        //     setAllLocale(session()->get('locale'));
-        // }
-
         return $next($request);
     }
 }

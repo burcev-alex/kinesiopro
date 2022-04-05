@@ -16,11 +16,15 @@ use Orchid\Screen\TD;
 class UserListLayout extends Table
 {
     /**
+     * Target
+     *
      * @var string
      */
     public $target = 'users';
 
     /**
+     * Columns
+     *
      * @return TD[]
      */
     public function columns(): array
@@ -68,7 +72,7 @@ class UserListLayout extends Table
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
-                                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                                ->confirm(__('Really?'))
                                 ->method('remove', [
                                     'id' => $user->id,
                                 ]),

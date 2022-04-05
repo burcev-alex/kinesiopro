@@ -52,7 +52,7 @@ class NewsEditScreen extends Screen
         $this->components = $news_paper->components;
         $this->name = $news_paper->title;
         return [
-            'item' => $news_paper
+            'item' => $news_paper,
         ];
     }
 
@@ -73,8 +73,14 @@ class NewsEditScreen extends Screen
                 ->modal('addcomponent')
                 ->method('addcomponent')
                 ->icon('plus-alt'),
-            ModalToggle::make('Удалить компонент')->method('deletecomponent')->modal('deletecomponent')->icon('trash')->canSee($this->components->count() > 0),
-            Link::make("Посмотреть")->href(config('app.url') . "/article/" . $this->news_paper->slug)->icon('globe-alt')
+            ModalToggle::make('Удалить компонент')
+            ->method('deletecomponent')
+            ->modal('deletecomponent')
+            ->icon('trash')
+            ->canSee($this->components->count() > 0),
+            Link::make("Посмотреть")
+            ->href(config('app.url') . "/article/" . $this->news_paper->slug)
+            ->icon('globe-alt'),
         ];
     }
 
@@ -96,7 +102,7 @@ class NewsEditScreen extends Screen
             Layout::modal('addcomponent', [
                 Layout::rows([
                     Select::make('component')->fromModel(Component::class, 'name')->value([]),
-                    Input::make('item.id')->hidden()
+                    Input::make('item.id')->hidden(),
                 ])
 
             ])->title('Выберите компонент'),
@@ -115,14 +121,16 @@ class NewsEditScreen extends Screen
                     CheckBox::make('item.me.active')
                     ->value($this->news_paper->active)->title('Активность'),
                     Upload::make('item.me.attachment_id')->title('Обложка')->value($this->news_paper->attachment_id)->maxFiles(1),
-                    Upload::make('item.me.detail_attachment_id')->title('Обложка заголовка')->value($this->news_paper->detail_attachment_id)->maxFiles(1)
+                    Upload::make('item.me.detail_attachment_id')
+                    ->title('Обложка заголовка')
+                    ->value($this->news_paper->detail_attachment_id)->maxFiles(1),
                 ]),
                 "SEO" => Layout::rows([
                     TextArea::make('item.me.meta_title')->title('Мета название')->value($this->news_paper->meta_title),
                     TextArea::make('item.me.meta_keywords')->title('Мета ключевые слова')->value($this->news_paper->meta_keywords),
-                    TextArea::make('item.me.meta_description')->title('Мета описание')->value($this->news_paper->meta_description)
+                    TextArea::make('item.me.meta_description')->title('Мета описание')->value($this->news_paper->meta_description),
                 ])
-            ])
+            ]),
         ];
     }
 
@@ -133,15 +141,14 @@ class NewsEditScreen extends Screen
         
         if (! isset($news_paper['me']['active'])) {
             $news_paper_model->active = 0;
-        }
-        else if(isset($news_paper['me']['active'])){
+        } elseif (isset($news_paper['me']['active'])) {
             $news_paper_model->active = 1;
         }
 
         $news_paper_model->fill($news_paper['me'])->save();
         
         
-        if(isset($news_paper['components'])){
+        if (isset($news_paper['components'])) {
             $news_paper_model->saveComponents($news_paper['components']);
         }
 

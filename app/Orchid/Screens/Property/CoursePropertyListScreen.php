@@ -30,7 +30,7 @@ class CoursePropertyListScreen extends Screen
     {
 
         return [
-            'refs' => RefChar::paginate(20)
+            'refs' => RefChar::paginate(20),
         ];
     }
 

@@ -15,19 +15,6 @@ use Illuminate\Validation\ValidationException;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        // $this->middleware('guest', [
-        //     'except' => [
-        //         'logout',
-        //         'switchLogout',
-        //     ],
-        // ]);
-    }
-
-    /**
      * Display the login view.
      *
      * @return \Illuminate\View\View
@@ -39,6 +26,8 @@ class AuthenticatedSessionController extends Controller
 
 
     /**
+     * Авторизация
+     *
      * @param LoginRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -48,10 +37,6 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $user = $request->user();
-        // if (!$user->hasVerifiedEmail()) {
-        //     // Log out and send email
-        //     $this->verificationIsRequired($request, $user);
-        // }
 
         $user->last_login_at = Carbon::now();
         $user->last_login_ip = $request->ip();
@@ -63,11 +48,13 @@ class AuthenticatedSessionController extends Controller
         $path = app('Illuminate\Routing\UrlGenerator')->previous();
 
         return response()->json([
-            'url' => $path
+            'url' => $path,
         ]);
     }
 
     /**
+     * Verification Is Required
+     *
      * @param $request
      * @param $user
      * @throws ValidationException
@@ -78,7 +65,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
         event(new Registered($user));
         throw ValidationException::withMessages([
-            'email' => 'Пожалуйста подтвердите email'
+            'email' => 'Пожалуйста подтвердите email',
         ]);
     }
 

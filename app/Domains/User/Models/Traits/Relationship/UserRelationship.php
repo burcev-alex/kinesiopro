@@ -3,6 +3,7 @@
 namespace App\Domains\User\Models\Traits\Relationship;
 
 use Orchid\Attachment\Models\Attachment;
+
 /**
  * Class UserRelationship.
  */
@@ -17,5 +18,4 @@ trait UserRelationship
     {
         return $this->hasOne(Attachment::class, 'id', 'scan_id');
     }
-
 }

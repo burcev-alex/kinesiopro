@@ -8,6 +8,8 @@ namespace App\Domains\User\Models\Traits\Scope;
 trait UserScope
 {
     /**
+     * Поиск по названию и email
+     *
      * @param $query
      * @param $term
      *
@@ -22,6 +24,8 @@ trait UserScope
     }
 
     /**
+     * Все неактивные пользователи
+     *
      * @param $query
      *
      * @return mixed
@@ -32,6 +36,8 @@ trait UserScope
     }
 
     /**
+     * Все автивные
+     *
      * @param $query
      *
      * @return mixed
@@ -42,6 +48,8 @@ trait UserScope
     }
 
     /**
+     * Фильтрация по типу
+     *
      * @param $query
      * @param $type
      *
@@ -53,6 +61,8 @@ trait UserScope
     }
 
     /**
+     * Все у кого есть полный доступ
+     *
      * @param $query
      *
      * @return mixed
@@ -62,25 +72,5 @@ trait UserScope
         return $query->whereHas('roles', function ($query) {
             $query->where('name', config('strizhi.access.role.admin'));
         });
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeAdmins($query)
-    {
-        return $query->where('type', $this::TYPE_ADMIN);
-    }
-
-    /**
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeUsers($query)
-    {
-        return $query->where('type', $this::TYPE_LAWYER);
     }
 }

@@ -30,7 +30,7 @@ class CategoryListScreen extends Screen
     public function query(): array
     {
         return [
-            'categories' => Category::paginate(12)
+            'categories' => Category::paginate(12),
         ];
     }
 

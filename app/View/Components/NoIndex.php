@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class NoIndex extends Component
 {
-    public $disablerobots; 
+    public $disablerobots;
     /**
      * Create a new component instance.
      *

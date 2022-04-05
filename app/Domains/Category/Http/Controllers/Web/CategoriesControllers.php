@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Services\RouterService;
 use App\Domains\Category\Services\CatalogFilterService;
 
-class CategoriesControllers extends Controller {
+class CategoriesControllers extends Controller
+{
     protected CatalogFilterService $catalogFilterService;
     protected CatalogFilterGeneratorService $filterGeneratorService;
     protected RouterService $routerService;
@@ -19,7 +20,8 @@ class CategoriesControllers extends Controller {
     public function __construct(
         CatalogFilterService $catalogFilterService,
         CatalogFilterGeneratorService $filterGeneratorService,
-        RouterService $routerService)
+        RouterService $routerService
+    )
     {
         $this->routerService = $routerService;
         $this->filterGeneratorService = $filterGeneratorService;
@@ -38,12 +40,12 @@ class CategoriesControllers extends Controller {
         
         
         // Хлебные крошки
-        BreadcrumbsService::category($category1, $filters); 
+        BreadcrumbsService::category($category1, $filters);
 
         // данные для мета тегов, и seo текст
         $arParseFilters = $this->catalogFilterService->parseFilters($filters);
         
-        if(array_key_exists('text', $arParseFilters)){
+        if (array_key_exists('text', $arParseFilters)) {
             $typePage = 'search';
         }
         $paths = explode('/', request()->path());
@@ -51,40 +53,39 @@ class CategoriesControllers extends Controller {
 
         $category_info = $this->catalogFilterService->getCategoryInfo();
         
-        if(!$category_info && strlen($category1) > 0){
+        if (!$category_info && strlen($category1) > 0) {
             abort(404);
         }
         
         $seo = [];
 
-        if(!empty($category_info) && $category_info->meta_title){
+        if (!empty($category_info) && $category_info->meta_title) {
             $seo['title'] = $category_info->meta_title;
-        } else if(!empty($category_info)) {
+        } elseif (!empty($category_info)) {
             $seo['title'] = $category_info->name;
-        }
-        else{
+        } else {
             $seo['title'] = __('main.meta.course_tile');
         }
 
-        if(!empty($category_info) && $category_info->meta_description){
+        if (!empty($category_info) && $category_info->meta_description) {
             $seo['description'] = $category_info->meta_description;
         } else {
             $seo['description'] = __('main.meta.course_description');
         }
 
-        if(!empty($category_info) && $category_info->meta_keywords){
+        if (!empty($category_info) && $category_info->meta_keywords) {
             $seo['keywords'] = $category_info->meta_keywords;
         } else {
             $seo['keywords'] = '';
         }
 
-        if(!empty($category_info) && $category_info->meta_h1){
+        if (!empty($category_info) && $category_info->meta_h1) {
             $seo['h1'] = $category_info->meta_h1;
         } else {
             $seo['h1'] = __('main.meta.course_h1');
         }
 
-        if(!empty($category_info) && $category_info->attachment){
+        if (!empty($category_info) && $category_info->attachment) {
             $seo['image'] = $category_info->attachment->url;
         } else {
             $seo['image'] = '';
@@ -100,15 +101,15 @@ class CategoriesControllers extends Controller {
             return response()->json([
 
                 'filters' => [
-                    'data' => $filterSchema
+                    'data' => $filterSchema,
                 ],
                 'resource' => [
                     'html' => view($templateCatalogList, ['courses' => $catalog])->render(),
-                    'data' => $catalog
+                    'data' => $catalog,
                 ],
                 'pagination' => [
                     'html' => view('includes.pagination', ['pagination' => $pagination, 'block' => $paginationBlock])->render(),
-                    'data' => $pagination
+                    'data' => $pagination,
                 ],
                 'selectedCourses' => $catalog->total(),
                 'totalCourses' => $this->catalogFilterService->getTotalCourses(),
@@ -118,7 +119,6 @@ class CategoriesControllers extends Controller {
             return view('pages.course.list', [
                 'targetUrl' => $targetUrl,
                 'seo' => $seo,
-                //'canonical' => $this->canonicalService->render(),
                 'courses' => $catalog,
                 'categoryInfo' => $seo,
                 'pagination' => $pagination,
@@ -127,13 +127,13 @@ class CategoriesControllers extends Controller {
                 'isFavorite' => $this->catalogFilterService->isFavorite()
             ]);
         }
-
     }
 
     /**
      * Get filters
      */
-    public function filters() {
+    public function filters()
+    {
 
         return response()->json([
             'filters' => $this->filterGeneratorService->getFilterSchema(),

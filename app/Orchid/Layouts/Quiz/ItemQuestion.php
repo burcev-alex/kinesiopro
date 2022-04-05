@@ -31,17 +31,17 @@ class ItemQuestion extends Rows
     protected $defNamespace = 'App\Orchid\Layouts\Quiz\Questions';
 
     /**
-     * Получает модельку привязанного к новости вопроса 
-     * и рендерит поля для редактирования ее json-полей. 
-     * Для каждого типа вопроса должен быть соответствующий 
+     * Получает модельку привязанного к новости вопроса
+     * и рендерит поля для редактирования ее json-полей.
+     * Для каждого типа вопроса должен быть соответствующий
      * его blade-question-слагу (<x-news.text-title/>) класс в пространстве имен App\Orchid\Layouts\Quiz\Qestions
      * (пример: text-title - App\Orchid\Layouts\Quiz\Qestions\TextTitle).
-     * 
+     *
      * Если класса не будет, то вопрос проигнорируется в админ панели
      * и заложится ошибка.
-     * 
-     * Каждый вопрос должен расширять этот класс и 
-     * имплиментировать App\Orchid\Layouts\Quiz\Interfaces\ItemQuestionInterface 
+     *
+     * Каждый вопрос должен расширять этот класс и
+     * имплиментировать App\Orchid\Layouts\Quiz\Interfaces\ItemQuestionInterface
      * что бы успешно попасть в метод $this->makeQuestion()
      *
      * @param  AppItemQuestion $question
@@ -62,7 +62,7 @@ class ItemQuestion extends Rows
 
     /**
      * Get the fields elements to be displayed.
-     * Этот метод проигнорирован, т.к. необходимо возвращать аккордеон для 
+     * Этот метод проигнорирован, т.к. необходимо возвращать аккордеон для
      * каждого вопроса, а тут зашит массив.
      *
      * @return Field[]
@@ -73,7 +73,7 @@ class ItemQuestion extends Rows
     }
 
     /**
-     * Пытается создать объект класса из пространиства имен указанного в defNamespace 
+     * Пытается создать объект класса из пространиства имен указанного в defNamespace
      * Имя класса транспонируется из kebab-case в CamelCase
      *
      * @param  string $slug
@@ -82,7 +82,7 @@ class ItemQuestion extends Rows
     public function createQuestion(string $slug): array
     {
         try {
-            // Выглядит муторно, но по факту просто камэлкэйсит слаг 
+            // Выглядит муторно, но по факту просто камэлкэйсит слаг
             // и конкатенирует ее с пространством имен
             $className = $this->defNamespace . '\\' . implode("", collect(explode('-', $slug))->map(function ($item) {
                 return ucfirst($item);
@@ -108,21 +108,22 @@ class ItemQuestion extends Rows
     {
         $fileds = $question->render();
 
+        $val = $this->question->sort;
+
         return [
             // название планки аккордеона должно быть уникальным
-            "Вопрос " . $this->question->sort . ' : ' . $this->question->name => [
+            "Вопрос " . $val . ' : ' . $this->question->name => [
                 Layout::rows(
                     array_merge(
-                        // прибавляем к полям редактирования необходимое для всех 
+                        // прибавляем к полям редактирования необходимое для всех
                         // вопросов поле сортировки
                         [
-                            Input::make($this->prefix . '.sort')->type('number')->value($this->question->sort)->title('Сортировка')->size(3)
+                            Input::make($this->prefix . '.sort')->type('number')->value($val)->title('Сортировка')->size(3)
                         ],
-
                         $fileds
                     )
                 )
-            ]
+            ],
         ];
     }
 }

@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 
 namespace App\Orchid\Layouts\Online\Interfaces;
 
-interface OnlineDesciptionComponentInterface {    
+interface OnlineDesciptionComponentInterface
+{
     /**
-     * render
+     * Render
      *
      * @return array
      */

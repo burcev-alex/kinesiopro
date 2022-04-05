@@ -20,10 +20,12 @@ class CourseBlock extends Model
         "start_date",
         "finish_date",
         "teacher_id",
-        "description"
+        "description",
     ];
 
     /**
+     * Даты
+     *
      * @var string[]
      */
     protected $dates = [

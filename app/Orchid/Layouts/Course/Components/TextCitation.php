@@ -17,7 +17,7 @@ class TextCitation extends CourseDesciptionComponent implements CourseDesciption
 
         return [
             Input::make($this->prefix . '.autor')->value($autor)->title('Автор цитаты'),
-            Quill::make($this->prefix . '.text')->value($text)->title('Текст')
+            Quill::make($this->prefix . '.text')->value($text)->title('Текст'),
         ];
     }
 }

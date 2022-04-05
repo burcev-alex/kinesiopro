@@ -19,6 +19,7 @@ class HistoryService
 
     /**
      * Get list of items in the order
+     *
      * @param int $orderId
      * @return array
      */
@@ -32,13 +33,15 @@ class HistoryService
         $return = [];
         foreach ($orders->items as $item) {
             $return[$item['product_id']][] = [
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
             ];
         }
         return $return;
     }
 
     /**
+     * Фильтрация по пользователю
+     *
      * @param int $userId
      * @return $this
      */

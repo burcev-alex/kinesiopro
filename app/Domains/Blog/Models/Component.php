@@ -9,13 +9,12 @@ class Component extends Model
     protected $fillable = [
         "name",
         "slug",
-        "fields"
+        "fields",
     ];
 
     protected $casts = [
-        'fields' => "array"
+        'fields' => "array",
     ];
 
     public $table = 'blog_components';
-    
 }

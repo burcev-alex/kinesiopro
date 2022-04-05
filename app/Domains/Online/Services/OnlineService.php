@@ -33,13 +33,16 @@ class OnlineService extends BaseService
 
     public function save(array $fields): self
     {
-        if(array_key_exists('attachment_id', $fields)){
+        if (array_key_exists('attachment_id', $fields)) {
             $fields['attachment_id'] = current($fields['attachment_id']);
         }
 
         $this->model->fill($fields);
-        if (isset($fields['active'])) $this->model->active = true;
-        else $this->model->active = false;
+        if (isset($fields['active'])) {
+            $this->model->active = true;
+        } else {
+            $this->model->active = false;
+        }
 
 
         $this->model->save();
@@ -59,11 +62,12 @@ class OnlineService extends BaseService
 
      /**
      * Get onlines catalog
+      *
      * @param int $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getCatalog(string $category='',  int $page = 1)
-    {  
+    public function getCatalog(string $category = '', int $page = 1)
+    {
         $builder = $this->model->active();
 
         if (!empty($category)) {
@@ -78,6 +82,8 @@ class OnlineService extends BaseService
     }
 
     /**
+     * Информация по онлайн-курсу
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */

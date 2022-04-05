@@ -19,12 +19,13 @@ class BannersService extends BaseService
         $this->model = $banner;
     }
 
-    public function getHomeBanners(){
+    public function getHomeBanners()
+    {
         return Cache::tags('banners')->rememberForever('banners.' . app()->getLocale(), function () {
             $result = Banner::Where('active', 1)->orderBy('sort', 'asc')->orderBy('created_at', 'desc')->get();
             $banners = [];
             
-            foreach($result as $item){
+            foreach ($result as $item) {
                 if ($item->attachment) {
                     $banners[] = [
                         'name' => $item->name,
@@ -40,15 +41,16 @@ class BannersService extends BaseService
 
             return $banners;
         });
-
-        
     }
 
     public function save(array $fields): self
     {
         $this->model->fill($fields['banner']);
-        if (isset($fields['banner']['active'])) $this->model->active = true;
-        else $this->model->active = false;
+        if (isset($fields['banner']['active'])) {
+            $this->model->active = true;
+        } else {
+            $this->model->active = false;
+        }
 
         $this->model->save();
 
@@ -60,11 +62,15 @@ class BannersService extends BaseService
     public function saveImages(array $images)
     {
         
-        if(!isset($images['attachment_id'])) $images['attachment_id'] = [];         
-        if(!isset($images['attachment_mobile_id'])) $images['attachment_mobile_id'] = [];         
+        if (!isset($images['attachment_id'])) {
+            $images['attachment_id'] = [];
+        }
+        if (!isset($images['attachment_mobile_id'])) {
+            $images['attachment_mobile_id'] = [];
+        }
         
-        foreach($images as $key => $items){
-            foreach($items as $item){
+        foreach ($images as $key => $items) {
+            foreach ($items as $item) {
                 Banner::where('id', $this->model->id)->update([$key => $item]);
             }
         }

@@ -26,9 +26,8 @@ class CourseBlock extends Rows
     protected $defNamespace = 'App\Orchid\Layouts\Course\Blocks';
 
     /**
-     * 
-     * Каждый блок должен расширять этот класс и 
-     * имплиментировать App\Orchid\Layouts\Course\Interfaces\CourseBlockInterface 
+     * Каждый блок должен расширять этот класс и
+     * имплиментировать App\Orchid\Layouts\Course\Interfaces\CourseBlockInterface
      * что бы успешно попасть в метод $this->makeBlock()
      *
      * @param  AppCourseBlock $block
@@ -49,7 +48,7 @@ class CourseBlock extends Rows
 
     /**
      * Get the fields elements to be displayed.
-     * Этот метод проигнорирован, т.к. необходимо возвращать аккордеон для 
+     * Этот метод проигнорирован, т.к. необходимо возвращать аккордеон для
      * каждого компонента, а тут зашит массив.
      *
      * @return Field[]
@@ -60,7 +59,7 @@ class CourseBlock extends Rows
     }
 
     /**
-     * Пытается создать объект класса из пространиства имен указанного в defNamespace 
+     * Пытается создать объект класса из пространиства имен указанного в defNamespace
      * Имя класса транспонируется из kebab-case в CamelCase
      *
      * @return array - поля, указанные в методе render запрашиваемого класса
@@ -70,7 +69,7 @@ class CourseBlock extends Rows
         $slug = 'Content';
 
         try {
-            // Выглядит муторно, но по факту просто камэлкэйсит слаг 
+            // Выглядит муторно, но по факту просто камэлкэйсит слаг
             // и конкатенирует ее с пространством имен
             $className = $this->defNamespace . '\\' . implode("", collect(explode('-', $slug))->map(function ($item) {
                 return ucfirst($item);
@@ -101,16 +100,15 @@ class CourseBlock extends Rows
             'Блок : ' . $this->block->title => [
                 Layout::rows(
                     array_merge(
-                        // прибавляем к полям редактирования необходимое для всех 
+                        // прибавляем к полям редактирования необходимое для всех
                         // компонентов поле сортировки
                         [
                             Input::make($this->prefix . '.sort')->type('number')->value($this->block->sort)->title('Сортировка')
                         ],
-
                         $fileds
                     )
                 )
-            ]
+            ],
         ];
     }
 }

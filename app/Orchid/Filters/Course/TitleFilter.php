@@ -12,6 +12,8 @@ use Orchid\Screen\Fields\Input;
 class TitleFilter extends Filter
 {
     /**
+     * Parameters
+     *
      * @var array
      */
     public $parameters = [
@@ -19,6 +21,8 @@ class TitleFilter extends Filter
     ];
 
     /**
+     * Name
+     *
      * @return string
      */
     public function name() : string
@@ -27,6 +31,8 @@ class TitleFilter extends Filter
     }
 
     /**
+     * Run
+     *
      * @param Builder $builder
      *
      * @return Builder
@@ -37,6 +43,8 @@ class TitleFilter extends Filter
     }
 
     /**
+     * Display
+     *
      * @return Field[]
      */
     public function display() : array

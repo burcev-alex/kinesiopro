@@ -83,6 +83,7 @@
 @push('after-scripts')
     @include('includes.scripts', [
     'list' => [
+        mix('js/plugins/mask.js'),
         mix('js/course_page_script.js')
     ],
     ])

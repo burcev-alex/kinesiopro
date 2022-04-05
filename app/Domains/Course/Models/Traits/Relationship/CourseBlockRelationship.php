@@ -1,16 +1,17 @@
-<?php 
+<?php
 
 namespace App\Domains\Course\Models\Traits\Relationship;
 
 use App\Domains\Course\Models\Course;
 use App\Domains\Teacher\Models\Teacher;
 
-trait CourseBlockRelationship {
+trait CourseBlockRelationship
+{
 
 
     public function course()
     {
-        return  $this->belongsTo(Course::class, 'course_id', 'id', 'properties');
+        return $this->belongsTo(Course::class, 'course_id', 'id', 'properties');
     }
 
     public function teacher()

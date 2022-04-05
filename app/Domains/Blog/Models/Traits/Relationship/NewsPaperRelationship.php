@@ -4,7 +4,8 @@ namespace App\Domains\Blog\Models\Traits\Relationship;
 use App\Domains\Blog\Models\NewsPaperComponent;
 use Orchid\Attachment\Models\Attachment;
 
-trait NewsPaperRelationship {
+trait NewsPaperRelationship
+{
 
     public function attachment()
     {

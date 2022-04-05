@@ -10,6 +10,8 @@ use Illuminate\Support\Collection;
 trait UserMethod
 {
     /**
+     * Супер-админ
+     *
      * @return bool
      */
     public function isMasterAdmin(): bool
@@ -18,6 +20,8 @@ trait UserMethod
     }
 
     /**
+     * Админ
+     *
      * @return mixed
      */
     public function isAdmin(): bool
@@ -26,6 +30,8 @@ trait UserMethod
     }
 
     /**
+     * Покупатель
+     *
      * @return mixed
      */
     public function isUser(): bool
@@ -34,6 +40,8 @@ trait UserMethod
     }
 
     /**
+     * Проверка на полные права
+     *
      * @return mixed
      */
     public function hasAllAccess(): bool
@@ -42,6 +50,8 @@ trait UserMethod
     }
 
     /**
+     * Тип пользователя
+     *
      * @param $type
      *
      * @return bool
@@ -52,6 +62,8 @@ trait UserMethod
     }
 
     /**
+     * Можно изменять емайл?
+     *
      * @return mixed
      */
     public function canChangeEmail(): bool
@@ -60,6 +72,8 @@ trait UserMethod
     }
 
     /**
+     * Проверка на активность
+     *
      * @return bool
      */
     public function isActive(): bool
@@ -68,6 +82,8 @@ trait UserMethod
     }
 
     /**
+     * Проверка на верификацию
+     *
      * @return bool
      */
     public function isVerified(): bool
@@ -76,6 +92,8 @@ trait UserMethod
     }
 
     /**
+     * Привяка к соц.сетям
+     *
      * @return bool
      */
     public function isSocial(): bool
@@ -84,6 +102,8 @@ trait UserMethod
     }
 
     /**
+     * Группировка по описанию
+     *
      * @return Collection
      */
     public function getPermissionDescriptions(): Collection
@@ -92,6 +112,8 @@ trait UserMethod
     }
 
     /**
+     * Произвольная аватарка
+     *
      * @param  bool  $size
      *
      * @return mixed|string
@@ -99,6 +121,8 @@ trait UserMethod
      */
     public function getAvatar($size = null)
     {
-        return 'https://gravatar.com/avatar/'.md5(strtolower(trim($this->email))).'?s='.config('strizhi.avatar.size', $size).'&d=mp';
+        $md5 = md5(strtolower(trim($this->email)));
+        
+        return 'https://gravatar.com/avatar/'.$md5.'?s='.config('strizhi.avatar.size', $size).'&d=mp';
     }
 }

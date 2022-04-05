@@ -16,7 +16,7 @@ class RefCharsValue extends Model
     protected $fillable = [
         "char_id",
         "value",
-        "slug"
+        "slug",
     ];
 
 

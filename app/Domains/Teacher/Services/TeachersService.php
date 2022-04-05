@@ -27,8 +27,11 @@ class TeachersService extends BaseService
     public function save(array $fields): self
     {
         $this->model->fill($fields['teacher']);
-        if (isset($fields['teacher']['active'])) $this->model->active = true;
-        else $this->model->active = false;
+        if (isset($fields['teacher']['active'])) {
+            $this->model->active = true;
+        } else {
+            $this->model->active = false;
+        }
 
 
         $this->model->save();
@@ -39,10 +42,12 @@ class TeachersService extends BaseService
     public function saveImages(array $images)
     {
         
-        if(!isset($images['attachment_id'])) $images['attachment_id'] = [];        
+        if (!isset($images['attachment_id'])) {
+            $images['attachment_id'] = [];
+        }
         
-        foreach($images as $key => $items){
-            foreach($items as $item){
+        foreach ($images as $key => $items) {
+            foreach ($items as $item) {
                 Teacher::where('id', $this->model->id)->update([$key => $item]);
             }
         }

@@ -72,8 +72,8 @@ class NewsCreateScreen extends Screen
                     Input::make('item.me.title')->title('Заголовок')->value(''),
                     CheckBox::make('item.me.active')
                     ->value(false)->title('Активность'),
-                    Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1)
-                ])
+                    Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1),
+                ]),
             ])
         ];
     }
@@ -83,24 +83,18 @@ class NewsCreateScreen extends Screen
     {
         $news_paper = $request->get('item')['me'];
 
-        if(!isset($news_paper['slug']) || !isset($news_paper['title']) || !isset($news_paper['attachment_id'])){
+        if (!isset($news_paper['slug']) || !isset($news_paper['title']) || !isset($news_paper['attachment_id'])) {
             Toast::error("Не все поля заполнены!");
             return redirect()->back();
         }
         
-        // $check_slug = NewsPaper::where('slug', $news_paper['slug'])->get()->first();
-        
-        // if($check_slug){
-        //     Toast::error("URL новости совпадает с уже существующим!");
-        //     return redirect()->back();
-        // }
-        
         $news_paper_model = new NewsPaper($news_paper);
         
-        if(!isset($news_paper['active']))
+        if (!isset($news_paper['active'])) {
             $news_paper_model->active = 0;
-        else if(isset($news_paper['active']))
+        } elseif (isset($news_paper['active'])) {
             $news_paper_model->active = 1;
+        }
         
         $news_paper_model->save();
 
@@ -108,7 +102,4 @@ class NewsCreateScreen extends Screen
         Toast::success("Добавьте в нее компонентов!");
         return redirect()->route('platform.news.edit', $news_paper_model->id);
     }
-
-
-
 }

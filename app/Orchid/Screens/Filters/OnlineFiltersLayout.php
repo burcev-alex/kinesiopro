@@ -9,13 +9,15 @@ use Orchid\Screen\Layouts\Selection;
 class OnlineFiltersLayout extends Selection
 {
     /**
+     * Filter
+     *
      * @return Filter[]
      */
     public function filters(): array
     {
         return [
             TitleFilter::class,
-            ActiveFilter::class
+            ActiveFilter::class,
         ];
     }
 }

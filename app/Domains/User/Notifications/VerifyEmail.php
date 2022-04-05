@@ -15,10 +15,9 @@ class VerifyEmail extends Notification
     /**
      * Get the notification's channels.
      *
-     * @param  mixed  $notifiable
      * @return array|string
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
@@ -36,7 +35,6 @@ class VerifyEmail extends Notification
             ->line("Спасибо «".$notifiable->name."», Вы успешно зарегистрировались на сайте kinesiopro.ru")
             ->line(__('Login: '). $notifiable->email)
             ->line(__('Password: '). $notifiable->not_code_pass)
-            // ->action(__('Verify E-mail Address'), $this->verificationUrl($notifiable))
             ->line("Пожалуйста, дозаполните свои данные в разделе \"Мои данные\" в Личном кабинете")
             ->line("Удачных покупок! ");
     }

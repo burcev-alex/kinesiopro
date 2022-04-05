@@ -5,7 +5,7 @@ namespace App\View\Components\News;
 use Illuminate\View\Component;
 
 /**
- * Родительский компонент. 
+ * Родительский компонент.
  * В него необходимо добавить свойства, необходимые для доступа в расширяющем компоненте.
  */
 class MainComponent extends Component
@@ -36,11 +36,11 @@ class MainComponent extends Component
     {
         $this->number = $number;
         
-        if(!empty($fields)){
+        if (!empty($fields)) {
             foreach ($fields as $key => $value) {
                 if ($key == 'media') {
                     foreach ($value as $attachment) {
-                        if($attachment){
+                        if ($attachment) {
                             $originPath = $attachment->relativeUrl;
                             
                             // подмена origin на webp , если поддерживается формат
@@ -52,13 +52,11 @@ class MainComponent extends Component
                     }
 
                     $this->$key = $value;
-                }
-                else{
+                } else {
                     $this->$key = $value;
                 }
             }
         }
-        
     }
 
     /**

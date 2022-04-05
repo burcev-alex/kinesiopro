@@ -13,13 +13,15 @@ class ElementComment extends ItemQuestion implements ItemQuestionInterface
 {
     public function render(): array
     {
+        $p = $this->prefix;
+
         $max = 4;
 
         $fields = $this->question->fields;
         
-        if(array_key_exists('list', $fields) && is_array($fields['list'])){
+        if (array_key_exists('list', $fields) && is_array($fields['list'])) {
             $arr = [];
-            foreach($fields['list']['answer'] as $key=>$value){
+            foreach ($fields['list']['answer'] as $key => $value) {
                 $arr[] = [
                     'answer' => $value,
                     'point' => $fields['list']['point'][$key]
@@ -32,29 +34,28 @@ class ElementComment extends ItemQuestion implements ItemQuestionInterface
         $comment = array_key_exists('comment', $fields) ? $fields['comment'] : '';
         
         $list = [
-            Input::make($this->prefix . '.title')->value($title)->title('Вопрос'),
-            Input::make($this->prefix . '.comment')->value($comment)->title('Комментарий'),
+            Input::make($p . '.title')->value($title)->title('Вопрос'),
+            Input::make($p . '.comment')->value($comment)->title('Комментарий'),
         ];
 
         for ($key = 0; $key < $max; $key++) {
             if (isset($fields['list']) && is_array($fields['list'])) {
                 if (array_key_exists($key, $fields['list'])) {
                     $item = $fields['list'][$key];
-                }
-                else{
+                } else {
                     $item = [
                         'answer' => '',
                         'point' => ''
                     ];
                 }
                 $list[] = Group::make([
-                    Input::make($this->prefix . '.list.answer.')->value($item['answer'])->title('Вариант ' . ($key + 1))->size(80),
-                    Input::make($this->prefix . '.list.point.')->value($item['point'])->title('Балл')->size(2)
+                    Input::make($p . '.list.answer.')->value($item['answer'])->title('Вариант ' . ($key + 1))->size(80),
+                    Input::make($p . '.list.point.')->value($item['point'])->title('Балл')->size(2),
                 ])->autoWidth();
             } else {
                 $list[] = Group::make([
-                    Input::make($this->prefix . '.list.answer.')->value('')->title('Вариант ' . ($key + 1))->size(80),
-                    Input::make($this->prefix . '.list.point.')->value('')->title('Балл')->size(2)
+                    Input::make($p . '.list.answer.')->value('')->title('Вариант ' . ($key + 1))->size(80),
+                    Input::make($p . '.list.point.')->value('')->title('Балл')->size(2),
                 ])->autoWidth();
             }
         }

@@ -29,24 +29,25 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Sort by slug // 'slug' => ['column'=>'', 'direction' => '']
+     *
      * @var array|\string[][]
      */
     protected array $sorts = [
         'sort' => [
             'column' => 'sort',
-            'direction' => 'asc'
+            'direction' => 'asc',
         ],
         'max_price' => [
             'column' => 'price',
-            'direction' => 'desc'
+            'direction' => 'desc',
         ],
         'min_price' => [
             'column' => 'price',
-            'direction' => 'asc'
+            'direction' => 'asc',
         ],
         'date' => [
             'column' => 'created_at',
-            'direction' => 'asc'
+            'direction' => 'asc',
         ]
     ];
 
@@ -55,7 +56,11 @@ class CatalogFilterService extends AbstractCatalogFilterService
     protected array $categoryIds = [];
     protected array $categoriesSlug = [];
 
-    /** @var int Show which sort is set currently and by default */
+    /**
+     * Show which sort is set currently and by default
+     *
+     * @var integer
+     */
     protected int $currentSortType;
     protected int $defaultSortType = self::DEFAULT_COURSE_SORT;
     protected bool $isFavorites = false;
@@ -66,7 +71,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
     protected int $defaultLimitPage = self::DEFAULT_LIMIT;
 
     /**
-     *
+     * Constructor
      */
     public function __construct()
     {
@@ -76,23 +81,30 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Get total of Courses in catalog
+     *
      * @return int
      */
     public function getTotalCourses(): int
     {
-        //$this->totalCourses = 0;
         if (!isset($this->totalCourses)) {
             $this->totalCourses = $this->query->count();
         }
         return $this->totalCourses;
     }
     
+    /**
+     * Список разделов, участвующие в фильтрации
+     *
+     * @return array
+     */
     public function getCategoryIds(): array
     {
         return $this->categoryIds;
     }
 
     /**
+     * Проверка на избранное
+     *
      * @return bool
      */
     public function isFavorite(): bool
@@ -102,6 +114,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Set filter by categories to catalog
+     *
      * @param ...$categories
      * @return $this
      */
@@ -120,8 +133,6 @@ class CatalogFilterService extends AbstractCatalogFilterService
             $this->categoryIds = $ids;
 
             $this->attachCategoriesIds($ids);
-            
-            // $this->totalCourses = $this->query->count();
         }
 
         return $this;
@@ -129,11 +140,13 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Get Courses Category information
+     *
      * @return Category
      */
 
-    public function getCategoryInfo(){
-        if(!empty($this->categoriesSlug)){
+    public function getCategoryInfo()
+    {
+        if (!empty($this->categoriesSlug)) {
             return Category::where('slug', end($this->categoriesSlug))->first();
         } else {
             return;
@@ -141,6 +154,8 @@ class CatalogFilterService extends AbstractCatalogFilterService
     }
 
     /**
+     * Set Default Sort Type
+     *
      * @param int $type
      * @return $this
      */
@@ -152,6 +167,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Use different object for getAvailableProperties and getCatalog
+     *
      * @param string $filters
      * @return array
      */
@@ -160,10 +176,10 @@ class CatalogFilterService extends AbstractCatalogFilterService
         $this->query->with([
             'properties' => function ($query) {
                 return $query->select(['course_id', 'ref_char_id', 'ref_char_value_id']);
-            }
+            },
         ]);
         
-        if(count($this->categoryIds) > 0){
+        if (count($this->categoryIds) > 0) {
             $this->attachCategoriesIds($this->categoryIds);
         }
 
@@ -190,27 +206,17 @@ class CatalogFilterService extends AbstractCatalogFilterService
         
         // собираем данные через эластик
         $aggregationCollection = [];
-        $availableChars = $this->facetFilter($filters, $courses, $aggregationCollection);
+        $availableChars = [];
 
-        // $this->totalCourses = $categoryCourses->count();
+        
         $this->selectedCourses = $courses->count();
 
         return [$availableChars, $availableCharsForCategory, $aggregationCollection];
     }
 
     /**
-     * Фасетный поиск по всем выбранным значениям свойств
-     *
-     * @param string $filters
-     * @return array
-     */
-    private function facetFilter($filters, $Courses, &$aggregationCollection)
-    {
-        return [];
-    }
-
-    /**
      * Get Courses catalog
+     *
      * @param string $filters
      * @param int $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -237,29 +243,14 @@ class CatalogFilterService extends AbstractCatalogFilterService
             'blocks'
         ]);
 
-        // $query = str_replace(array('?'), array('\'%s\''), $builder->toSql());
-        // $query = vsprintf($query, $builder->getBindings());
-        // dd($query);
-
         $result = $builder->paginate($this->currentLimitPage, ['*'], 'page', $page);
-            
-        // foreach($result as $key_prod => $item){
-        //     $charts = [];
-
-        //     foreach($item->property_values as $charValue){ 
-        //         if(empty($charts[$charValue->char_id]['value'])){$charts[$charValue->char_id]['value'] = [];}
-        //         $charts[$charValue->char_id]['name'] = $charValue->char->name;
-        //         $charts[$charValue->char_id]['value'] = array_merge($charts[$charValue->char_id]['value'], [$charValue->id => $charValue->value]);
-        //         $charts[$charValue->char_id]['valueText'] = implode (', ', $charts[$charValue->char_id]['value']);
-        //     }
-            
-        //     $result[$key_prod]->charValue = $charts;
-        // }
         
         return $result;
     }
 
     /**
+     * Attach Filters
+     *
      * @param string $filters
      * @return $this
      */
@@ -306,6 +297,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Attach properties
+     *
      * @param $properties
      */
     protected function attachProperties($properties)
@@ -343,6 +335,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Attach order by
+     *
      * @param string $slug
      */
     protected function filterSort(string $slug)
@@ -358,6 +351,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Limiting the display of the number of elements on the page
+     *
      * @param int $value
      */
     protected function filterNumbers(int $value)
@@ -369,6 +363,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Search by text
+     *
      * @param string $text
      */
     protected function filterText(string $text)
@@ -380,6 +375,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Search by period
+     *
      * @param string $month
      */
     protected function filterPeriod(string $month)
@@ -389,6 +385,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Search by teacher
+     *
      * @param int $teacherId
      */
     protected function filterTeacher(int $teacherId)
@@ -402,6 +399,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Add filter by categories ids
+     *
      * @param array $ids
      */
     protected function attachCategoriesIds(array $ids)
@@ -411,6 +409,7 @@ class CatalogFilterService extends AbstractCatalogFilterService
 
     /**
      * Get function name
+     *
      * @param string $key
      * @return string
      */

@@ -31,6 +31,8 @@ class UserListScreen extends Screen
     public $description = 'All registered users';
 
     /**
+     * Permission
+     *
      * @var string
      */
     public $permission = 'platform.systems.users';
@@ -82,6 +84,8 @@ class UserListScreen extends Screen
     }
 
     /**
+     * AsyncGetUser
+     *
      * @param User $user
      *
      * @return array
@@ -94,6 +98,8 @@ class UserListScreen extends Screen
     }
 
     /**
+     * Save
+     *
      * @param User    $user
      * @param Request $request
      */
@@ -110,6 +116,8 @@ class UserListScreen extends Screen
     }
 
     /**
+     * Remove
+     *
      * @param Request $request
      */
     public function remove(Request $request): void

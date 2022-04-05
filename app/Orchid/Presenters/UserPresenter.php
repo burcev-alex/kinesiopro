@@ -12,6 +12,8 @@ use Orchid\Support\Presenter;
 class UserPresenter extends Presenter implements Searchable, Personable
 {
     /**
+     * Label
+     *
      * @return string
      */
     public function label(): string
@@ -20,6 +22,8 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
+     * Title
+     *
      * @return string
      */
     public function title(): string
@@ -28,6 +32,8 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
+     * SubTitle
+     *
      * @return string
      */
     public function subTitle(): string
@@ -40,6 +46,8 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
+     * Url
+     *
      * @return string
      */
     public function url(): string
@@ -48,6 +56,8 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
+     * Image
+     *
      * @return string
      */
     public function image(): ?string
@@ -68,6 +78,8 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
+     * SearchQuery
+     *
      * @param string|null $query
      *
      * @return Builder

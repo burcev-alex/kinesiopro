@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 
 namespace App\Orchid\Layouts\News\Interfaces;
 
-interface NewsPaperComponentInterface {    
+interface NewsPaperComponentInterface
+{
     /**
-     * render
+     * Render
      *
      * @return array
      */

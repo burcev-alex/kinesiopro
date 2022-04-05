@@ -37,7 +37,8 @@ class BannersEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Banner $banner){
+    public function query(Banner $banner)
+    {
         $this->exists = $banner->exists;
         if ($this->exists) {
             $this->description = 'Редактировать баннер';
@@ -45,12 +46,11 @@ class BannersEditScreen extends Screen
                 $this->name = $banner->name;
             }
             return [
-                'banner' => $banner
+                'banner' => $banner,
             ];
-        }
-        else{
+        } else {
             return [
-                'banner' => collect([])
+                'banner' => collect([]),
             ];
         }
     }
@@ -67,7 +67,7 @@ class BannersEditScreen extends Screen
                 ->method('save')->icon('save'),
 
             Button::make('Удалить')
-                ->method('remove')->icon('trash')
+                ->method('remove')->icon('trash'),
         ];
     }
 
@@ -85,7 +85,7 @@ class BannersEditScreen extends Screen
                 ],
                 'Изображение' => [
                     BannersImagesRows::class
-                ]
+                ],
             ])
         ];
     }
@@ -94,11 +94,12 @@ class BannersEditScreen extends Screen
         Banner $banner,
         Request $request,
         BannersService $service
-    ){
+    )
+    {
         $service->setModel($banner);
         $validate = $request->validate([
-            'banner.name' =>'required',
-            'banner.images' =>'array|min:2|max:2|required',
+            'banner.name' => 'required',
+            'banner.images' => 'array|min:2|max:2|required',
             'banner.images.attachment_id' => 'array|min:1|max:1|required',
             'banner.images.attachment_mobile_id' => 'array|min:1|max:1|required',
             'banner.*' => ''
@@ -111,6 +112,8 @@ class BannersEditScreen extends Screen
     }
 
     /**
+     * Remove
+     *
      * @param Banner $banner
      *
      * @return \Illuminate\Http\RedirectResponse

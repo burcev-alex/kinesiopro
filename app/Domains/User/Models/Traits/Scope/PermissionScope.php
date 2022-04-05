@@ -8,6 +8,8 @@ namespace App\Domains\User\Models\Traits\Scope;
 trait PermissionScope
 {
     /**
+     * Мастер
+     *
      * @param $query
      *
      * @return mixed
@@ -19,6 +21,8 @@ trait PermissionScope
     }
 
     /**
+     * Родитель
+     *
      * @param $query
      *
      * @return mixed
@@ -29,6 +33,8 @@ trait PermissionScope
     }
 
     /**
+     * Ребенок
+     *
      * @param $query
      *
      * @return mixed
@@ -39,6 +45,8 @@ trait PermissionScope
     }
 
     /**
+     * Сигнатура
+     *
      * @param $query
      *
      * @return mixed

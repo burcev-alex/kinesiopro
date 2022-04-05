@@ -16,7 +16,6 @@ class ResourceUser extends JsonResource
      */
     public function toArray($request)
     {
-        /** @var User $resource */
         $resource = $this->resource;
         $birthday = $resource->birthday
             ? Carbon::parse($resource->birthday)

@@ -12,6 +12,8 @@ use Illuminate\Validation\ValidationException;
 class UserService
 {
     /**
+     * Обновление данных пользователя
+     *
      * @param User $user
      * @param array $data
      * @return User

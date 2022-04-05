@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace App\Domains\Podcast\Models\Traits\Relationship;
 
 use Orchid\Attachment\Models\Attachment;
 
-trait PodcastRelationship {
+trait PodcastRelationship
+{
     public function attachment()
     {
         return $this->hasOne(Attachment::class, 'id', 'attachment_id');

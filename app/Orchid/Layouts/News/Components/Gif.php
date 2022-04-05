@@ -10,8 +10,10 @@ class Gif extends NewsPaperComponent implements NewsPaperComponentInterface
 {
     public function render(): array
     {
+        $value = isset($this->component->mediaFields['media']) ? $this->component->mediaFields['media'][0]->id : [];
+        
         return [
-            Upload::make($this->prefix . '.media')->value( isset($this->component->mediaFields['media']) ? $this->component->mediaFields['media'][0]->id : [])->title('Гифка')
+            Upload::make($this->prefix . '.media')->value($value)->title('Гифка')
         ];
     }
 }

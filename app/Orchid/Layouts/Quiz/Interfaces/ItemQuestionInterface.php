@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 
 namespace App\Orchid\Layouts\Quiz\Interfaces;
 
-interface ItemQuestionInterface {    
+interface ItemQuestionInterface
+{
     /**
-     * render
+     * Render
      *
      * @return array
      */

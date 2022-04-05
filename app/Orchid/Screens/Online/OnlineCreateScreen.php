@@ -47,7 +47,7 @@ class OnlineCreateScreen extends Screen
             
             Button::make('Сохранить')
                 ->method('save')
-                ->icon('save')
+                ->icon('save'),
         ];
     }
 
@@ -77,7 +77,8 @@ class OnlineCreateScreen extends Screen
         Online $online,
         OrchidOnlineRequest $request,
         OnlineOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($online);
         $validated = $request->validated();

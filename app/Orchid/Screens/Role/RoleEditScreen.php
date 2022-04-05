@@ -32,11 +32,15 @@ class RoleEditScreen extends Screen
     public $description = 'Access rights';
 
     /**
+     * Permission
+     *
      * @var string
      */
     public $permission = 'platform.systems.roles';
 
     /**
+     * Exists
+     *
      * @var bool
      */
     private $exist = false;
@@ -102,6 +106,8 @@ class RoleEditScreen extends Screen
     }
 
     /**
+     * Save
+     *
      * @param Role    $role
      * @param Request $request
      *
@@ -133,6 +139,8 @@ class RoleEditScreen extends Screen
     }
 
     /**
+     * Remove
+     *
      * @param Role $role
      *
      * @throws \Exception

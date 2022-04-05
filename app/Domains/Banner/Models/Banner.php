@@ -24,12 +24,11 @@ class Banner extends Model
         "attachment_id",
         "attachment_mobile_id",
         "sort",
-        "active"
+        "active",
     ];
 
     protected static function newFactory()
     {
         return BannerFactory::new();
     }
-    
 }

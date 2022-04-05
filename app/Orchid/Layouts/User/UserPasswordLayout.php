@@ -18,7 +18,6 @@ class UserPasswordLayout extends Rows
      */
     public function fields(): array
     {
-        /** @var User $user */
         $user = $this->query->get('user');
         $placeholder = $user->exists
             ? __('Leave empty to keep current password')

@@ -21,11 +21,11 @@ class OrdersItem extends Model
         "unit_price",
         "total",
         "name",
-        "property"
+        "property",
     ];
 
     protected $casts = [
-        'property' => "array"
+        'property' => "array",
     ];
 
 

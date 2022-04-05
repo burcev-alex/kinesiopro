@@ -8,6 +8,8 @@ namespace App\Domains\User\Models\Traits\Relationship;
 trait PermissionRelationship
 {
     /**
+     * Родительские связь
+     *
      * @return mixed
      */
     public function parent()
@@ -16,6 +18,8 @@ trait PermissionRelationship
     }
 
     /**
+     * Дочерние связи
+     *
      * @return mixed
      */
     public function children()

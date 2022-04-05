@@ -5,6 +5,8 @@ use Carbon\Carbon;
 if (! function_exists('setAllLocale')) {
 
     /**
+     * SetAllLocale
+     *
      * @param $locale
      */
     function setAllLocale($locale)
@@ -18,6 +20,8 @@ if (! function_exists('setAllLocale')) {
 if (! function_exists('setAppLocale')) {
 
     /**
+     * SetAppLocale
+     *
      * @param $locale
      */
     function setAppLocale($locale)
@@ -29,6 +33,8 @@ if (! function_exists('setAppLocale')) {
 if (! function_exists('setPHPLocale')) {
 
     /**
+     * SetPHPLocale
+     *
      * @param $locale
      */
     function setPHPLocale($locale)
@@ -40,6 +46,8 @@ if (! function_exists('setPHPLocale')) {
 if (! function_exists('setCarbonLocale')) {
 
     /**
+     * SetCarbonLocale
+     *
      * @param $locale
      */
     function setCarbonLocale($locale)
@@ -51,12 +59,14 @@ if (! function_exists('setCarbonLocale')) {
 if (! function_exists('getLocaleName')) {
 
     /**
+     * GetLocaleName
+     *
      * @param $locale
      *
      * @return mixed
      */
     function getLocaleName($locale)
     {
-        return config('grandstep.locale.languages')[$locale]['name'];
+        return config('kinesio.locale.languages')[$locale]['name'];
     }
 }

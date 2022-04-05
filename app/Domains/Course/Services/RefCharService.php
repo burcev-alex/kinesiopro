@@ -35,16 +35,16 @@ class RefCharService extends BaseService
         // найти все значения характеристик
         $arrCharValues = [];
         $resCharProperties = RefCharsValue::where('char_id', $this->model->id)->get();
-        foreach($resCharProperties as $charValue){
+        foreach ($resCharProperties as $charValue) {
             $arrCharValues[] = $charValue->slug;
         }
         $arrCharValues = array_unique($arrCharValues);
 
         // найти пересечение и удалить те значения , которых нет в новом наборе
-        foreach($arrCharValues as $valueId){
-            if(!array_key_exists($valueId, $values)){
+        foreach ($arrCharValues as $valueId) {
+            if (!array_key_exists($valueId, $values)) {
                 $rsDeleteValues = RefCharsValue::where('char_id', $this->model->id)->where('slug', $valueId)->get();
-                foreach($rsDeleteValues as $elValue){
+                foreach ($rsDeleteValues as $elValue) {
                     $elValue->delete();
                 }
             }
@@ -65,11 +65,13 @@ class RefCharService extends BaseService
     }
 
     /**
+     * Значения свойства
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getCharsGroupedBySlug()
     {
-        return Cache::tags('chars_with_values')->rememberForever('chars', function() {
+        return Cache::tags('chars_with_values')->rememberForever('chars', function () {
             $chars = RefChar::query()
                 ->with([
                     'values'

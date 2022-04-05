@@ -58,6 +58,8 @@ class UserProfileScreen extends Screen
     }
 
     /**
+     * Layout
+     *
      * @return \Orchid\Screen\Layout[]
      */
     public function layout(): array
@@ -86,6 +88,8 @@ class UserProfileScreen extends Screen
     }
 
     /**
+     * Save
+     *
      * @param Request $request
      */
     public function save(Request $request): void
@@ -106,6 +110,8 @@ class UserProfileScreen extends Screen
     }
 
     /**
+     * Change Password
+     *
      * @param Request $request
      */
     public function changePassword(Request $request): void

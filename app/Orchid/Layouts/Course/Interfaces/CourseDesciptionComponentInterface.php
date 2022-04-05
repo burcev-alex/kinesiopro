@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 
 namespace App\Orchid\Layouts\Course\Interfaces;
 
-interface CourseDesciptionComponentInterface {    
+interface CourseDesciptionComponentInterface
+{
     /**
-     * render
+     * Render
      *
      * @return array
      */

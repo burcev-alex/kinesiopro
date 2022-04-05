@@ -17,6 +17,8 @@ class OrderListLayout extends Table
     public $target = 'items';
 
     /**
+     * Columns
+     *
      * @return TD[]
      */
     public function columns(): array
@@ -25,10 +27,10 @@ class OrderListLayout extends Table
             TD::make('id', 'ID')
                 ->render(function (Order $item) {
                     return Link::make($item->id)->route('platform.order.show', $item);
-            }),
+                }),
             
             TD::make('number', 'Номер')->render(function (Order $item) {
-				return Link::make($item->number)->route('platform.order.show', $item);
+                return Link::make($item->number)->route('platform.order.show', $item);
                 return $item->number;
             }),
             

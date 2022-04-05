@@ -12,10 +12,10 @@ class NewsPaperComponent extends Model
         "news_paper_id",
         "component_id",
         "sort",
-        "fields"
+        "fields",
     ];
     protected $casts = [
-        "fields" => "array"
+        "fields" => "array",
     ];
 
     public $table = 'blog_news_paper_components';
@@ -24,15 +24,15 @@ class NewsPaperComponent extends Model
     public function getMediaFieldsAttribute()
     {
         $fields = $this->fields;
-        if(isset($fields['media']) && is_array(($fields['media'])))
-        {
+        if (isset($fields['media']) && is_array(($fields['media']))) {
             foreach ($fields['media'] as $key => $value) {
                 $media = NewsPaperMedia::find($value);
                 $value = $media->attachment;
                 $fields['media'][$key] = $value;
-             }
-        } else 
+            }
+        } else {
             unset($fields['media']);
+        }
         return $fields;
     }
 
@@ -43,11 +43,10 @@ class NewsPaperComponent extends Model
 
     public function getNameAttribute()
     {
-        return  $this->component->name;
+        return $this->component->name;
     }
     public function getSlugAttribute()
     {
-        return  $this->component->slug;
+        return $this->component->slug;
     }
-
 }

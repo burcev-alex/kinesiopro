@@ -35,5 +35,4 @@ class Category extends Model
     {
         return CategoryFactory::new();
     }
-    
 }

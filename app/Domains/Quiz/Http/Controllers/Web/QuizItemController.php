@@ -21,13 +21,17 @@ class QuizItemController
     }
 
     /**
-     * Show history of orders
+     * Список тестов
+     *
+     * @param Request $request
+     * @param string $param1
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request, $param1 = null)
     {
         list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
 
-        if(!$page){
+        if (!$page) {
             $page = 1;
         }
 
@@ -45,7 +49,7 @@ class QuizItemController
                         'pagination' => $pagination,
                         'block' => 'quiz-page-block'
                     ])->render(),
-                ]
+                ],
             ];
         }
 
@@ -64,21 +68,26 @@ class QuizItemController
     }
 
     /**
-     * Show order details
+     * Show test details
+     *
+     * @param string $slug
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($slug, Request $request)
+    public function show($slug)
     {
         list($quiz_item, $components) = $this->quizService->showItemDetails($slug);
 
-        if (!$quiz_item)
+        if (!$quiz_item) {
             return abort(404);
+        }
 
         // Хлебные крошки
         BreadcrumbsService::card($quiz_item);
 
         return view('pages.quiz.quiz-single', [
             'quiz_item' => $quiz_item,
-            'components' => $components
+            'components' => $components,
         ]);
     }
 }

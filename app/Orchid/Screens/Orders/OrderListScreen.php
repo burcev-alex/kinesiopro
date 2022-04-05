@@ -27,10 +27,10 @@ class OrderListScreen extends Screen
      *
      * @return array
      */
-    public function query($id): array
+    public function query(): array
     {
         return [
-            'items' => Order::orderBy('created_at', 'DESC')->paginate(20)
+            'items' => Order::orderBy('created_at', 'DESC')->paginate(20),
         ];
     }
 

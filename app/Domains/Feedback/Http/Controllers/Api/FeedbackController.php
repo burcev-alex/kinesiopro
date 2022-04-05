@@ -10,11 +10,22 @@ use Validator;
 class FeedbackController extends BaseController
 {
 
-    public function index(Request $request)
+    /**
+     * Обратная связь
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function index()
     {
         return view('pages.feedback');
     }
 
+    /**
+     * Сохранить запрос с формы обратной связи
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function save(Request $request)
     {
         $input = $request->all();

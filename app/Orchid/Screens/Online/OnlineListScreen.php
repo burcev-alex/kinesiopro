@@ -3,7 +3,6 @@
 
 namespace App\Orchid\Screens\Online;
 
-
 use App\Domains\Online\Models\Online;
 use App\Orchid\Layouts\Online\OnlineListLayout;
 use App\Orchid\Screens\Filters\OnlineFiltersLayout;
@@ -33,8 +32,10 @@ class OnlineListScreen extends Screen
      */
     public function query(): array
     {
+        $filter = OnlineFiltersLayout::class;
+        
         return [
-            'onlines' => Online::filters()->filtersApplySelection(OnlineFiltersLayout::class)->orderBy('id', 'DESC')->paginate(10)
+            'onlines' => Online::filters()->filtersApplySelection($filter)->orderBy('id', 'DESC')->paginate(10),
         ];
     }
 
@@ -59,7 +60,7 @@ class OnlineListScreen extends Screen
     {
         return [
             OnlineFiltersLayout::class,
-            OnlineListLayout::class
+            OnlineListLayout::class,
         ];
     }
 }

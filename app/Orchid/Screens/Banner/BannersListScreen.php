@@ -3,7 +3,6 @@
 
 namespace App\Orchid\Screens\Banner;
 
-
 use App\Domains\Banner\Models\Banner;
 use App\Orchid\Layouts\Banner\BannersListLayout;
 
@@ -34,7 +33,7 @@ class BannersListScreen extends Screen
     public function query(): array
     {
         return [
-            'banners' => Banner::orderBy('id', 'ASC')->paginate(12)
+            'banners' => Banner::orderBy('id', 'ASC')->paginate(12),
         ];
     }
 

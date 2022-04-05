@@ -11,7 +11,7 @@ use Orchid\Screen\AsSource;
 
 /**
  * RefChar
- * 
+ *
  * @method static RefCharScope property
  */
 class RefChar extends Model
@@ -26,7 +26,7 @@ class RefChar extends Model
         "slug",
         "name",
         "active",
-        "sort"
+        "sort",
     ];
 
     protected static function newFactory()

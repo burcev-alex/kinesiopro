@@ -29,7 +29,6 @@ class OrderCreate extends Mailable
     public function __construct(int $orderId)
     {
         $this->orderId = $orderId;
-
     }
 
     /**
@@ -41,9 +40,12 @@ class OrderCreate extends Mailable
     {
         $order = Order::whereId($this->orderId)->with('items')->first();
 
-        return $this->subject('Заказ '.$order->number.' создан')->from('noreplay@kinesiopro.ru', 'KinesioPRO')->view('emails.order.create')->with([
-            'fullName' => $order->first_name.' '.$order->last_name,
-            'order' => $order
-        ]);
+        return $this->subject('Заказ '.$order->number.' создан')
+                ->from('noreplay@kinesiopro.ru', 'KinesioPRO')
+                ->view('emails.order.create')
+                ->with([
+                    'fullName' => $order->first_name.' '.$order->last_name,
+                    'order' => $order
+                ]);
     }
 }

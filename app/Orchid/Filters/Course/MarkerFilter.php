@@ -12,6 +12,8 @@ use Orchid\Screen\Fields\Select;
 class MarkerFilter extends Filter
 {
     /**
+     * Parameters
+     *
      * @var array
      */
     public $parameters = [
@@ -19,6 +21,8 @@ class MarkerFilter extends Filter
     ];
 
     /**
+     * Name
+     *
      * @return string
      */
     public function name() : string
@@ -27,6 +31,8 @@ class MarkerFilter extends Filter
     }
 
     /**
+     * Run
+     *
      * @param Builder $builder
      *
      * @return Builder
@@ -37,6 +43,8 @@ class MarkerFilter extends Filter
     }
 
     /**
+     * Display
+     *
      * @return Field[]
      */
     public function display() : array

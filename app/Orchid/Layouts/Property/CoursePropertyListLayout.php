@@ -26,7 +26,7 @@ class CoursePropertyListLayout extends Table
     {
         return [
             TD::make('slug'),
-            TD::make('name')->render(function($ref){
+            TD::make('name')->render(function ($ref) {
                 return Link::make($ref->name)->route('platform.property.edit', $ref);
             }),
         ];

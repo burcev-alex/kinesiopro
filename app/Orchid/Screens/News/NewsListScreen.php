@@ -32,7 +32,7 @@ class NewsListScreen extends Screen
     public function query(): array
     {
         return [
-            'news' => NewsPaper::orderBy('created_at')->paginate(10)
+            'news' => NewsPaper::orderBy('created_at')->paginate(10),
         ];
     }
 

@@ -33,13 +33,16 @@ class PodcastService extends BaseService
 
     public function save(array $fields): self
     {
-        if(array_key_exists('attachment_id', $fields)){
+        if (array_key_exists('attachment_id', $fields)) {
             $fields['attachment_id'] = current($fields['attachment_id']);
         }
 
         $this->model->fill($fields);
-        if (isset($fields['active'])) $this->model->active = true;
-        else $this->model->active = false;
+        if (isset($fields['active'])) {
+            $this->model->active = true;
+        } else {
+            $this->model->active = false;
+        }
 
 
         $this->model->save();
@@ -59,11 +62,12 @@ class PodcastService extends BaseService
 
      /**
      * Get podcasts catalog
+      *
      * @param int $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCatalog(int $page = 1)
-    {  
+    {
         $builder = $this->model->active();
 
         $this->attachLimitPagination();
@@ -74,6 +78,8 @@ class PodcastService extends BaseService
     }
 
     /**
+     * Данные по подкасту
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */

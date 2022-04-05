@@ -10,6 +10,8 @@ use Orchid\Screen\Layouts\Selection;
 class CourseFiltersLayout extends Selection
 {
     /**
+     * Filters
+     *
      * @return Filter[]
      */
     public function filters(): array
@@ -17,7 +19,7 @@ class CourseFiltersLayout extends Selection
         return [
             TitleFilter::class,
             MarkerFilter::class,
-            ActiveFilter::class
+            ActiveFilter::class,
         ];
     }
 }

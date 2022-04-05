@@ -26,10 +26,11 @@ class CourseOrchidService extends CourseService
      */
     public function save(array $fields): self
     {
-        if(!isset($fields['active']))
+        if (!isset($fields['active'])) {
             $fields['active'] = 0;
-        else if(isset($fields['active']))
+        } elseif (isset($fields['active'])) {
             $fields['active'] = 1;
+        }
         
         $this->model->fill($fields)->save();
 
@@ -45,14 +46,13 @@ class CourseOrchidService extends CourseService
             $arrPropertyValues = [];
             $resCourseProperties = CourseProperty::where('course_id', $this->model->id)->with('ref_char')->get();
             foreach ($resCourseProperties as $propertyValue) {
-                // если это изменения из группы , 
+                // если это изменения из группы ,
                 // тогда НЕ редактировать поля Цена за пару и Размеры в ростовке
                 if (! is_null($this->group)) {
                     if (! in_array($propertyValue->ref_char->slug, ['cvet'])) {
                         $arrPropertyValues[] = $propertyValue->ref_char_value_id;
                     }
-                }
-                else{
+                } else {
                     $arrPropertyValues[] = $propertyValue->ref_char_value_id;
                 }
             }
@@ -60,7 +60,8 @@ class CourseOrchidService extends CourseService
             // найти пересечение и удалить те значения , которых нет в новом наборе
             foreach ($arrPropertyValues as $valueId) {
                 if (! in_array($valueId, $properties)) {
-                    $rsDeleteProperty = CourseProperty::where('course_id', $this->model->id)->where('ref_char_value_id', $valueId)->get();
+                    $rsDeleteProperty = CourseProperty::where('course_id', $this->model->id)
+                        ->where('ref_char_value_id', $valueId)->get();
                     foreach ($rsDeleteProperty as $property) {
                         $property->delete();
                     }
@@ -72,9 +73,9 @@ class CourseOrchidService extends CourseService
             $ref_char_value = RefCharsValue::find($char_value);
             CourseProperty::updateOrCreate([
                 'course_id' => $this->model->id,
-                'ref_char_value_id' => $char_value
+                'ref_char_value_id' => $char_value,
             ], [
-                'ref_char_id' => $ref_char_value->char_id
+                'ref_char_id' => $ref_char_value->char_id,
             ]);
         }
         return $this;
@@ -116,7 +117,7 @@ class CourseOrchidService extends CourseService
         foreach ($teachers['id'] as $teacher) {
             CourseTeacher::create([
                 'course_id' => $this->model->id,
-                'teacher_id' => intval($teacher)
+                'teacher_id' => intval($teacher),
             ]);
         }
         return $this;
@@ -125,20 +126,23 @@ class CourseOrchidService extends CourseService
     public function saveMarkers(array $markers)
     {
         
-        if(array_key_exists('marker_new', $markers))
+        if (array_key_exists('marker_new', $markers)) {
             $this->model->marker_new = 1;
-        else
+        } else {
             $this->model->marker_new = 0;
+        }
         
-        if(array_key_exists('marker_popular', $markers))
+        if (array_key_exists('marker_popular', $markers)) {
             $this->model->marker_popular = 1;
-        else
+        } else {
             $this->model->marker_popular = 0;
+        }
         
-        if(array_key_exists('marker_archive', $markers))
+        if (array_key_exists('marker_archive', $markers)) {
             $this->model->marker_archive = 1;
-        else
+        } else {
             $this->model->marker_archive = 0;
+        }
 
         $this->model->save();
     }

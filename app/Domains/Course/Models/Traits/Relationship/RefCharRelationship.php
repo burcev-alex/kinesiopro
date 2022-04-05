@@ -6,7 +6,8 @@ use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Models\RefCharsValue;
 use Illuminate\Support\Facades\DB;
 
-trait RefCharRelationship{
+trait RefCharRelationship
+{
 
     public function values()
     {
@@ -20,6 +21,11 @@ trait RefCharRelationship{
 
     public function courses()
     {
-        return $this->hasManyThrough(Course::class, CourseProperty::class, 'ref_char_id', 'id', 'id', 'course_id')->select([DB::raw('courses.id'), DB::raw('courses.category_id'), DB::raw('courses_properties.ref_char_value_id')]);
+        $select = [DB::raw('courses.id'), DB::raw('courses.category_id'), DB::raw('courses_properties.ref_char_value_id')];
+        
+        $from = Course::class;
+        $to = CourseProperty::class;
+        
+        return $this->hasManyThrough($from, $to, 'ref_char_id', 'id', 'id', 'course_id')->select($select);
     }
 }

@@ -30,18 +30,16 @@ class PodcastShortRows extends Rows
                 Quill::make('podcast.description')
                 ->title('Описание')->value($podcast->description)
             ];
-        }
-        else{
+        } else {
             $rows = [
                 ...$rows,
                 ...[
                     Quill::make('podcast.description')
                     ->title('Описание'),
-                ]
+                ],
             ];
 
             return $rows;
         }
-        
     }
 }

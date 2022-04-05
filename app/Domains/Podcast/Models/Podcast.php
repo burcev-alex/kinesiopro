@@ -15,7 +15,7 @@ class Podcast extends Model
     use HasFactory,
     PodcastRelationship,
     PodcastAttribute,
-    PodcastScope, 
+    PodcastScope,
     AsSource;
 
     protected $fillable = [
@@ -41,5 +41,4 @@ class Podcast extends Model
     {
         return PodcastFactory::new();
     }
-    
 }

@@ -12,10 +12,10 @@ class ItemQuestion extends Model
         "item_id",
         "question_id",
         "sort",
-        "fields"
+        "fields",
     ];
     protected $casts = [
-        "fields" => "array"
+        "fields" => "array",
     ];
 
     public $table = 'quiz_item_questions';
@@ -27,11 +27,11 @@ class ItemQuestion extends Model
 
     public function getNameAttribute()
     {
-        return  $this->question->name;
+        return $this->question->name;
     }
     public function getSlugAttribute()
     {
-        return  $this->question->slug;
+        return $this->question->slug;
     }
 
     public function getMediaFieldsAttribute()

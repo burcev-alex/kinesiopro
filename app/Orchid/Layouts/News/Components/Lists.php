@@ -26,20 +26,27 @@ class Lists extends NewsPaperComponent implements NewsPaperComponentInterface
                     'cross' => 'Крест'
                 ])
                 ->title('Тип метки для элементов списка')
-                ->value($marker)
+                ->value($marker),
         ];
+
+        $helpText = 'Можно оставить пустым, тогда элемент не отобразится';
 
         for ($key = 0; $key < $max; $key++) {
             if (isset($this->component->fields['list']) && is_array($this->component->fields['list'])) {
                 if (array_key_exists($key, $this->component->fields['list'])) {
                     $item = $this->component->fields['list'][$key];
-                }
-                else{
+                } else {
                     $item = '';
                 }
-                $list[] = TextArea::make($this->prefix . '.list.')->value($item)->title('Элемент списка ' . ($key + 1))->help('Можно оставить пустым, тогда элемент не отобразится');
+                $list[] = TextArea::make($this->prefix . '.list.')
+                ->value($item)
+                ->title('Элемент списка ' . ($key + 1))
+                ->help($helpText);
             } else {
-                $list[] = TextArea::make($this->prefix . '.list.')->value('')->title('Элемент списка ' . ($key + 1))->help('Можно оставить пустым, тогда элемент не отобразится');
+                $list[] = TextArea::make($this->prefix . '.list.')
+                ->value('')
+                ->title('Элемент списка ' . ($key + 1))
+                ->help($helpText);
             }
         }
 

@@ -29,12 +29,11 @@ class Teacher extends Model
         "meta_title",
         "meta_keywords",
         "meta_description",
-        "active"
+        "active",
     ];
 
     protected static function newFactory()
     {
         return TeacherFactory::new();
     }
-    
 }

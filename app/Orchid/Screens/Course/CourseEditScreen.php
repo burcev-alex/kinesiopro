@@ -67,7 +67,7 @@ class CourseEditScreen extends Screen
             'properties' => $course->properties,
             'blocks' => $course->blocks,
             'components' => $course->components,
-            'property_values' => $course->property_values
+            'property_values' => $course->property_values,
         ];
     }
 
@@ -100,7 +100,10 @@ class CourseEditScreen extends Screen
                         ->method('addblock')
                         ->icon('plus-alt'),
 
-                    ModalToggle::make('Удалить блок')->method('deleteblock')->modal('deleteblock')->icon('trash')->canSee($this->blocks->count() > 0),
+                    ModalToggle::make('Удалить блок')
+                    ->method('deleteblock')
+                    ->modal('deleteblock')->icon('trash')
+                    ->canSee($this->blocks->count() > 0),
             ]),
             
             DropDown::make('Детальное описание')
@@ -111,11 +114,14 @@ class CourseEditScreen extends Screen
                     ->modal('addcomponent')
                     ->method('addcomponent')
                     ->icon('plus-alt'),
-                ModalToggle::make('Удалить описание')->method('deletecomponent')->modal('deletecomponent')->icon('trash')->canSee($this->components->count() > 0),
+                ModalToggle::make('Удалить описание')
+                ->method('deletecomponent')
+                ->modal('deletecomponent')->icon('trash')
+                ->canSee($this->components->count() > 0),
             ]),
             Button::make('Удалить')
                 ->method('remove')
-                ->icon('close')
+                ->icon('close'),
         ];
     }
 
@@ -144,7 +150,7 @@ class CourseEditScreen extends Screen
             Layout::modal('addcomponent', [
                 Layout::rows([
                     Select::make('component')->fromModel(Component::class, 'name')->value([]),
-                    Input::make('item.id')->hidden()
+                    Input::make('item.id')->hidden(),
                 ])
 
             ])->title('Выберите компонент'),
@@ -162,7 +168,7 @@ class CourseEditScreen extends Screen
             Layout::tabs([
                 'Курс' => [
                     CourseMainRows::class,
-                    CourseMarketRows::class
+                    CourseMarketRows::class,
                 ],
                 'Характеристики' => [
                     CoursePropsRows::class
@@ -172,11 +178,11 @@ class CourseEditScreen extends Screen
                 'SEO' => [
                     CourseSeoRows::class
                 ]
-            ])
+            ]),
         ];
     }
 
-    public function addblock(Course $course, Request $request)
+    public function addblock(Course $course)
     {
         $item = $course->id;
 
@@ -231,7 +237,8 @@ class CourseEditScreen extends Screen
         Course $course,
         OrchidCourseRequest $request,
         CourseOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($course);
         $validated = $request->validated();
@@ -262,7 +269,8 @@ class CourseEditScreen extends Screen
         Course $course,
         OrchidCourseRequest $request,
         CourseOrchidService $service
-    ) {
+    )
+    {
 
         $service->setModel($course);
         $validated = $request->validated();
@@ -270,7 +278,7 @@ class CourseEditScreen extends Screen
         // удаляем свойства
         $properties = CourseProperty::where('course_id', $course->id)->get();
         $propIds = [];
-        foreach($properties as $variant){
+        foreach ($properties as $variant) {
             $propIds[] = $variant->id;
         }
         $course->properties()->delete();
@@ -278,7 +286,7 @@ class CourseEditScreen extends Screen
         // удаляем блоки
         $blocks = AppCourseBlock::where('course_id', $course->id)->get();
         $propIds = [];
-        foreach($blocks as $variant){
+        foreach ($blocks as $variant) {
             $propIds[] = $variant->id;
         }
         $course->blocks()->delete();

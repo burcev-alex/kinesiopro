@@ -21,16 +21,20 @@ class NewsPaperController
     }
 
     /**
-     * Show history of orders
+     * Список новостей блога
+     *
+     * @param Request $request
+     * @param string $param1
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request, $param1 = null)
     {
         list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
-        
-        if(!$page){
+
+        if (!$page) {
             $page = 1;
         }
-        if(!$filters){
+        if (!$filters) {
             $filters = "";
         }
 
@@ -48,7 +52,7 @@ class NewsPaperController
                         'pagination' => $pagination,
                         'block' => 'blog-grid-block'
                     ])->render(),
-                ]
+                ],
             ];
         }
 
@@ -68,31 +72,36 @@ class NewsPaperController
 
     /**
      * Show order details
+     *
+     * @param string $slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($slug, Request $request)
+    public function show($slug)
     {
         list($news_paper, $components) = $this->newsService->showArticleDetails($slug);
 
-        if (!$news_paper)
+        if (!$news_paper) {
             return abort(404);
+        }
 
         // Хлебные крошки
         BreadcrumbsService::card($news_paper);
 
         return view('pages.blog.blog-single', [
             'news_paper' => $news_paper,
-            'components' => $components
+            'components' => $components,
         ]);
     }
 
     /**
-     * @param Request $request
+     * Общее кол-во новостей
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function count(Request $request)
+    public function count()
     {
         return response()->json([
-            'count' => $this->newsService->where('active', true)->get()->count()
+            'count' => $this->newsService->where('active', true)->get()->count(),
         ]);
     }
 }

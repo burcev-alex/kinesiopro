@@ -27,10 +27,10 @@ class ContactListLayout extends Table
     {
         return [
             TD::make('id', 'ID'),
-            TD::make('city', 'Город')->render(function($contact){
+            TD::make('city', 'Город')->render(function ($contact) {
                 return Link::make($contact->city)->route('platform.contact.edit', $contact);
             }),
-            TD::make('email', 'E-mail')
+            TD::make('email', 'E-mail'),
         ];
     }
 }

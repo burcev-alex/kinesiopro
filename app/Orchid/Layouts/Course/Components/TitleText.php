@@ -13,7 +13,7 @@ class TitleText extends CourseDesciptionComponent implements CourseDesciptionCom
     {
         return [
             Input::make($this->prefix . '.title')->value($this->component->fields['title'])->title('Заголовок'),
-            Quill::make($this->prefix . '.text')->value($this->component->fields['text'])->title('Текст')
+            Quill::make($this->prefix . '.text')->value($this->component->fields['text'])->title('Текст'),
         ];
     }
 }

@@ -25,15 +25,15 @@ class TeacherMainRows extends Rows
      */
     protected function fields(): array
     {
-       $rows = [];
+        $rows = [];
 
         $rows = [
             ...$rows,
             ...[
                 Input::make('teacher.full_name')->title('ФИО')->required(),
                 Input::make('teacher.sort')->title('Сортировка')->required(),
-                CheckBox::make('teacher.active')->title('Активность')
-            ]
+                CheckBox::make('teacher.active')->title('Активность'),
+            ],
         ];
 
         return $rows;

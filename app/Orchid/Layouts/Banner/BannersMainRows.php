@@ -26,7 +26,7 @@ class BannersMainRows extends Rows
      */
     protected function fields(): array
     {
-       $rows = [];
+        $rows = [];
 
         $rows = [
             ...$rows,
@@ -39,8 +39,8 @@ class BannersMainRows extends Rows
                     Input::make('banner.time_organization')->title('Время организации'),
                     Input::make('banner.place')->title('Место'),
                     Input::make('banner.description')->title('Комментарий'),
-                ])
-            ]
+                ]),
+            ],
         ];
 
         return $rows;

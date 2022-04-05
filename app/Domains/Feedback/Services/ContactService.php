@@ -15,18 +15,19 @@ class ContactService extends BaseService
      * @param  Contact $contact
      * @return void
      */
-    public function __construct(Contact $contact) {
+    public function __construct(Contact $contact)
+    {
         $this->model = $contact;
     }
 
     public function save(array $fields): self
     {
-        if(array_key_exists('phoneList', $fields)){
+        if (array_key_exists('phoneList', $fields)) {
             $fields['phone'] = $fields['phoneList'];
             
-            if(is_array($fields['phone'])){
-                foreach($fields['phone'] as $key=>$phone){
-                    if(strlen($phone) == 0){
+            if (is_array($fields['phone'])) {
+                foreach ($fields['phone'] as $key => $phone) {
+                    if (strlen($phone) == 0) {
                         unset($fields['phone'][$key]);
                     }
                 }

@@ -39,7 +39,8 @@ class TeachersEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Teacher $teacher){
+    public function query(Teacher $teacher)
+    {
         $this->exists = $teacher->exists;
         if ($this->exists) {
             $this->description = 'Редактировать данные преподавателя';
@@ -47,12 +48,11 @@ class TeachersEditScreen extends Screen
                 $this->name = $teacher->full_name;
             }
             return [
-                'teacher' => $teacher
+                'teacher' => $teacher,
             ];
-        }
-        else{
+        } else {
             return [
-                'teacher' => collect([])
+                'teacher' => collect([]),
             ];
         }
     }
@@ -69,7 +69,7 @@ class TeachersEditScreen extends Screen
                 ->method('save')->icon('save'),
 
             Button::make('Удалить')
-                ->method('remove')->icon('trash')
+                ->method('remove')->icon('trash'),
         ];
     }
 
@@ -102,12 +102,13 @@ class TeachersEditScreen extends Screen
         Teacher $teacher,
         Request $request,
         TeachersService $service
-    ){
+    )
+    {
         $service->setModel($teacher);
         $validate = $request->validate([
-            'teacher.full_name' =>'required',
-            'teacher.slug' =>'required',
-            'teacher.images' =>'array|min:1|max:1|required',
+            'teacher.full_name' => 'required',
+            'teacher.slug' => 'required',
+            'teacher.images' => 'array|min:1|max:1|required',
             'teacher.images.attachment_id' => 'array|min:1|max:1|required',
             'teacher.*' => ''
         ]);
@@ -119,6 +120,8 @@ class TeachersEditScreen extends Screen
     }
 
     /**
+     * Remove
+     *
      * @param Teacher $teacher
      *
      * @return \Illuminate\Http\RedirectResponse

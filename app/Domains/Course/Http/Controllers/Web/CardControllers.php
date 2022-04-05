@@ -12,12 +12,15 @@ use Tabuna\Breadcrumbs\Breadcrumbs;
 use Tabuna\Breadcrumbs\Trail;
 use function Symfony\Component\String\b;
 
-class CardControllers extends Controller {
+class CardControllers extends Controller
+{
 
     protected CourseService $courseService;
     protected CoursePropertiesService $coursePropertiesService;
 
     /**
+     * Constructor
+     *
      * @param CourseService $courseService
      * @param CoursePropertiesService $coursePropertiesService
      */
@@ -29,12 +32,13 @@ class CardControllers extends Controller {
 
     /**
      * Get course by id
+     *
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($slug) {
-              
-        /** @var Course $course */
+    public function show($slug)
+    {
+        
         $course = $this->courseService->show($slug);
         
         if (!$course) {
@@ -53,28 +57,28 @@ class CardControllers extends Controller {
                 'condition' => $course->marker_archive ? '' : 'new',
                 'currency' => 'RUB',
                 'brand' => 'Kinesiopro',
-            ]
+            ],
         ];
 
-        if(!empty($course) && $course->meta_h1){
+        if (!empty($course) && $course->meta_h1) {
             $seo['h1'] = $course->meta_h1;
         } else {
             $seo['h1'] = $course->name;
         }
 
-        if(!empty($course) && $course->meta_title){
+        if (!empty($course) && $course->meta_title) {
             $seo['title'] = $course->meta_title;
         } else {
             $seo['title'] = $course->name;
         }
 
-        if(!empty($course) && $course->meta_description){
+        if (!empty($course) && $course->meta_description) {
             $seo['description'] = $course->meta_description;
         } else {
             $seo['description'] = $course->name;
         }
 
-        if(!empty($course) && $course->meta_keywords){
+        if (!empty($course) && $course->meta_keywords) {
             $seo['keywords'] = $course->meta_keywords;
         } else {
             $seo['keywords'] = '';

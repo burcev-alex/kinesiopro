@@ -29,12 +29,12 @@ class OnlineListLayout extends Table
             TD::make('id', 'ID'),
             TD::make('title', 'Название'),
             
-            TD::make('active', 'Активность')->render(function($online){
+            TD::make('active', 'Активность')->render(function ($online) {
                 return $online->active ? 'да' : '<b>нет</b>';
             }),
-            TD::make('code', 'Символьный код')->render(function($online){
+            TD::make('code', 'Символьный код')->render(function ($online) {
                 return Link::make($online->slug)->route('platform.online.edit', $online);
-            })
+            }),
 
         ];
     }

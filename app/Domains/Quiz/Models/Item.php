@@ -41,8 +41,9 @@ class Item extends Model
             $component_id = preg_replace("/[^0-9]/", '', $componentKey);
             
             $component_model = ItemQuestion::find($component_id);
-            if(!$component_model)
+            if (!$component_model) {
                 continue;
+            }
 
             $sort = $fields['sort'];
             unset($fields['sort']);
@@ -50,11 +51,10 @@ class Item extends Model
             ItemQuestion::updateOrCreate([
                 "item_id" => $this->id,
                 "id" => $component_id
-            ],[
+            ], [
                 "sort" => $sort,
-                "fields" => $fields
+                "fields" => $fields,
             ]);
-            
         }
     }
 

@@ -10,8 +10,10 @@ class Gif extends OnlineDesciptionComponent implements OnlineDesciptionComponent
 {
     public function render(): array
     {
+        $val = isset($this->component->mediaFields['media']) ? $this->component->mediaFields['media'][0]->id : [];
+        
         return [
-            Upload::make($this->prefix . '.media')->value( isset($this->component->mediaFields['media']) ? $this->component->mediaFields['media'][0]->id : [])->title('Гифка')
+            Upload::make($this->prefix . '.media')->value($val)->title('Гифка')
         ];
     }
 }

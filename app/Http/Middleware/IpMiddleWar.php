@@ -19,8 +19,8 @@ class IpMiddleWar
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->session()->has('geoip_location')){
-            if(isset($_SERVER['HTTP_X_REAL_IP'])){
+        if (!$request->session()->has('geoip_location')) {
+            if (isset($_SERVER['HTTP_X_REAL_IP'])) {
                 $location = GeoIP::getLocation($_SERVER['HTTP_X_REAL_IP']);
                 $request->session()->put('geoip_location', $location->toArray());
             }

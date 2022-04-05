@@ -156,6 +156,8 @@ abstract class BaseService
     }
 
     /**
+     * Get By Column
+     *
      * @param $item
      * @param $column
      * @param  array  $columns
@@ -215,6 +217,8 @@ abstract class BaseService
     }
 
     /**
+     * Paginate
+     *
      * @param int    $limit
      * @param array  $columns
      * @param string $pageName

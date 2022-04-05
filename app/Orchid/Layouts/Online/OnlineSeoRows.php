@@ -24,11 +24,11 @@ class OnlineSeoRows extends Rows
         $online = $this->query->get('online');
         $rows = [
             Input::make('online.meta_h1')
-                ->title('Meta H1')->value(isset($online) ? $online->meta_h1 : ''), 
+                ->title('Meta H1')->value(isset($online) ? $online->meta_h1 : ''),
             Input::make('online.meta_title')
-                ->title('Meta Title')->value(isset($online) ? $online->meta_title : ''), 
+                ->title('Meta Title')->value(isset($online) ? $online->meta_title : ''),
             Input::make('online.meta_keywords')
-                ->title('Meta Keywords')->value(isset($online) ? $online->meta_keywords : ''), 
+                ->title('Meta Keywords')->value(isset($online) ? $online->meta_keywords : ''),
             Input::make('online.meta_description')
                 ->title('Meta Description')->value(isset($online) ? $online->meta_description : ''),
         ];

@@ -30,7 +30,7 @@ class BannersImagesRows extends Rows
 
             Upload::make('banner.images.attachment_mobile_id')
                 ->value($banner->count() ? ($banner->attachment_mobile ? [$banner->attachment_mobile->id] : []) : [])
-                ->title('Мобильное')
+                ->title('Мобильное'),
         ];
     }
 }

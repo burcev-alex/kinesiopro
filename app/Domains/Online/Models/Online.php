@@ -13,11 +13,11 @@ use Orchid\Filters\Filterable;
 
 class Online extends Model
 {
-    use HasFactory, 
-    Filterable, 
+    use HasFactory,
+    Filterable,
     OnlineRelationship,
     OnlineAttribute,
-    OnlineScope, 
+    OnlineScope,
     AsSource;
 
     protected $fillable = [
@@ -46,5 +46,4 @@ class Online extends Model
     {
         return OnlineFactory::new();
     }
-    
 }

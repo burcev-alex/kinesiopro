@@ -29,17 +29,17 @@ class TeacherListLayout extends Table
         return [
             TD::make('id', 'ID'),
 
-            TD::make('image', 'Фото')->render(function($teacher){
+            TD::make('image', 'Фото')->render(function ($teacher) {
                 return view('platform.teacher-image', [
                     'teacher_name' => $teacher->full_name,
                     'image' => isset($teacher->attachment) ? $teacher->attachment->url() : '',
                     'link' => route('platform.teachers.edit', ['teachers' => $teacher->id])
                 ]);
-            }),            
+            }),
             
-            TD::make('active', 'Активность')->render(function($teacher){
+            TD::make('active', 'Активность')->render(function ($teacher) {
                 return $teacher->active ? 'да' : '<b>нет</b>';
-            })
+            }),
         ];
     }
 }

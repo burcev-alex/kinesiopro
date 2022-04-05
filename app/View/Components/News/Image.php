@@ -24,7 +24,6 @@ class Image extends MainComponent
      */
     public function render()
     {
-        // Log::info($this->media);   
         return view('components.news.image', [
             "number" => $this->number,
             "media" => $this->media

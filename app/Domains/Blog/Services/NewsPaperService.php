@@ -15,16 +15,16 @@ class NewsPaperService extends BaseService
 {
 
     /**
+     * Тип фильтрующего свойства
+     *
      * @var array|string[]
      */
-    protected array $filtersTypes = [
-        
-    ];
+    protected array $filtersTypes = [];
     
     protected array $selectedFilters = [];
 
     /**
-     * __construct
+     * Construct
      *
      * @param  NewsPaper $product
      * @return void
@@ -37,6 +37,8 @@ class NewsPaperService extends BaseService
     }
 
     /**
+     * Данные по конкретной новости
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
@@ -49,6 +51,7 @@ class NewsPaperService extends BaseService
 
     /**
      * Get list of selected filters
+     *
      * @return array
      */
     public function getSelectedFilters(): array
@@ -57,6 +60,8 @@ class NewsPaperService extends BaseService
     }
 
     /**
+     * Вывод списка новостей по фильтру
+     *
      * @param string $filters
      * @param string $slug
      * @param int $page
@@ -73,20 +78,24 @@ class NewsPaperService extends BaseService
     }
     
     /**
+     * Детальная информация
+     *
      * @param $slug
      * @return Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
     public function showArticleDetails($slug)
     {
         $news_paper = $this->model->where('slug', $slug)->where('active', true)->with('components')->get()->first();
-        if (!$news_paper)
+        if (!$news_paper) {
             return null;
+        }
 
         return [$news_paper, $news_paper->components];
     }
 
     /**
      * Attach all filters
+     *
      * @param $filters
      */
     public function attachFilters($filters)
@@ -101,19 +110,22 @@ class NewsPaperService extends BaseService
 
     /**
      * Get function name
+     *
      * @param string $key
      * @return string
      */
-    protected function getFunctionName(string $key) {
+    protected function getFunctionName(string $key)
+    {
         return Str::camel('filter' . Str::ucfirst($key));
     }
 
     /**
+     * Parse Filters
+     *
      * @param string $filters
-     * @param bool $parseKey
      * @return array
      */
-    public function parseFilters(string $filters, bool $parseKey = true): array
+    public function parseFilters(string $filters): array
     {
         $return = [];
         foreach (explode(';', $filters) as $filter) {
@@ -129,6 +141,7 @@ class NewsPaperService extends BaseService
 
     /**
      * Parse value
+     *
      * @param string $key
      * @param string $value
      * @return float|string|string[]
@@ -147,5 +160,4 @@ class NewsPaperService extends BaseService
                 return $value;
         }
     }
-
 }

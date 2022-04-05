@@ -20,6 +20,8 @@ use Orchid\Attachment\File;
 class RegisteredUserController extends Controller
 {
     /**
+     * Регистрация пользоваеля в системе
+     *
      * @param RequestUserRegister $request
      * @return \Illuminate\Http\JsonResponse
      * @throws ValidationException
@@ -39,7 +41,7 @@ class RegisteredUserController extends Controller
 
         if ($phone) {
             throw ValidationException::withMessages([
-                'phone' => __('auth.registration.phone_exists')
+                'phone' => __('auth.registration.phone_exists'),
             ]);
         }
 
@@ -57,21 +59,20 @@ class RegisteredUserController extends Controller
                 ]);
             } else {
                 throw ValidationException::withMessages([
-                    'email' => __('auth.registration.email_exists')
+                    'email' => __('auth.registration.email_exists'),
                 ]);
             }
         } else {
             try {
                 DB::beginTransaction();
 
-                if(strlen($data['birthday_year']) > 0 && 
-                strlen($data['birthday_month']) > 0 && 
-                strlen($data['birthday_day']) > 0){
+                if (strlen($data['birthday_year']) > 0 &&
+                strlen($data['birthday_month']) > 0 &&
+                strlen($data['birthday_day']) > 0) {
                     $birthday = $data['birthday_year']."-";
                     $birthday .= $data['birthday_month']."-";
                     $birthday .= $data['birthday_day'];
-                }
-                else{
+                } else {
                     $birthday = null;
                 }
 
@@ -89,7 +90,7 @@ class RegisteredUserController extends Controller
                 ];
 
                 // загрузка аватар
-                if($request->avatar_id){
+                if ($request->avatar_id) {
                     $uploaded = new UploadedFile($request->avatar_id->path(), md5($email)."_avatar.jpg");
                     $file = new File($uploaded, 'public');
                     $attach = $file->load();
@@ -98,7 +99,7 @@ class RegisteredUserController extends Controller
                 }
 
                 // загрузка скан.копий документов
-                if($request->scan_id){
+                if ($request->scan_id) {
                     $uploaded = new UploadedFile($request->scan_id->path(), md5($email)."_scan.jpg");
                     $file = new File($uploaded, 'public');
                     $attach = $file->load();
@@ -119,11 +120,12 @@ class RegisteredUserController extends Controller
         }
 
         return response()->json([
-            'message' => __('auth.registration.success')
+            'message' => __('auth.registration.success'),
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('pages.registration');
     }
 }

@@ -28,7 +28,7 @@ class OrchidCourseRequest extends FormRequest
             'course.active' => '',
             'course.sort' => 'required|integer',
             'course.category_id' => 'required',
-            'course.*' => '', 
+            'course.*' => '',
             'property_values.*' => '',
             'blocks.*' => '',
             'markers.*' => '',

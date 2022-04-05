@@ -37,11 +37,15 @@ class UserEditScreen extends Screen
     public $description = 'Details such as name, email and password';
 
     /**
+     * Permission
+     *
      * @var string
      */
     public $permission = 'platform.systems.users';
 
     /**
+     * Data
+     *
      * @var User
      */
     private $user;
@@ -57,7 +61,7 @@ class UserEditScreen extends Screen
     {
         $this->user = $user;
 
-        if (! $user->exists) {
+        if (!$user->exists) {
             $this->name = 'Create User';
         }
 
@@ -85,7 +89,7 @@ class UserEditScreen extends Screen
 
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                ->confirm('Really?')
                 ->method('remove')
                 ->canSee($this->user->exists),
 
@@ -96,6 +100,8 @@ class UserEditScreen extends Screen
     }
 
     /**
+     * Layout
+     *
      * @return \Orchid\Screen\Layout[]
      */
     public function layout(): array
@@ -150,6 +156,8 @@ class UserEditScreen extends Screen
     }
 
     /**
+     * Save
+     *
      * @param User    $user
      * @param Request $request
      *
@@ -161,7 +169,7 @@ class UserEditScreen extends Screen
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($user),
-            ]
+            ],
         ]);
 
         $permissions = collect($request->get('permissions'))
@@ -172,7 +180,7 @@ class UserEditScreen extends Screen
             ->toArray();
 
         $userData = $request->get('user');
-        if ($user->exists && (string)$userData['password'] === '') {
+        if ($user->exists && (string) $userData['password'] === '') {
             // When updating existing user null password means "do not change current password"
             unset($userData['password']);
         } else {
@@ -181,14 +189,14 @@ class UserEditScreen extends Screen
 
         $userData['permissions'] = $permissions;
 
-        if(array_key_exists('avatar_id', $userData) && is_array($userData['avatar_id'])){
+        if (array_key_exists('avatar_id', $userData) && is_array($userData['avatar_id'])) {
             $userData['avatar_id'] = current($userData['avatar_id']);
         }
 
-        if(array_key_exists('scan_id', $userData) && is_array($userData['scan_id'])){
+        if (array_key_exists('scan_id', $userData) && is_array($userData['scan_id'])) {
             $userData['scan_id'] = current($userData['scan_id']);
         }
-        
+
         $user->fill($userData)->save();
 
         $user->replaceRoles($request->input('user.roles'));
@@ -199,6 +207,8 @@ class UserEditScreen extends Screen
     }
 
     /**
+     * Remove
+     *
      * @param User $user
      *
      * @throws \Exception
@@ -215,6 +225,8 @@ class UserEditScreen extends Screen
     }
 
     /**
+     * Login As
+     *
      * @param User $user
      *
      * @return \Illuminate\Http\RedirectResponse

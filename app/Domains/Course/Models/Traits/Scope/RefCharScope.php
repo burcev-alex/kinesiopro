@@ -1,7 +1,8 @@
 <?php
 namespace App\Domains\Course\Models\Traits\Scope;
 
-trait RefCharScope {
+trait RefCharScope
+{
 
     public function scopeAll($query)
     {

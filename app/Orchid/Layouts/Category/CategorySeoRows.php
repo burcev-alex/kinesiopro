@@ -36,8 +36,7 @@ class CategorySeoRows extends Rows
                     TextArea::make('category.meta_description')->value($categories->meta_description)->title('Мета описание'),
                 ],
             ];
-        }
-        else{
+        } else {
             $rows = [
                 ...$rows,
                 ...[
@@ -45,7 +44,7 @@ class CategorySeoRows extends Rows
                     Input::make('category.meta_title')->title('Мета заголовок'),
                     Input::make('category.meta_keywords')->title('Мета ключевые слова'),
                     TextArea::make('category.meta_description')->title('Мета описание'),
-                ]
+                ],
             ];
         }
 

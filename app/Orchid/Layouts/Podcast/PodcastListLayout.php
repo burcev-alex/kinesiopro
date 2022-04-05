@@ -28,12 +28,12 @@ class PodcastListLayout extends Table
         return [
             TD::make('id', 'ID'),
             TD::make('title', 'Название'),
-            TD::make('active', 'Активность')->render(function($podcast){
+            TD::make('active', 'Активность')->render(function ($podcast) {
                 return $podcast->active ? 'да' : '<b>нет</b>';
             }),
-            TD::make('slug', 'Символьный код')->render(function($podcast){
+            TD::make('slug', 'Символьный код')->render(function ($podcast) {
                 return Link::make($podcast->slug)->route('platform.podcast.edit', $podcast);
-            })
+            }),
 
         ];
     }

@@ -47,12 +47,11 @@ class ContactEditScreen extends Screen
             }
 
             return [
-                'contact' => $contact
+                'contact' => $contact,
             ];
-        }
-        else{
+        } else {
             return [
-                'contact' => collect([])
+                'contact' => collect([]),
             ];
         }
     }
@@ -69,7 +68,7 @@ class ContactEditScreen extends Screen
             ->method('save')->icon('save'),
 
             Button::make('Удалить')
-            ->method('remove')->icon('trash')
+            ->method('remove')->icon('trash'),
         ];
     }
 
@@ -79,24 +78,24 @@ class ContactEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-{
-    return [
+    {
+        return [
         Layout::tabs([
             'Город' => [
                 ContactMainRows::class
             ],
             'Соц.сети' => [
                 ContactSocialRows::class
-            ]
+            ],
         ])
-    ];
-}
+        ];
+    }
 
     public function save(
         Contact $contact,
         Request $request,
         ContactService $service
-        )
+    )
     {
         $service->setModel($contact);
         $validate = $request->validate([
@@ -108,10 +107,11 @@ class ContactEditScreen extends Screen
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.contact.edit', $contact);
-
     }
 
     /**
+     * Remove
+     *
      * @param Contact $item
      *
      * @return \Illuminate\Http\RedirectResponse

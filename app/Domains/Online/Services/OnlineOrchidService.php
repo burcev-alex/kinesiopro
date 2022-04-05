@@ -18,10 +18,11 @@ class OnlineOrchidService extends OnlineService
      */
     public function save(array $fields): self
     {
-        if(!isset($fields['active']))
+        if (!isset($fields['active'])) {
             $fields['active'] = 0;
-        else if(isset($fields['active']))
+        } elseif (isset($fields['active'])) {
             $fields['active'] = 1;
+        }
         
         $this->model->fill($fields)->save();
 
@@ -33,10 +34,12 @@ class OnlineOrchidService extends OnlineService
     public function saveImages(array $images)
     {
         
-        if(!isset($images['attachment_id'])) $images['attachment_id'] = [];        
+        if (!isset($images['attachment_id'])) {
+            $images['attachment_id'] = [];
+        }
         
-        foreach($images as $key => $items){
-            foreach($items as $item){
+        foreach ($images as $key => $items) {
+            foreach ($items as $item) {
                 Online::where('id', $this->model->id)->update([$key => $item]);
             }
         }
@@ -47,20 +50,18 @@ class OnlineOrchidService extends OnlineService
         foreach ($components as $componentKey => $fields) {
             $component_id = preg_replace("/[^0-9]/", '', $componentKey);
             
-            // Log::info($fields);
             $component_model = OnlineDesciptionComponent::find($component_id);
-            if(!$component_model)
+            if (!$component_model) {
                 continue;
+            }
 
-            if(isset($fields['media'])){
+            if (isset($fields['media'])) {
                 foreach ($fields['media'] as $key => $value) {
-
                     $model = OnlineDesciptionMedia::updateOrCreate([
                         "component_id" => $component_id,
-                        "attachment_id" => $value
+                        "attachment_id" => $value,
                     ]);
                     $fields['media'][$key] = $model->id;
-
                 }
             }
 
@@ -70,11 +71,10 @@ class OnlineOrchidService extends OnlineService
             OnlineDesciptionComponent::updateOrCreate([
                 "online_id" => $this->model->id,
                 "id" => $component_id
-            ],[
+            ], [
                 "sort" => $sort,
-                "fields" => $fields
+                "fields" => $fields,
             ]);
-            
         }
     }
 }

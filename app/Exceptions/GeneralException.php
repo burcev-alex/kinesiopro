@@ -11,6 +11,8 @@ use Throwable;
 class GeneralException extends Exception
 {
     /**
+     * Message
+     *
      * @var
      */
     public $message;
@@ -41,7 +43,7 @@ class GeneralException extends Exception
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function render($request)
+    public function render()
     {
         // All instances of GeneralException redirect back with a flash message to show a bootstrap alert-error
         return redirect()

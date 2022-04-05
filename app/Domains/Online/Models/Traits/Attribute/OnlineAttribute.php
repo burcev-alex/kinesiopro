@@ -8,9 +8,11 @@ trait OnlineAttribute
 {
 
     /**
+     * Название типа курса
+     *
      * @return string
      */
-    function getTypeTitleAttribute()
+    public function getTypeTitleAttribute()
     {
         $arr = [
             'marafon' => 'марафон',
@@ -25,14 +27,15 @@ trait OnlineAttribute
 
     /**
      * Detect price format
+     *
      * @return string
      */
-    function getPriceFormatAttribute()
+    public function getPriceFormatAttribute()
     {
         return number_format($this->price, 0, '.', ' ');
     }
 
-    private function _defaultImage()
+    private function defaultImage()
     {
         return '/images/photo_not_found.png';
     }
@@ -42,9 +45,9 @@ trait OnlineAttribute
         return $this->start_date->translatedFormat('d F Y');
     }
     
-    function getAttachmentWebpAttribute()
+    public function getAttachmentWebpAttribute()
     {
-        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->_defaultImage();
+        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->defaultImage();
         
         // подмена origin на webp , если поддерживается формат
         if (isSupportWebP()) {

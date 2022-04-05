@@ -49,12 +49,11 @@ class PodcastEditScreen extends Screen
             }
 
             return [
-                'podcast' => $podcast
+                'podcast' => $podcast,
             ];
-        }
-        else{
+        } else {
             return [
-                'podcast' => collect([])
+                'podcast' => collect([]),
             ];
         }
     }
@@ -71,7 +70,7 @@ class PodcastEditScreen extends Screen
             ->method('save')->icon('save'),
 
             Button::make('Удалить')
-            ->method('remove')->icon('trash')
+            ->method('remove')->icon('trash'),
         ];
     }
 
@@ -81,8 +80,8 @@ class PodcastEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-{
-    return [
+    {
+        return [
         Layout::tabs([
             'Подкаст' => [
                 PodcastMainRows::class
@@ -94,14 +93,14 @@ class PodcastEditScreen extends Screen
                 PodcastSeoRows::class
             ]
         ])
-    ];
-}
+        ];
+    }
 
     public function save(
         Podcast $podcast,
         Request $request,
         PodcastService $service
-        )
+    )
     {
         $service->setModel($podcast);
         $validate = $request->validate([
@@ -116,10 +115,11 @@ class PodcastEditScreen extends Screen
 
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.podcast.edit', $podcast);
-
     }
 
     /**
+     * Remove
+     *
      * @param Podcast $item
      *
      * @return \Illuminate\Http\RedirectResponse

@@ -29,17 +29,17 @@ class BannersListLayout extends Table
         return [
             TD::make('id', 'ID'),
 
-            TD::make('image', 'изображение')->render(function($banner){
+            TD::make('image', 'изображение')->render(function ($banner) {
                 return view('platform.banner-image', [
                     'banner_name' => $banner->name,
                     'image' => isset($banner->attachment) ? $banner->attachment->url() : '',
                     'link' => route('platform.banners.edit', ['banners' => $banner->id])
                 ]);
-            }),            
+            }),
             
-            TD::make('active', 'Активность')->render(function($banner){
+            TD::make('active', 'Активность')->render(function ($banner) {
                 return $banner->active ? 'да' : '<b>нет</b>';
-            })
+            }),
         ];
     }
 }

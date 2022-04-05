@@ -3,7 +3,6 @@
 
 namespace App\Orchid\Screens\Teacher;
 
-
 use App\Domains\Teacher\Models\Teacher;
 use App\Orchid\Layouts\Teacher\TeacherListLayout;
 
@@ -34,7 +33,7 @@ class TeachersListScreen extends Screen
     public function query(): array
     {
         return [
-            'teachers' => Teacher::orderBy('id', 'ASC')->paginate(12)
+            'teachers' => Teacher::orderBy('id', 'ASC')->paginate(12),
         ];
     }
 

@@ -1,12 +1,16 @@
 <?php
 namespace App\Services;
+
 class RouterService
 {
     /**
+     * Detect Parameters
+     *
      * @param array $params
      * @return mixed|null[]  Returned values are in next order [category1, filters]
      */
-    public function detectParameters(array $params):array {
+    public function detectParameters(array $params):array
+    {
         $return = ['', '', 1];
 
         $filterSelected = false;
@@ -24,7 +28,8 @@ class RouterService
         return $return;
     }
 
-    public function detectParametersApplicability(array $params):array {
+    public function detectParametersApplicability(array $params):array
+    {
         $return = ['', '', 1];
 
         $filterSelected = false;
@@ -43,6 +48,8 @@ class RouterService
     }
 
     /**
+     * Detect Simple Pagination Params
+     *
      * @param array $params
      * @return array
      */
@@ -63,6 +70,7 @@ class RouterService
 
     /**
      * Get list of array from path
+     *
      * @return string
      */
     public function detectFiltersFromPath(): string
@@ -82,6 +90,8 @@ class RouterService
     }
 
     /**
+     * Get Pagination
+     *
      * @param int $currentPage
      * @param int $lastPage
      * @return array
@@ -104,7 +114,6 @@ class RouterService
                 $pagination['prev_url'] = $prevId == 1
                     ? str_replace('/page-' . $currentPage, '', $url)
                     : str_replace('/page-' . $currentPage, '/page-' . ($currentPage - 1), $url);
-
             }
             if ($currentPage < $lastPage) {
                 $pagination['next_url'] = str_replace('/page-' . $currentPage, '/page-' . ($currentPage + 1), $url);

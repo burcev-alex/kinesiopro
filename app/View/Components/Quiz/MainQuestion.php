@@ -8,7 +8,7 @@ use Orchid\Attachment\Models\Attachment;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Родительский вопрос. 
+ * Родительский вопрос.
  * В него необходимо добавить свойства, необходимые для доступа в расширяющем вопросе.
  */
 class MainQuestion extends Component
@@ -38,7 +38,7 @@ class MainQuestion extends Component
     {
         $this->number = $number;
         
-        if(!empty($fields)){
+        if (!empty($fields)) {
             foreach ($fields as $key => $value) {
                 if ($key == 'media') {
                     foreach ($value as $attachment) {
@@ -52,13 +52,11 @@ class MainQuestion extends Component
                     }
 
                     $this->$key = $value;
-                }
-                else{
+                } else {
                     $this->$key = $value;
                 }
             }
         }
-        
     }
 
     /**

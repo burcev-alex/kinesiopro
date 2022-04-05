@@ -1,17 +1,19 @@
-<?php 
+<?php
 
 namespace App\Domains\Category\Models\Traits\Attribute;
 
-trait CategoryAttribute {
+trait CategoryAttribute
+{
     /**
      * Get product image
+     *
      * @return string
      */
-    function getImageUrlAttribute()
+    public function getImageUrlAttribute()
     {
         $originPath = $this->attachment
             ? $this->attachment->relativeUrl
-            : $this->_defaultImage();
+            : $this->defaultImage();
 
         // подмена origin на webp , если поддерживается формат
         if (isSupportWebP()) {
@@ -19,7 +21,7 @@ trait CategoryAttribute {
             $originPath = convertImageToWebP($originPath);
         }
 
-        if(strlen($originPath) == 0){
+        if (strlen($originPath) == 0) {
             $originPath = $this->attachment->url();
         }
 

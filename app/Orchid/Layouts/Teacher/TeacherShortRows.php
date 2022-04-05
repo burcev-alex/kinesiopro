@@ -36,8 +36,7 @@ class TeacherShortRows extends Rows
                 Quill::make('teacher.specialization')
                 ->title('Специализация')->value($teacher->specialization),
             ];
-        }
-        else{
+        } else {
             $rows = [
                 ...$rows,
                 ...[
@@ -49,11 +48,10 @@ class TeacherShortRows extends Rows
                     ->title('Курсы и сертификаты'),
                     Quill::make('teacher.specialization')
                     ->title('Специализация'),
-                ]
+                ],
             ];
 
             return $rows;
         }
-        
     }
 }

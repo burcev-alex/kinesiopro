@@ -5,11 +5,14 @@ use App\Domains\Category\Models\Category;
 
 /**
  * Class CategoryObserver
+ *
  * @package App\Observers
  */
 class CategoryObserver
 {
     /**
+     * Удаление
+     *
      * @param Category $category
      */
     public function deleting(Category $category)
@@ -57,21 +60,21 @@ class CategoryObserver
     }
 
     /**
-     * @param Category $category
+     * Ключи кеша
+     *
      * @return array
      */
-    private function getCacheKeys(Category $category): array
+    private function getCacheKeys(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
     /**
-     * @param Category $category
+     * Тег кеша
+     *
      * @return array
      */
-    private function getCacheTags(Category $category): array
+    private function getCacheTags(): array
     {
         return [
             'categories'

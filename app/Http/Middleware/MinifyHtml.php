@@ -18,6 +18,8 @@ class MinifyHtml
     {
 
         /**
+         * Handle
+         *
          * @var $response Response
          */
         $response = $next($request);
@@ -30,6 +32,12 @@ class MinifyHtml
         return $response;
     }
 
+    /**
+     * Минификация текста
+     *
+     * @param string $input
+     * @return string
+     */
     public function minify($input)
     {
         $search = [

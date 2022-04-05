@@ -25,7 +25,6 @@ class ContactMainRows extends Rows
     protected function fields(): array
     {
         $contact = $this->query->get('contact');
-        // dd($contact->phone);
         
         $rows = [
             Input::make('contact.city')->title('Город')->required(),
@@ -44,8 +43,7 @@ class ContactMainRows extends Rows
             if (isset($contact->phone) && is_array($contact->phone)) {
                 if (array_key_exists($key, $contact->phone)) {
                     $value = $contact->phone[$key];
-                }
-                else{
+                } else {
                     $value = '';
                 }
 
@@ -57,7 +55,7 @@ class ContactMainRows extends Rows
 
         $rows = [
             ...$rows,
-            ...$phones
+            ...$phones,
         ];
 
         return $rows;

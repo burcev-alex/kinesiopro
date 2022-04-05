@@ -38,7 +38,7 @@ class CategoryMainRows extends Rows
                 Upload::make('category.attachment_id')
                 ->value($categories ? ($categories->attachment ? [$categories->attachment->id] : []) : [])
                 ->title('Иконка'),
-            ]
+            ],
         ];
 
         return $rows;

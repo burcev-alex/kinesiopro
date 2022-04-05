@@ -2,21 +2,20 @@
 
 namespace App\Domains\Teacher\Models\Traits\Attribute;
 
-
 use Intervention\Image\ImageManagerStatic as Image;
 use File;
 
 trait TeacherAttribute
 {
 
-    private function _defaultImage()
+    private function defaultImage()
     {
         return '/images/photo_not_found.png';
     }
     
-    function getAttachmentWebpAttribute()
+    public function getAttachmentWebpAttribute()
     {
-        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->_defaultImage();
+        $originPath = $this->attachment ? $this->attachment->relativeUrl : $this->defaultImage();
         
         // подмена origin на webp , если поддерживается формат
         if (isSupportWebP()) {

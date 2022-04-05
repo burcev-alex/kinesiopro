@@ -39,7 +39,7 @@ class CoursePropertyEditScreen extends Screen
         return [
             'ref' => $ref,
             'values' => $ref->values,
-            'slug' => $ref->slug 
+            'slug' => $ref->slug
         ];
     }
 
@@ -87,7 +87,7 @@ class CoursePropertyEditScreen extends Screen
             'ref.active' => '',
             'char_values.*' => '',
         ]);
-        // Log::info($valide);
+        
         $service->save($valide['ref']);
         $service->saveValues($valide['char_values']);
 

@@ -72,8 +72,8 @@ class QuizItemCreateScreen extends Screen
                     Input::make('item.me.title')->title('Название')->value(''),
                     CheckBox::make('item.me.active')
                     ->value(false)->title('Активность'),
-                    Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1)
-                ])
+                    Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1),
+                ]),
             ])
         ];
     }
@@ -83,24 +83,25 @@ class QuizItemCreateScreen extends Screen
     {
         $quiz_item = $request->get('item')['me'];
 
-        if(!isset($quiz_item['slug']) || !isset($quiz_item['title']) || !isset($quiz_item['attachment_id'])){
+        if (!isset($quiz_item['slug']) || !isset($quiz_item['title']) || !isset($quiz_item['attachment_id'])) {
             Toast::error("Не все поля заполнены!");
             return redirect()->back();
         }
         
         $check_slug = Item::where('slug', $quiz_item['slug'])->get()->first();
         
-        if($check_slug){
+        if ($check_slug) {
             Toast::error("URL новости совпадает с уже существующим!");
             return redirect()->back();
         }
         
         $quiz_item_model = new Item($quiz_item);
         
-        if(!isset($quiz_item['active']))
+        if (!isset($quiz_item['active'])) {
             $quiz_item_model->active = 0;
-        else if(isset($quiz_item['active']))
+        } elseif (isset($quiz_item['active'])) {
             $quiz_item_model->active = 1;
+        }
         
         $quiz_item_model->save();
 
@@ -108,7 +109,4 @@ class QuizItemCreateScreen extends Screen
         Toast::success("Добавьте в нее вопросы!");
         return redirect()->route('platform.quiz.edit', $quiz_item_model->id);
     }
-
-
-
 }

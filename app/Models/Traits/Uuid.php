@@ -10,6 +10,8 @@ use Ramsey\Uuid\Uuid as PackageUuid;
 trait Uuid
 {
     /**
+     * Uuid
+     *
      * @param $query
      * @param $uuid
      *
@@ -21,6 +23,8 @@ trait Uuid
     }
 
     /**
+     * GetUuidName
+     *
      * @return string
      */
     public function getUuidName()

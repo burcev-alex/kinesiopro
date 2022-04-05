@@ -12,7 +12,7 @@ use Validator;
 
 class CheckoutController extends BaseController
 {
-    public function success(Request $request)
+    public function success()
     {
         return view('personal.order.checkout_success', []);
     }
@@ -46,7 +46,7 @@ class CheckoutController extends BaseController
 
         try {
             $result = $service->store($input);
-            if (IntVal($result['order_id']) > 0) {
+            if (intval($result['order_id']) > 0) {
                 return $this->sendResponse($result, 'Item created successfully.');
             } else {
                 throw new GeneralException(__('There was a problem creating this order. Please try again.'));

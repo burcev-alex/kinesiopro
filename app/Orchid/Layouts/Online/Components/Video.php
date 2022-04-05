@@ -10,8 +10,10 @@ class Video extends OnlineDesciptionComponent implements OnlineDesciptionCompone
 {
     public function render(): array
     {
+        $helpText = 'Ссылка должна быть вида "https://www.youtube.com/embed/abc123"';
+        
         return [
-            Input::make($this->prefix . '.link')->value($this->component->fields['link'])->title('Ссылка на ютуб')->help('Ссылка должна быть вида "https://www.youtube.com/embed/abc123"')
+            Input::make($this->prefix . '.link')->value($this->component->fields['link'])->title('Ссылка на ютуб')->help($helpText)
         ];
     }
 }

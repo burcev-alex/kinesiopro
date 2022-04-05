@@ -22,6 +22,7 @@ class UserController
 
     /**
      * Get user data page
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -38,11 +39,13 @@ class UserController
 
         return view('pages.personal.notifications', [
             'user' => new ResourceUser($request->user()),
-            'notifications' => $list->toArray()
+            'notifications' => $list->toArray(),
         ]);
     }
 
     /**
+     * Изменение данных пользователя
+     *
      * @param RequestUserUpdate $requestUserUpdate
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException

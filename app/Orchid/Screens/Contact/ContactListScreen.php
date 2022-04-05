@@ -30,7 +30,7 @@ class ContactListScreen extends Screen
     public function query(): array
     {
         return [
-            'contacts' => Contact::paginate(20)
+            'contacts' => Contact::paginate(20),
         ];
     }
 

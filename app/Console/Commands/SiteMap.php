@@ -46,39 +46,39 @@ class SiteMap extends Command
         $static = [
             [
                 'url' => str_replace(app('config')->get('app.url'), app('config')->get('app.url'), route('home')),
-                'updated_at' => new Carbon(time())
-            ]
+                'updated_at' => new Carbon(time()),
+            ],
         ];
 
         $courses = Course::where('active', true)->get();
-        foreach($courses as $course){
+        foreach ($courses as $course) {
             $static[] = [
                 'url' => app('config')->get('app.url').route('courses.card', ['slug' => $course->slug]),
-                'updated_at' => new Carbon(time())
+                'updated_at' => new Carbon(time()),
             ];
         }
 
         $onlines = Online::where('active', true)->get();
-        foreach($onlines as $online){
+        foreach ($onlines as $online) {
             $static[] = [
                 'url' => app('config')->get('app.url').route('online.single', ['slug' => $online->slug]),
-                'updated_at' => new Carbon(time())
+                'updated_at' => new Carbon(time()),
             ];
         }
 
         $news = Online::where('active', true)->get();
-        foreach($news as $article){
+        foreach ($news as $article) {
             $static[] = [
                 'url' => app('config')->get('app.url').route('blog.single', ['slug' => $article->slug]),
-                'updated_at' => new Carbon(time())
+                'updated_at' => new Carbon(time()),
             ];
         }
 
         $podcasts = Podcast::where('active', true)->get();
-        foreach($podcasts as $podcast){
+        foreach ($podcasts as $podcast) {
             $static[] = [
                 'url' => app('config')->get('app.url').route('podcast.single', ['slug' => $podcast->slug]),
-                'updated_at' => new Carbon(time())
+                'updated_at' => new Carbon(time()),
             ];
         }
 

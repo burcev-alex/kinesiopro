@@ -35,7 +35,7 @@ class CourseMarketRows extends Rows
                 CheckBox::make('markers.marker_popular')->value($marker_popular)->title('Главная'),
                 CheckBox::make('markers.marker_archive')->value($marker_archive)->title('Архив'),
             ]),
-            Input::make('course.sort')->title('Сортировка')->required()
+            Input::make('course.sort')->title('Сортировка')->required(),
 
         ];
     }

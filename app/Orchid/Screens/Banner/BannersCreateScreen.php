@@ -36,12 +36,12 @@ class BannersCreateScreen extends Screen
      *
      * @return array
      */
-    public function query(Banner $banner){
+    public function query(Banner $banner)
+    {
         $this->exists = $banner->exists;
         return [
-            'banner' => collect([])
+            'banner' => collect([]),
         ];
-        
     }
 
     /**
@@ -71,7 +71,7 @@ class BannersCreateScreen extends Screen
                 ],
                 'Изображение' => [
                     BannersImagesRows::class
-                ]
+                ],
             ])
         ];
     }
@@ -80,11 +80,12 @@ class BannersCreateScreen extends Screen
         Banner $banner,
         Request $request,
         BannersService $service
-    ){
+    )
+    {
         $service->setModel($banner);
         $validate = $request->validate([
-            'banner.name' =>'required',
-            'banner.images' =>'array|min:2|max:2|required',
+            'banner.name' => 'required',
+            'banner.images' => 'array|min:2|max:2|required',
             'banner.images.attachment_id' => 'array|min:1|max:1|required',
             'banner.images.attachment_mobile_id' => 'array|min:1|max:1|required',
             'banner.*' => ''
@@ -95,5 +96,4 @@ class BannersCreateScreen extends Screen
         Alert::success('Изменения успешно сохранены');
         return redirect()->route('platform.banners.edit', $banner->id);
     }
-
 }

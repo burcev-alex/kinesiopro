@@ -16,7 +16,7 @@ final class BreadcrumbsService
     {
         Breadcrumbs::for(
             'blog.single',
-            function (Trail $trail) use($paper) {
+            function (Trail $trail) use ($paper) {
                 $trail->push('Блог', route('blog'));
 
                 $trail->push($paper->title, route('blog.single', ['slug' => $paper->slug]));

@@ -8,20 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class OnlineDesciptionComponent extends Model
 {
-    use OnlineDesciptionComponentAttribute, 
+    use OnlineDesciptionComponentAttribute,
     OnlineDesciptionComponentRelationship;
 
     protected $fillable = [
         "course_id",
         "component_id",
         "sort",
-        "fields"
+        "fields",
     ];
     protected $casts = [
-        "fields" => "array"
+        "fields" => "array",
     ];
 
     public $table = 'onlines_description_components';
-
-    
 }

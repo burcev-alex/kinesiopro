@@ -2,14 +2,13 @@
 
 namespace App\Domains\Course\Models\Traits\Attribute;
 
-
 use Intervention\Image\ImageManagerStatic as Image;
 use File;
 
 trait CourseAttribute
 {
 
-    private function _defaultImage()
+    private function defaultImage()
     {
         return '/images/photo_not_found.png';
     }
@@ -21,9 +20,10 @@ trait CourseAttribute
 
     /**
      * Detect product class name
+     *
      * @return string
      */
-    function getMarkerClassAttribute()
+    public function getMarkerClassAttribute()
     {
         if ($this->marker_new) {
             return 'new';
@@ -33,9 +33,10 @@ trait CourseAttribute
 
     /**
      * Detect product class name
+     *
      * @return string
      */
-    function getClassNewAttribute()
+    public function getClassNewAttribute()
     {
         return $this->marker_new
             ? 'new'
@@ -44,34 +45,31 @@ trait CourseAttribute
 
     /**
      * Detect price format
+     *
      * @return string
      */
-    function getPriceFormatAttribute()
+    public function getPriceFormatAttribute()
     {
         return number_format($this->price, 0, '.', ' ');
     }
-
-    /**
-     * `variants` relation must be included
-     * @return string
-     */
-    function getAvailabilityClassAttribute()
+    
+    public function getAvailabilityClassAttribute()
     {
         return $this->marker_archive ? 'not-available' : ($this->available
             ? 'correct'
             : 'error');
     }
     
-    function getCityDisplayAttribute()
+    public function getCityDisplayAttribute()
     {
-        return implode(', ', $this->property_values->filter(function($prop){
+        return implode(', ', $this->property_values->filter(function ($prop) {
             return ($prop->char->slug == 'city');
         })->pluck('value')->toArray());
     }
     
-    function getFormatDisplayAttribute()
+    public function getFormatDisplayAttribute()
     {
-        return implode(', ', $this->property_values->filter(function($prop){
+        return implode(', ', $this->property_values->filter(function ($prop) {
             return $prop->char->slug == 'format';
         })->pluck('value')->toArray());
     }

@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace App\Domains\Banner\Models\Traits\Relationship;
 
 use Orchid\Attachment\Models\Attachment;
 
-trait BannerRelationship {
+trait BannerRelationship
+{
     public function attachment()
     {
         return $this->hasOne(Attachment::class, 'id', 'attachment_id');

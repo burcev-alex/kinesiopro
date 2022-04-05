@@ -25,6 +25,8 @@ class QuizItemService extends BaseService
     }
 
     /**
+     * Даные по тесту
+     *
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
@@ -36,6 +38,8 @@ class QuizItemService extends BaseService
     }
 
     /**
+     * Список тестов
+     *
      * @param string $filters
      * @param string $slug
      * @param int $page
@@ -50,14 +54,17 @@ class QuizItemService extends BaseService
     }
     
     /**
+     * Детальная информация по тесту
+     *
      * @param $slug
      * @return Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
     public function showItemDetails($slug)
     {
         $rs = $this->model->where('slug', $slug)->where('active', true)->get()->first();
-        if (!$rs)
+        if (!$rs) {
             return null;
+        }
 
         return [$rs, $rs->questions];
     }

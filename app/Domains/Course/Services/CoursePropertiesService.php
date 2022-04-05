@@ -19,22 +19,24 @@ class CoursePropertiesService
         $this->courseService = $courseService;
 
         $arrRefProperties = RefChar::where('active', 1)->get()->pluck('slug')->toArray();
-        foreach($arrRefProperties as $slug){
+        foreach ($arrRefProperties as $slug) {
             $this->schema[$slug] = 'all';
         }
     }
 
     /**
      * Get general course properties
-     * @param Course $course
+     *
      * @return array[]
      */
-    public function getGeneralProperties(Course $course) {
-
+    public function getGeneralProperties()
+    {
         return [];
     }
 
     /**
+     * Вывод всех свойств курса
+     *
      * @param Course $course
      * @return array
      */
@@ -43,8 +45,7 @@ class CoursePropertiesService
         $grouped = $course->getGroupedPropertiesBySlug();
         
         $return = [];
-        foreach ($this->schema as $key => $type)
-        {
+        foreach ($this->schema as $key => $type) {
             $properties = $grouped->get($key);
             if (!$properties || $properties->isEmpty()) {
                 continue;
@@ -54,13 +55,13 @@ class CoursePropertiesService
                 $return[] = [
                     'slug' => $property->chars->slug,
                     'name' => $property->chars->name,
-                    'value' => $property->value
+                    'value' => $property->value,
                 ];
             } elseif ($type == 'all') {
                 $return[] = [
                     'slug' => $properties->first()->chars->slug,
                     'name' => $properties->first()->chars->name,
-                    'value' => $properties->pluck('value')->implode(', ')
+                    'value' => $properties->pluck('value')->implode(', '),
                 ];
             } elseif ($type == 'min_max') {
                 $min = $properties->min('value');
@@ -69,7 +70,7 @@ class CoursePropertiesService
                 $return[] = [
                     'slug' => $property->chars->slug,
                     'name' => $property->chars->name,
-                    'value' => $min . '-' . $max
+                    'value' => $min . '-' . $max,
                 ];
             }
         }
@@ -78,6 +79,8 @@ class CoursePropertiesService
     }
 
     /**
+     * Свойств, которые необхоимы для товаров в корзине
+     *
      * @param Course $course
      * @return array
      */
@@ -86,11 +89,10 @@ class CoursePropertiesService
         $grouped = $course->getGroupedPropertiesBySlug();
         
         $schema = [
-            'city' => 'Город'
+            'city' => 'Город',
         ];
         $return = [];
-        foreach ($schema as $key => $title)
-        {
+        foreach ($schema as $key => $title) {
             $properties = $grouped->get($key);
             if (!$properties || $properties->isEmpty()) {
                 $value = '';
@@ -101,7 +103,7 @@ class CoursePropertiesService
             $return[$key] = [
                 'key' => $key,
                 'name' => $title,
-                'value' => $value
+                'value' => $value,
             ];
         }
         return $return;

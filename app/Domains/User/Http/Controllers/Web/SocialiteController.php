@@ -11,6 +11,7 @@ class SocialiteController
 {
     /**
      * Redirect to driver
+     *
      * @param string $driver
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -21,6 +22,7 @@ class SocialiteController
 
     /**
      * Google callback
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function google()
@@ -59,13 +61,13 @@ class SocialiteController
             $userId = $newUser->id;
             auth()->login($newUser, true);
         }
-        
-        FavoritesService::synchronize($userId);
 
         return redirect()->route('index');
     }
 
     /**
+     * Авторизация через FB
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function facebook()
@@ -96,14 +98,12 @@ class SocialiteController
                 'facebook_id' => $user->id,
                 'last_login_at' => Carbon::now(),
                 'last_login_ip' => request()->ip(),
-                'receive_emails' => true
+                'receive_emails' => true,
             ]);
             $userId = $newUser->id;
             auth()->login($newUser, true);
         }
         
-        FavoritesService::synchronize($userId);
-
         return redirect()->route('index');
     }
 }

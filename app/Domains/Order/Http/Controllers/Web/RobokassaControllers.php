@@ -20,21 +20,20 @@ class RobokassaControllers extends BaseController
 
         $this->service = new FacadeRobokassa();
 
-        if(!array_key_exists('InvId', $input)){
+        if (!array_key_exists('InvId', $input)) {
             return abort('419');
         }
         
         $this->order = Order::where('id', $input['InvId'])->get()->first();
     }
 
-    public function success(Request $request)
+    public function success()
     {
         if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
-        
             // изменение статуса заказа
             
             $fields = [
-                'payment_status' => 'payed'
+                'payment_status' => 'payed',
             ];
 
             $this->order->update($fields);
@@ -47,36 +46,31 @@ class RobokassaControllers extends BaseController
                     [SignatureValue] => a4487f74d53baf3e8dbbb5ad6bb740c5
                     [IsTest] => 1
                     [Culture] => ru
-                ) 
+                )
              */
-
         }
 
         return view('pages.order.robokassa.success', ['data' => $this->data, 'order' => $this->order]);
     }
 
-    public function payment(Request $request)
+    public function payment()
     {
         if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
-        
             // изменение статуса заказа
             $fields = [
-                'payment_status' => 'payed'
+                'payment_status' => 'payed',
             ];
 
             $this->order->update($fields);
-
         }
 
         return view('pages.order.robokassa.payment', ['data' => $this->data, 'order' => $this->order]);
     }
     
-    public function error(Request $request)
+    public function error()
     {
         if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
-        
             // изменение статуса заказа
-
         }
 
         return view('pages.order.robokassa.error', ['data' => $this->data, 'order' => $this->order]);

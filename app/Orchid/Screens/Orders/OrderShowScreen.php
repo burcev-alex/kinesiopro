@@ -34,6 +34,8 @@ class OrderShowScreen extends Screen
     public $description = 'Просмор заказа';
 
     /**
+     * Exists
+     *
      * @var bool
      */
     public $exists = false;
@@ -48,7 +50,7 @@ class OrderShowScreen extends Screen
      *
      * @return array
      */
-    public function query(Order $item, OrderItem $products) : array
+    public function query(Order $item) : array
     {
         $this->exists = $item->exists;
 
@@ -60,7 +62,7 @@ class OrderShowScreen extends Screen
         }
 
         return [
-            'item' => $this->data
+            'item' => $this->data,
         ];
     }
 
@@ -122,29 +124,30 @@ class OrderShowScreen extends Screen
                     Label::make('first_name')->value($this->data['first_name'])->title('Имя'),
                     Label::make('last_name')->value($this->data['last_name'])->title('Фамилия'),
                     Label::make('phone')->value($this->data['phone'])->title('Телефон'),
-                    Label::make('email')->value($this->data['email'])->title('Email')
+                    Label::make('email')->value($this->data['email'])->title('Email'),
                 ])->title('Покупатель'),
             ]),
             Layout::columns([
                 Layout::rows([
                     Label::make('payment_method')->value($this->data['payment_method'])->title('Способ оплаты'),
-                    Label::make('payment_status')->value($this->data['payment_status'])->title('Статус оплаты')
+                    Label::make('payment_status')->value($this->data['payment_status'])->title('Статус оплаты'),
                 ])->title('Оплата'),
                 Layout::rows([
-                    Input::make('payment_link')->value(array_key_exists('url', $this->data['payment']) ? $this->data['payment']['url'] : '')->title('Ссылка'),
+                    Input::make('payment_link')
+                    ->value(array_key_exists('url', $this->data['payment']) ? $this->data['payment']['url'] : '')
+                    ->title('Ссылка'),
                 ])->title('Метод оплаты'),
             ]),
             Layout::view('platform.order.detail.products'),
             Layout::rows([
                 Label::make('comment')->title('Комментарий клиента')->value($this->data['comment']),
             ])->title('Доп. информация'),
-            Layout::rows([
-                FieldsCode::make('code')->language(FieldsCode::MARKUP)->value(print_r($this->data,true)),
-            ])->title('System'),
         ];
     }
 
     /**
+     * Remove
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -161,6 +164,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set paid
+     *
      * @param Order $item
      * @param Request $request
      *
@@ -189,6 +194,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set Cancel
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -201,6 +208,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set complete
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -213,6 +222,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set refusal
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -225,6 +236,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set pending
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -237,6 +250,8 @@ class OrderShowScreen extends Screen
     }
 
     /**
+     * Set State
+     *
      * @param Order $item
      *
      * @return \Illuminate\Http\RedirectResponse
