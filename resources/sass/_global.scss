@@ -829,8 +829,8 @@
     display: block;
     text-align: center;
     color: #3A3A3A;
-    font-size: 16px;
     margin-top: 10px;
+    font: normal normal 16px 'Nunito', sans-serif;
   }
   
   .etabs li.tab {
@@ -1051,7 +1051,11 @@
     font: normal normal 14px 'Nunito', sans-serif;
   }
   
-  .bread-crumbs li a:after {
+  .bread-crumbs li:first-of-type a:before {
+    display: none;
+  }
+  
+  .bread-crumbs li a:before {
     content: '.';
     margin: 0 5px 0 8px;
     color: #FA8151;
@@ -1067,6 +1071,14 @@
   .bread-crumbs li > span {
     color: #828A96;
     font: normal normal 14px 'Nunito', sans-serif;
+  }
+  
+  .bread-crumbs li > span:before {
+    content: '.';
+    margin: 0 5px 0 8px;
+    color: #FA8151;
+    font-size: 40px;
+    line-height: 0;
   }
   
   .titleH1 {
@@ -1509,7 +1521,7 @@
   }
   
   .contactsBlock__title {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: bold;
     color: #212529;
   }
@@ -1720,7 +1732,16 @@
   
   .blockCheckbox span {
     color: #575756;
-    font: normal normal 18px/27px 'Nunito', sans-serif;
+    font: normal normal 16px/20px 'Nunito', sans-serif;
+  }
+  
+  .blockCheckbox span span {
+    color: #3A3A3A;
+    font: normal normal 18px 'Nunito', sans-serif;
+  }
+  
+  .blockCheckbox2 > span {
+    font: normal normal 14px/21px 'Nunito', sans-serif;
   }
   
   .formIntensive {
@@ -2161,10 +2182,6 @@
     height: 20px;
   }
   
-  .enter {
-  
-  }
-  
   .enter__desc {
     color: #3A3A3A;
     font: normal normal 16px 'Nunito', sans-serif;
@@ -2480,7 +2497,7 @@
     color: #FA8151;
   }
   
-  .dontPage__desc{
+  .dontPage__desc {
     text-align: center;
     color: #3A3A3A;
     font: normal normal 18px/27px 'Nunito', sans-serif;
@@ -2490,6 +2507,14 @@
   .error {
     color: #be5607 !important;
     font: normal normal 16px 'Nunito', sans-serif !important;
+  }
+  
+  .registerPayContent .teachersH2 {
+    font-size: 34px;
+  }
+  
+  .perAccountEEnter {
+    display: none;
   }
   
   /*
@@ -2782,6 +2807,7 @@
     .navMenu {
       border-top: 1px solid #ffffff;
       padding-top: 20px;
+      padding-right: 60px;
     }
   
     .perAccount span {
@@ -2793,11 +2819,11 @@
     }
   
     .headerMenuSocial {
-      max-width: 90px;
+      max-width: 70px;
     }
   
     .headerMenu {
-      max-width: 150px;
+      max-width: 130px;
     }
   
     .headerLogo {
@@ -2805,7 +2831,7 @@
     }
   
     .header {
-      padding: 25px 0 15px;
+      padding: 20px 0 15px;
     }
   
     .sliderTopContent {
@@ -2985,7 +3011,7 @@
     }
   
     .headerRight {
-      max-width: 67%;
+      max-width: 64%;
       top: 35px;
     }
   
@@ -3126,6 +3152,26 @@
   }
   
   @media (max-width: 780px) {
+    .enter {
+      display: none;
+    }
+  
+    .perAccountEEnter {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+    }
+  
     .formRegisterBlockItemPassword,
     .formRegisterBlockItemPassword2 {
       display: none;
@@ -3473,6 +3519,10 @@
   }
   
   @media (max-width: 690px) {
+    .headerRight {
+      max-width: 68%;
+    }
+  
     .itemLeft {
       max-width: 100%;
       margin-bottom: 10px;
@@ -3637,6 +3687,10 @@
   }
   
   @media (max-width: 580px) {
+    .navMenu {
+      padding-right: 0;
+    }
+  
     .footerBlockList2,
     .footerBlockList {
       display: none;
@@ -3868,6 +3922,7 @@
   
     .headerRight .perAccount {
       max-width: 154px;
+      margin: 10px 0 0 0;
     }
   
     .mobilBlockBtnBlock .perAccount {
@@ -3885,7 +3940,7 @@
     }
   
     .headerRight {
-      max-width: 154px;
+      max-width: 165px;
     }
   
     .headerIn {
@@ -3952,7 +4007,7 @@
   
     .navMenuMobil li > a {
       color: #3A3A3A;
-      font: normal normal 16px 'Nunito', sans-serif;
+      font: normal normal 18px 'Nunito', sans-serif;
       text-transform: uppercase;
       display: block;
       text-align: center;
@@ -4194,7 +4249,9 @@
     }
   
     .bread-crumbs {
-      padding: 0 15px;
+      padding: 0;
+      max-width: 250px;
+      width: 100%;
     }
   
     .mainRight {
@@ -4315,6 +4372,10 @@
   
     .testContent {
       margin-bottom: 70px;
+    }
+  
+    .blockCourse__time {
+      font-size: 14px;
     }
   }
   

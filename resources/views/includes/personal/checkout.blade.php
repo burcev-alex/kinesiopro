@@ -41,7 +41,7 @@
 
     <h3 class="registerPay__title">Платежный шлюз:</h3>
     <div class="registerPayBlock flex">
-        <div class="formIntensiveRadio">
+        <div class="formIntensiveRadio blockCheckbox2">
             <label class="blockCheckbox">
                 <span>Сбербанк (подходит для большинства платежей)</span>
                 <input type="radio" value="sberbank" checked="checked" name="order[payment]"><span class="checkmark"></span>
@@ -49,7 +49,7 @@
             <img src="/images/icon41.svg" alt="">
         </div>
 
-        <div class="formIntensiveRadio">
+        <div class="formIntensiveRadio blockCheckbox2">
             <label class="blockCheckbox">
                 <span>Robokassa (подходит для жителей Украины)</span>
                 <input type="radio" value="robokassa" name="order[payment]"><span class="checkmark"></span>
