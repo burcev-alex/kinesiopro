@@ -7,17 +7,17 @@
             <div class="scheduleTop">
                 <ul class="scheduleList flex">
                     <li>
-                        <a href="#" class="active">Он-лайн</a>
+                        <a href="{{ route('online') }}">Он-лайн</a>
                     </li>
 
                     <li>
-                        <div class="scheduleSlider">
+                        <div class="scheduleSlider offline">
                             <span class="scheduleSlider__btn"></span>
                         </div>
                     </li>
 
                     <li>
-                        <a href="#">Оффлайн</a>
+                        <a href="{{ route('courses.index') }}" class="active">Оффлайн</a>
                     </li>
                 </ul>
 

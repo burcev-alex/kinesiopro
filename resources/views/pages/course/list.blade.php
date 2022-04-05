@@ -25,7 +25,7 @@
                 <div class="scheduleTop">
                     <ul class="scheduleList flex">
                         <li>
-                            <a href="#">Он-лайн</a>
+                            <a href="{{ route('online') }}">Он-лайн</a>
                         </li>
 
                         <li>

@@ -7,8 +7,8 @@
             }
         }
     @endphp
-    <li class="tab @if($defaultActive) active @endif ">
-        <a href="javascript:" data-slug="" class="etabs__all">
+    <li class="tab @if($defaultActive) active @endif " data-action="async">
+        <a href="{{ route('courses.index') }}" data-slug="" class="etabs__all">
             <span class="etabs__img">
                 <img src="/images/icon16.svg" alt="">
             </span>

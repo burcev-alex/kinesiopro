@@ -26,6 +26,7 @@
 @push('after-scripts')
     @include('includes.scripts', [
     'list' => [
+        mix('js/plugins/mask.js'),
         mix('js/online_page_script.js')
     ],
     ])

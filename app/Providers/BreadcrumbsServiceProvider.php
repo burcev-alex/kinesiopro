@@ -106,5 +106,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push('Бонусная программа', route('discount'))
         );
+
+        // Онлайн курсы
+        Breadcrumbs::for(
+            'online',
+            fn (Trail $trail) =>
+            $trail->push('Онлайн-курсы', route('online'))
+        );
     }
 }
