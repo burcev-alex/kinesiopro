@@ -181,11 +181,11 @@ class UserEditScreen extends Screen
 
         $userData['permissions'] = $permissions;
 
-        if(is_array($userData['avatar_id'])){
+        if(array_key_exists('avatar_id', $userData) && is_array($userData['avatar_id'])){
             $userData['avatar_id'] = current($userData['avatar_id']);
         }
 
-        if(is_array($userData['scan_id'])){
+        if(array_key_exists('scan_id', $userData) && is_array($userData['scan_id'])){
             $userData['scan_id'] = current($userData['scan_id']);
         }
         
