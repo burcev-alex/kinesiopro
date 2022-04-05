@@ -9,7 +9,7 @@
             <a href="tel:+7 (925) 038-61-32" class="footerBlock__phone">+7 (925) 038-61-32</a>
             <a href="mailto:kineziopro@gmail.com" class="footerBlock__mail"><span>kineziopro@gmail.com</span></a>
 
-            <a href="#" class="perAccount flex">
+            <a href="{{ route('profile.index') }}" class="perAccount flex">
                 <span>Личный кабинет</span>
             </a>
 

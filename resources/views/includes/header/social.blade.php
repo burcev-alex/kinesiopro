@@ -27,7 +27,7 @@
 
     @include('includes.header.search')
 
-    @if (Auth::check())
+    @auth
         <div class="enter">
             <div class="enter__desc">Вы вошли как: <span style="display: none;">3</span></div>
             <a href="{{ route('profile.index') }}" class="enter__name">{{ $logged_in_user->name }}</a>
@@ -36,7 +36,7 @@
         <a href="{{ route('auth.login') }}" class="show_autorization_popup perAccount flex">
             <span>Авторизация</span>
         </a>
-    @endif
+    @endauth
 
 
     <ul class="headerMenuSocial flex">

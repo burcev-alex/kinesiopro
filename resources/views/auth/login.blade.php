@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', __('Login'))
+@section('metaLabels')
+    @parent
+    @includeIf('meta::manager', [
+        'title' => 'Авторизация',
+        'description' => ''
+    ])
+@stop
 
 @section('content')
 

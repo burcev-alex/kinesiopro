@@ -13,10 +13,14 @@ export class Validator {
         // Форма регистрации
         context.formValidator('registrationStaticForm', function (form) {
             addPreloader();
+
+            let formData = new FormData($(form).get(0));
             
             $.post({
                 url: $(form).attr('action'),
-                data: $(form).serializeArray(),
+                data: formData,
+                contentType: false,
+                processData: false,
                 headers: {
                     'X-CSRF-TOKEN': context._token
                 },

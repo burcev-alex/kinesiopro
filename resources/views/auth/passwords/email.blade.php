@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', __('Reset Password'))
+@section('metaLabels')
+    @parent
+    @includeIf('meta::manager', [
+        'title' => 'Восстановение пароля',
+        'description' => ''
+    ])
+@stop
 
 @section('content')
     @include('includes.partials.breadcrumbs')

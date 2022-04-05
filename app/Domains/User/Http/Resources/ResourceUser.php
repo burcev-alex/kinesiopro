@@ -26,6 +26,11 @@ class ResourceUser extends JsonResource
             'firstname' => $resource->firstname,
             'surname' => $resource->surname,
             'email' => $resource->email,
+            'avatar' => $resource->avatar->relativeUrl,
+            'birthday' => $birthday,
+            'work' => $resource->work,
+            'position' => $resource->position,
+            'country' => $resource->country,
             'phone' => $resource->phone
         ];
     }

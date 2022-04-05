@@ -14,8 +14,8 @@ class RequestUserRegister extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
-            'surname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string'],
             'work' => ['required', 'string'],
             'country' => ['required', 'string'],
@@ -24,6 +24,9 @@ class RequestUserRegister extends FormRequest
             'password' => ['required', 'confirmed', 'min:6'],
             'scan_id' => '',
             'avatar_id' => '',
+            'birthday_year' => '',
+            'birthday_month' => '',
+            'birthday_day' => '',
         ];
     }
 

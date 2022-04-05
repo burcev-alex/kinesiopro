@@ -19,16 +19,6 @@ use Orchid\Attachment\File;
 
 class RegisteredUserController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('guest', [
-        //     'except' => [
-        //         'logout',
-        //         'switchLogout',
-        //     ],
-        // ]);
-    }
-
     /**
      * @param RequestUserRegister $request
      * @return \Illuminate\Http\JsonResponse
@@ -74,6 +64,17 @@ class RegisteredUserController extends Controller
             try {
                 DB::beginTransaction();
 
+                if(strlen($data['birthday_year']) > 0 && 
+                strlen($data['birthday_month']) > 0 && 
+                strlen($data['birthday_day']) > 0){
+                    $birthday = $data['birthday_year']."-";
+                    $birthday .= $data['birthday_month']."-";
+                    $birthday .= $data['birthday_day'];
+                }
+                else{
+                    $birthday = null;
+                }
+
                 $fields = [
                     'name' => $data['surname']." ".$data['firstname'],
                     'firstname' => $data['firstname'],
@@ -81,6 +82,7 @@ class RegisteredUserController extends Controller
                     'email' => $email,
                     'phone' => $data['phone'],
                     'work' => $data['work'],
+                    'birthday' => $birthday,
                     'position' => $data['position'],
                     'country' => $data['country'],
                     'password' => $data['password'],

@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <form id="registrationStaticForm" action="{{ route('register.post') }}" method="POST" class="flex formRegister">
+        <form id="registrationStaticForm" enctype="multipart/form-data" action="{{ route('register.post') }}" method="POST" class="flex formRegister">
             @csrf
             <div class="formRegisterBlock">
                 <div class="formRegisterBlockItem">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="formRegisterBlockFile formRegisterBlockFileMobil">
-                    <input type="file" name="avatar">
+                    <input type="file" name="avatar_id">
                     <span>Добавить фото</span>
                 </div>
 
@@ -95,14 +95,14 @@
                 <div class="birthday flex birthdayMobil">
                     <label for="birthday">Дата рождения</label>
                     <select class="select birthdaySelect" id="birthday" name="birthday_day">
-                        <option value="день">день</option>
+                        <option value="">день</option>
                         @for($i=1; $i<=31; $i++)
                         <option value="{{ ($i<10)?'0':'' }}{{ $i }}">{{ ($i<10)?'0':'' }}{{ $i }}</option>
                         @endfor
                     </select>
 
-                    <select class="select birthdaySelect" name="month" id="birthday_month">
-                        <option value="день">месяц</option>
+                    <select class="select birthdaySelect" name="birthday_month" id="birthday_month">
+                        <option value="">месяц</option>
                         <option value="Январь">Январь</option>
                         <option value="Февраль">Февраль</option>
                         <option value="Март">Март</option>
@@ -118,7 +118,7 @@
                     </select>
 
                     <select class="select birthdaySelect" id="year" name="birthday_year">
-                        <option value="год">год</option>
+                        <option value="">год</option>
                         @for($i=2004; $i>=1950; $i--)
                         <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
@@ -142,7 +142,7 @@
 
             <div class="formRegisterBtn flex">
                 <div class="formRegisterBlockFile scanPassword flex">
-                    <input type="file" name="scan">
+                    <input type="file" name="scan_id">
                     <span>Прикрепить скан паспорта</span>
                 </div>
 

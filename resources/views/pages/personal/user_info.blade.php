@@ -20,8 +20,10 @@
 
         <div class="accountCenter">
             <h3 class="accountCenter__title">Профиль</h3>
-
-            <img src="/images/img23.png" alt="">
+            
+            @if($user->picture)
+                <img src="{{ $user->picture->relativeUrl }}" width="150" alt="">
+            @endif
 
             <ul class="accountCenterList">
                 <li>
@@ -56,7 +58,7 @@
 
                 <li>
                     <span class="accountCenterList__one">Местро работы</span>
-                    <span class="accountCenterList__two">{{ $user->place }}</span>
+                    <span class="accountCenterList__two">{{ $user->work }}</span>
                 </li>
 
                 <li>

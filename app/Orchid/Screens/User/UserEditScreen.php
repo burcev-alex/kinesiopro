@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
+use App\Domains\User\Models\User;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserPasswordLayout;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Orchid\Access\UserSwitch;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -161,7 +161,7 @@ class UserEditScreen extends Screen
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($user),
-            ],
+            ]
         ]);
 
         $permissions = collect($request->get('permissions'))
@@ -179,18 +179,15 @@ class UserEditScreen extends Screen
             $userData['password'] = Hash::make($userData['password']);
         }
 
-        $user
-            ->fill($userData)
-            ->fill([
-                'permissions' => $permissions,
-            ])
-            ->save();
+        $userData['permissions'] = $permissions;
+        
+        $user->fill($userData)->save();
 
         $user->replaceRoles($request->input('user.roles'));
 
         Toast::info(__('User was saved.'));
 
-        return redirect()->route('platform.systems.users');
+        return redirect()->route('platform.systems.users.edit', $user);
     }
 
     /**

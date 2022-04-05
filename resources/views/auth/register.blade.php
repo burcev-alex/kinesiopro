@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', __('Register'))
+@section('metaLabels')
+    @parent
+    @includeIf('meta::manager', [
+        'title' => 'Регистрация',
+        'description' => ''
+    ])
+@stop
 
 @section('content')
     <div class="container py-4">
