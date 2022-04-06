@@ -2,6 +2,7 @@
 namespace App\Domains\Order\Services;
 
 use App;
+use App\Domains\Crm\Jobs\PaymentOnlineCourse;
 use App\Domains\Order\Facades\Cart;
 use App\Domains\Order\Models\Interfaces\OrderInterface;
 use App\Domains\Order\Models\Order;
@@ -137,6 +138,12 @@ class CheckoutService extends BaseService
 
             // сохранить идентификатор платежного запроса
             Order::where('id', $orderId)->update(['payment' => $parameters['external']]);
+
+            // событие проверка наличия оплаты
+            // если нее не произвели, оставить уведомление через 3часа
+            $job = new PaymentOnlineCourse($order->id);
+            $job->delay(now()->addMinutes(60*3));
+            dispatch($job);
 
             session()->forget('coupon');
         } catch (\Exception $e) {
