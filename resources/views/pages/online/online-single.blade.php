@@ -81,6 +81,17 @@
                     </li>
                     @endif
 
+                    <li>
+                        <div class="signUpBlockList__img">
+                            <img src="/images/icon30.svg" alt="">
+                        </div>
+
+                        <div class="signUpBlockListRight">
+                            <div class="signUpBlockListRight__title">Формат</div>
+                            <div class="signUpBlockListRight__date">Онлайн</div>
+                        </div>
+                    </li>
+
                     @if(strlen($online->price) > 0)
                     <li>
                         <div class="signUpBlockList__img">

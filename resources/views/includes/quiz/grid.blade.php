@@ -10,6 +10,6 @@
             </span>
         </a>
 
-        <p>{!! $article->preview !!}</p>
+        <p>{!! $article->preview_format !!}</p>
     </li>
 @endforeach

@@ -14,6 +14,16 @@ trait PodcastAttribute
     {
         return $this->publication_date ? $this->publication_date->translatedFormat("d M") : '';
     }
+
+    public function getPublishDateDayAttribute()
+    {
+        return $this->publication_date ? $this->publication_date->translatedFormat("d") : '';
+    }
+
+    public function getPublishDateMonthAttribute()
+    {
+        return $this->publication_date ? $this->publication_date->translatedFormat("M") : '';
+    }
     
     public function getAttachmentWebpAttribute()
     {

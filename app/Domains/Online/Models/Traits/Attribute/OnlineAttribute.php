@@ -3,7 +3,7 @@
 namespace App\Domains\Online\Models\Traits\Attribute;
 
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Str;
 trait OnlineAttribute
 {
 
@@ -44,6 +44,11 @@ trait OnlineAttribute
     {
         return $this->start_date->translatedFormat('d F Y');
     }
+
+    public function getDiffDayAttribute()
+    {
+        return $this->start_date->diff($this->finish_date)->days;
+    }
     
     public function getAttachmentWebpAttribute()
     {
@@ -55,5 +60,9 @@ trait OnlineAttribute
             $originPath = convertImageToWebP($originPath);
         }
         return $originPath;
+    }
+    
+    public function getPreviewFormatAttribute(){
+        return Str::limit(strip_tags($this->preview), 115);
     }
 }

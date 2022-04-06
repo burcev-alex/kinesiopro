@@ -10,6 +10,7 @@ use App\Services\RouterService;
 use App\Domains\Podcast\Services\CatalogFilterService;
 use App\Domains\Podcast\Services\PodcastService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class PodcastControllers extends Controller
 {
@@ -27,7 +28,16 @@ class PodcastControllers extends Controller
 
     public function index(Request $request, string $param1 = '')
     {
-       
+        // установка типа отображения подкастов
+        if(!$request->view){
+            $typeView = Cookie::get('podcast_view') ?? 'grid';
+        }
+        else{
+            $typeView = $request->view;
+            Cookie::queue('podcast_view', $typeView, 60*60*24);
+        }
+        
+
         list($category, $filters, $page) = $this->routerService->detectParameters(['', '', $param1]);
         
         if (!$page) {
@@ -41,7 +51,7 @@ class PodcastControllers extends Controller
         if ($request->wantsJson()) {
             return [
                 'resource' => [
-                    'html' => view('includes.podcast.grid', ['podcasts' => $catalog])->render(),
+                    'html' => view('includes.podcast.'.$typeView, ['podcasts' => $catalog])->render(),
                 ],
                 'pagination' => [
                     'html' => view('includes.pagination', [
@@ -53,6 +63,7 @@ class PodcastControllers extends Controller
         }
         
         return view('pages.podcast.podcast-list', [
+            'type' => $typeView,
             'podcasts' => $catalog,
             'pagination' => $pagination,
         ]);
