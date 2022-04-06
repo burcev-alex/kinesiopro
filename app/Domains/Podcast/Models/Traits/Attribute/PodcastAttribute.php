@@ -24,6 +24,19 @@ trait PodcastAttribute
     {
         return $this->publication_date ? $this->publication_date->translatedFormat("M") : '';
     }
+
+    public function getIdentifMarkAttribute()
+    {
+        if(substr_count($this->url, "podcast-") > 0){
+            $split = explode("podcast-", $this->url);
+            $returned = '-'.$split[1];
+        }
+        else{
+            $returned = '';
+        }
+
+        return $returned;
+    }
     
     public function getAttachmentWebpAttribute()
     {
