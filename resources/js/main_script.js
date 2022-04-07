@@ -6,7 +6,9 @@ window.axios.defaults.headers.common['x-apikey'] = '123456';
 let langPrefix = $('html').attr('lang') === 'ru' ? '/ru' : '';
 let token = $('meta[name="csrf-token"]').attr('content');
 
-import { Validator } from './modules/validator';
+import {
+    Validator
+} from './modules/validator';
 
 let isMobile;
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) || $(window).width() <= 991) {
@@ -14,7 +16,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
 } else isMobile = false;
 
 $(document).ready(function () {
-    
+
     // валидация форм
     let validator = new Validator();
 
@@ -24,7 +26,7 @@ $(document).ready(function () {
 
     $('.navMenuMobil .navMenu__active > a').on('click', function () {
         $(this).toggleClass('active');
-        $('.navMenuMobilIn').slideToggle();
+        $(this).parent().find('.navMenuMobilIn').slideToggle();
     });
 
     $('.headerBtn').on('click', function () {

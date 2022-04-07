@@ -16,7 +16,7 @@
     <div class="testIn width flex">
         <img src="{{ $quiz_item->banner != null ? $quiz_item->banner->url() : '' }}" alt="">
 
-        <div class="paragraf">{!! $quiz_item->description !!}</div>
+        <div class="testInRight">{!! $quiz_item->description !!}</div>
     </div>
 
     <section class="teachers intensive" data-block="tests-intensive">
