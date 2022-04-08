@@ -4,12 +4,6 @@ namespace App\Domains\Teacher\Services;
 
 use App\Services\BaseService;
 use App\Domains\Teacher\Models\Teacher;
-use App\Exceptions\NoPageException;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Orchid\Attachment\Models\Attachment;
 
 class TeachersService extends BaseService
 {
@@ -21,7 +15,38 @@ class TeachersService extends BaseService
      */
     public function __construct(Teacher $teacher)
     {
+        $this->query = Teacher::query()->where('active', true);
+
         $this->model = $teacher;
+    }
+
+    /**
+     * Даные по преподавателю
+     *
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getBySlug(string $slug)
+    {
+        return Teacher::query()
+            ->where('slug', $slug)->where('active', true)
+            ->first();
+    }
+
+    /**
+     * Список преподавателей
+     *
+     * @param string $filters
+     * @param string $slug
+     * @param int $page
+     * @param int $perPage
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getList(int $page, int $perPage = 50)
+    {
+        $query = $this->model->active();
+
+        return $query->where('active', true)->orderBy('sort', 'asc')->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function save(array $fields): self

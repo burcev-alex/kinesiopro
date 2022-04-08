@@ -113,5 +113,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push('Онлайн-курсы', route('online'))
         );
+
+        // Преподаватели
+        Breadcrumbs::for(
+            'teacher.index',
+            fn (Trail $trail) =>
+            $trail->push('Преподаватели', route('teacher.index'))
+        );
     }
 }

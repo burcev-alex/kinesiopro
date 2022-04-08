@@ -4,6 +4,7 @@ namespace App\Domains\Teacher\Models;
 
 use App\Domains\Teacher\Models\Traits\Attribute\TeacherAttribute;
 use App\Domains\Teacher\Models\Traits\Relationship\TeacherRelationship;
+use App\Domains\Teacher\Models\Traits\Scope\TeacherScope;
 use Database\Factories\TeacherFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,8 @@ class Teacher extends Model
 {
     use HasFactory,
     TeacherRelationship,
-    TeacherAttribute,
+    TeacherAttribute, 
+    TeacherScope, 
     AsSource;
 
     protected $fillable = [
