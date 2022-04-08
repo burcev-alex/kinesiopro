@@ -29,7 +29,7 @@
 
     @auth
         <div class="enter">
-            <div class="enter__desc">Вы вошли как: <span style="display: none;">3</span></div>
+            <div class="enter__desc">Вы вошли как: @if($logged_in_user->unreadNotifications->count() > 0)<span>{{ $logged_in_user->unreadNotifications->count() }}</span>@endif</div>
             <a href="{{ route('profile.index') }}" class="enter__name">{{ $logged_in_user->name }}</a>
         </div>
     @else
