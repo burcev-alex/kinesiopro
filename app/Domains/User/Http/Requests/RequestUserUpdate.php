@@ -17,13 +17,15 @@ class RequestUserUpdate extends FormRequest
     {
         $userId = request()->user()->id;
         return [
-            'firstname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
-            'surname' => ['required', 'string', 'regex:/^[а-яА-ЯёЁА-Яа-яёЁЇїІіЄєҐґ\s]+$/iu', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', Rule::unique('users')->ignore($userId)],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($userId)],
-            'password' => ['required_with:new_password', 'min:6'],
-            'new_password' => ['sometimes', 'min:6'],
-            'activity' => []
+            'password' => ['required:string', 'min:6'],
+            'work' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'position' => ['required', 'string'],
+            'birthday' => '',
         ];
     }
 

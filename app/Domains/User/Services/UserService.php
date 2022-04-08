@@ -32,20 +32,18 @@ class UserService
             ]);
         }
 
+        $user->name = $data['surname']." ".$data['firstname'];
         $user->firstname = $data['firstname'];
         $user->surname = $data['surname'];
         $user->email = $email;
         $user->phone = $data['phone'];
+        $user->work = $data['work'];
+        $user->position = $data['position'];
+        $user->country = $data['country'];
+        $user->birthday = $data['birthday'];
 
-        if (isset($data['new_password'])) {
-            if (Hash::check($data['password'], $user->password)) {
-                $user->password = $data['new_password'];
-            } else {
-                throw ValidationException::withMessages([
-                    'password' => 'Неверный старый пароль',
-                ]);
-            }
-        }
+        $user->password = $data['password'];
+
         $user->save();
         return $user;
     }

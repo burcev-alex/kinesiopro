@@ -10,6 +10,39 @@ export class Validator {
     events() {
         let context = this;
 
+        // Форма изменение персональных данных
+        context.formValidator('profileUpdate', function (form) {
+            addPreloader();
+
+            let formData = new FormData($(form).get(0));
+            
+            $.post({
+                url: $(form).attr('action'),
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': context._token
+                },
+                success: function (response) {
+                    removePreloader();
+                    console.log(response);
+
+                    document.location = '/profile/';
+                    
+                },
+                error: function (response) {
+                    removePreloader();
+
+                    if (response.status === 422) {
+                        context.showValidationErrors(form, response.responseJSON.errors);                    
+                    } else {
+                        console.error(response.responseJSON.message);
+                    }
+                }
+            });
+        });
+
         // Форма регистрации
         context.formValidator('registrationStaticForm', function (form) {
             addPreloader();
@@ -27,7 +60,6 @@ export class Validator {
                 success: function (response) {
                     removePreloader();
                     console.log(response);
-                    context.unblockButton(button);
 
                     document.location = '/';
                     

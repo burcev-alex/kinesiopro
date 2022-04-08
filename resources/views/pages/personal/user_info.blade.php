@@ -25,7 +25,58 @@
                 <img src="{{ $user->picture->relativeUrl }}" width="150" alt="">
             @endif
 
-            <ul class="accountCenterList">
+            <form action="{{ route('profile.update') }}" data-action="async" method="POST" class="accountForm" id="profileUpdate" style="display: none;">
+                <div class="accountFormBlock flex">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" value="{{ $user->firstname }}" required name="firstname">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="surname">Фамилия</label>
+                    <input type="text" id="surname" value="{{ $user->surname }}" required name="surname">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="phone">Телефон</label>
+                    <input type="text" id="phone" value="{{ $user->phone }}" required name="phone">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email" value="{{ $user->email }}" required name="email">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="date">Дата рождения</label>
+                    <input type="date" id="date" name="birthday" value="{{ $user->birthday }}">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="country">Страна</label>
+                    <input type="text" id="country" value="{{ $user->country }}" required name="country">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="work">Местро работы</label>
+                    <input type="text" id="work" name="work" value="{{ $user->work }}" required>
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="jobs">Профессия</label>
+                    <input type="text" id="jobs" name="position" required value="{{ $user->position }}">
+                </div>
+
+                <div class="accountFormBlock flex">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" autocomplete="none" name="password">
+                </div>
+
+                <button type="submit" class="saveBtn flex">
+                    <span>Сохранить</span>
+                </button>
+            </form>
+
+            <ul class="accountCenterList" id="accountInfoShow">
                 <li>
                     <span class="accountCenterList__one">Имя</span>
                     <span class="accountCenterList__two">{{ $user->firstname }}</span>
@@ -74,7 +125,7 @@
 
             <ul class="accountCenterRed flex">
                 <li>
-                    <a href="#">Изменить</a>
+                    <a href="javascript:;" data-action="change-data-user">Изменить</a>
                 </li>
 
                 <li>

@@ -2638,10 +2638,11 @@
     justify-content: center;
     border-radius: 5px;
     border: 2px solid #EB6907;
-    max-width: 127px;
-    width: 100%;
     height: 40px;
     margin-top: 30px;
+    background: none;
+    padding: 0 19px;
+    cursor: pointer;
   }
   
   .saveBtn span {
@@ -2689,6 +2690,35 @@
     margin-bottom: 0;
   }
   
+  .accountForm {
+    margin-top: 24px;
+  }
+  
+  .accountFormBlock {
+    justify-content: flex-start;
+    margin-bottom: 4px;
+  }
+  
+  .accountFormBlock label {
+    max-width: 180px;
+    width: 100%;
+    font: normal normal 18px 'Nunito', sans-serif;
+    color: #B6B6B5;
+  }
+  
+  .accountFormBlock input {
+    max-width: 340px;
+    width: 100%;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #E6E6E6;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    font: normal normal 18px 'Nunito', sans-serif;
+    color: #3A3A3A;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -2697,6 +2727,14 @@
   Start responsive
   ################*/
   @media (max-width: 1340px) {
+    .accountFormBlock input {
+      max-width: 60%;
+    }
+  
+    .accountFormBlock label{
+      max-width: 38%;
+    }
+  
     .accountCenterList2 .accountCenterList__two {
       max-width: 300px;
     }
@@ -3205,6 +3243,15 @@
     .navMenu li.navMenu__program > a:before {
       width: 171px;
       top: 9px;
+    }
+  
+    .accountFormBlock input,
+    .accountFormBlock label{
+      max-width: 100%;
+    }
+  
+    .accountFormBlock label{
+      margin-bottom: 10px;
     }
   }
   
@@ -4260,7 +4307,7 @@
       max-width: 100%;
     }
   
-    .teachersItem{
+    .teachersItem {
       margin-bottom: 20px;
     }
   }
@@ -4920,7 +4967,7 @@
       max-width: 68%;
     }
   
-    .teachersItemBlock p{
+    .teachersItemBlock p {
       font-size: 14px;
       line-height: 22px;
     }

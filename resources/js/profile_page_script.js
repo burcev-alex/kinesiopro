@@ -6,6 +6,13 @@ $(document).ready(function () {
         $('.buyListIn').toggleClass('active');
       });
 
+    $('a[data-action="change-data-user"]').on('click', function(){
+
+        $(this).closest('.accountCenterRed').hide();
+        $('#accountInfoShow').hide();
+        $('#profileUpdate').show();
+        return false;
+    });
 });
 
 
