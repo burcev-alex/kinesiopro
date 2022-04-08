@@ -92,7 +92,7 @@
         </li>
 
         <li>
-            <a href="/"><span>Преподаватели</span></a>
+            <a href="{{ route('teacher.index') }}"><span>Преподаватели</span></a>
         </li>
 
         <li>
