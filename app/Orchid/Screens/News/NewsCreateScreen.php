@@ -68,7 +68,7 @@ class NewsCreateScreen extends Screen
         return [
             Layout::tabs([
                 "Основное" => Layout::rows([
-                    Input::make('item.me.slug')->title('URL')->value(''),
+                    Input::make('item.me.slug')->title('Символьный код')->value(''),
                     Input::make('item.me.title')->title('Заголовок')->value(''),
                     CheckBox::make('item.me.active')
                     ->value(false)->title('Активность'),

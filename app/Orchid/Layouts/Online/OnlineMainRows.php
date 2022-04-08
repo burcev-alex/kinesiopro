@@ -31,7 +31,7 @@ class OnlineMainRows extends Rows
         return [
             CheckBox::make('online.active')->title('Активность'),
             Input::make('online.title')->title('Название')->required(),
-            Input::make('online.slug')->title('URL')->required(),
+            Input::make('online.slug')->title('Символьный код')->required(),
             
             Input::make('online.price')->title('Цена')->required(),
             Input::make('online.sort')->title('Сортировка')->required(),

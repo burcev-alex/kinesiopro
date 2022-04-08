@@ -111,7 +111,7 @@ class QuizItemEditScreen extends Screen
             Layout::tabs([
                 "Вопросы" => $questions,
                 "Основное" => Layout::rows([
-                    Input::make('item.me.slug')->title('URL')->value($this->quiz_item->slug),
+                    Input::make('item.me.slug')->title('Символьный код')->value($this->quiz_item->slug),
                     Input::make('item.me.title')->title('Название')->value($this->quiz_item->title),
                     CheckBox::make('item.me.active')
                     ->value($this->quiz_item->active)->title('Активность'),

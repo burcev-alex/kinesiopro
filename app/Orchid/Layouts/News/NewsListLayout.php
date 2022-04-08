@@ -35,7 +35,7 @@ class NewsListLayout extends Table
                 return CheckBox::make('active')
                 ->value($item->active)->disabled();
             }),
-            TD::make('slug', 'URL'),
+            TD::make('slug', 'Символьный код'),
             TD::make('publishDate', 'Дата публикации')->render(function (NewsPaper $item) {
                 return $item->publishDate;
             }),

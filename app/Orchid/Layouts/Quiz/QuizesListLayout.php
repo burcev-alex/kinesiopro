@@ -35,7 +35,7 @@ class QuizesListLayout extends Table
                 return CheckBox::make('active')
                 ->value($item->active)->disabled();
             }),
-            TD::make('slug', 'URL'),
+            TD::make('slug', 'Символьный код'),
         ];
     }
 }

@@ -115,7 +115,7 @@ class NewsEditScreen extends Screen
             Layout::tabs([
                 "Компоненты" => $components,
                 "Основное" => Layout::rows([
-                    Input::make('item.me.slug')->title('URL')->value($this->news_paper->slug),
+                    Input::make('item.me.slug')->title('Символьный код')->value($this->news_paper->slug),
                     DateTimer::make('item.me.publication_date')->title('Дата публикации')->value($this->news_paper->publication_date),
                     Input::make('item.me.title')->title('Заголовок')->value($this->news_paper->title),
                     CheckBox::make('item.me.active')

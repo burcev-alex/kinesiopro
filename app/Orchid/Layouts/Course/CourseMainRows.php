@@ -56,7 +56,7 @@ class CourseMainRows extends Rows
         return [
             CheckBox::make('course.active')->title('Активность'),
             Input::make('course.name')->title('Название')->required(),
-            Input::make('course.slug')->title('URL')->required(),
+            Input::make('course.slug')->title('Символьный код')->required(),
             
             Input::make('course.price')->title('Цена')->required(),
             
