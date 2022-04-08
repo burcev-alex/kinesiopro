@@ -18,7 +18,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -79,7 +79,7 @@ class NewsEditScreen extends Screen
             ->icon('trash')
             ->canSee($this->components->count() > 0),
             Link::make("Посмотреть")
-            ->href(config('app.url') . "/article/" . $this->news_paper->slug)
+            ->href(config('app.url') . "/blog/" . $this->news_paper->slug)
             ->icon('globe-alt'),
         ];
     }
@@ -120,10 +120,12 @@ class NewsEditScreen extends Screen
                     Input::make('item.me.title')->title('Заголовок')->value($this->news_paper->title),
                     CheckBox::make('item.me.active')
                     ->value($this->news_paper->active)->title('Активность'),
-                    Upload::make('item.me.attachment_id')->title('Обложка')->value($this->news_paper->attachment_id)->maxFiles(1),
-                    Upload::make('item.me.detail_attachment_id')
-                    ->title('Обложка заголовка')
-                    ->value($this->news_paper->detail_attachment_id)->maxFiles(1),
+                ]),
+                "Картинки" => Layout::rows([
+                    Cropper::make('item.me.attachment_id')->title('Обложка')->value($this->news_paper->attachment_id)->width(363)->height(200)->targetId(),
+                    Cropper::make('item.me.detail_attachment_id')
+                    ->title('Обложка заголовка')->width(144)->height(144)
+                    ->value($this->news_paper->detail_attachment_id)->targetId(),
                 ]),
                 "SEO" => Layout::rows([
                     TextArea::make('item.me.meta_title')->title('Мета название')->value($this->news_paper->meta_title),

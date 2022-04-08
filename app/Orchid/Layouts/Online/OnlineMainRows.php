@@ -6,7 +6,7 @@ use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\DateTimer;
 
@@ -36,7 +36,7 @@ class OnlineMainRows extends Rows
             Input::make('online.price')->title('Цена')->required(),
             Input::make('online.sort')->title('Сортировка')->required(),
 
-            Upload::make('images.attachment_id')->title('Картинка анонса')->value($online->attachment_id)->maxFiles(1),
+            Cropper::make('images.attachment_id')->value($online->attachment_id)->title('Картинка анонса')->width(305)->height(305)->targetId(),
             
             Select::make('online.type')
                     ->options([

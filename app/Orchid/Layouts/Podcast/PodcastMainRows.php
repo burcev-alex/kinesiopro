@@ -5,7 +5,7 @@ use App\Domains\Podcast\Models\Podcast;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\DateTimer;
 
@@ -26,6 +26,8 @@ class PodcastMainRows extends Rows
     protected function fields(): array
     {
         $podcast = $this->query->get('podcast');
+
+        $value = $podcast ? ($podcast->attachment ? $podcast->attachment->id : '') : '';
         
         $rows = [
             Input::make('podcast.title')->title('Название')->required(),
@@ -34,9 +36,7 @@ class PodcastMainRows extends Rows
             CheckBox::make('podcast.active')->title('Активность'),
             DateTimer::make('podcast.publication_date')->title('Дата публикации'),
             Input::make('podcast.url')->title('Ссылка на эпизод'),
-            Upload::make('podcast.attachment_id')
-            ->value($podcast ? ($podcast->attachment ? [$podcast->attachment->id] : []) : [])
-            ->title('Картинка анонса')->required(),
+            Cropper::make('podcast.attachment_id')->value($value)->title('Картинка анонса')->width(305)->height(305)->required()->targetId(),
         ];
 
         return $rows;

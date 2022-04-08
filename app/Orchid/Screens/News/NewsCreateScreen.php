@@ -12,7 +12,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -72,7 +72,7 @@ class NewsCreateScreen extends Screen
                     Input::make('item.me.title')->title('Заголовок')->value(''),
                     CheckBox::make('item.me.active')
                     ->value(false)->title('Активность'),
-                    Upload::make('item.me.attachment_id')->title('Обложка')->value([])->maxFiles(1),
+                    Cropper::make('item.me.attachment_id')->title('Обложка')->width(363)->height(200)->targetId(),
                 ]),
             ])
         ];

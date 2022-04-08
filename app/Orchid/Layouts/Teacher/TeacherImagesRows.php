@@ -3,7 +3,7 @@ namespace App\Orchid\Layouts\Teacher;
 
 use Log;
 use Orchid\Screen\Field;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Layouts\Rows;
 
 class TeacherImagesRows extends Rows
@@ -23,10 +23,10 @@ class TeacherImagesRows extends Rows
     protected function fields(): array
     {
         $teacher = $this->query->get('teacher');
+
+        $value = $teacher->count() ? ($teacher->attachment ? $teacher->attachment->id : '') : '';
         return [
-            Upload::make('teacher.images.attachment_id')
-                ->value($teacher->count() ? ($teacher->attachment ? [$teacher->attachment->id] : []) : [])
-                ->title('Фото'),
+            Cropper::make('teacher.images.attachment_id')->value($value)->title('Фото')->width(150)->height(150)->targetId(),
         ];
     }
 }

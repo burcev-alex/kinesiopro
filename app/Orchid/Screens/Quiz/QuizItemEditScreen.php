@@ -16,7 +16,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -115,13 +115,8 @@ class QuizItemEditScreen extends Screen
                     Input::make('item.me.title')->title('Название')->value($this->quiz_item->title),
                     CheckBox::make('item.me.active')
                     ->value($this->quiz_item->active)->title('Активность'),
-                    Upload::make('item.me.attachment_id')
-                    ->title('Картинка анонса')
-                    ->value($this->quiz_item->attachment_id)
-                    ->maxFiles(1),
-                    Upload::make('item.me.detail_attachment_id')
-                    ->title('Детальная картинка')
-                    ->value($this->quiz_item->detail_attachment_id)->maxFiles(1),
+                    Cropper::make('item.me.attachment_id')->value($this->quiz_item->attachment_id)->title('Обложка')->width(415)->height(200)->targetId(),
+                    Cropper::make('item.me.detail_attachment_id')->value($this->quiz_item->detail_attachment_id)->title('Детальная картинка')->width(413)->height(200)->targetId(),
                     Quill::make('item.me.preview')
                     ->value($this->quiz_item->preview)
                     ->title('Анонс'),
