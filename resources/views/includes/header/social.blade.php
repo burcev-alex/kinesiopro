@@ -34,7 +34,7 @@
         </div>
     @else
         <a href="{{ route('auth.login') }}" class="show_autorization_popup perAccount flex">
-            <span>Авторизация</span>
+            <span>Личный кабинет</span>
         </a>
     @endauth
 

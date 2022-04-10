@@ -17,14 +17,14 @@
             @csrf
             <div class="formRegisterBlock flex">
                 <div class="formRegisterBlockItem">
-                    <label for="email">E-mail <span>*</span></label>
+                    <label for="email">Ваш e-mail <span>*</span></label>
                     <input type="text" id="email" name="email" value="{{ old('email') }}" required>
                 </div>
             </div>
 
             <div class="formRegisterBtn flex">
                 <button type="submit" class="flex enterBtn" value="Submit">
-                    <span>Отправить ссылку для сброса пароля</span>
+                    <span>Отправить</span>
                 </button>
             </div>
         </form>
