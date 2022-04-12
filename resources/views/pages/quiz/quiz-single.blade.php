@@ -13,10 +13,10 @@
     @include('includes.partials.breadcrumbs')
     <h1 class="width titleH1">{{ $quiz_item->title }}</h1>
 
-    <div class="testIn width flex">
-        <img src="{{ $quiz_item->banner != null ? $quiz_item->banner->url() : '' }}" alt="">
+    <div class="testIn width">
+        <img class="testInImg" src="{{ $quiz_item->banner != null ? $quiz_item->banner->url() : '' }}" alt="">
 
-        <div class="testInRight">{!! $quiz_item->description !!}</div>
+        {!! $quiz_item->description !!}
     </div>
 
     <section class="teachers intensive" data-block="tests-intensive">
