@@ -35,4 +35,20 @@ $(document).ready(function () {
     });
 
     $('.select').multipleSelect({});
+
+    $('.scheduleList__online a').on('click', function (event) {
+        event.preventDefault();
+        $('.scheduleSlider').removeClass('offline');
+        $(".scheduleList__offline.active, .scheduleList__offline .active").removeClass('active');
+        $(this).parents('.scheduleList__online').addClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.scheduleList__offline').on('click', function (event) {
+        event.preventDefault();
+        $('.scheduleSlider').addClass('offline');
+        $(".scheduleList__offline").addClass('active');
+        $(".scheduleList__offline.active a").addClass('active');
+        $(".scheduleList__online, .scheduleList__online a").removeClass('active');
+    });
 });
