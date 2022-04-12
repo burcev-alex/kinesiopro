@@ -56,8 +56,9 @@ class RefCharService extends BaseService
                     'char_id' => $this->model->id,
                     'slug' => $slug
                 ], [
+                    'char_id' => $this->model->id,
                     'value' => trim($value['value']),
-                    'slug' => $slug
+                    'slug' => trim($value['slug'])
                 ]);
             }
         }

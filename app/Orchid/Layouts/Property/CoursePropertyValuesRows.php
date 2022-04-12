@@ -38,19 +38,14 @@ class CoursePropertyValuesRows extends Rows
                 'slug' => $slug
             ];
         })->toArray();
-
-        $fields = [
-            'value' => TextArea::make(),
-            'slug' => TextArea::make()
-        ];
+        
         $columns = [
             'Название' => 'value',
             'Символьный код' => 'slug',
         ];
 
         return [
-            Matrix::make('char_values')->fields($fields)
-            ->columns($columns)->value($rows)->maxRows(count($rows))
+            Matrix::make('char_values')->columns($columns)->value($rows)->maxRows(count($rows)+1)
         ];
     }
 }
