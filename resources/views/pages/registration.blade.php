@@ -17,7 +17,7 @@
         <div class="scheduleContent">
             <div class="scheduleTop">
                 <ul class="scheduleList flex">
-                    <li>
+                    <li class="scheduleList__online active">
                         <a href="#" class="active">Регистрация</a>
                     </li>
 
@@ -27,7 +27,7 @@
                         </div>
                     </li>
 
-                    <li>
+                    <li class="scheduleList__offline">
                         <a href="#">Вход с помощью соцсетей</a>
                     </li>
                 </ul>

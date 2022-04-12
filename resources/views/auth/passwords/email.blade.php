@@ -13,7 +13,7 @@
     <h1 class="width titleH1">Восстановение пароля</h1>
 
     <section class="formRegisterMain">
-        <form action="{{ route('password.email') }}" data-action="async" method="POST" class="flex formAutorizaishen" id="passwordFogot">
+        <form action="{{ route('password.email') }}" data-action="async" method="POST" class="flex formAutorizaishen formRegisterRecover" id="passwordFogot">
             @csrf
             <div class="formRegisterBlock flex">
                 <div class="formRegisterBlockItem">

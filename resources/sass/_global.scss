@@ -1175,7 +1175,7 @@
     display: block;
     width: 280px;
     margin-top: 15px;
-    max-height: 80px;
+    max-height: 76px;
     overflow: hidden;
   }
   
@@ -1691,7 +1691,7 @@
   
   .podcast {
     margin-top: 33px;
-    margin-bottom: 60px;
+    margin-bottom: 0;
   }
   
   .podcast li .blogItem__title {
@@ -2067,7 +2067,7 @@
   }
   
   .accountCenter {
-    max-width: 50%;
+    max-width: 523px;
     width: 100%;
   }
   
@@ -2204,6 +2204,7 @@
     padding-left: 24px;
     color: #B6B6B5;
     font: normal normal 16px 'Nunito', sans-serif;
+    margin-bottom: 20px;
   }
   
   .profileList {
@@ -2223,6 +2224,13 @@
     font: normal normal 16px 'Nunito', sans-serif;
     color: #3A3A3A;
     position: relative;
+  }
+  
+  a.buyList__sertificate {
+    padding: 25px 0 15px 22px;
+    display: block;
+    font: normal normal 16px 'Nunito', sans-serif;
+    color: #3A3A3A;
   }
   
   .profileList li a span {
@@ -2287,8 +2295,7 @@
   }
   
   .buyList {
-    padding: 10px 0 0 0;
-    margin-top: 10px;
+    margin-top: 0;
   }
   
   .buyList li.buyList__active a {
@@ -2306,14 +2313,14 @@
     border: 5px solid transparent;
     border-top: 8px solid #FA8151;
     position: absolute;
-    top: 7px;
+    top: 9px;
     right: 20px;
   }
   
   .buyList li.buyList__active a.active:after {
     border: 5px solid transparent;
     border-bottom: 8px solid #ffffff;
-    top: 0;
+    top: 5px;
   }
   
   .buyList.active {
@@ -2325,7 +2332,7 @@
     display: block;
     width: 100%;
     padding-left: 25px;
-    padding-top: 8px;
+    padding-top: 3px;
     padding-bottom: 8px;
   }
   
@@ -2379,6 +2386,7 @@
     flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
+    padding-bottom: 11px;
   }
   
   .buyListIn li a:before {
@@ -2539,6 +2547,7 @@
     background: none;
     height: 41px;
     padding: 0 19px;
+    margin-bottom: 40px;
   }
   
   .enterBtn span {
@@ -2589,14 +2598,14 @@
     width: 100%;
   }
   
-  .testInRight h2 {
+  .testIn h2 {
     font-weight: bold;
     font-size: 22px;
     line-height: 30px;
     color: #3A3A3A;
   }
   
-  .testInRight h3 {
+  .testIn h3 {
     font-weight: bold;
     font-size: 22px;
     line-height: 30px;
@@ -2612,15 +2621,15 @@
     padding: 20px 0 40px 0;
   }
   
-  .testInRight ul {
+  .testIn ul {
     margin: 10px 0;
   }
   
-  .testInRight ul li {
+  .testIn ul li {
     margin-bottom: 10px;
   }
   
-  .testInRight ul li {
+  .testIn ul li {
     font: normal normal 16px 'Nunito', sans-serif;
     color: #3A3A3A;
   }
@@ -2656,6 +2665,10 @@
     margin-bottom: 53px;
     align-items: flex-start;
     justify-content: flex-start;
+  }
+  
+  .teachersContent {
+    align-items: flex-start;
   }
   
   .teachersItem img {
@@ -2719,6 +2732,24 @@
     color: #3A3A3A;
   }
   
+  .testInImg {
+    max-width: 420px;
+    width: 100%;
+  }
+  
+  .testInImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .accountMobil {
+    max-width: 72%;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -2731,7 +2762,7 @@
       max-width: 60%;
     }
   
-    .accountFormBlock label{
+    .accountFormBlock label {
       max-width: 38%;
     }
   
@@ -2740,7 +2771,7 @@
     }
   
     .testInRight {
-      max-width: 63%;
+      max-width: 62%;
     }
   
     .width {
@@ -2790,13 +2821,12 @@
   
     .podcast li,
     .onlineContent li {
-      max-width: 23.9%;
+      max-width: 23.7%;
     }
   
     .blogItem__img2 {
       max-width: 100%;
       display: block;
-      height: 100%;
     }
   
     .onlineContent li .blogItem__title span {
@@ -2870,10 +2900,6 @@
   
     .teachersListRight {
       max-width: 68%;
-    }
-  
-    .accountCenter {
-      max-width: 40%;
     }
   }
   
@@ -2956,6 +2982,14 @@
   
     .accountCenterList2 .accountCenterList__one {
       width: 150px;
+    }
+  
+    .accountMobil {
+      max-width: 69%;
+    }
+  
+    .accountCenter {
+      max-width: 400px;
     }
   }
   
@@ -3056,8 +3090,8 @@
       max-width: 57%;
     }
   
-    .testIn img {
-      width: 40%;
+    .testInImg {
+      max-width: 40%;
     }
   
     .navMenu li.navMenu__program > a:before {
@@ -3081,6 +3115,14 @@
     .accountCenterList2 .accountCenterList__one {
       font-size: 16px;
     }
+  
+    .blogItem__img2 {
+      height: 200px;
+    }
+  
+    .accountMobil {
+      max-width: 65%;
+    }
   }
   
   @media (max-width: 1050px) {
@@ -3095,6 +3137,14 @@
   
     .teachersItem {
       max-width: 50%;
+    }
+  
+    .accountMobil {
+      max-width: 65%;
+    }
+  
+    .accountCenter {
+      max-width: 360px;
     }
   }
   
@@ -3246,12 +3296,25 @@
     }
   
     .accountFormBlock input,
-    .accountFormBlock label{
+    .accountFormBlock label {
       max-width: 100%;
     }
   
-    .accountFormBlock label{
+    .accountFormBlock label {
       margin-bottom: 10px;
+    }
+  
+    .blogItem__img2 {
+      height: 300px;
+    }
+  
+    .accountFormBlock label {
+      font-size: 14px;
+      max-width: 111px;
+    }
+  
+    .accountFormBlock input {
+      max-width: 67%;
     }
   }
   
@@ -3270,6 +3333,7 @@
   
     .blogItem li .blogItem__title {
       width: 80%;
+      max-height: 70px;
     }
   
     .mainRight {
@@ -3296,10 +3360,6 @@
       margin: 0 1.5% 50px 0;
     }
   
-    .accountCenter {
-      max-width: 37%;
-    }
-  
     .accountCenterList__one {
       width: 130px;
     }
@@ -3318,15 +3378,32 @@
       font-size: 14px;
     }
   
+    .accountCenter {
+      max-width: 295px;
+    }
+  
+    .accountFormBlock input {
+      max-width: 61%;
+    }
   }
   
   @media (max-width: 860px) {
-    .teachersItem {
-      max-width: 100%;
-    }
-  
     .footerBlockList2 {
       max-width: 230px;
+    }
+  
+    .teachersItem img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .teachersItemBlock__name {
+      font-size: 22px;
+    }
+  
+    .teachersItemBlock p {
+      font-size: 18px;
+      line-height: 27px;
     }
   
     .footerBlockListMenu3 {
@@ -3390,10 +3467,6 @@
   
     .formRegisterMain {
       margin: 0 auto 70px;
-    }
-  
-    .accountContent {
-      display: none;
     }
   
     .mobilRegContent {
@@ -3466,6 +3539,7 @@
       max-width: 273px;
       width: 100%;
       margin-top: 10px;
+      max-height: 80px;
     }
   
     .blogItem li .blogItem__title span {
@@ -3478,8 +3552,7 @@
     }
   
     .testInRight {
-      max-width: 100%;
-      margin-top: 20px;
+      max-width: 57%;
     }
   
     .testIn img {
@@ -3503,9 +3576,88 @@
     .marafonRight > .paragraf {
       max-width: 60%;
     }
+  
+    .blogItem__img2 {
+      height: 250px;
+    }
+  
+    .accountLeft {
+      max-width: 100%;
+    }
+  
+    .profile {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+    }
+  
+    .buyList {
+      max-width: 45%;
+      width: 100%;
+    }
+  
+    .profileList,
+    .profileOne {
+      max-width: 50%;
+      width: 100%;
+    }
+  
+    .profileList {
+      margin-top: 0;
+    }
+  
+    .accountRight,
+    .accountCenter {
+      margin-top: 50px;
+    }
+  
+    .accountCenter {
+      max-width: 380px;
+    }
+  
+    .accountCenterList__one,
+    .accountCenterList__two {
+      font-size: 18px;
+    }
+  
+    .accountCenterList__one {
+      width: 180px;
+    }
+  
+    .scheduleBtn span,
+    .notificationsList__desc,
+    .notificationsList__day {
+      font-size: 16px;
+    }
+  
+    .accountContent {
+      margin-bottom: 60px;
+    }
+  
+    .accountMobil {
+      max-width: 100%;
+    }
+  
+    .accountFormBlock input {
+      max-width: 70%;
+    }
   }
   
   @media (max-width: 780px) {
+    .formRegisterMain .scheduleTop {
+      display: none;
+    }
+  
     .enter {
       display: none;
     }
@@ -3688,10 +3840,6 @@
       margin: 30px auto 0;
     }
   
-    .teachersH2 {
-      font-size: 24px;
-    }
-  
     .teachersListRight p {
       font-size: 14px;
       line-height: 25px;
@@ -3751,8 +3899,9 @@
     }
   
     .blogItem__img2 {
-      max-width: 305px;
+      max-width: 350px;
       width: 100%;
+      height: 320px;
     }
   
     .onlineContent li .blogItem__title {
@@ -3790,6 +3939,11 @@
       top: 0;
       right: 0;
       width: 49%;
+      margin: 0;
+    }
+  
+    .formRegisterBlockItem {
+      margin: 0;
     }
   
     .formRegister {
@@ -3807,7 +3961,7 @@
     .formRegisterBlockFileMobil {
       position: absolute;
       right: 0;
-      top: 100px;
+      top: 85px;
       width: 49%;
     }
   
@@ -3821,7 +3975,7 @@
     .selectCountryMobil {
       position: absolute;
       width: 49%;
-      top: 279px;
+      top: 260px;
       left: 0;
     }
   
@@ -3829,7 +3983,7 @@
       position: absolute;
       right: 0;
       width: 49%;
-      top: 223px;
+      top: 203px;
     }
   
     .formRegisterBlockItemWork {
@@ -3841,7 +3995,7 @@
   
     .formRegisterBlockSelectsMobil {
       position: absolute;
-      top: 420px;
+      top: 397px;
       left: 0;
       width: 49%;
     }
@@ -3881,13 +4035,38 @@
     }
   
     .etabs li.tab {
-      width: 80px;
+      width: 86px;
       margin-right: 3%;
     }
+  
+    .bread-crumbs li > span:before {
+      margin: 0 5px 0 5px;
+    }
+  
   
     .scroll .etabs {
       max-width: 900px;
       width: 900px;
+    }
+  
+    .registerPayContent .teachersH2 {
+      font-size: 24px;
+    }
+  
+    .formAutorizaishen .formRegisterBlock .formRegisterBlockItem {
+      max-width: 48.5%;
+    }
+  
+    .formAutorizaishen .formRegisterBlock {
+      justify-content: space-between;
+    }
+  
+    .formAutorizaishen .enterBtn {
+      margin-bottom: 0;
+    }
+  
+    .formRegisterRecover .formRegisterBlock .formRegisterBlockItem {
+      max-width: 100%;
     }
   }
   
@@ -3933,6 +4112,30 @@
   
     .blogContent {
       margin-bottom: 80px;
+    }
+  
+    .accountCenterList__one, .accountCenterList__two {
+      font-size: 16px;
+    }
+  
+    .accountCenterList__one {
+      max-width: 130px;
+    }
+  
+    .accountCenter {
+      max-width: 314px;
+    }
+  
+    .accountFormBlock input {
+      max-width: 63%;
+    }
+  
+    .teachersItem {
+      max-width: 100%;
+    }
+  
+    .teachersItemBlock {
+      max-width: 73%;
     }
   }
   
@@ -4055,6 +4258,31 @@
     .marafonRight > .paragraf {
       max-width: 100%;
     }
+  
+    .accountCenter {
+      max-width: 307px;
+    }
+  
+    .formRegisterMain {
+      margin: 0 auto;
+    }
+  
+    .formAutorizaishen {
+      position: relative;
+    }
+  
+    .forgotPassword {
+      position: absolute;
+      bottom: 72px;
+    }
+  
+    .formAutorizaishen .formRegisterBlock .formRegisterBlockItem {
+      margin-bottom: 30px;
+    }
+  
+    .formAutorizaishen .enterBtn {
+      margin-top: 0;
+    }
   }
   
   @media (max-width: 580px) {
@@ -4075,12 +4303,24 @@
     .testInRight h2 {
       font-size: 20px;
       line-height: 28px;
-      text-align: center;
+  
     }
   
     .testInRight h3,
     .testIn p {
-      text-align: center;
+      text-align: left;
+    }
+  
+    .testInRight {
+      max-width: 100%;
+    }
+  
+    .testInImg {
+      max-width: 100%;
+    }
+  
+    .testIn img {
+      max-width: 100%;
     }
   
     .navMenu {
@@ -4310,6 +4550,36 @@
     .teachersItem {
       margin-bottom: 20px;
     }
+  
+    .accountCenter {
+      max-width: 100%;
+    }
+  
+    .accountMobil {
+      flex-direction: column-reverse;
+    }
+  
+    .signUpBlockList,
+    .accountRight {
+      max-width: 100%;
+    }
+  
+    .notifications__title h3 span {
+      right: 0;
+      left: 28%;
+    }
+  
+    .accountCenterList__one {
+      max-width: 300px;
+    }
+  
+    .accountCenterList__one, .accountCenterList__two {
+      font-size: 18px;
+    }
+  
+    .buyList {
+      max-width: 50%;
+    }
   }
   
   @media (max-width: 520px) {
@@ -4322,7 +4592,7 @@
   
     .headerRight .perAccount {
       max-width: 154px;
-      margin: 10px 0 0 0;
+      margin: 0;
     }
   
     .mobilBlockBtnBlock .perAccount {
@@ -4798,10 +5068,10 @@
     }
   
     .bread-crumbs li > span:before {
-      margin: 0;
+      margin: 0 4px 0 3px;
       left: 0;
       position: relative;
-      top: -3px;
+      top: -1px;
     }
   
     .mainContent {
@@ -4815,6 +5085,38 @@
     .teachersItemBlock p {
       font-size: 16px;
       line-height: 25px;
+    }
+  
+    .blogItem {
+      max-width: 320px;
+    }
+  
+    .blogItem li {
+      max-width: 100%;
+    }
+  
+    .accountContent {
+      max-width: 90%;
+    }
+  
+    .notifications__title h3 span {
+      left: 34%;
+    }
+  
+    .signUp {
+      display: none;
+    }
+  
+    .mainContent2 {
+      margin-bottom: 0;
+    }
+  
+    .mainContent2 .mainRight {
+      margin: 0 auto;
+    }
+  
+    .registerPayContent {
+      margin-top: 20px;
     }
   }
   
@@ -4894,7 +5196,46 @@
       width: 100px;
       height: 100px;
     }
+  
+    .notifications__title h3 span {
+      left: 44%;
+    }
+  
+    .accountCenterList__one, .accountCenterList__two {
+      font-size: 16px;
+    }
+  
+    .accountCenterList__one {
+      width: 150px;
+    }
+  
+    .buyList {
+      max-width: 100%;
+    }
+  
+    .profile {
+      padding: 30px 0 10px;
+    }
+  
+    .teachersItemBlock {
+      max-width: 73%;
+    }
+  
+    .teachersItem img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .teachersItemBlock__name {
+      font-size: 18px;
+    }
+  
+    .teachersItemBlock p {
+      font-size: 14px;
+      line-height: 24px;
+    }
   }
+  
   
   @media (max-width: 400px) {
     .serviceList li {
@@ -4925,6 +5266,24 @@
     .sliderTopText {
       max-width: 300px;
       top: 25px;
+    }
+  
+    .profileList li a span, .notifications__title h3 span {
+      font-size: 12px;
+      width: 18px;
+      height: 18px;
+    }
+  
+    .profileList li a span {
+      right: -18px;
+    }
+  
+    .teachersItemBlock {
+      max-width: 70%;
+    }
+  
+    .teachersItemBlock__name{
+      padding-bottom: 5px;
     }
   }
   
@@ -4971,6 +5330,19 @@
       font-size: 14px;
       line-height: 22px;
     }
+  
+    .notifications__title h3 span {
+      left: 55%;
+    }
+  
+    .accountCenterList__one,
+    .accountCenterList__two {
+      font-size: 14px;
+    }
+  
+    .accountFormBlock input {
+      max-width: 61%;
+    }
   }
   
   @media (max-width: 348px) {
@@ -4981,6 +5353,10 @@
   
     .blogItem__img2 {
       max-width: 290px;
+    }
+  
+    .accountCenterList__one {
+      width: 120px;
     }
   }
   
