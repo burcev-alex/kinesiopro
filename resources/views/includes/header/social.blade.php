@@ -1,23 +1,10 @@
 <div class="headerRight flex">
     <ul class="headerMenu flex">
         <li>
-            <a href="#">
-                <img src="/images/icon5.svg" alt="">
-            </a>
-        </li>
-
-        <li>
             <a href="https://vk.com/physiosapiens" target="_blank">
                 <img src="/images/icon6.svg" alt="vk">
             </a>
         </li>
-
-        <li>
-            <a href="#">
-                <img src="/images/icon7.svg" alt="">
-            </a>
-        </li>
-
         <li>
             <a href="https://www.youtube.com/channel/UCsxUk35UDtUY4d-6pF0E__A" target="_blank">
                 <img src="/images/icon8.svg" alt="youtube">
@@ -41,12 +28,12 @@
 
     <ul class="headerMenuSocial flex">
         <li>
-            <a href="#">
+            <a href="https://wa.me/79161997279" target="_blank">
                 <img src="/images/icon10.svg" alt="">
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="https://t.me/burcev_alex">
                 <img src="/images/icon11.svg" alt="">
             </a>
         </li>

@@ -39,25 +39,13 @@
 
                 <ul class="headerMenu flex">
                     <li>
-                        <a href="#">
-                            <img src="/images/icon5.svg" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
+                        <a href="https://vk.com/physiosapiens" target="_blank">
                             <img src="/images/icon6.svg" alt="">
                         </a>
                     </li>
 
                     <li>
-                        <a href="#">
-                            <img src="/images/icon7.svg" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
+                        <a href="https://www.youtube.com/channel/UCsxUk35UDtUY4d-6pF0E__A" target="_blank">
                             <img src="/images/icon8.svg" alt="">
                         </a>
                     </li>

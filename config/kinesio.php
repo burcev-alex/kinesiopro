@@ -140,5 +140,5 @@ return [
         'login' => env('SBERBANK_LOGIN', 'admin'),
         'password' => env('SBERBANK_PASSWORD', '123456'),
         'token' => env('SBERBANK_TOKEN', 'test123456')
-    ]
+    ],
 ];
