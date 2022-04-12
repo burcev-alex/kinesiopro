@@ -28,7 +28,7 @@ class OrchidOnlineRequest extends FormRequest
             'online.type' => 'required',
             'online.active' => '',
             'online.sort' => 'required|integer',
-            'images.attachment_id' => 'array|min:1|max:1|required',
+            'online.attachment_id' => 'required',
             'online.*' => '',
             'components.*' => '',
         ];

@@ -84,10 +84,6 @@ class OnlineCreateScreen extends Screen
         $validated = $request->validated();
 
         $service->save($validated['online']);
-
-        if (array_key_exists('images', $validated)) {
-            $service->saveImages($validated['images']);
-        }
        
         Alert::success('Курс успешно создан');
         return redirect()->route('platform.online.edit', $online);

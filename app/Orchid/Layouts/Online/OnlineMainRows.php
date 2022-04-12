@@ -36,7 +36,7 @@ class OnlineMainRows extends Rows
             Input::make('online.price')->title('Цена')->required(),
             Input::make('online.sort')->title('Сортировка')->required(),
 
-            Cropper::make('images.attachment_id')->value($online->attachment_id)->title('Картинка анонса')->width(305)->height(305)->targetId(),
+            Cropper::make('online.attachment_id')->value($online ? $online->attachment_id : '')->title('Картинка анонса')->width(305)->height(305)->targetId(),
             
             Select::make('online.type')
                     ->options([

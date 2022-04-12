@@ -188,10 +188,6 @@ class OnlineEditScreen extends Screen
 
         $service->save($validated['online']);
 
-        if (array_key_exists('images', $validated)) {
-            $service->saveImages($validated['images']);
-        }
-
         if (array_key_exists('components', $validated)) {
             $service->saveComponents($validated['components']);
         }

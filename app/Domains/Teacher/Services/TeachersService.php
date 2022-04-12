@@ -66,15 +66,12 @@ class TeachersService extends BaseService
 
     public function saveImages(array $images)
     {
-        
         if (!isset($images['attachment_id'])) {
             $images['attachment_id'] = [];
         }
         
-        foreach ($images as $key => $items) {
-            foreach ($items as $item) {
-                Teacher::where('id', $this->model->id)->update([$key => $item]);
-            }
+        foreach ($images as $key => $item) {
+            Teacher::where('id', $this->model->id)->update([$key => $item]);
         }
     }
 }

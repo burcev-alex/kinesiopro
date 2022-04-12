@@ -109,7 +109,6 @@ class TeachersEditScreen extends Screen
             'teacher.full_name' => 'required',
             'teacher.slug' => 'required',
             'teacher.images' => 'array|min:1|max:1|required',
-            'teacher.images.attachment_id' => 'array|min:1|max:1|required',
             'teacher.*' => ''
         ]);
         $service->save($validate);

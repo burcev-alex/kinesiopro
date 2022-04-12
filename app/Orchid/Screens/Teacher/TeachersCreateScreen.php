@@ -6,8 +6,8 @@ use App\Domains\Teacher\Models\Teacher;
 use App\Domains\Teacher\Services\TeachersService;
 use App\Orchid\Layouts\Teacher\TeacherSeoRows;
 use App\Orchid\Layouts\Teacher\TeacherShortRows;
-use App\Orchid\Layouts\Teacher\TeachersImagesRows;
-use App\Orchid\Layouts\Teacher\TeachersMainRows;
+use App\Orchid\Layouts\Teacher\TeacherImagesRows;
+use App\Orchid\Layouts\Teacher\TeacherMainRows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Orchid\Screen\Actions\Button;
@@ -94,8 +94,7 @@ class TeachersCreateScreen extends Screen
         $validate = $request->validate([
             'teacher.full_name' => 'required',
             'teacher.slug' => 'required',
-            'teacher.images' => 'array|min:1|max:1|required',
-            'teacher.images.attachment_id' => 'array|min:1|max:1|required',
+            'teacher.images.attachment_id' => 'required',
             'teacher.*' => ''
         ]);
         $service->save($validate);

@@ -26,7 +26,7 @@ class TeacherSeoRows extends Rows
         $teacher = $this->query->get('teacher');
         $rows = [];
 
-        if (isset($teacher)) {
+        if ($teacher->count() > 0) {
             $rows = [
                 ...$rows,
                 ...[

@@ -32,6 +32,7 @@ class TeacherMainRows extends Rows
             ...[
                 Input::make('teacher.full_name')->title('ФИО')->required(),
                 Input::make('teacher.sort')->title('Сортировка')->required(),
+                Input::make('teacher.slug')->title('Символьный код')->required(),
                 CheckBox::make('teacher.active')->title('Активность'),
             ],
         ];

@@ -24,8 +24,8 @@ class TeacherShortRows extends Rows
         $teacher = $this->query->get('teacher');
 
         $rows = [];
-
-        if ($teacher) {
+        
+        if ($teacher->count() > 0) {
             return [
                 Quill::make('teacher.description')
                 ->title('Краткое описание')->value($teacher->description),

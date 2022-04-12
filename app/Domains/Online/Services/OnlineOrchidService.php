@@ -31,20 +31,6 @@ class OnlineOrchidService extends OnlineService
         return $this;
     }
 
-    public function saveImages(array $images)
-    {
-        
-        if (!isset($images['attachment_id'])) {
-            $images['attachment_id'] = [];
-        }
-        
-        foreach ($images as $key => $items) {
-            foreach ($items as $item) {
-                Online::where('id', $this->model->id)->update([$key => $item]);
-            }
-        }
-    }
-
     public function saveComponents(array $components)
     {
         foreach ($components as $componentKey => $fields) {
