@@ -17,18 +17,18 @@ class QuizQuestionsSeeder extends Seeder
     {
         
         $component_names = [
+            "simple-element" => [
+                "title" => "Простой вопрос",
+                "fields" => [
+                    "title",
+                    "list"
+                ]
+            ],
             "element-comment" => [
                 "title" => "Вопрос с комментарием",
                 "fields" => [
                     "title",
                     "comment",
-                    "list"
-                ]
-            ],
-            "simple-element" => [
-                "title" => "Простой вопрос",
-                "fields" => [
-                    "title",
                     "list"
                 ]
             ],
