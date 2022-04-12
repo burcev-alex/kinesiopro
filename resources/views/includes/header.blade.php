@@ -53,13 +53,13 @@
 
                 <ul class="headerMenuSocial flex">
                     <li>
-                        <a href="#">
+                        <a href="https://t.me/Physiosapiens.ru" target="_blank">
                             <img src="/images/icon10.svg" alt="">
                         </a>
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="https://wa.me/79161997279" target="_blank">
                             <img src="/images/icon11.svg" alt="">
                         </a>
                     </li>

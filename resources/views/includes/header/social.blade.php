@@ -28,12 +28,12 @@
 
     <ul class="headerMenuSocial flex">
         <li>
-            <a href="https://wa.me/79161997279" target="_blank">
+            <a href="https://t.me/Physiosapiens.ru" target="_blank">
                 <img src="/images/icon10.svg" alt="">
             </a>
         </li>
         <li>
-            <a href="https://t.me/burcev_alex">
+            <a href="https://wa.me/79161997279" target="_blank">
                 <img src="/images/icon11.svg" alt="">
             </a>
         </li>

@@ -15,23 +15,10 @@
 
             <ul class="footerSocial flex">
                 <li>
-                    <a href="#">
-                        <img src="/images/icon.svg" alt="">
-                    </a>
-                </li>
-
-                <li>
                     <a href="https://vk.com/physiosapiens" target="_blank">
                         <img src="/images/icon2.svg" alt="">
                     </a>
                 </li>
-
-                <li>
-                    <a href="#">
-                        <img src="/images/icon3.svg" alt="">
-                    </a>
-                </li>
-
                 <li>
                     <a href="https://www.youtube.com/channel/UCsxUk35UDtUY4d-6pF0E__A" target="_blank">
                         <img src="/images/icon4.svg" alt="">
