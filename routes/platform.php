@@ -55,6 +55,11 @@ use App\Orchid\Screens\Utils\ClearCacheScreen;
 use App\Orchid\Screens\Orders\OrderShowScreen;
 use App\Orchid\Screens\Orders\OrderListScreen;
 
+use App\Orchid\Screens\Stream\StreamCreateScreen;
+use App\Orchid\Screens\Stream\StreamEditScreen;
+use App\Orchid\Screens\Stream\LessonEditScreen;
+use App\Orchid\Screens\Stream\StreamListScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -79,6 +84,11 @@ Route::screen('/properties/{property}/edit', CoursePropertyEditScreen::class)->n
 Route::screen('/teachers', TeachersListScreen::class)->name('platform.teachers.list');
 Route::screen('/teachers/{teachers}/edit', TeachersEditScreen::class)->name('platform.teachers.edit');
 Route::screen('/teachers-create', TeachersCreateScreen::class)->name('platform.teachers.create');
+
+Route::screen('/streams', StreamListScreen::class)->name('platform.stream.list');
+Route::screen('/streams/{stream}/edit', StreamEditScreen::class)->name('platform.stream.edit');
+Route::screen('/streams/{stream}/edit/{lesson}/edit', LessonEditScreen::class)->name('platform.stream.edit.lesson.edit');
+Route::screen('/streams-create', StreamCreateScreen::class)->name('platform.stream.create');
 
 Route::screen('/banners', BannersListScreen::class)->name('platform.banners.list');
 Route::screen('/banners/{banners}/edit', BannersEditScreen::class)->name('platform.banners.edit');

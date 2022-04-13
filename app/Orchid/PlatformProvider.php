@@ -43,6 +43,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.online.list')
                 ->icon('list'),
 
+            Menu::make('Видео-курсы')
+                ->route('platform.stream.list')
+                ->icon('list'),
+
             Menu::make('Подкасты')
                 ->route('platform.podcast.list')
                 ->icon('list'),
