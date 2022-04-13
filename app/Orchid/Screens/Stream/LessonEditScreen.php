@@ -129,6 +129,7 @@ class LessonEditScreen extends Screen
                     Input::make('item.me.title')->title('Заголовок')->value($this->lesson->title),
                     Input::make('item.me.sort')->type('number')->value($this->lesson->sort)->title('Сортировка'),
                     Input::make('item.me.slug')->type('hidden')->value($this->lesson->slug),
+                    Input::make('item_id')->type('hidden')->value($this->lesson->id),
                     Input::make('stream_id')->type('hidden')->value($this->lesson->stream_id),
                 ]),
                 "Картинка" => Layout::rows([
@@ -142,6 +143,7 @@ class LessonEditScreen extends Screen
     {
         $lesson = $request->get('item');
         $streamId = $request->get('stream_id');
+        $id = $request->get('item_id');
 
         $lesson_model->fill($lesson['me'])->save();
         
@@ -154,7 +156,7 @@ class LessonEditScreen extends Screen
 
         return redirect()->route('platform.stream.edit.lesson.edit', [
             'stream' => $streamId, 
-            'lesson' => $lesson_model->id
+            'lesson' => $id
         ]);
     }
 
