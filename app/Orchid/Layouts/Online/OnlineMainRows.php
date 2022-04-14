@@ -50,8 +50,8 @@ class OnlineMainRows extends Rows
                     ->required(),
             
             Group::make([
-                DateTimer::make('online.start_date')->title('Дата начала'),
-                DateTimer::make('online.finish_date')->title('Дата окончания'),
+                DateTimer::make('online.start_date')->title('Дата начала')->enableTime(),
+                DateTimer::make('online.finish_date')->title('Дата окончания')->enableTime(),
             ]),
         ];
     }

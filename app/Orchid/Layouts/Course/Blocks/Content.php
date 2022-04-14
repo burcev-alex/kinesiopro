@@ -35,8 +35,8 @@ class Content extends CourseBlock implements CourseBlockInterface
                     ->title('Преподаватель')->required(),
             ]),
             Group::make([
-                DateTimer::make($this->prefix . '.start_date')->title('Дата начала')->value($start_date)->required(),
-                DateTimer::make($this->prefix . '.finish_date')->title('Дата окончания')->value($finish_date)->required(),
+                DateTimer::make($this->prefix . '.start_date')->title('Дата начала')->value($start_date)->required()->enableTime(),
+                DateTimer::make($this->prefix . '.finish_date')->title('Дата окончания')->value($finish_date)->required()->enableTime(),
             ]),
         ];
     }

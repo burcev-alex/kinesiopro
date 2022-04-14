@@ -61,8 +61,10 @@ class CourseMainRows extends Rows
             Input::make('course.price')->title('Цена')->required(),
             
             Group::make([
-                DateTimer::make('course.start_date')->title('Дата начала')->required(),
-                DateTimer::make('course.finish_date')->title('Дата окончания'),
+                DateTimer::make('course.start_date')->title('Дата начала')
+                ->allowInput()->required()->enableTime(),
+                DateTimer::make('course.finish_date')
+                ->allowInput()->title('Дата окончания')->enableTime(),
             ]),
 
             Group::make([
