@@ -69,9 +69,6 @@ class CourseCreateScreen extends Screen
                 'Характеристики' => [
                     CoursePropsRows::class
                 ],
-                'Детальное описание' => [
-                    CourseDescriptionRows::class
-                ],
                 'SEO' => [
                     CourseSeoRows::class
                 ]

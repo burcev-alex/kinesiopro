@@ -51,7 +51,7 @@ class CourseDesciptionComponent extends Rows
     {
         $this->component = $component;
         $this->title = $component->name;
-        $this->prefix = 'item.components.' . $this->component->slug.'-'.$this->component->id;
+        $this->prefix = 'components.' . $this->component->slug.'-'.$this->component->id;
     }
 
 

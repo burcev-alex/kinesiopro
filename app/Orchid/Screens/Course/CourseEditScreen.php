@@ -150,7 +150,7 @@ class CourseEditScreen extends Screen
             Layout::modal('addcomponent', [
                 Layout::rows([
                     Select::make('component')->fromModel(Component::class, 'name')->value([]),
-                    Input::make('item.id')->hidden(),
+                    Input::make('item.id')->value($this->data->id)->hidden(),
                 ])
 
             ])->title('Выберите компонент'),
@@ -251,6 +251,10 @@ class CourseEditScreen extends Screen
 
         if (array_key_exists('blocks', $validated)) {
             $service->saveBlocks($validated['blocks']);
+        }
+
+        if (array_key_exists('components', $validated)) {
+            $service->saveComponents($validated['components']);
         }
 
         if (array_key_exists('teachers', $validated)) {

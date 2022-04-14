@@ -3,6 +3,8 @@ namespace App\Domains\Course\Services;
 
 use App\Domains\Category\Models\Category;
 use App\Domains\Course\Models\CourseBlock;
+use App\Domains\Course\Models\CourseDesciptionComponent;
+use App\Domains\Course\Models\CourseDesciptionMedia;
 use App\Domains\Course\Models\CourseProperty;
 use App\Domains\Course\Models\CourseTeacher;
 use App\Domains\Course\Models\RefCharsValue;
@@ -102,6 +104,39 @@ class CourseOrchidService extends CourseService
             ]);
         }
         return $this;
+    }
+
+    public function saveComponents(array $components)
+    {
+        foreach ($components as $componentKey => $fields) {
+            $component_id = preg_replace("/[^0-9]/", '', $componentKey);
+            
+            $component_model = CourseDesciptionComponent::find($component_id);
+            if (!$component_model) {
+                continue;
+            }
+
+            if (isset($fields['media'])) {
+                foreach ($fields['media'] as $key => $value) {
+                    $model = CourseDesciptionMedia::updateOrCreate([
+                        "component_id" => $component_id,
+                        "attachment_id" => $value,
+                    ]);
+                    $fields['media'][$key] = $model->id;
+                }
+            }
+
+            $sort = $fields['sort'];
+            unset($fields['sort']);
+
+            CourseDesciptionComponent::updateOrCreate([
+                "course_id" => $this->model->id,
+                "id" => $component_id
+            ], [
+                "sort" => $sort,
+                "fields" => $fields,
+            ]);
+        }
     }
 
     public function saveTeachers(array $teachers, $overwrite = true)

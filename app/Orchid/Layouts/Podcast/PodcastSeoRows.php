@@ -26,7 +26,7 @@ class PodcastSeoRows extends Rows
         $podcast = $this->query->get('podcast');
         $rows = [];
 
-        if (isset($podcast)) {
+        if ($podcast->count() > 0) {
             $rows = [
                 Input::make('podcast.meta_h1')->value($podcast->meta_h1)->title('Мета H1'),
                 Input::make('podcast.meta_title')->value($podcast->meta_title)->title('Мета заголовок'),

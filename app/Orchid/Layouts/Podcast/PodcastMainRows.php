@@ -26,8 +26,6 @@ class PodcastMainRows extends Rows
     protected function fields(): array
     {
         $podcast = $this->query->get('podcast');
-
-        $value = $podcast ? ($podcast->attachment ? $podcast->attachment->id : '') : '';
         
         $rows = [
             Input::make('podcast.title')->title('Название')->required(),
@@ -36,7 +34,7 @@ class PodcastMainRows extends Rows
             CheckBox::make('podcast.active')->title('Активность'),
             DateTimer::make('podcast.publication_date')->title('Дата публикации'),
             Input::make('podcast.url')->title('Ссылка на эпизод'),
-            Cropper::make('podcast.attachment_id')->value($value)->title('Картинка анонса')->width(305)->height(305)->required()->targetId(),
+            Cropper::make('podcast.attachment_id')->title('Картинка анонса')->width(305)->height(305)->required()->targetId(),
         ];
 
         return $rows;

@@ -33,10 +33,6 @@ class PodcastService extends BaseService
 
     public function save(array $fields): self
     {
-        if (array_key_exists('attachment_id', $fields)) {
-            $fields['attachment_id'] = current($fields['attachment_id']);
-        }
-
         $this->model->fill($fields);
         if (isset($fields['active'])) {
             $this->model->active = true;
