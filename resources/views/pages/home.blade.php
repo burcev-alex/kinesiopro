@@ -18,7 +18,18 @@
     
     @include('includes.home.service')
 
-    @include('includes.home.schedule')
+    <script language="JavaScript">
+        window.filterParams = {};
+    </script>
+    @include('includes.home.schedule', [
+        'fieldsFilter' => [
+            'city' => true,
+            'format' => true,
+            'teacher' => true,
+            'period' => true,
+            'direct' => false,
+        ]
+    ])
 
 @endsection
 

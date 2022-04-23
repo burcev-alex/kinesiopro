@@ -14,18 +14,15 @@
     @include('includes.partials.breadcrumbs')
     <h1 class="width titleH1">{{ $podcast->title }}</h1>
 
-    <main class="mainContent width flex">
-        <div class="mainRight">
-            <div class="mainBlock">
-                @if($podcast->url)
-                <div>
-                    <div id="vk_podcast" style="width: 100%; height: 152px;"></div>
-                </div>
-                @endif
-                <div class="paragraf"> {!! $podcast->description !!} </div>
-            </div>
+    <section class="podcasts width">
+        @if($podcast->url)
+        <div class="audio flex">
+            <div id="vk_podcast" style="width: 100%; height: 152px;"></div>
         </div>
-    </main>
+        @endif
+
+        <p class="podcast__paragraf">{!! $podcast->description !!}</p>
+    </section>
     @if($podcast->url)
         <script type="text/javascript">
         window.podcastIdentifMark = "{{ $podcast->identif_mark }}";

@@ -18,7 +18,7 @@ final class BreadcrumbsService
             function (Trail $trail) use ($item) {
                 $trail->push('Преподаватели', route('teacher.index'));
 
-                $trail->push($item->title, route('teacher.single', ['slug' => $item->slug]));
+                $trail->push($item->full_name, route('teacher.single', ['slug' => $item->slug]));
             }
         );
     }

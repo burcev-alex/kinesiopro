@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuizItemQuestionsSeeder::class);
         // $this->call(NotificationSeeder::class);
 
-        // $this->call(StreamComponentsSeeder::class);
+        $this->call(StreamComponentsSeeder::class);
         // $this->call(SteamSeeder::class);
         
         // Model::reguard();

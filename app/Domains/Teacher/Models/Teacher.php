@@ -32,6 +32,10 @@ class Teacher extends Model
         "meta_keywords",
         "meta_description",
         "active",
+        "fb",
+        "vk",
+        "instagram",
+        "youtube",
     ];
 
     protected static function newFactory()

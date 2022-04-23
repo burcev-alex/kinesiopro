@@ -41,9 +41,6 @@ export class Filter {
                 history.pushState({}, null, path);
             }
 
-            console.log(path);
-            
-
             if (!path) {
                 return;
             }
@@ -76,8 +73,6 @@ export class Filter {
                 history.pushState({}, null, path);
             }
 
-            console.log(path);
-
             if (!path) {
                 return;
             }
@@ -96,7 +91,16 @@ export class Filter {
     firstLoad(){
         let context = this;
 
-        let path = '/courses/sort=date;numbers='+context.limitPage+'/';
+        let filter = '';
+
+        if(window.filterParams){
+            for (let i in window.filterParams) {
+                filter += i + '='+window.filterParams[i];
+            }
+            filter += ';';
+        }
+
+        let path = '/courses/'+filter+'sort=date;numbers='+context.limitPage+'/';
 
         if(context.isCatalog){
             history.pushState({}, null, path);
@@ -122,6 +126,19 @@ export class Filter {
             filters = {},
             sort = 'date',
             numbers = context.limitPage;
+
+        if(window.filterParams){
+            if(window.filterParams){
+                for (let code in window.filterParams) {
+                    if (filters[code]) {
+                        filters[code] += ',' + window.filterParams[code];
+                    } else {
+                        filters[code] = window.filterParams[code];
+                    }
+                }
+            }
+        }
+        
         // Parse filters
         $(values).each(function (index, obj) {
             if (obj.value !== '') {
@@ -266,7 +283,6 @@ export class Filter {
             success: success,
             error: function (data) {
                 removePreloader('#filter-form');
-                console.log('Error');
             }
         });
     }

@@ -25,7 +25,10 @@
             </div>
             
             <div class="scheduleBlock">
-                @include('includes.course.filter', ['block' => 'home-page-block-course'])
+                @include('includes.course.filter', [
+                    'block' => 'home-page-block-course',
+                    'fields' => $fieldsFilter
+                ])
 
                 <div class="tab-container">
                     <div class="scroll">

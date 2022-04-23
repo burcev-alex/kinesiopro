@@ -7,6 +7,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Rows;
 
 class TeacherMainRows extends Rows
@@ -34,6 +35,12 @@ class TeacherMainRows extends Rows
                 Input::make('teacher.sort')->title('Сортировка')->required(),
                 Input::make('teacher.slug')->title('Символьный код')->required(),
                 CheckBox::make('teacher.active')->title('Активность'),
+                Group::make([
+                    Input::make('teacher.fb')->title('FB'),
+                    Input::make('teacher.vk')->title('VK'),
+                    Input::make('teacher.instagram')->title('Instagram'),
+                    Input::make('teacher.youtube')->title('Youtube'),
+                ]),
             ],
         ];
 

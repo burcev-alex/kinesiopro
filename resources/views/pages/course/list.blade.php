@@ -43,7 +43,16 @@
                 </div>
 
                 <div class="scheduleBlock">
-                    @include('includes.course.filter', ['block' => 'course-grid-block'])
+                    @include('includes.course.filter', [
+                        'block' => 'course-grid-block',
+                        'fields' => [
+                            'city' => true,
+                            'format' => true,
+                            'teacher' => true,
+                            'period' => true,
+                            'direct' => true,
+                        ]
+                    ])
 
                     <div class="tab-container">
                         <div class="scroll">

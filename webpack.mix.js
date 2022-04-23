@@ -11,12 +11,11 @@ mix.js('resources/js/online_page_script.js', 'public/js');
 mix.js('resources/js/quiz_page_script.js', 'public/js');
 mix.js('resources/js/register_page_script.js', 'public/js');
 mix.js('resources/js/profile_page_script.js', 'public/js');
+mix.js('resources/js/teacher_page_script.js', 'public/js');
 mix.js('resources/js/dashboard.js', 'public/js');
 
 mix.sass('resources/sass/slick.scss', 'public/css');
 mix.sass('resources/sass/selects.scss', 'public/css');
-mix.sass('resources/sass/audio.scss', 'public/css');
-mix.sass('resources/sass/fancybox.scss', 'public/css');
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/dashboard.scss', 'public/css');
 
@@ -26,6 +25,8 @@ mix.copy('resources/fonts', 'public/fonts');
 
 mix.copy('node_modules/jquery/dist/jquery.min.js', 'public/js/plugins');
 mix.copy('node_modules/jquery-validation/dist/jquery.validate.min.js', 'public/js/plugins');
+mix.copy('resources/sass/audio.css', 'public/css');
+mix.copy('resources/sass/fancybox.css', 'public/css');
 // mix.copy('node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js', 'public/js/plugins/fancybox');
 //  mix.copy('manifest.json', 'public/manifest.json');
 mix.copy('sw.js', 'public/sw.js');
