@@ -9,16 +9,15 @@
 @stop
 
 @section('content')
-    <div class="container">
-        <div class="breadCrumbs">
-            <a href="" class="backBtn">
-                <svg>
-                    <use xlink:href="/img/icons/svgSprite.svg#arrLeft"></use>
-                </svg>
-            </a>
-            <p class="breadCrumbs__name">{{ __('product.checkout.title') }}</p>
+    @include('includes.partials.breadcrumbs')
+        
+    <h1 class="width titleH1">Заказ</h1>
+    <div class="order width flex">
+        <img src="/images/icon42.svg" alt="">
+
+        <div class="orderContent flex">
+            <span>Спасибо, ваш заказ принят и успешно оплачен!</span>
+            <a href="{{ route('profile.index') }}">Вернутсья в личный кабинет</a>
         </div>
     </div>
-    {{-- VUE --}}
-    <p>Order success</p>
 @endsection

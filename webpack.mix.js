@@ -15,6 +15,8 @@ mix.js('resources/js/dashboard.js', 'public/js');
 
 mix.sass('resources/sass/slick.scss', 'public/css');
 mix.sass('resources/sass/selects.scss', 'public/css');
+mix.sass('resources/sass/audio.scss', 'public/css');
+mix.sass('resources/sass/fancybox.scss', 'public/css');
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/dashboard.scss', 'public/css');
 
