@@ -20,6 +20,7 @@ use Orchid\Screen\Actions\DropDown;
 use Orchid\Support\Facades\Toast;
 use Orchid\Support\Facades\Layout;
 use App\Orchid\Layouts\Stream\StreamLesson;
+use Illuminate\Support\Str;
 
 class StreamEditScreen extends Screen
 {
@@ -184,7 +185,7 @@ class StreamEditScreen extends Screen
 
         Lesson::create([
             "stream_id" => $item,
-            "slug" => md5(time()),
+            "slug" => md5(Str::random(16)),
             "sort" => 0,
             "title" => 'Example'
         ]);

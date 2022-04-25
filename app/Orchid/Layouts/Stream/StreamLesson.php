@@ -23,6 +23,10 @@ class StreamLesson extends Rows
     protected $prefix;
     
     protected $lesson;
+    protected $slug;
+    protected $stream_id;
+    protected $sort;
+
     protected $defNamespace = 'App\Orchid\Layouts\Stream\Lesson';
 
     /**
@@ -36,7 +40,12 @@ class StreamLesson extends Rows
     public function __construct(Lesson $lesson)
     {
         $this->lesson = $lesson;
+        
         $this->title = $lesson->title;
+        $this->slug = $lesson->slug;
+        $this->stream_id = $lesson->stream_id;
+        $this->sort = $lesson->sort;
+
         $this->prefix = 'lessons.'. $this->lesson->id;
     }
 
@@ -94,7 +103,7 @@ class StreamLesson extends Rows
     public function makeLesson(StreamLessonInterface $lesson): array
     {
         $fileds = $lesson->render();
-
+        
         return [
             // название планки аккордеона должно быть уникальным
             'Урок : ' . $this->lesson->title => [
@@ -103,7 +112,7 @@ class StreamLesson extends Rows
                         // прибавляем к полям редактирования необходимое для всех
                         // компонентов поле сортировки
                         [
-                            Input::make($this->prefix . '.sort')->type('number')->value($this->lesson->sort)->title('Сортировка')
+                            Input::make($this->prefix . '.sort')->type('number')->value($this->sort)->title('Сортировка')
                         ],
                         $fileds
                     )

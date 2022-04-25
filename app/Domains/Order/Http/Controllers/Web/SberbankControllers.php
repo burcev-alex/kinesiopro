@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Order\Http\Controllers\Web;
 
+use App\Domains\Order\Models\Interfaces\OrderInterface;
 use App\Domains\Order\Models\Order;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Api\BaseController;
@@ -28,6 +29,13 @@ class SberbankControllers extends BaseController
         $res = $this->service->getState($this->data['payment_id']);
         if ($this->order && $res['success']) {
             // изменение статуса заказа
+
+            $fields = [
+                'state' => OrderInterface::STATE_PAID,
+                'payment_status' => 'payed',
+            ];
+
+            $this->order->update($fields);
         }
 
         return view('pages.order.sberbank.success', ['data' => $this->data, 'order' => $this->order]);

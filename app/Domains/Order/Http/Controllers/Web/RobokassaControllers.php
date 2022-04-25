@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Order\Http\Controllers\Web;
 
+use App\Domains\Order\Models\Interfaces\OrderInterface;
 use App\Domains\Order\Models\Order;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Api\BaseController;
@@ -29,10 +30,13 @@ class RobokassaControllers extends BaseController
 
     public function success()
     {
-        if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
+        if ($this->order) {
+            //  $this->service->validateResult($this->data, floatval($this->order->total))
+
             // изменение статуса заказа
             
             $fields = [
+                'state' => OrderInterface::STATE_PAID,
                 'payment_status' => 'payed',
             ];
 
@@ -55,9 +59,10 @@ class RobokassaControllers extends BaseController
 
     public function payment()
     {
-        if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
+        if ($this->order) {
             // изменение статуса заказа
             $fields = [
+                'state' => OrderInterface::STATE_PAID,
                 'payment_status' => 'payed',
             ];
 
@@ -69,7 +74,7 @@ class RobokassaControllers extends BaseController
     
     public function error()
     {
-        if ($this->order && $this->service->validateResult($this->data, $this->order->total)) {
+        if ($this->order) {
             // изменение статуса заказа
         }
 

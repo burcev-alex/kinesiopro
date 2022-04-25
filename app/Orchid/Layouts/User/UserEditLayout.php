@@ -8,6 +8,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
 class UserEditLayout extends Rows
@@ -20,6 +21,13 @@ class UserEditLayout extends Rows
     public function fields(): array
     {
         return [
+            Select::make('user.type')
+                ->required()
+                ->options([
+                    'customer' => 'Клиент',
+                    'admin' => 'Администратор'
+                ])
+                ->title('Тип пользователя'),
             Input::make('user.name')
                 ->type('text')
                 ->max(255)

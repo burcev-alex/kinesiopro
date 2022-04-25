@@ -11,13 +11,11 @@ class Content extends StreamLesson implements StreamLessonInterface
 {
     public function render(): array
     {
-        $title = $this->lesson ? $this->lesson->title : '';
-        $slug = $this->lesson ? $this->lesson->slug : '';
         $streamId = $this->lesson ? $this->lesson->stream_id : 0;
         
         $rows = [
-            Input::make($this->prefix . '.slug')->type('hidden')->value($slug)->title('Символьный код')->required(),
-            Input::make($this->prefix . '.title')->value($title)->title('Название')->required(),
+            Input::make($this->prefix . '.slug')->type('hidden')->value($this->lesson->slug)->title('Символьный код')->required(),
+            Input::make($this->prefix . '.title')->value($this->lesson->title)->title('Название')->required(),
         ];
 
         if(intval($streamId) > 0){
