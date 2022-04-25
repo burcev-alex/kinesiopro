@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
 use App;
+use App\Domains\Course\Models\Traits\Scope\CourseScope;
 
 class Course extends Model
 {
-    use HasFactory,
+    use HasFactory, 
+    CourseScope, 
     CourseRelationship,
     AsSource,
     CourseAttribute,

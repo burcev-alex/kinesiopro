@@ -1,5 +1,6 @@
 <?php
 use App\Domains\Category\Http\Controllers\Web\CategoriesControllers;
+use App\Domains\Category\Http\Controllers\Web\SearchControllers;
 use App\Domains\Course\Http\Controllers\Web\CardControllers;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +12,6 @@ Route::get('/filters/{param1?}/{param2?}/{param3?}/', [CategoriesControllers::cl
 
 Route::get('/courses/{param1?}/{param2?}/{param3?}/', [CategoriesControllers::class, 'index'])
 ->name('courses.index');
+
+
+Route::get('/search/', [SearchControllers::class, 'index'])->name('search');

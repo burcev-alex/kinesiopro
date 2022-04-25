@@ -1,3 +1,3 @@
-<form action="" class="headerSearch">
-    <a href="#" class="headerSearch__btn"></a>
+<form action="{{ route('search') }}" class="headerSearch">
+    <a href="{{ route('search') }}" class="headerSearch__btn"></a>
 </form>

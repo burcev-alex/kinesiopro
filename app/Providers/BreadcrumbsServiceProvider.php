@@ -134,5 +134,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push('Покупки', route('orders.index'))
         );
+
+        // Поиск
+        Breadcrumbs::for(
+            'search',
+            fn (Trail $trail) =>
+            $trail->push('Поиск', route('search'))
+        );
     }
 }

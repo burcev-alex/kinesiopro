@@ -1,8 +1,7 @@
 <?php
+namespace App\Domains\Course\Models\Traits\Scope;
 
-namespace App\Domains\Blog\Models\Traits\Scope;
-
-trait NewsPaperScope
+trait CourseScope
 {
     public function scopeActive($query)
     {
