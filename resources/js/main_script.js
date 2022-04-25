@@ -51,4 +51,12 @@ $(document).ready(function () {
         $(".scheduleList__offline.active a").addClass('active');
         $(".scheduleList__online, .scheduleList__online a").removeClass('active');
     });
+
+    $('.tablesBody__btn').on('click', function () {
+        $(this).toggleClass('active');
+        $(this).parents('.tablesBody').find('.tablesBodyList, .tablesBodyList2').toggleClass('active');
+        $(this).parents('.tablesBody').find('.tablesBody__topDot').toggleClass('none');
+        $(this).parents('.tablesBody').find('.tablesBody__bold').toggleClass('normal');
+        // $('.tablesBodyList, .tablesBodyList2').toggleClass('active');
+    });
 });

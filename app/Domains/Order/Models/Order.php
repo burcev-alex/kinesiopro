@@ -63,11 +63,11 @@ class Order extends Model implements OrderInterface
     public function getStateClassAttribute()
     {
         $result = [
-            OrderInterface::STATE_PENDING => 'pending',
-            OrderInterface::STATE_PAID => 'paid',
-            OrderInterface::STATE_CANCELLED => 'cancelled',
-            OrderInterface::STATE_COMPLETED => 'completed',
-            OrderInterface::STATE_REFUSAL => 'refusal'
+            OrderInterface::STATE_PENDING => '',
+            OrderInterface::STATE_PAID => 'buy',
+            OrderInterface::STATE_CANCELLED => 'canceled',
+            OrderInterface::STATE_COMPLETED => 'buy',
+            OrderInterface::STATE_REFUSAL => 'canceled'
         ];
         return $result[$this->state] ?? '';
     }

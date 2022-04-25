@@ -73,7 +73,7 @@ class OnlineControllers extends Controller
 
         return view('pages.online.online-single', [
             'online' => $online,
-            'components' => $online->components,
+            'components' => $online->components
         ]);
     }
 }

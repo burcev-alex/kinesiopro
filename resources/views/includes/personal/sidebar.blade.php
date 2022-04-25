@@ -3,29 +3,29 @@
 
     <ul class="buyList">
         <li class="buyList__active">
-            <a href="#">Покупки</a>
+            <a href="{{ route('orders.index') }}">Покупки</a>
         </li>
 
         <li>
             <ul class="buyListIn">
                 <li>
-                    <a href="#">Вебинары</a>
+                    <a href="{{ route('orders.index', ['type' => 'webinar']) }}">Вебинары</a>
                 </li>
 
                 <li>
-                    <a href="#">Семинары</a>
+                    <a href="{{ route('orders.index', ['type' => 'course']) }}">Семинары</a>
                 </li>
 
                 <li>
-                    <a href="#">Конференции</a>
+                    <a href="{{ route('orders.index', ['type' => 'conference']) }}">Конференции</a>
                 </li>
 
                 <li>
-                    <a href="#">Марафоны</a>
+                    <a href="{{ route('orders.index', ['type' => 'marafon']) }}">Марафоны</a>
                 </li>
 
                 <li>
-                    <a href="#">Видеокурсы</a>
+                    <a href="{{ route('orders.index', ['type' => 'video']) }}">Видеокурсы</a>
                 </li>
             </ul>
         </li>

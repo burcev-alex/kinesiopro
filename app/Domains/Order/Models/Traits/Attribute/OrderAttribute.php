@@ -9,7 +9,7 @@ trait OrderAttribute
 
     public function getCreatedAttribute()
     {
-        return $this->created_at->format('d.m.Y H:i:s');
+        return $this->created_at->translatedFormat('d F Y');
     }
 
     public function getCompletedAttribute()

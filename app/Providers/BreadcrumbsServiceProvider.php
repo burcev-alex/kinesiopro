@@ -120,5 +120,19 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             fn (Trail $trail) =>
             $trail->push('Преподаватели', route('teacher.index'))
         );
+
+        // Видеокурсы
+        Breadcrumbs::for(
+            'stream.index',
+            fn (Trail $trail) =>
+            $trail->push('Видеокурсы', route('stream.index'))
+        );
+
+        // Покупки
+        Breadcrumbs::for(
+            'orders.index',
+            fn (Trail $trail) =>
+            $trail->push('Покупки', route('orders.index'))
+        );
     }
 }

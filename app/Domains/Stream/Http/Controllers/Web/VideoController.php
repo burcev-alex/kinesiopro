@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Domains\Blog\Http\Controllers\Web;
+namespace App\Domains\Stream\Http\Controllers\Web;
 
-use App\Domains\Blog\Services\BreadcrumbsService;
-use App\Domains\Blog\Services\NewsPaperService;
+use App\Domains\Stream\Services\BreadcrumbsService;
+use App\Domains\Stream\Services\StreamService;
 use App\Services\RouterService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
-class NewsPaperController
+class VideoController
 {
     protected RouterService $routerService;
-    protected NewsPaperService $newsService;
+    protected StreamService $streamService;
 
-    public function __construct(RouterService $routerService, NewsPaperService $newsService)
+    public function __construct(RouterService $routerService, StreamService $streamService)
     {
         $this->routerService = $routerService;
-        $this->newsService = $newsService;
+        $this->streamService = $streamService;
     }
 
     /**
-     * Список новостей блога
+     * Список всех видеокурсов
      *
      * @param Request $request
      * @param string $param1
@@ -38,19 +36,19 @@ class NewsPaperController
             $filters = "";
         }
 
-        // доступные статьи
-        $articles = $this->newsService->getArticles($filters, $page);
+        // доступные курсы
+        $articles = $this->streamService->getArticles($filters, $page);
 
         $pagination = $this->routerService->getPagination($articles->currentPage(), $articles->lastPage());
         if ($request->wantsJson()) {
             return [
                 'resource' => [
-                    'html' => view('includes.blog.items', ['articles' => $articles])->render(),
+                    'html' => view('includes.video.grid', ['articles' => $articles])->render(),
                 ],
                 'pagination' => [
                     'html' => view('includes.pagination', [
                         'pagination' => $pagination,
-                        'block' => 'blog-grid-block'
+                        'block' => 'video-grid-block'
                     ])->render(),
                 ],
             ];
@@ -58,38 +56,38 @@ class NewsPaperController
 
         // мета теги для категорий
         $meta = [];
-        $meta['meta_title'] = __('main.meta.blog_title');
-        $meta['meta_h1'] = __('main.meta.blog_h1');
-        $meta['meta_description'] = __('main.meta.blog_description');
+        $meta['meta_title'] = __('main.meta.video_title');
+        $meta['meta_h1'] = __('main.meta.video_h1');
+        $meta['meta_description'] = __('main.meta.video_description');
 
-        return view('pages.blog.blog-list', [
+        return view('pages.video.video-list', [
             'meta' => $meta,
             'articles' => $articles,
             'pagination' => $pagination,
-            'blockId' => 'blog-page-block'
+            'blockId' => 'video-page-block'
         ]);
     }
 
     /**
-     * Show order details
+     * Show course details
      *
      * @param string $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($slug)
     {
-        list($news_paper, $components) = $this->newsService->showArticleDetails($slug);
+        list($stream, $lessons) = $this->streamService->showArticleDetails($slug);
 
-        if (!$news_paper) {
+        if (!$stream) {
             return abort(404);
         }
 
         // Хлебные крошки
-        BreadcrumbsService::card($news_paper);
+        BreadcrumbsService::card($stream);
 
-        return view('pages.blog.blog-single', [
-            'news_paper' => $news_paper,
-            'components' => $components,
+        return view('pages.video.video-single', [
+            'stream' => $stream,
+            'lessons' => $lessons,
         ]);
     }
 
@@ -101,7 +99,7 @@ class NewsPaperController
     public function count()
     {
         return response()->json([
-            'count' => $this->newsService->where('active', true)->get()->count(),
+            'count' => $this->streamService->where('active', true)->get()->count(),
         ]);
     }
 }

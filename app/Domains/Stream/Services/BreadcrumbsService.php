@@ -17,9 +17,31 @@ final class BreadcrumbsService
         Breadcrumbs::for(
             'stream.single',
             function (Trail $trail) use ($stream) {
-                $trail->push('Видео курсы', route('stream'));
+                $trail->push('Видеокурсы', route('stream.index'));
 
                 $trail->push($stream->title, route('stream.single', ['slug' => $stream->slug]));
+            }
+        );
+    }
+
+    /**
+     * Хлебные крошки для урока видео курса
+     *
+     * @return void
+     */
+    public static function lesson($stream, $lesson)
+    {
+        Breadcrumbs::for(
+            'stream.single.lesson',
+            function (Trail $trail) use ($stream, $lesson) {
+                $trail->push('Видеокурсы', route('stream.index'));
+
+                $trail->push($stream->title, route('stream.single', ['slug' => $stream->slug]));
+
+                $trail->push($stream->title, route('stream.single.lesson', [
+                    'stream' => $stream->slug,
+                    'lessonId' => $lesson->id,
+                ]));
             }
         );
     }

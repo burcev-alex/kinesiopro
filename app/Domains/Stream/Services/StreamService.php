@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Stream\Services;
 
+use App\Domains\Stream\Models\Lesson;
 use App\Domains\Stream\Models\Stream;
 use App\Exceptions\NoPageException;
 use App\Services\BaseService;
@@ -47,7 +48,7 @@ class StreamService extends BaseService
      * @param int $perPage
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticles(string $filters, int $page, int $perPage = 9)
+    public function getArticles(string $filters, int $page, int $perPage = 12)
     {
         $query = $this->model->active();
 
@@ -68,5 +69,21 @@ class StreamService extends BaseService
         }
 
         return [$stream, $stream->lessons];
+    }
+    
+    /**
+     * Детальная информация по уроку
+     *
+     * @param $id
+     * @return Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function showLessonDetails($id)
+    {
+        $lesson = Lesson::query()->where('id', $id)->with('components')->get()->first();
+        if (!$lesson) {
+            return null;
+        }
+
+        return [$lesson, $lesson->components];
     }
 }

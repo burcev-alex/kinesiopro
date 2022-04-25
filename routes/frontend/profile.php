@@ -11,7 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/', [UserController::class, 'update'])->name('profile.update');
 
     // Order endpoints
-    Route::get('/orders/', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{type?}', [OrderController::class, 'index'])->where('type', 'marafon|course|conference|webinar|video')->name('orders.index');
 
     // уведомления
     Route::get('/notifications/', [UserController::class, 'notifications'])->name('profile.notifications');

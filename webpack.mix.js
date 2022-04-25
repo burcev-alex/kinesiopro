@@ -12,6 +12,7 @@ mix.js('resources/js/quiz_page_script.js', 'public/js');
 mix.js('resources/js/register_page_script.js', 'public/js');
 mix.js('resources/js/profile_page_script.js', 'public/js');
 mix.js('resources/js/teacher_page_script.js', 'public/js');
+mix.js('resources/js/video_page_script.js', 'public/js');
 mix.js('resources/js/dashboard.js', 'public/js');
 
 mix.sass('resources/sass/slick.scss', 'public/css');

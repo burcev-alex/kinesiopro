@@ -2,24 +2,16 @@
 namespace App\Domains\Order\Services;
 
 use App;
-use App\Domains\Crm\Jobs\PaymentOnlineCourse;
-use App\Domains\Order\Facades\Cart;
+use App\Domains\Order\Jobs\PaymentOnlineCourse;
 use App\Domains\Order\Models\Interfaces\OrderInterface;
 use App\Domains\Order\Models\Order;
 use App\Domains\Order\Models\OrdersItem;
 use App\Domains\Order\Services\Payment\PaymentFactory;
-use App\Domains\Product\Models\ProductsVariant;
-use App\Domains\User\Models\UserProfileDelivery;
-use App\Domains\User\Services\RegistratorService;
 use App\Exceptions\GeneralException;
 use App\Services\BaseService;
-use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 
 /**
  * Class CheckoutService.

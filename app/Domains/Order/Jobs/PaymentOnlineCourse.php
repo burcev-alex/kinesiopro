@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Crm\Jobs;
+namespace App\Domains\Order\Jobs;
 
 use App;
 use App\Domains\Online\Models\Online;

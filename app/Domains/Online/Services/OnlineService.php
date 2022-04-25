@@ -89,6 +89,6 @@ class OnlineService extends BaseService
      */
     public function getBySlug(string $slug)
     {
-        return $this->model->where('slug', $slug)->where('active', true)->with('components')->first();
+        return $this->model->where('slug', $slug)->where('active', true)->with(['components', 'stream'])->first();
     }
 }

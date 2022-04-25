@@ -105,7 +105,7 @@ class LessonEditScreen extends Screen
                     ->icon('undo')
             ])
         );
-
+        
         return [
             Layout::modal('addcomponent', [
                 Layout::rows([
@@ -128,6 +128,7 @@ class LessonEditScreen extends Screen
                     ->icon('undo'),
                     Input::make('item.me.title')->title('Заголовок')->value($this->lesson->title),
                     Input::make('item.me.sort')->type('number')->value($this->lesson->sort)->title('Сортировка'),
+                    TextArea::make('item.me.description')->value($this->lesson->description)->title('Краткое описание'),
                     Input::make('item.me.slug')->type('hidden')->value($this->lesson->slug),
                     Input::make('item_id')->type('hidden')->value($this->lesson->id),
                     Input::make('stream_id')->type('hidden')->value($this->lesson->stream_id),
@@ -139,12 +140,12 @@ class LessonEditScreen extends Screen
         ];
     }
 
-    public function save(Lesson $lesson_model, Request $request)
+    public function save(Stream $stream, Lesson $lesson_model, Request $request)
     {
         $lesson = $request->get('item');
         $streamId = $request->get('stream_id');
         $id = $request->get('item_id');
-
+        
         $lesson_model->fill($lesson['me'])->save();
         
         

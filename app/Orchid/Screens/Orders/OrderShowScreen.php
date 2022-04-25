@@ -102,7 +102,7 @@ class OrderShowScreen extends Screen
     {
 
         return [
-            Layout::modal('payedModal', [
+            Layout::modal('paidModal', [
                 Layout::rows([
                     Input::make('payment_numer')->title('Номер транзакции')->value(''),
                 ]),
@@ -179,7 +179,7 @@ class OrderShowScreen extends Screen
         $orderId = $item->id;
 
         $order = Order::find($orderId);
-        $order->payment = json_encode(array_merge($data['payment'], ['transactionId' => $arrRequest['payment_numer']]));
+        $order->payment = array_merge($data['payment'], ['transactionId' => $arrRequest['payment_numer']]);
         $order->state = OrderInterface::STATE_PAID;
         $order->payment_status = 'payed';
         $res = $order->save();
