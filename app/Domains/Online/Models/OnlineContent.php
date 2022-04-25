@@ -24,5 +24,7 @@ class OnlineContent extends Model
         "stream_id",
     ];
 
+    public $timestamps = false;
+    
     public $table = 'onlines_content';
 }

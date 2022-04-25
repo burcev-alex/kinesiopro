@@ -58,6 +58,7 @@ class OnlineEditScreen extends Screen
         
         return [
             'online' => $online,
+            'stream' => $online->stream,
             'components' => $online->components,
         ];
     }
@@ -190,6 +191,13 @@ class OnlineEditScreen extends Screen
 
         if (array_key_exists('components', $validated)) {
             $service->saveComponents($validated['components']);
+        }
+
+        if (array_key_exists('bind', $validated)) {
+            $service->saveBindStream($validated['bind']['stream']);
+        }
+        else{
+            $service->saveBindStream(0);
         }
        
         Alert::success('Курс успешно изменен');

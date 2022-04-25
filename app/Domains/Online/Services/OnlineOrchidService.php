@@ -2,10 +2,12 @@
 namespace App\Domains\Online\Services;
 
 use App\Domains\Online\Models\Online;
+use App\Domains\Online\Models\OnlineContent;
 use App\Domains\Online\Models\OnlineDesciptionComponent;
 use App\Domains\Online\Models\OnlineDesciptionMedia;
 use App\Domains\Online\Services\OnlineService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class OnlineOrchidService extends OnlineService
 {
@@ -29,6 +31,18 @@ class OnlineOrchidService extends OnlineService
         Cache::tags(['onlines'])->flush();
         
         return $this;
+    }
+
+    public function saveBindStream($streamId)
+    {
+        DB::statement('DELETE FROM onlines_content WHERE online_id='.$this->model->id);
+        
+        if (intval($streamId) > 0) {
+            OnlineContent::create([
+                "online_id" => $this->model->id,
+                "stream_id" => $streamId,
+            ]);
+        }
     }
 
     public function saveComponents(array $components)

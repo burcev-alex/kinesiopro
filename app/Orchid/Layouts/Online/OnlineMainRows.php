@@ -1,6 +1,7 @@
 <?php
 namespace App\Orchid\Layouts\Online;
 
+use App\Domains\Stream\Models\Stream;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
@@ -27,6 +28,7 @@ class OnlineMainRows extends Rows
     protected function fields(): array
     {
         $online = $this->query->get('online');
+        $stream = $this->query->get('stream');
 
         return [
             CheckBox::make('online.active')->title('Активность'),
@@ -48,6 +50,8 @@ class OnlineMainRows extends Rows
                     ])
                     ->title('Тип')
                     ->required(),
+            
+            Select::make('bind.stream')->fromModel(Stream::class, 'title')->title('Привязка к видеокурсу')->empty()->value(($online && $stream) ? $stream->id : ''),
             
             Group::make([
                 DateTimer::make('online.start_date')->title('Дата начала')->enableTime(),

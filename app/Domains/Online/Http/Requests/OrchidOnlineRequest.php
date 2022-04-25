@@ -31,6 +31,8 @@ class OrchidOnlineRequest extends FormRequest
             'online.attachment_id' => 'required',
             'online.*' => '',
             'components.*' => '',
+            'bind.*' => '',
+            'bind.stream' => '',
         ];
     }
 }
