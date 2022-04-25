@@ -13,7 +13,7 @@ use Orchid\Attachment\Models\Attachment;
 
 class PodcastService extends BaseService
 {
-    public const DEFAULT_LIMIT = 8;
+    public const DEFAULT_LIMIT = 12;
 
     // кол-во элементов на странице
     protected int $currentLimitPage;

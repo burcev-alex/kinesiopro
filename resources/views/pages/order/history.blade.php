@@ -25,7 +25,7 @@
             <ul class="tables flex">
                 <li class="tables__header">
                     <span class="tables__num">№</span>
-                    <span class="tables__date">Дата</span>
+                    <span class="tables__date">Дата покупки</span>
                     <span class="tables__title">Название продукта</span>
                     <span class="tables__price">Стоимость</span>
                     <span class="tables__status">Статус</span>

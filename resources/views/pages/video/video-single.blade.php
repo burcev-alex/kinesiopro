@@ -11,11 +11,11 @@
 
 @section('content')
     @include('includes.partials.breadcrumbs')
-    <h1 class="width titleH1">Видеокурс</h1>
+    <h1 class="width titleH1">Видеокурсы</h1>
     
     <!--Start videoCourse-->
     <section class="videoCourse width">
-        <h2 class="videoCourse__title">Видео курс: <span>«{{ $stream->title }}»</span></h2>
+        <h2 class="videoCourse__title">Видеокурс: <span>«{{ $stream->title }}»</span></h2>
         
         <div class="videoCourseContent">
             @foreach ($lessons as $lesson)

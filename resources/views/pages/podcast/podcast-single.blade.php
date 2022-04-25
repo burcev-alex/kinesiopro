@@ -21,7 +21,7 @@
         </div>
         @endif
 
-        <p class="podcast__paragraf">{!! $podcast->description !!}</p>
+        <div class="podcast__paragraf">{!! $podcast->description !!}</div>
     </section>
     @if($podcast->url)
         <script type="text/javascript">
