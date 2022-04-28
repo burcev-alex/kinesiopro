@@ -132,7 +132,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         Breadcrumbs::for(
             'orders.index',
             fn (Trail $trail) =>
-            $trail->push('Покупки', route('orders.index'))
+            $trail->push(Lang::get('breadcrumbs.personal.profile'), route('profile.index'))->push('Покупки', route('orders.index'))
         );
 
         // Поиск

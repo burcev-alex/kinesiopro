@@ -48,7 +48,7 @@ class StreamService extends BaseService
      * @param int $perPage
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getArticles(string $filters, int $page, int $perPage = 12)
+    public function getArticles(string $filters, int $page, int $perPage = 8)
     {
         $query = $this->model->active();
 
