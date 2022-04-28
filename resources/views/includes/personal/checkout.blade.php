@@ -25,15 +25,13 @@
             <label for="phone">Телефон <span>*</span></label>
             <input type="text" id="phone" required name="order[phone]">
         </div>
-    </div>
 
-    <div class="registerBtnBottom flex">
-        <div class="registerBtnTop__block">
+        <div class="registerBtnTop__block registerBtnTop__blockModif">
             <label for="email">E-mail <span>*</span></label>
             <input type="text" id="email" required name="order[user_email]">
         </div>
 
-        <div class="registerBtnTop__block">
+        <div class="registerBtnTop__block registerBtnTop__blockModif">
             <label for="promo">Промокод</label>
             <input type="text" id="promo" name="order[promocode]">
         </div>
