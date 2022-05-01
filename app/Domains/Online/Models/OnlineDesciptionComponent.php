@@ -12,7 +12,7 @@ class OnlineDesciptionComponent extends Model
     OnlineDesciptionComponentRelationship;
 
     protected $fillable = [
-        "course_id",
+        "online_id",
         "component_id",
         "sort",
         "fields",
