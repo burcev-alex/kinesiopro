@@ -123,7 +123,7 @@ class OnlineEditScreen extends Screen
             Layout::modal('addcomponent', [
                 Layout::rows([
                     Select::make('component')->fromModel(Component::class, 'name')->value([]),
-                    Input::make('item.id')->hidden(),
+                    Input::make('item.id')->value($this->data->id)->hidden(),
                 ])
 
             ])->title('Выберите компонент'),
@@ -152,14 +152,14 @@ class OnlineEditScreen extends Screen
     {
         $component = Component::find($request->component);
         $fields = [];
-        $item = $request->item['id'];
+        $itemId = $request->item['id'];
 
         foreach ($component->fields as $key => $value) {
             $fields[$value] = '';
         }
 
         AppOnlineDesciptionComponent::create([
-            "online_id" => $item,
+            "online_id" => $itemId,
             "component_id" => $component->id,
             "sort" => 0,
             "fields" => $fields
