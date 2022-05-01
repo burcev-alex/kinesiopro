@@ -38,7 +38,7 @@ final class BreadcrumbsService
 
                 $trail->push($stream->title, route('stream.single', ['slug' => $stream->slug]));
 
-                $trail->push($stream->title, route('stream.single.lesson', [
+                $trail->push($lesson->title, route('stream.single.lesson', [
                     'stream' => $stream->slug,
                     'lessonId' => $lesson->id,
                 ]));
