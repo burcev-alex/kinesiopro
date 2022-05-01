@@ -13,6 +13,11 @@ trait CourseAttribute
         return '/images/photo_not_found.png';
     }
 
+    public function getStartDateFormatAttribute()
+    {
+        return $this->start_date->translatedFormat('d F Y');
+    }
+
     public function getDiffDayAttribute()
     {
         return $this->start_date->diff($this->finish_date)->days;

@@ -50,8 +50,40 @@ class OnlineControllers extends Controller
                 ],
             ];
         }
+
+        if($category == 'video'){
+            $title = 'Видеокурсы';
+        }
+        if($category == 'marafon'){
+            $title = 'Марафоны';
+        }
+        else if($category == 'course'){
+            $title = 'Очные курсы';
+        }
+        else if($category == 'conference'){
+            $title = 'Конференции';
+        }
+        else if($category == 'webinar'){
+            $title = 'Вебинары';
+        }
+        else if($category == 'video'){
+            $title = 'Видеокурсы';
+        }
+        else{
+            $title = __('main.meta.online_title');
+        }
+
+        // Онлайн курсы
+        Breadcrumbs::for(
+            'online',
+            fn (Trail $trail) =>
+            $trail->push($title, route('online'))
+        );
         
         return view('pages.online.online-list', [
+            'meta' => [
+                'title' => $title
+            ],
             'onlines' => $catalog,
             'pagination' => $pagination,
         ]);

@@ -37,8 +37,8 @@
         <h2 class="videoCourse__title">Видеокурс: <span>«{{ $stream->title }}»</span></h2>
 
         <div class="videoCourseIn">
-            <h3 class="videoCourseIn__title">Часть {{ $step }}. {{ $lesson->title }}</p>
-            <div>{!! $lesson->description !!}</div>
+            <h3 class="videoCourseIn__title">Часть {{ $step }}. {{ $lesson->title }}</h3>
+            <p>{!! strip_tags($lesson->description) !!}</p>
             <div class="videoBottom flex">
                 <div class="videoBottomLeft">
                     <span class="videoBottomLeft__lessons">{{ $step }} из {{ $lessons->count() }} уроков</span>

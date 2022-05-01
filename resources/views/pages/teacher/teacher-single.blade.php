@@ -64,6 +64,7 @@
         };
     </script>
     @include('includes.home.schedule', [
+        'title' => $teacher->full_name.'. Расписание семенаров',
         'fieldsFilter' => [
             'city' => true,
             'format' => true,

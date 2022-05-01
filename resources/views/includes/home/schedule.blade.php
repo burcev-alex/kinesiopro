@@ -1,6 +1,6 @@
 <!--Start schedule-->
 <section class="schedule width">
-    <h2 class="schedule__title">Расписание</h2>
+    <h2 class="schedule__title">{{ $title }}</h2>
 
     <form id="filter-form" action="{{ route('courses.index') }}">
         <div class="scheduleContent">

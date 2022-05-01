@@ -68,7 +68,7 @@
 
                         <div class="signUpBlockListRight">
                             <div class="signUpBlockListRight__title">Дата начала</div>
-                            <div class="signUpBlockListRight__date">{{ $course->start_date->format('d F Y') }}</div>
+                            <div class="signUpBlockListRight__date">{{ $course->start_date_format }}</div>
                         </div>
                     </li>
 

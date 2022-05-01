@@ -22,6 +22,7 @@
         window.filterParams = {};
     </script>
     @include('includes.home.schedule', [
+        'title' => 'Расписание семенаров',
         'fieldsFilter' => [
             'city' => true,
             'format' => true,

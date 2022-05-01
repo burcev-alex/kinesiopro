@@ -3,14 +3,14 @@
 @section('metaLabels')
     @parent
     @includeIf('meta::manager', [
-        'title' => __('main.meta.online_title'),
+        'title' => $meta['title'],
         'description' => __('main.meta.online_description')
     ])
 @stop
 
 @section('content')
     @include('includes.partials.breadcrumbs')
-    <h1 class="width titleH1">{{ __('main.meta.online_h1') }}</h1>
+    <h1 class="width titleH1">{{ $meta['title'] }}</h1>
 
     <!-- Start onlineContent-->
     <ul class="blogItem flex onlineContent width" id="online-grid-block">

@@ -3,14 +3,14 @@
 @section('metaLabels')
     @parent
     @includeIf('meta::manager', [
-        'title' => 'Восстановение пароля',
+        'title' => 'Восстановление пароля',
         'description' => ''
     ])
 @stop
 
 @section('content')
     @include('includes.partials.breadcrumbs')
-    <h1 class="width titleH1">Восстановение пароля</h1>
+    <h1 class="width titleH1">Восстановление пароля</h1>
 
     <section class="formRegisterMain">
         <form action="{{ route('password.email') }}" data-action="async" method="POST" class="flex formAutorizaishen formRegisterRecover" id="passwordFogot">

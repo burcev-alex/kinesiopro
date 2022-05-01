@@ -83,7 +83,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         Breadcrumbs::for(
             'contacts',
             fn (Trail $trail) =>
-            $trail->push(Lang::get('breadcrumbs.about'), route('contacts'))
+            $trail->push(Lang::get('breadcrumbs.contacts'), route('contacts'))
         );
 
         // Авторизация
@@ -105,13 +105,6 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             'discount',
             fn (Trail $trail) =>
             $trail->push('Бонусная программа', route('discount'))
-        );
-
-        // Онлайн курсы
-        Breadcrumbs::for(
-            'online',
-            fn (Trail $trail) =>
-            $trail->push('Онлайн-курсы', route('online'))
         );
 
         // Преподаватели
@@ -140,6 +133,56 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             'search',
             fn (Trail $trail) =>
             $trail->push('Поиск', route('search'))
+        );
+
+        // Основные сведения об образовательной организации
+        Breadcrumbs::for(
+            'about.organizations',
+            fn (Trail $trail) =>
+            $trail->push('О проекте', route('about.us'))->push('Основные сведения об образовательной организации', route('about.organizations'))
+        );
+
+        // Руководство. Педагогический (научно-педагогический) состав
+        Breadcrumbs::for(
+            'about.headliners',
+            fn (Trail $trail) =>
+            $trail->push('О проекте', route('about.us'))->push('Руководство. Педагогический (научно-педагогический) состав', route('about.headliners'))
+        );
+
+        // Кто мы
+        Breadcrumbs::for(
+            'about.us',
+            fn (Trail $trail) =>
+            $trail->push('О проекте', route('about.us'))
+        );
+
+        // Оплата робокассов
+        Breadcrumbs::for(
+            'robokassa.payment',
+            fn (Trail $trail) =>
+            $trail->push('Заказ', route('orders.index'))
+        );
+        Breadcrumbs::for(
+            'robokassa.success',
+            fn (Trail $trail) =>
+            $trail->push('Заказ', route('orders.index'))
+        );
+        Breadcrumbs::for(
+            'robokassa.error',
+            fn (Trail $trail) =>
+            $trail->push('Заказ', route('orders.index'))
+        );
+
+        // Оплата сбербанком
+        Breadcrumbs::for(
+            'success.success',
+            fn (Trail $trail) =>
+            $trail->push('Заказ', route('orders.index'))
+        );
+        Breadcrumbs::for(
+            'sberbank.error',
+            fn (Trail $trail) =>
+            $trail->push('Заказ', route('orders.index'))
         );
     }
 }

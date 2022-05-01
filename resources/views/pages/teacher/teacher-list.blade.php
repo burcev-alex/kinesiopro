@@ -14,7 +14,7 @@
 
     <!--Start mainContent-->
     <main class="mainContent width">
-        <div class="flex" id="teacher-grid-block">
+        <div class="flex teachersContent" id="teacher-grid-block">
             @include('includes.teacher.grid', ['teachers' => $teachers])
         </div>
     </main>
