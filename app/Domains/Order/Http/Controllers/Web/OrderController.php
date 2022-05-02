@@ -31,33 +31,33 @@ class OrderController
 
             $data['stream'] = [];
 
-            if(strlen($type) > 0){
+            if (strlen($type) > 0) {
                 $actual = false;
-                foreach($data['items'] as $item){
-                    if($item['product_type'] == $type){
+                foreach ($data['items'] as $item) {
+                    if ($item['product_type'] == $type) {
                         $actual = true;
 
                         // онлайн продукты
                         $online = Online::whereId($item['product_id'])->with('stream')->get()->first();
 
-                        $data['stream'] = $online->stream->toArray();
-
+                        if ($online->stream) {
+                            $data['stream'] = $online->stream->toArray();
+                        }
                     }
-                    if($item['product_type'] == 'online'){
+                    if ($item['product_type'] == 'online') {
                         // онлайн продукты
                         $online = Online::whereId($item['product_id'])->get()->first();
 
-                        if($online && $online->type == $type){
+                        if ($online && $online->type == $type) {
                             $actual = true;
                         }
-                    }
-                    elseif($item['product_type'] == 'course' && $type == 'course'){
+                    } elseif ($item['product_type'] == 'course' && $type == 'course') {
                         // очные курсы
                         $actual = true;
                     }
                 }
 
-                if(!$actual){
+                if (!$actual) {
                     continue;
                 }
             }
@@ -71,22 +71,17 @@ class OrderController
             $items[$data['id']] = $data;
         }
         
-        if($type == 'marafon'){
+        if ($type == 'marafon') {
             $typeTitle = 'Марафоны';
-        }
-        else if($type == 'course'){
+        } elseif ($type == 'course') {
             $typeTitle = 'Очные курсы';
-        }
-        else if($type == 'conference'){
+        } elseif ($type == 'conference') {
             $typeTitle = 'Конференции';
-        }
-        else if($type == 'webinar'){
+        } elseif ($type == 'webinar') {
             $typeTitle = 'Вебинары';
-        }
-        else if($type == 'video'){
+        } elseif ($type == 'video') {
             $typeTitle = 'Видеокурсы';
-        }
-        else{
+        } else {
             $typeTitle = 'Все покупки';
         }
 

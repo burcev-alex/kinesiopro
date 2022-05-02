@@ -187,6 +187,11 @@ class OnlineEditScreen extends Screen
         $service->setModel($online);
         $validated = $request->validated();
 
+        if($validated['online']['type'] == 'video' && IntVal($validated['bind']['stream']) == 0){
+            Alert::error('Сделайте привязку к видеокурсу!');
+            return redirect()->route('platform.online.edit', $online);
+        }
+
         $service->save($validated['online']);
 
         if (array_key_exists('components', $validated)) {
