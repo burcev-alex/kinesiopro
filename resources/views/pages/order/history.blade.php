@@ -10,13 +10,15 @@
 
 @section('content')
     @include('includes.partials.breadcrumbs')
-            
+
     <h1 class="width titleH1">Покупки</h1>
 
     <!-- Start accountContent -->
     <section class="accountContent width flex">
         <div class="accountLeft">
-            @include('includes.personal.sidebar')
+            @include('includes.personal.sidebar', [
+                'title' => $typeTitle,
+            ])
         </div>
 
         <div class="buyAccount">
@@ -30,25 +32,27 @@
                     <span class="tables__price">Стоимость</span>
                     <span class="tables__status">Статус</span>
                 </li>
-                @foreach($items as $order)
+                @foreach ($items as $order)
                     <li class="tablesBody">
                         <span class="tablesBody__num">{{ $loop->index + 1 }}</span>
                         <span class="tablesBody__date">{{ $order['created_at'] }}</span>
-            
+
                         <div class="tablesBody__title flex">
                             <div class="tablesBody__left">
                                 <div class="tablesBody__top">
                                     @php
                                         $product = current($order['items']);
                                     @endphp
-                                    @if(count($order['stream']) == 0)
+                                    @if (count($order['stream']) == 0)
                                         {{ $product['name'] }}
-                                    @else 
-                                        <a href="{{ route('stream.single', ['slug' => $order['stream']['slug']]) }}">{{ $product['name'] }}</a>
+                                    @else
+                                        <a
+                                            href="{{ route('stream.single', ['slug' => $order['stream']['slug']]) }}">{{ $product['name'] }}</a>
                                     @endif
                                     <span class="tablesBody__topDot">...</span>
-                                    <span class="tablesBody__bold">{{ $order['total'] }} руб.</span></div>
-            
+                                    <span class="tablesBody__bold">{{ $order['total'] }} руб.</span>
+                                </div>
+
                                 <ul class="tablesBodyList">
                                     <li class="tablesBodyList__bold">
                                         <b class="tablesBodyList__name">Общая стоимость</b>
@@ -57,10 +61,13 @@
                                 </ul>
                             </div>
                         </div>
-                        @if($order['payment_status'] == 'waiting')
-                            <a href="{{ array_key_exists('url', $order['payment']) ? $order['payment']['url'] : '#' }}" target="_blank" class="tablesBody__processing {{ $order['stateClass'] }}">{{ $order['stateTitle'] }}</a>
+                        @if ($order['payment_status'] == 'waiting')
+                            <a href="{{ array_key_exists('url', $order['payment']) ? $order['payment']['url'] : '#' }}"
+                                target="_blank"
+                                class="tablesBody__processing {{ $order['stateClass'] }}">{{ $order['stateTitle'] }}</a>
                         @else
-                            <span class="tablesBody__processing {{ $order['stateClass'] }}">{{ $order['stateTitle'] }}</span>
+                            <span
+                                class="tablesBody__processing {{ $order['stateClass'] }}">{{ $order['stateTitle'] }}</span>
                         @endif
                         <span class="tablesBody__btn"></span>
                     </li>
@@ -70,13 +77,11 @@
 
     </section>
     <!-- End accountContent -->
-   
+
 @endsection
 
 @push('after-scripts')
     @include('includes.scripts', [
-    'list' => [
-        '/js/profile_page_script.js'
-    ],
+        'list' => ['/js/profile_page_script.js'],
     ])
 @endpush

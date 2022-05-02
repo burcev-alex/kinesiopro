@@ -1,31 +1,34 @@
 <div class="profile">
-    <div class="profile__title">Профиль</div>
+    <div class="profile__title">{{ $title }}</div>
+    @php
+        $currentRoute = \Request::path();
+    @endphp
 
-    <ul class="buyList">
+    <ul class="buyList @if(\Request::route()->getName() == 'orders.index') active @endif">
         <li class="buyList__active">
             <a href="{{ route('orders.index') }}">Покупки</a>
         </li>
 
         <li>
-            <ul class="buyListIn">
+            <ul class="buyListIn @if(\Request::route()->getName() == 'orders.index') active @endif ">
                 <li>
-                    <a href="{{ route('orders.index', ['type' => 'webinar']) }}">Вебинары</a>
+                    <a href="{{ route('orders.index', ['type' => 'webinar']) }}" @if($currentRoute == 'orders/webinar') class="active" @endif>Вебинары</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('orders.index', ['type' => 'course']) }}">Семинары</a>
+                    <a href="{{ route('orders.index', ['type' => 'course']) }}" @if($currentRoute == 'orders/course') class="active" @endif>Семинары</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('orders.index', ['type' => 'conference']) }}">Конференции</a>
+                    <a href="{{ route('orders.index', ['type' => 'conference']) }}" @if($currentRoute == 'orders/conference') class="active" @endif>Конференции</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('orders.index', ['type' => 'marafon']) }}">Марафоны</a>
+                    <a href="{{ route('orders.index', ['type' => 'marafon']) }}" @if($currentRoute == 'orders/marafon') class="active" @endif>Марафоны</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('orders.index', ['type' => 'video']) }}">Видеокурсы</a>
+                    <a href="{{ route('orders.index', ['type' => 'video']) }}" @if($currentRoute == 'orders/video') class="active" @endif>Видеокурсы</a>
                 </li>
             </ul>
         </li>

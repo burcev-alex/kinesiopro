@@ -9,24 +9,27 @@
 
 @section('content')
     @include('includes.partials.breadcrumbs')
-    
+
     <h1 class="width titleH1">Личный кабинет</h1>
 
     <!-- Start accountContent -->
     <section class="accountContent width flex">
         <div class="accountLeft">
-            @include('includes.personal.sidebar')
+            @include('includes.personal.sidebar', [
+                'title' => 'Профиль',
+            ])
         </div>
 
         <div class="accountMobil flex">
             <div class="accountCenter">
                 <h3 class="accountCenter__title">Профиль</h3>
-                
-                @if($user->picture)
+
+                @if ($user->picture)
                     <img src="{{ $user->picture->relativeUrl }}" width="150" alt="">
                 @endif
 
-                <form action="{{ route('profile.update') }}" data-action="async" method="POST" class="accountForm" id="profileUpdate" style="display: none;">
+                <form action="{{ route('profile.update') }}" data-action="async" method="POST" class="accountForm"
+                    id="profileUpdate" style="display: none;">
                     <div class="accountFormBlock flex">
                         <label for="name">Имя</label>
                         <input type="text" id="name" value="{{ $user->firstname }}" required name="firstname">
@@ -176,18 +179,16 @@
                 </div>
 
                 @include('includes.personal.notification')
-                
+
             </div>
         </div>
     </section>
     <!-- End accountContent -->
-    
+
 @endsection
 
 @push('after-scripts')
     @include('includes.scripts', [
-    'list' => [
-        '/js/profile_page_script.js'
-    ],
+        'list' => ['/js/profile_page_script.js'],
     ])
 @endpush
