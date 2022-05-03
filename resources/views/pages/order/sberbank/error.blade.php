@@ -17,7 +17,7 @@
 
         <div class="orderContent flex">
             <span>К сожалению в процессе оплаты произошла ошибка</span>
-            <a href="{{ route('profile.index') }}">Вернутсья в личный кабинет</a>
+            <a href="{{ route('profile.index') }}">Вернуться в личный кабинет</a>
         </div>
     </div>
 @endsection

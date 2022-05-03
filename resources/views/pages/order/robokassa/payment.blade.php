@@ -17,7 +17,7 @@
 
         <div class="orderContent flex">
             <span>Спасибо, ваш заказ принят и успешно оплачен!</span>
-            <a href="{{ route('profile.index') }}">Вернутсья в личный кабинет</a>
+            <a href="{{ route('profile.index') }}">Вернуться в личный кабинет</a>
         </div>
     </div>
 @endsection

@@ -5,7 +5,7 @@
     <form id="filter-form" action="{{ route('courses.index') }}">
         <div class="scheduleContent">
             <div class="scheduleTop">
-                <ul class="scheduleList flex">
+                {{-- <ul class="scheduleList flex">
                     <li class="scheduleList__online">
                         <a href="{{ route('online') }}">Он-лайн</a>
                     </li>
@@ -19,7 +19,7 @@
                     <li class="scheduleList__offline active">
                         <a href="{{ route('courses.index') }}" class="active">Оффлайн</a>
                     </li>
-                </ul>
+                </ul> --}}
 
                 <a href="{{ route('courses.index') }}" class="schedule__all">Посмотреть все</a>
             </div>

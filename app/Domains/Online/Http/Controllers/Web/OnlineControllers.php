@@ -70,7 +70,7 @@ class OnlineControllers extends Controller
             $title = 'Видеокурсы';
         }
         else{
-            $title = __('main.meta.online_title');
+            $title = __('main.meta.online_h1');
         }
 
         // Онлайн курсы
