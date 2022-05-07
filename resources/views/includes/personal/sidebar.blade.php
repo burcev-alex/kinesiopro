@@ -53,6 +53,6 @@
     </ul>
 </div>
 
-<a href="{{ route('courses.index') }}" class="flex scheduleBtn">
+<a href="{{ route('courses.index') }}" class="flex scheduleBtn block">
     <span>Перейти к расписанию занятий</span>
 </a>

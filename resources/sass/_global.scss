@@ -1442,7 +1442,6 @@
   .blockMarafon__title {
     color: #212529;
     font-size: 26px;
-    line-height: 52px;
     font-weight: bold;
   }
   
@@ -2467,6 +2466,7 @@
     max-width: 1063px;
     width: 100%;
     margin: 60px auto 0;
+    padding-bottom: 30px;
   }
   
   .registerBtnBottom {
@@ -2699,6 +2699,7 @@
   
   .teachersContent {
     align-items: flex-start;
+    margin-top: 60px;
   }
   
   .teachersItem img {
@@ -2717,7 +2718,7 @@
   .teachersItemBlock__name {
     max-height: 50px;
     overflow: hidden;
-    line-height: 30px;
+    line-height: 25px;
     padding-bottom: 10px;
   }
   
@@ -2787,6 +2788,7 @@
   
   .pagination-block {
     margin-bottom: 80px;
+    margin-top: 30px;
   }
   
   .teachersArticleLeft {
@@ -3390,6 +3392,10 @@
     align-items: flex-start;
   }
   
+  .videoCourseItem img {
+    margin: 7px 0 0 0;
+  }
+  
   .videoCourseItemRight {
     margin-left: 25px;
     max-width: 91%;
@@ -3404,6 +3410,7 @@
   .videoCourseItemRight p {
     color: #3A3A3A;
     font: normal normal 18px 'Nunito', sans-serif;
+    padding-top: 2px;
   }
   
   .videoCourseContent {
@@ -3454,6 +3461,9 @@
   .videoBottomRight > span {
     color: #3A3A3A;
     font: normal normal 18px 'Nunito', sans-serif;
+    max-width: 500px;
+    width: 100%;
+    display: block;
   }
   
   .audio {
@@ -3779,7 +3789,7 @@
     }
   
     .teachersItemBlock {
-      max-width: 70%;
+      max-width: 65%;
     }
   
     .videoItem {
@@ -3815,6 +3825,10 @@
     .tablesBody__price {
       width: 28%;
     }
+  
+    .youtube {
+      max-width: 100%;
+    }
   }
   
   @media (max-width: 1220px) {
@@ -3828,7 +3842,8 @@
     }
   
     .formIntensiveRadio {
-      max-width: 33%;
+      max-width: 275px;
+      width: 100%;
     }
   
     .accountCenterList2 .accountCenterList__two {
@@ -3880,11 +3895,6 @@
   
     .schedule .ms-parent .ms-choice span {
       font-size: 14px;
-    }
-  
-    .itemCenter p {
-      font-size: 18px;
-      line-height: 26px;
     }
   
     .mainRight {
@@ -4326,6 +4336,7 @@
     .formIntensive {
       margin-top: 30px;
       margin-bottom: 30px;
+      justify-content: space-evenly;
     }
   
     .accountLeft {
@@ -4507,6 +4518,10 @@
   }
   
   @media (max-width: 860px) {
+    .videoCourseItem img {
+      margin-top: 10px;
+    }
+  
     .footerBlockList2 {
       max-width: 230px;
     }
@@ -4692,7 +4707,7 @@
       right: 0;
     }
   
-    .marafonRight > .paragraf {
+    .marafonRight .paragraf {
       max-width: 60%;
     }
   
@@ -4883,9 +4898,17 @@
     .videoCourseItem {
       padding: 20px 20px 20px 30px;
     }
+  
+    .testIn img.testInImg {
+      max-width: 37%;
+    }
   }
   
   @media (max-width: 780px) {
+    .teachersContent {
+      margin-top: 60px;
+    }
+  
     .bread {
       max-width: 600px;
       width: 100%;
@@ -4895,10 +4918,6 @@
   
     .bread-crumbs li {
       margin-bottom: 10px;
-    }
-  
-    .testInImg {
-      max-width: 37%;
     }
   
     .formRegisterMain .scheduleTop {
@@ -5165,7 +5184,8 @@
     }
   
     .formIntensiveRadio {
-      max-width: 50%;
+      max-width: 350px;
+      width: 100%;
       margin-bottom: 10px;
     }
   
@@ -5291,7 +5311,7 @@
   
     .etabs li.tab {
       width: 86px;
-      margin-right: 3%;
+      margin-right: 2%;
     }
   
     .bread-crumbs li > span:before {
@@ -5458,6 +5478,14 @@
     .audioRight {
       max-width: 65%;
     }
+  
+    .formIntensiveRadio {
+      max-width: 260px;
+    }
+  
+    .videoBottomRight > span {
+      max-width: 100%;
+    }
   }
   
   @media (max-width: 690px) {
@@ -5587,6 +5615,10 @@
   }
   
   @media (max-width: 650px) {
+    .testIn img.testInImg {
+      max-width: 100%;
+    }
+  
     .footerH3,
     .footerBlockListMenu li a {
       font-size: 13px;
@@ -5702,7 +5734,7 @@
       width: 72%;
     }
   
-    .marafonRight > .paragraf {
+    .marafonRight .paragraf {
       max-width: 100%;
     }
   
@@ -5899,7 +5931,7 @@
     }
   
     .itemLeft {
-      max-width: 160px;
+      max-width: 180px;
     }
   
     .itemRight {
@@ -6211,7 +6243,7 @@
   
     .blockMarafonList li span,
     .podcast__paragraf {
-      font-size: 16px;
+      font-size: 18px;
       line-height: 24px;
     }
   
@@ -6246,8 +6278,40 @@
       padding-bottom: 10px;
     }
   
-    .registerBtnTop__blockModif{
+    .registerBtnTop__blockModif {
       max-width: 100% !important;
+    }
+  
+    .textBlock p {
+      font-size: 18px;
+    }
+  
+    .dontPage__desc {
+      margin-bottom: 100px;
+    }
+  
+    .forgotPassword {
+      bottom: 123px;
+    }
+  
+    .listPodcast {
+      margin-top: 50px;
+    }
+  
+    .scheduleBtn.block {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
     }
   }
   
@@ -6574,10 +6638,6 @@
       padding: 25px;
     }
   
-    .textBlock p {
-      font-size: 14px;
-    }
-  
     .mainTitle {
       text-align: center;
       font-size: 24px;
@@ -6604,7 +6664,7 @@
     }
   
     .schedule {
-      margin-top: 0;
+      margin-top: 30px;
     }
   
     .contacts {
@@ -6710,6 +6770,7 @@
   
     .listPodcast {
       margin-bottom: 70px;
+      margin-top: 40px;
     }
   
     .testContent {
@@ -6745,7 +6806,7 @@
     }
   
     .mainContent {
-      max-width: 90%;
+      max-width: 100%;
     }
   
     .teachersItemBlock__name {
@@ -6759,6 +6820,7 @@
   
     .blogItem {
       max-width: 320px;
+      margin: 0 auto;
     }
   
     .blogItem li {
@@ -6951,6 +7013,10 @@
   
     .bread-crumbs li > span:before {
       margin: 0 14px 0 11px;
+    }
+  
+    .testIn {
+      margin-bottom: 40px;
     }
   }
   

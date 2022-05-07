@@ -22,7 +22,7 @@
                 <div class="formRegisterBlockItem">
                     <label for="email">E-mail <span>*</span></label>
                     <input type="text" id="email" name="email" value="{{ old('email') }}">
-                    <a href="{{ route('password.create') }}"><span>Забыли пароль?</span></a>
+                    <a href="{{ route('password.create') }}" class="forgotPassword"><span>Забыли пароль?</span></a>
                 </div>
 
                 <div class="formRegisterBlockItem">
