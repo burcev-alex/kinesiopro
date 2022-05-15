@@ -735,7 +735,7 @@
   
   .scheduleList {
     width: 100%;
-    margin: 20px auto 0;
+    margin: 20px auto;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -1806,8 +1806,6 @@
   }
   
   .formIntensiveRadio {
-    max-width: 400px;
-    min-width: 100px;
     margin-bottom: 17px;
   }
   
@@ -3044,14 +3042,15 @@
   }
   
   .navigation li {
-    margin: 0 5px;
+    margin: 0 10px;
   }
   
   .navigation li a {
     color: #EB6907;
     font-size: 18px;
     border-bottom: 1px solid;
-    line-height: 0;
+    line-height: 18px;
+    display: block;
   }
   
   .navigation li a.active {
@@ -3690,6 +3689,12 @@
     margin-top: 20px;
   }
   
+  .marafonRight .paragraf p {
+    color: #3A3A3A;
+    font: normal normal 18px/27px 'Nunito', sans-serif;
+    padding-bottom: 10px;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -3698,6 +3703,15 @@
   Start responsive
   ################*/
   @media (max-width: 1340px) {
+    .intensive .teachersIn {
+      max-width: 1000px;
+      width: 100%;
+    }
+  
+    .formIntensiveRadio {
+      max-width: 250px;
+    }
+  
     .accountFormBlock input {
       max-width: 60%;
     }
@@ -3841,11 +3855,6 @@
       margin: 0 1.4% 50px 0;
     }
   
-    .formIntensiveRadio {
-      max-width: 275px;
-      width: 100%;
-    }
-  
     .accountCenterList2 .accountCenterList__two {
       max-width: 280px;
     }
@@ -3911,6 +3920,10 @@
   }
   
   @media (max-width: 1180px) {
+    .intensive .teachersIn {
+      max-width: 900px;
+    }
+  
     .teachersItemBlock {
       max-width: 64%;
     }
@@ -4175,6 +4188,10 @@
   }
   
   @media (max-width: 1050px) {
+    .intensive .teachersIn {
+      max-width: 700px;
+    }
+  
     .accountCenterList2 .accountCenterList__two {
       max-width: 100%;
     }
@@ -4708,7 +4725,7 @@
     }
   
     .marafonRight .paragraf {
-      max-width: 60%;
+      max-width: 65%;
     }
   
     .blogItem__img2 {
@@ -4887,7 +4904,7 @@
   
     .videoCourseItemRight a {
       font-size: 18px;
-      line-height: 36px;
+      line-height: 25px;
     }
   
     .videoCourseItemRight p {
@@ -5184,8 +5201,6 @@
     }
   
     .formIntensiveRadio {
-      max-width: 350px;
-      width: 100%;
       margin-bottom: 10px;
     }
   
@@ -5479,16 +5494,24 @@
       max-width: 65%;
     }
   
-    .formIntensiveRadio {
-      max-width: 260px;
-    }
-  
     .videoBottomRight > span {
       max-width: 100%;
     }
   }
   
   @media (max-width: 690px) {
+    .intensive .teachersIn {
+      max-width: 490px;
+    }
+  
+    .formIntensiveRadio:first-of-type {
+      margin-left: 0;
+    }
+  
+    .formIntensiveRadio {
+      margin-left: 2px;
+    }
+  
     .headerRight {
       max-width: 68%;
     }
@@ -6313,6 +6336,12 @@
       -ms-flex-wrap: wrap;
       -webkit-flex-wrap: wrap;
     }
+  
+    .teachersContent {
+      max-width: 95%;
+      margin: 60px auto 0;
+    }
+  
   }
   
   @media (max-width: 520px) {
@@ -6835,10 +6864,6 @@
       left: 34%;
     }
   
-    .signUp {
-      display: none;
-    }
-  
     .mainContent2 {
       margin-bottom: 0;
     }
@@ -7018,6 +7043,12 @@
     .testIn {
       margin-bottom: 40px;
     }
+  
+    .formIntensive {
+      margin-top: 30px;
+    }
+  
+  
   }
   
   @media (max-width: 480px) {
@@ -7119,6 +7150,7 @@
   
     .teachersItemBlock {
       max-width: 73%;
+      margin-left: 2%;
     }
   
     .teachersItem img {
@@ -7164,6 +7196,10 @@
   
     .tablesBody .tablesBody__bold {
       width: 25%;
+    }
+  
+    .intensive .teachersIn {
+      max-width: 300px;
     }
   }
   
