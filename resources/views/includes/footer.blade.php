@@ -1,5 +1,5 @@
 <!--Start footer-->
-<footer class="footer">
+<footer class="footer @yield('footer_class_custom') ">
     <div class="footerIn flex width">
         <div class="footerBlock">
             <a href="{{ route('index') }}" class="footerBlock__Logo">

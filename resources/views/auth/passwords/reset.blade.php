@@ -38,4 +38,14 @@
             </div>
         </form>
     </section>
+
+    @mobile
+    <div class="push"></div>
+    @endmobile
+
+    @tablet
+    <div class="push"></div>
+    @endtablet
 @endsection
+
+@section('footer_class_custom') fix @endsection

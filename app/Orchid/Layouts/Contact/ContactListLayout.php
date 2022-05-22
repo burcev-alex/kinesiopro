@@ -31,6 +31,14 @@ class ContactListLayout extends Table
                 return Link::make($contact->city)->route('platform.contact.edit', $contact);
             }),
             TD::make('email', 'E-mail'),
+            TD::make('phone', 'Phone')->render(function ($contact) {
+                return implode(", ", $contact->phone);
+            }),
+            TD::make('address', 'Address'),
+            TD::make('fb', 'FB'),
+            TD::make('vk', 'VK'),
+            TD::make('instagram', 'Instagram'),
+            TD::make('youtube', 'Youtube'),
         ];
     }
 }

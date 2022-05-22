@@ -8,6 +8,7 @@ use App\Services\RouterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Mobile_Detect;
 
 class NewsPaperController
 {
@@ -38,8 +39,20 @@ class NewsPaperController
             $filters = "";
         }
 
+        $detect = new Mobile_Detect();
+
+        if($detect->isMobile()){
+            $perPage = 8;
+        }
+        else if($detect->isTablet()){
+            $perPage = 8;
+        }
+        else{
+            $perPage = 9;
+        }
+
         // доступные статьи
-        $articles = $this->newsService->getArticles($filters, $page);
+        $articles = $this->newsService->getArticles($filters, $page, $perPage);
 
         $pagination = $this->routerService->getPagination($articles->currentPage(), $articles->lastPage());
         if ($request->wantsJson()) {

@@ -38,8 +38,12 @@ class OrderListLayout extends Table
                 return $item->total. " руб";
             }),
             
+            TD::make('items', 'Продукт')->render(function (Order $item) {
+                return current($item->items->toArray())['name'];
+            }),
+            
             TD::make('state', 'Статус')->render(function (Order $item) {
-                return $item->state;
+                return $item->state_title;
             }),
             
             TD::make('first_name', 'Имя')->render(function (Order $item) {

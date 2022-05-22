@@ -43,7 +43,7 @@
             </ul>
         </li>
 
-        <li class="navMenu__active navMenu__program">
+        <li class="navMenu__active @desktop navMenu__program @enddesktop @tablet navMenu__program @endtablet ">
             <a href="{{ route('courses.index') }}"><span>Образовательные программы</span></a>
 
             <ul class="navMenu{{ $sufix }}In">

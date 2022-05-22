@@ -15,10 +15,22 @@
     @include('includes.header.search')
 
     @auth
-        <div class="enter">
-            <div class="enter__desc">Вы вошли как: @if($logged_in_user->unreadNotifications->count() > 0)<span>{{ $logged_in_user->unreadNotifications->count() }}</span>@endif</div>
-            <a href="{{ route('profile.index') }}" class="enter__name">{{ $logged_in_user->name }}</a>
-        </div>
+        @mobile
+            <a href="{{ route('profile.index') }}" class="perAccount flex">
+                <span>Личный кабинет</span>
+            </a>
+        @endmobile
+        @tablet
+            <a href="{{ route('profile.index') }}" class="perAccount flex">
+                <span>Личный кабинет</span>
+            </a>
+        @endtablet
+        @desktop
+            <div class="enter">
+                <div class="enter__desc">Вы вошли как: @if($logged_in_user->unreadNotifications->count() > 0)<span>{{ $logged_in_user->unreadNotifications->count() }}</span>@endif</div>
+                <a href="{{ route('profile.index') }}" class="enter__name">{{ $logged_in_user->name }}</a>
+            </div>
+        @enddesktop
     @else
         <a href="{{ route('auth.login') }}" class="show_autorization_popup perAccount flex">
             <span>Личный кабинет</span>

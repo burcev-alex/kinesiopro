@@ -26,30 +26,15 @@
                     @include('includes.header.search')
 
                     @auth
-                        <div class="enter">
-                            <div class="enter__desc">Вы вошли как: @if($logged_in_user->unreadNotifications->count() > 0)<span>{{ $logged_in_user->unreadNotifications->count() }}</span>@endif</div>
-                            <a href="{{ route('profile.index') }}" class="enter__name">{{ $logged_in_user->name }}</a>
-                        </div>
+                        <a href="{{ route('profile.index') }}" class="perAccount flex">
+                            <span>Личный кабинет</span>
+                        </a>
                     @else
                         <a href="{{ route('register.create') }}" class="show_autorization_popup perAccount flex">
                             <span>Личный кабинет</span>
                         </a>
                     @endauth
                 </div>
-
-                <ul class="headerMenu flex">
-                    <li>
-                        <a href="https://vk.com/physiosapiens" target="_blank">
-                            <img src="/images/icon6.svg" alt="">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/channel/UCsxUk35UDtUY4d-6pF0E__A" target="_blank">
-                            <img src="/images/icon8.svg" alt="">
-                        </a>
-                    </li>
-                </ul>
 
                 <ul class="headerMenuSocial flex">
                     <li>
