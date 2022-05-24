@@ -730,7 +730,7 @@
     border-bottom: 1px dashed #EB6907;
     position: absolute;
     right: 0;
-    top: 0;
+    top: -63px;
   }
   
   .scheduleList {
@@ -3695,6 +3695,12 @@
     padding-bottom: 10px;
   }
   
+  .empty-catalog-text {
+    max-width: 90%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -6342,6 +6348,9 @@
       margin: 60px auto 0;
     }
   
+    .tab-content {
+      padding: 0 30px;
+    }
   }
   
   @media (max-width: 520px) {
@@ -6365,7 +6374,6 @@
     .headerSearch__btn {
       margin-right: 10px;
     }
-  
   
     .headerLogo {
       width: 120px;
@@ -6631,6 +6639,7 @@
     .schedule__all {
       position: relative;
       margin: 20px auto 0;
+      top: 0;
     }
   
     .item {
@@ -6641,7 +6650,6 @@
     .width {
       max-width: 100%;
     }
-  
   
     .scheduleTop {
       display: -webkit-box;
@@ -7048,7 +7056,9 @@
       margin-top: 30px;
     }
   
-  
+    .bread-crumbs li > span{
+      text-align: center;
+    }
   }
   
   @media (max-width: 480px) {
