@@ -728,9 +728,6 @@
     color: #575756;
     font: normal normal 18px 'Nunito', sans-serif;
     border-bottom: 1px dashed #EB6907;
-    position: absolute;
-    right: 0;
-    top: -63px;
   }
   
   .scheduleList {
@@ -3701,6 +3698,26 @@
     margin: 0 auto;
   }
   
+  .scheduleTop {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+  }
+  
+  #total h2 {
+    padding: 20px 0 0 0;
+  }
+  
   /*
   font: normal normal 16px 'Nunito', sans-serif;
   */
@@ -3709,6 +3726,7 @@
   Start responsive
   ################*/
   @media (max-width: 1340px) {
+    #total,
     .intensive .teachersIn {
       max-width: 1000px;
       width: 100%;
@@ -3926,6 +3944,7 @@
   }
   
   @media (max-width: 1180px) {
+    #total,
     .intensive .teachersIn {
       max-width: 900px;
     }
@@ -4194,6 +4213,7 @@
   }
   
   @media (max-width: 1050px) {
+    #total,
     .intensive .teachersIn {
       max-width: 700px;
     }
@@ -4928,6 +4948,10 @@
   }
   
   @media (max-width: 780px) {
+    #total {
+      max-width: 600px;
+    }
+  
     .teachersContent {
       margin-top: 60px;
     }
@@ -5506,6 +5530,7 @@
   }
   
   @media (max-width: 690px) {
+    #total,
     .intensive .teachersIn {
       max-width: 490px;
     }
@@ -6354,6 +6379,10 @@
   }
   
   @media (max-width: 520px) {
+    #total {
+      max-width: 90%;
+    }
+  
     .headerSearch,
     .nav,
     .headerMenuSocial,
@@ -7045,7 +7074,7 @@
     }
   
     .bread-crumbs li > span:before {
-      margin: 0 14px 0 11px;
+      margin: 0 7px 0 0;
     }
   
     .testIn {
@@ -7056,7 +7085,7 @@
       margin-top: 30px;
     }
   
-    .bread-crumbs li > span{
+    .bread-crumbs li > span {
       text-align: center;
     }
   }
